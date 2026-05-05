@@ -744,16 +744,21 @@ onValue(ref(db, 'admin_config/icone_logo'), s => {
   document.querySelectorAll('.em-op').forEach(e => e.classList.toggle('sel', e.dataset.e === ic));
 });
 
-// BUG FIX PRINCIPAL: garantir que o DOM está pronto antes de renderizar
+// onValue recebe snapshot completo — debounce evita race condition entre callbacks
+let _ocTimer = null;
 onValue(OC, s => {
+  if (_ocTimer) clearTimeout(_ocTimer);
   const _tmp = [];
   s.forEach(c => _tmp.push({ firebaseKey: c.key, ...c.val() }));
   _ocs = _tmp.reverse();
-  if (_domPronto) {
-    renderLista();
-    renderCal();
-    renderChart();
-  }
+  _ocTimer = setTimeout(() => {
+    _ocTimer = null;
+    if (_domPronto) {
+      renderLista();
+      renderCal();
+      renderChart();
+    }
+  }, 50);
 });
 
 onValue(EV, s => {
