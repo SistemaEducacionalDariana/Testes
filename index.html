@@ -744,11 +744,11 @@ onValue(ref(db, 'admin_config/icone_logo'), s => {
   document.querySelectorAll('.em-op').forEach(e => e.classList.toggle('sel', e.dataset.e === ic));
 });
 
-// BUG FIX PRINCIPAL: garantir que o DOM está pronto antes de renderizar
 onValue(OC, s => {
-  _ocs = [];
-  s.forEach(c => _ocs.push({ firebaseKey: c.key, ...c.val() }));
-  _ocs.reverse();
+  const tmp = [];
+  s.forEach(c => tmp.push({ firebaseKey: c.key, ...c.val() }));
+  _ocs = tmp.reverse();  
+  
   if (_domPronto) {
     renderLista();
     renderCal();
