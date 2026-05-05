@@ -6,986 +6,675 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CETI</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
 <style>
-:root {
-  --azul:    #1B3F8B;
-  --azul2:   #2A5BD7;
-  --azulc:   #E8EEFF;
-  --amarelo: #FFB800;
-  --verde:   #22C55E;
-  --vermelho:#EF4444;
-  --cinza:   #F0F4FF;
-  --borda:   #D6DCF0;
-  --texto:   #0F1729;
-  --sub:     #64748B;
-  --radius:  12px;
-  --bg-page:   #F5F6FA;
-  --bg-card:   #FFFFFF;
-  --bg-input:  #FFFFFF;
-  --bg-header: #FFFFFF;
-  --header-txt:#0F1729;
-  --tab-bg:    #FFFFFF;
-  --tab-borda: #E8EAF0;
-  --badge-pendente-bg: #FEF3C7; --badge-pendente-txt: #92400E; --badge-pendente-dot: #F59E0B;
-  --badge-acomp-bg:   #DBEAFE; --badge-acomp-txt:   #1D4ED8; --badge-acomp-dot:   #3B82F6;
-  --badge-resolvido-bg:#DCFCE7; --badge-resolvido-txt:#166534; --badge-resolvido-dot:#22C55E;
+:root{
+  --az:#1B3F8B;--az2:#2A5BD7;--azc:#E8EEFF;--am:#FFB800;--vd:#22C55E;
+  --vm:#EF4444;--cz:#F0F4FF;--bd:#D6DCF0;--tx:#0F1729;--sb:#64748B;--r:12px;
+  --bg:#F5F6FA;--card:#FFF;--inp:#FFF;--hd:#FFF;--htx:#0F1729;--tbbg:#FFF;--tbbd:#E8EAF0;
+  --pnd-bg:#FEF3C7;--pnd-tx:#92400E;--pnd-dt:#F59E0B;
+  --ac-bg:#DBEAFE; --ac-tx:#1D4ED8; --ac-dt:#3B82F6;
+  --rv-bg:#DCFCE7; --rv-tx:#166534; --rv-dt:#22C55E;
 }
-
-html[data-tema="escuro"] {
-  --azulc:   #1e2d4d;
-  --cinza:   #141C2E;
-  --borda:   #2A3A5A;
-  --texto:   #E2E8F8;
-  --sub:     #6B7A99;
-  --bg-page:   #0C1220;
-  --bg-card:   #141C2E;
-  --bg-input:  #1A2540;
-  --bg-header: #0C1220;
-  --header-txt:#E2E8F8;
-  --tab-bg:    #0C1220;
-  --tab-borda: #1E2A40;
-  --badge-pendente-bg: #2D1E00; --badge-pendente-txt: #FCD34D; --badge-pendente-dot: #F59E0B;
-  --badge-acomp-bg:   #0A1830; --badge-acomp-txt:   #93C5FD; --badge-acomp-dot:   #3B82F6;
-  --badge-resolvido-bg:#041A10; --badge-resolvido-txt:#86EFAC; --badge-resolvido-dot:#22C55E;
+html[data-tema="escuro"]{
+  --azc:#1e2d4d;--cz:#141C2E;--bd:#2A3A5A;--tx:#E2E8F8;--sb:#6B7A99;
+  --bg:#0C1220;--card:#141C2E;--inp:#1A2540;--hd:#0C1220;--htx:#E2E8F8;--tbbg:#0C1220;--tbbd:#1E2A40;
+  --pnd-bg:#2D1E00;--pnd-tx:#FCD34D;--pnd-dt:#F59E0B;
+  --ac-bg:#0A1830;--ac-tx:#93C5FD;--ac-dt:#3B82F6;
+  --rv-bg:#041A10;--rv-tx:#86EFAC;--rv-dt:#22C55E;
 }
-
-html[data-tema="black"] {
-  --azulc:   #111111;
-  --cinza:   #0A0A0A;
-  --borda:   #1E1E1E;
-  --texto:   #F0F0F0;
-  --sub:     #555555;
-  --bg-page:   #000000;
-  --bg-card:   #0D0D0D;
-  --bg-input:  #0D0D0D;
-  --bg-header: #000000;
-  --header-txt:#F0F0F0;
-  --tab-bg:    #000000;
-  --tab-borda: #1A1A1A;
-  --badge-pendente-bg: #1A1200; --badge-pendente-txt: #FCD34D; --badge-pendente-dot: #F59E0B;
-  --badge-acomp-bg:   #060E1A; --badge-acomp-txt:   #93C5FD; --badge-acomp-dot:   #3B82F6;
-  --badge-resolvido-bg:#020D06; --badge-resolvido-txt:#6EE7B7; --badge-resolvido-dot:#10B981;
+html[data-tema="black"]{
+  --azc:#111;--cz:#0A0A0A;--bd:#1E1E1E;--tx:#F0F0F0;--sb:#555;
+  --bg:#000;--card:#0D0D0D;--inp:#0D0D0D;--hd:#000;--htx:#F0F0F0;--tbbg:#000;--tbbd:#1A1A1A;
+  --pnd-bg:#1A1200;--pnd-tx:#FCD34D;--pnd-dt:#F59E0B;
+  --ac-bg:#060E1A;--ac-tx:#93C5FD;--ac-dt:#3B82F6;
+  --rv-bg:#020D06;--rv-tx:#6EE7B7;--rv-dt:#10B981;
 }
-
-* { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
-html,body { height:100%; font-family:'DM Sans',sans-serif; background:var(--bg-page); color:var(--texto); transition:background 0.25s,color 0.25s; overflow-x:hidden; }
-
-/* ── LAYOUT ─────────────────────────────────── */
-#app-root {
-  display:flex; flex-direction:column; height:100vh; height:100dvh;
-  max-width:430px; margin:0 auto; position:relative;
-}
-
-.main-scroll {
-  flex:1; overflow-y:auto; overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:env(safe-area-inset-bottom);
-}
-
-/* ── HEADER ─────────────────────────────────── */
-.header {
-  background:var(--bg-header);
-  color:var(--header-txt);
-  padding:14px 18px 12px;
-  display:flex; align-items:center; justify-content:space-between;
-  border-bottom:1px solid var(--tab-borda);
-  flex-shrink:0;
-  position:relative; z-index:200;
-}
-.header-left { display:flex; align-items:center; gap:10px; min-width:0; }
-.logo { 
-  width:34px; height:34px; border-radius:9px; display:flex; align-items:center; 
-  justify-content:center; font-size:18px; flex-shrink:0; cursor:pointer;
-  background:var(--cinza); border:1px solid var(--borda); transition:transform .15s;
-}
-.logo:active { transform:scale(.92); }
-.header-nome { font-weight:600; font-size:14px; color:var(--texto); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.header-sub  { font-size:10px; color:var(--sub); font-weight:400; margin-top:1px; }
-.header-right { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-.btn-nova { 
-  background:var(--texto); color:var(--bg-page); border:none; border-radius:8px; 
-  padding:8px 14px; font-weight:600; font-size:12px; cursor:pointer; 
-  font-family:'DM Sans',sans-serif; white-space:nowrap; letter-spacing:.2px;
-  transition:opacity .15s;
-}
-html[data-tema="escuro"] .btn-nova,html[data-tema="black"] .btn-nova { background:#fff; color:#000; }
-.btn-nova:active { opacity:.7; }
-.btn-icon { 
-  background:var(--cinza); color:var(--sub); border:1px solid var(--borda); 
-  border-radius:8px; width:34px; height:34px; display:flex; align-items:center; 
-  justify-content:center; font-size:14px; cursor:pointer; transition:background .15s;
-  flex-shrink:0;
-}
-.btn-icon:active { background:var(--borda); }
-.btn-icon.ativo { background:var(--vermelho); color:#fff; border-color:var(--vermelho); }
-
-/* ── BANNERS ─────────────────────────────────── */
-.admin-banner { 
-  background:var(--cinza); color:var(--sub); padding:8px 18px; font-size:11px; 
-  font-weight:500; display:none; align-items:center; justify-content:space-between;
-  border-bottom:1px solid var(--borda);
-}
-.admin-banner.show { display:flex; }
-.admin-user-badge { 
-  background:var(--vermelho); color:#fff; border-radius:20px; 
-  padding:2px 10px; font-size:10px; font-weight:600;
-}
-.admin-config-btn { 
-  background:var(--cinza); border:1px solid var(--borda); color:var(--sub); 
-  border-radius:6px; padding:3px 10px; font-size:10px; font-weight:600; cursor:pointer;
-  font-family:'DM Sans',sans-serif;
-}
-.conn-banner { background:#FEF3C7; color:#92400E; padding:7px 18px; font-size:11px; font-weight:600; text-align:center; display:none; }
-.conn-banner.show { display:block; }
-.fila-banner { background:var(--azul2); color:#fff; padding:7px 18px; font-size:11px; font-weight:600; text-align:center; display:none; align-items:center; justify-content:center; gap:8px; }
-.fila-banner.show { display:flex; }
-.fila-sync-btn { background:rgba(255,255,255,0.2); border:none; color:#fff; border-radius:5px; padding:2px 8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; }
-
-/* ── VIEWS ──────────────────────────────────── */
-.view { display:none; }
-.view.active { display:block; }
-
-/* ── CARDS TOPO ──────────────────────────────── */
-.cards-row { 
-  display:grid; grid-template-columns:repeat(4,1fr); gap:8px; 
-  padding:14px 16px 10px; 
-}
-.stat-card { 
-  background:var(--bg-card); border-radius:10px; padding:12px 8px; 
-  text-align:center; border:1px solid var(--borda);
-}
-.stat-num   { font-size:20px; font-weight:700; letter-spacing:-0.5px; }
-.stat-label { font-size:9px; color:var(--sub); font-weight:500; margin-top:2px; text-transform:uppercase; letter-spacing:.5px; }
-.stat-card.c-amarelo .stat-num { color:#D97706; }
-.stat-card.c-azul    .stat-num { color:var(--azul2); }
-.stat-card.c-verde   .stat-num { color:#16A34A; }
-.stat-card.c-cinza   .stat-num { color:var(--sub); }
-
-/* ── BUSCA ───────────────────────────────────── */
-.busca-wrap { padding:0 16px 10px; }
-.busca-input { 
-  width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--borda);
-  font-size:13px; font-family:'DM Sans',sans-serif; background:var(--bg-card); 
-  outline:none; color:var(--texto); transition:border .2s;
-}
-.busca-input:focus { border-color:var(--azul2); }
-
-/* ── LISTA ──────────────────────────────────── */
-.lista { padding:0 16px 16px; display:flex; flex-direction:column; gap:8px; }
-.oc-card { 
-  background:var(--bg-card); border-radius:var(--radius); padding:13px 14px; 
-  border:1px solid var(--borda); cursor:pointer; position:relative;
-  transition:border-color .15s;
-}
-.oc-card:active { opacity:.85; }
-.oc-card.offline-pending { border-left:3px solid var(--amarelo); }
-.offline-tag { display:inline-block; background:#FEF3C7; color:#92400E; border-radius:4px; padding:1px 6px; font-size:9px; font-weight:600; margin-left:5px; }
-.oc-top   { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
-.oc-nome  { font-weight:600; font-size:14px; color:var(--texto); }
-.oc-turma { background:var(--cinza); border-radius:5px; padding:2px 7px; font-size:10px; font-weight:600; color:var(--sub); white-space:nowrap; border:1px solid var(--borda); }
-.oc-tipo  { font-size:12px; color:var(--sub); margin-top:4px; font-weight:400; }
-.oc-meta  { display:flex; justify-content:space-between; align-items:center; margin-top:10px; flex-wrap:wrap; gap:5px; }
-.oc-data  { font-size:10px; color:var(--sub); font-weight:400; }
-.btn-excluir-card { display:none; position:absolute; top:10px; right:10px; background:#FEE2E2; color:var(--vermelho); border:none; border-radius:6px; padding:4px 8px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
-.modo-admin .btn-excluir-card { display:block; }
-.modo-admin .oc-turma { display:none; }
-.empty { text-align:center; color:var(--sub); padding:50px 20px; font-size:13px; }
-.loading { text-align:center; padding:40px; }
-.spinner { width:24px; height:24px; border:2px solid var(--borda); border-top-color:var(--azul2); border-radius:50%; animation:spin .7s linear infinite; display:inline-block; }
-@keyframes spin { to { transform:rotate(360deg); } }
-
-/* ── BADGES ──────────────────────────────────── */
-.badge { display:inline-flex; align-items:center; gap:4px; border-radius:20px; padding:3px 8px; font-size:10px; font-weight:600; }
-.badge-dot { width:5px; height:5px; border-radius:50%; }
-.badge-pendente  { background:var(--badge-pendente-bg);  color:var(--badge-pendente-txt);  }
-.badge-pendente  .badge-dot { background:var(--badge-pendente-dot); }
-.badge-acomp     { background:var(--badge-acomp-bg);     color:var(--badge-acomp-txt);     }
-.badge-acomp     .badge-dot { background:var(--badge-acomp-dot); }
-.badge-resolvido { background:var(--badge-resolvido-bg); color:var(--badge-resolvido-txt); }
-.badge-resolvido .badge-dot { background:var(--badge-resolvido-dot); }
-
-/* ── FORMS ──────────────────────────────────── */
-.form-wrap { padding:16px; }
-.form-card { background:var(--bg-card); border-radius:var(--radius); padding:18px; border:1px solid var(--borda); }
-.form-header { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
-.btn-back { background:var(--cinza); border:1px solid var(--borda); color:var(--sub); font-weight:500; font-size:12px; cursor:pointer; border-radius:7px; padding:6px 12px; font-family:'DM Sans',sans-serif; }
-.form-title { font-size:16px; font-weight:700; }
-.form-group { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
-.form-row   { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-label { font-size:10px; font-weight:600; color:var(--sub); text-transform:uppercase; letter-spacing:.5px; }
-input[type=text],input[type=password],input[type=datetime-local],select,textarea {
-  width:100%; padding:9px 12px; border-radius:8px; border:1px solid var(--borda);
-  font-size:13px; font-family:'DM Sans',sans-serif; background:var(--bg-input); 
-  outline:none; color:var(--texto); transition:border .2s;
-}
-input:focus,select:focus,textarea:focus { border-color:var(--azul2); }
-textarea { min-height:90px; resize:vertical; }
-select option { background:var(--bg-card); color:var(--texto); }
-.senha-wrap { position:relative; }
-.senha-wrap input { padding-right:40px; }
-.btn-olho { position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:16px; padding:0; line-height:1; }
-.btn-salvar { 
-  width:100%; background:var(--texto); color:var(--bg-page); border:none; 
-  border-radius:9px; padding:13px; font-size:13px; font-weight:600; cursor:pointer; 
-  font-family:'DM Sans',sans-serif; letter-spacing:.2px; transition:opacity .15s;
-}
-html[data-tema="escuro"] .btn-salvar,html[data-tema="black"] .btn-salvar { background:#fff; color:#000; }
-.btn-salvar:disabled { opacity:.4; cursor:not-allowed; }
-.btn-salvar:active { opacity:.75; }
-.btn-vermelho { background:linear-gradient(135deg,#1B3F8B,#2A5BD7) !important; color:#fff !important; }
-html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { background:linear-gradient(135deg,#1B3F8B,#2A5BD7) !important; color:#fff !important; }
-.btn-danger { background:linear-gradient(135deg,#7F1D1D,#991B1B) !important; color:#fff !important; }
-
-/* ── DETALHE ────────────────────────────────── */
-.detalhe-card { background:var(--bg-card); margin:16px; border-radius:var(--radius); padding:18px; border:1px solid var(--borda); }
-.detalhe-nome { font-size:19px; font-weight:700; color:var(--texto); margin:10px 0 4px; }
-.detalhe-info { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; }
-.info-item  { background:var(--cinza); border-radius:8px; padding:10px 12px; border:1px solid var(--borda); }
-.info-label { font-size:9px; font-weight:600; color:var(--sub); text-transform:uppercase; letter-spacing:.4px; }
-.info-val   { font-size:13px; font-weight:500; margin-top:3px; }
-.detalhe-desc { background:var(--cinza); border-radius:9px; padding:12px; font-size:13px; line-height:1.65; color:var(--texto); margin-bottom:14px; border:1px solid var(--borda); }
-.status-btns { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-top:4px; }
-.status-btn  { padding:10px 4px; border:1px solid var(--borda); border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:var(--cinza); color:var(--sub); transition:all .15s; }
-.status-btn:hover,.status-btn:active { background:var(--azul2); color:#fff; border-color:var(--azul2); }
-.admin-acoes { display:none; gap:8px; margin-top:12px; }
-.admin-acoes.show { display:grid; grid-template-columns:1fr 1fr; }
-.btn-editar { padding:11px; border:1px solid var(--borda); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:var(--cinza); color:var(--sub); }
-.btn-del    { padding:11px; border:none; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:#FEE2E2; color:#991B1B; }
-
-/* ── PAINEL ADMIN ───────────────────────────── */
-.painel-admin { background:var(--bg-card); margin:16px; border-radius:var(--radius); padding:18px; border:1px solid var(--borda); }
-.painel-secao { border:1px solid var(--borda); border-radius:10px; padding:14px; margin-bottom:12px; }
-.painel-secao-titulo { font-size:11px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
-
-/* ── ADMIN ABAS ─────────────────────────────── */
-.admin-tabs { display:flex; gap:0; background:var(--cinza); border-radius:10px; padding:3px; margin-bottom:14px; border:1px solid var(--borda); overflow-x:auto; }
-.admin-tab { flex:1; min-width:60px; padding:7px 8px; border:none; background:transparent; font-family:'DM Sans',sans-serif; font-size:10px; font-weight:600; color:var(--sub); cursor:pointer; border-radius:7px; transition:all .15s; white-space:nowrap; text-align:center; }
-.admin-tab.ativo { background:var(--bg-card); color:var(--texto); box-shadow:0 1px 4px rgba(0,0,0,0.1); }
-.admin-tabpanel { display:none; }
-.admin-tabpanel.ativo { display:block; }
-
-/* ── LOG DE AÇÕES ────────────────────────────── */
-.log-item { background:var(--cinza); border-radius:8px; padding:9px 12px; border:1px solid var(--borda); margin-bottom:6px; }
-.log-item-topo { display:flex; justify-content:space-between; align-items:center; }
-.log-item-acao { font-size:11px; font-weight:600; color:var(--texto); }
-.log-item-quem { font-size:10px; color:var(--azul2); font-weight:600; }
-.log-item-detalhe { font-size:10px; color:var(--sub); margin-top:3px; }
-.log-item-data { font-size:9px; color:var(--sub); margin-top:2px; }
-.log-vazio { text-align:center; color:var(--sub); padding:20px; font-size:12px; }
-
-/* ── LISTA ADMINS ────────────────────────────── */
-.admin-usuario-card { background:var(--cinza); border-radius:9px; padding:12px 14px; border:1px solid var(--borda); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
-.admin-usuario-nome { font-size:13px; font-weight:600; }
-.admin-usuario-sub  { font-size:10px; color:var(--sub); margin-top:2px; }
-.admin-usuario-badge { background:var(--azul2); color:#fff; border-radius:20px; padding:2px 9px; font-size:10px; font-weight:600; }
-.admin-usuario-badge.principal { background:#16A34A; }
-.btn-remover-admin { background:#FEE2E2; color:#991B1B; border:none; border-radius:6px; padding:5px 10px; font-size:10px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
-
-/* ── TAB BAR (FUNDO) ────────────────────────── */
-.tab-bar {
-  display:flex; background:var(--tab-bg); border-top:1px solid var(--tab-borda);
-  flex-shrink:0;
-  padding-bottom:env(safe-area-inset-bottom);
-}
-.tab-btn {
-  flex:1; padding:10px 0 8px; border:none; background:transparent; font-family:'DM Sans',sans-serif;
-  font-size:10px; font-weight:600; color:var(--sub); cursor:pointer;
-  display:flex; flex-direction:column; align-items:center; gap:3px; transition:color .2s;
-  letter-spacing:.3px; text-transform:uppercase;
-}
-.tab-btn-icon { font-size:18px; line-height:1; transition:transform .2s; }
-.tab-btn.ativo { color:var(--azul2); }
-.tab-btn.ativo .tab-btn-icon { transform:translateY(-1px); }
-
-/* ── ANALYTICS ──────────────────────────────── */
-.analytics-wrap { padding:12px 16px 16px; display:flex; flex-direction:column; gap:12px; }
-.section-card { background:var(--bg-card); border-radius:var(--radius); border:1px solid var(--borda); overflow:hidden; }
-.section-header { padding:14px 16px 10px; display:flex; align-items:center; justify-content:space-between; }
-.section-title { font-size:13px; font-weight:700; color:var(--texto); }
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;transition:background .25s,color .25s}
+#app-root{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto}
+.main-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:env(safe-area-inset-bottom)}
+/* HEADER */
+.hdr{background:var(--hd);color:var(--htx);padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--tbbd);flex-shrink:0;z-index:200}
+.hdr-l{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;cursor:pointer;background:var(--cz);border:1px solid var(--bd);transition:transform .15s}
+.logo:active{transform:scale(.92)}
+.hdr-nome{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-sub{font-size:10px;color:var(--sb);margin-top:1px}
+.hdr-r{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.btn-nova{background:var(--tx);color:var(--bg);border:none;border-radius:8px;padding:8px 14px;font-weight:600;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.2px;transition:opacity .15s;white-space:nowrap}
+html[data-tema="escuro"] .btn-nova,html[data-tema="black"] .btn-nova{background:#fff;color:#000}
+.btn-nova:active{opacity:.7}
+/* BANNERS */
+.adm-ban{background:var(--cz);color:var(--sb);padding:8px 18px;font-size:11px;font-weight:500;display:none;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.adm-ban.show{display:flex}
+.adm-badge{background:var(--vm);color:#fff;border-radius:20px;padding:2px 10px;font-size:10px;font-weight:600}
+.adm-cfg{background:var(--cz);border:1px solid var(--bd);color:var(--sb);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.conn-ban{background:#FEF3C7;color:#92400E;padding:7px 18px;font-size:11px;font-weight:600;text-align:center;display:none}
+.conn-ban.show{display:block}
+.fila-ban{background:var(--az2);color:#fff;padding:7px 18px;font-size:11px;font-weight:600;text-align:center;display:none;align-items:center;justify-content:center;gap:8px}
+.fila-ban.show{display:flex}
+.fila-sync{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:5px;padding:2px 8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
+/* VIEWS */
+.view{display:none}.view.active{display:block}
+/* CARDS TOPO */
+.cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px 16px 10px}
+.stat-card{background:var(--card);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid var(--bd)}
+.stat-num{font-size:20px;font-weight:700;letter-spacing:-.5px}
+.stat-label{font-size:9px;color:var(--sb);font-weight:500;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+.c-am .stat-num{color:#D97706}.c-az .stat-num{color:var(--az2)}.c-vd .stat-num{color:#16A34A}.c-cz .stat-num{color:var(--sb)}
+/* BUSCA */
+.busca-w{padding:0 16px 10px}
+.busca{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bd);font-size:13px;font-family:'DM Sans',sans-serif;background:var(--card);outline:none;color:var(--tx);transition:border .2s}
+.busca:focus{border-color:var(--az2)}
+/* LISTA */
+.lista{padding:0 16px 16px;display:flex;flex-direction:column;gap:8px}
+.oc-card{background:var(--card);border-radius:var(--r);padding:13px 14px;border:1px solid var(--bd);cursor:pointer;position:relative;transition:border-color .15s}
+.oc-card:active{opacity:.85}
+.oc-card.off-pend{border-left:3px solid var(--am)}
+.off-tag{display:inline-block;background:#FEF3C7;color:#92400E;border-radius:4px;padding:1px 6px;font-size:9px;font-weight:600;margin-left:5px}
+.oc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.oc-nome{font-weight:600;font-size:14px}
+.oc-turma{background:var(--cz);border-radius:5px;padding:2px 7px;font-size:10px;font-weight:600;color:var(--sb);white-space:nowrap;border:1px solid var(--bd)}
+.oc-tipo{font-size:12px;color:var(--sb);margin-top:4px}
+.oc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap;gap:5px}
+.oc-data{font-size:10px;color:var(--sb)}
+.btn-del-card{display:none;position:absolute;top:10px;right:10px;background:#FEE2E2;color:var(--vm);border:none;border-radius:6px;padding:4px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.modo-adm .btn-del-card{display:block}
+.modo-adm .oc-turma{display:none}
+.empty{text-align:center;color:var(--sb);padding:50px 20px;font-size:13px}
+.loading{text-align:center;padding:40px}
+.spin{width:24px;height:24px;border:2px solid var(--bd);border-top-color:var(--az2);border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:3px 8px;font-size:10px;font-weight:600}
+.bdot{width:5px;height:5px;border-radius:50%}
+.b-pnd{background:var(--pnd-bg);color:var(--pnd-tx)}.b-pnd .bdot{background:var(--pnd-dt)}
+.b-ac{background:var(--ac-bg);color:var(--ac-tx)}.b-ac .bdot{background:var(--ac-dt)}
+.b-rv{background:var(--rv-bg);color:var(--rv-tx)}.b-rv .bdot{background:var(--rv-dt)}
+/* FORMS */
+.fw{padding:16px}
+.fc{background:var(--card);border-radius:var(--r);padding:18px;border:1px solid var(--bd)}
+.fhdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.btn-back{background:var(--cz);border:1px solid var(--bd);color:var(--sb);font-weight:500;font-size:12px;cursor:pointer;border-radius:7px;padding:6px 12px;font-family:'DM Sans',sans-serif}
+.ftitle{font-size:16px;font-weight:700}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{font-size:10px;font-weight:600;color:var(--sb);text-transform:uppercase;letter-spacing:.5px}
+input[type=text],input[type=password],input[type=datetime-local],select,textarea{
+  width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--bd);font-size:13px;
+  font-family:'DM Sans',sans-serif;background:var(--inp);outline:none;color:var(--tx);transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--az2)}
+textarea{min-height:90px;resize:vertical}
+select option{background:var(--card);color:var(--tx)}
+.pw{position:relative}.pw input{padding-right:40px}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:0}
+.btn-save{width:100%;background:var(--tx);color:var(--bg);border:none;border-radius:9px;padding:13px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.2px;transition:opacity .15s}
+html[data-tema="escuro"] .btn-save,html[data-tema="black"] .btn-save{background:#fff;color:#000}
+.btn-save:disabled{opacity:.4;cursor:not-allowed}.btn-save:active{opacity:.75}
+.btn-blue{background:linear-gradient(135deg,#1B3F8B,#2A5BD7)!important;color:#fff!important}
+html[data-tema="escuro"] .btn-blue,html[data-tema="black"] .btn-blue{background:linear-gradient(135deg,#1B3F8B,#2A5BD7)!important;color:#fff!important}
+.btn-red{background:linear-gradient(135deg,#7F1D1D,#991B1B)!important;color:#fff!important}
+/* TURMAS CHIPS */
+.turma-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.tchip{background:var(--cz);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--sb)}
+.tchip.sel{background:var(--az2);color:#fff;border-color:var(--az2)}
+.tchip.outras{background:transparent;border-style:dashed}
+/* DETALHE */
+.det-card{background:var(--card);margin:16px;border-radius:var(--r);padding:18px;border:1px solid var(--bd)}
+.det-nome{font-size:19px;font-weight:700;margin:10px 0 4px}
+.det-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.ii{background:var(--cz);border-radius:8px;padding:10px 12px;border:1px solid var(--bd)}
+.il{font-size:9px;font-weight:600;color:var(--sb);text-transform:uppercase;letter-spacing:.4px}
+.iv{font-size:13px;font-weight:500;margin-top:3px}
+.det-desc{background:var(--cz);border-radius:9px;padding:12px;font-size:13px;line-height:1.65;margin-bottom:14px;border:1px solid var(--bd)}
+.st-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:4px}
+.st-btn{padding:10px 4px;border:1px solid var(--bd);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;background:var(--cz);color:var(--sb);transition:all .15s}
+.st-btn:active{background:var(--az2);color:#fff;border-color:var(--az2)}
+.adm-act{display:none;gap:8px;margin-top:12px}
+.adm-act.show{display:grid;grid-template-columns:1fr 1fr}
+.btn-edit{padding:11px;border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;background:var(--cz);color:var(--sb)}
+.btn-del{padding:11px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;background:#FEE2E2;color:#991B1B}
+/* ADMIN PAINEL */
+.adm-tabs{display:flex;gap:0;background:var(--cz);border-radius:10px;padding:3px;margin-bottom:14px;border:1px solid var(--bd);overflow-x:auto}
+.adm-tab{flex:1;min-width:55px;padding:7px 8px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:var(--sb);cursor:pointer;border-radius:7px;transition:all .15s;white-space:nowrap;text-align:center}
+.adm-tab.on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.adm-panel{display:none}.adm-panel.on{display:block}
+.sec{border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:12px}
+.sec-t{font-size:11px;font-weight:700;color:var(--sb);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+/* LOG */
+.log-item{background:var(--cz);border-radius:8px;padding:9px 12px;border:1px solid var(--bd);margin-bottom:6px}
+.log-top{display:flex;justify-content:space-between;align-items:center}
+.log-acao{font-size:11px;font-weight:600}
+.log-quem{font-size:10px;color:var(--az2);font-weight:600}
+.log-det{font-size:10px;color:var(--sb);margin-top:3px}
+.log-dt{font-size:9px;color:var(--sb);margin-top:2px}
+.log-empty{text-align:center;color:var(--sb);padding:20px;font-size:12px}
+/* ADMINS */
+.aucard{background:var(--cz);border-radius:9px;padding:12px 14px;border:1px solid var(--bd);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.au-nome{font-size:13px;font-weight:600}
+.au-sub{font-size:10px;color:var(--sb);margin-top:2px}
+.au-badge{background:var(--az2);color:#fff;border-radius:20px;padding:2px 9px;font-size:10px;font-weight:600}
+.au-badge.princ{background:#16A34A}
+.btn-rm-adm{background:#FEE2E2;color:#991B1B;border:none;border-radius:6px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+/* TAB BAR */
+.tab-bar{display:flex;background:var(--tbbg);border-top:1px solid var(--tbbd);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom)}
+.tab-btn{flex:1;padding:10px 0 8px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:var(--sb);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;letter-spacing:.3px;text-transform:uppercase}
+.tab-btn-ic{font-size:18px;line-height:1;transition:transform .2s}
+.tab-btn.on{color:var(--az2)}.tab-btn.on .tab-btn-ic{transform:translateY(-1px)}
+/* ANALYTICS */
+.an-wrap{padding:12px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.sc{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);overflow:hidden}
 /* CALENDÁRIO */
-.cal-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 10px; }
-.cal-titulo { font-size:13px; font-weight:700; }
-.cal-nav { display:flex; gap:5px; }
-.cal-nav-btn { background:var(--cinza); border:1px solid var(--borda); color:var(--sub); border-radius:7px; width:28px; height:28px; font-size:14px; cursor:pointer; font-weight:700; display:flex; align-items:center; justify-content:center; }
-.cal-dias-semana { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; padding:0 10px; }
-.cal-ds { font-size:9px; font-weight:600; color:var(--sub); text-transform:uppercase; padding:4px 0; letter-spacing:.4px; }
-.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; padding:4px 10px 12px; }
-.cal-dia {
-  aspect-ratio:1; border-radius:7px; display:flex; flex-direction:column; align-items:center; 
-  justify-content:center; font-size:12px; font-weight:500; cursor:pointer; position:relative; 
-  transition:background .15s; gap:2px;
-}
-.cal-dia:hover { background:var(--cinza); }
-.cal-dia.vazio { cursor:default; }
-.cal-dia.hoje { color:var(--azul2); font-weight:700; }
-.cal-dia.selecionado { background:var(--texto) !important; color:var(--bg-card) !important; }
-html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.selecionado { background:#fff !important; color:#000 !important; }
-.cal-dia.tem-oc { font-weight:700; }
-.cal-dia.passado { opacity:0.4; cursor:default; }
-.cal-bolinha-wrap { display:flex; gap:2px; }
-.cal-bolinha { width:4px; height:4px; border-radius:50%; background:var(--amarelo); flex-shrink:0; }
-.cal-bolinha-ev { width:4px; height:4px; border-radius:50%; background:#8B5CF6; flex-shrink:0; }
-.cal-dia.selecionado .cal-bolinha,
-.cal-dia.selecionado .cal-bolinha-ev { background:rgba(255,255,255,0.7); }
-.cal-dia.tem-oc.resolvido-dia .cal-bolinha { background:var(--verde); }
-
-.cal-ocs-dia { border-top:1px solid var(--borda); }
-.cal-ocs-titulo { padding:12px 16px 8px; display:flex; align-items:center; justify-content:space-between; }
-.cal-ocs-titulo-txt { font-size:12px; font-weight:600; color:var(--sub); }
-.cal-ocs-cabecalho { display:flex; align-items:center; justify-content:space-between; padding:0 16px 8px; }
-.btn-add-evento { background:var(--azul2); color:#fff; border:none; border-radius:7px; padding:6px 12px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
-.btn-dl-rel { background:var(--cinza); border:1px solid var(--borda); color:var(--sub); border-radius:7px; padding:5px 10px; font-size:10px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
-.cal-ocs-lista { padding:0 16px 14px; display:flex; flex-direction:column; gap:6px; }
-.cal-oc-item { background:var(--cinza); border-radius:8px; padding:9px 12px; border-left:3px solid var(--azul2); cursor:pointer; border:1px solid var(--borda); border-left:3px solid var(--azul2); }
-.cal-oc-item-nome { font-size:12px; font-weight:600; }
-.cal-oc-item-info { font-size:11px; color:var(--sub); margin-top:2px; }
-.cal-oc-item.s-pendente  { border-left-color:var(--badge-pendente-dot); }
-.cal-oc-item.s-acomp     { border-left-color:var(--badge-acomp-dot); }
-.cal-oc-item.s-resolvido { border-left-color:var(--badge-resolvido-dot); }
-.cal-oc-item.s-evento    { border-left-color:#8B5CF6; cursor:default; }
-.cal-oc-item-del { float:right; background:none; border:none; color:var(--sub); cursor:pointer; font-size:14px; padding:0 0 0 8px; }
-
-/* ABAS DO CALENDÁRIO */
-.cal-tipo-tabs { display:flex; gap:0; margin:0 16px 8px; background:var(--cinza); border-radius:8px; padding:2px; border:1px solid var(--borda); }
-.cal-tipo-tab { flex:1; padding:6px; border:none; background:transparent; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; color:var(--sub); cursor:pointer; border-radius:6px; transition:all .15s; }
-.cal-tipo-tab.ativo { background:var(--bg-card); color:var(--texto); }
-
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px}
+.cal-t{font-size:13px;font-weight:700}
+.cal-nav{display:flex;gap:5px}
+.cal-nb{background:var(--cz);border:1px solid var(--bd);color:var(--sb);border-radius:7px;width:28px;height:28px;font-size:14px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center}
+.cal-dw{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;padding:0 10px}
+.cal-ds{font-size:9px;font-weight:600;color:var(--sb);text-transform:uppercase;padding:4px 0;letter-spacing:.4px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:4px 10px 12px}
+.cd{aspect-ratio:1;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:500;cursor:pointer;position:relative;transition:background .15s;gap:2px}
+.cd:hover{background:var(--cz)}
+.cd.vz{cursor:default}
+.cd.hj{color:var(--az2);font-weight:700}
+.cd.sel{background:var(--tx)!important;color:var(--card)!important}
+html[data-tema="escuro"] .cd.sel,html[data-tema="black"] .cd.sel{background:#fff!important;color:#000!important}
+.cd.past{opacity:.38;cursor:default}
+.bols{display:flex;gap:2px}
+.bol{width:4px;height:4px;border-radius:50%;background:var(--am)}
+.bol-ev{width:4px;height:4px;border-radius:50%;background:#8B5CF6}
+.cd.sel .bol,.cd.sel .bol-ev{background:rgba(255,255,255,.7)}
+.cd.rv-dia .bol{background:var(--vd)}
+.cal-bot{border-top:1px solid var(--bd)}
+.cal-oc-hdr{padding:12px 16px 6px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.cal-oc-tit{font-size:12px;font-weight:600;color:var(--sb)}
+.cal-hdr-btns{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.btn-add-ev{background:var(--az2);color:#fff;border:none;border-radius:7px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-exp-ics{background:var(--cz);border:1px solid var(--bd);color:var(--sb);border-radius:7px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-dl{background:var(--cz);border:1px solid var(--bd);color:var(--sb);border-radius:7px;padding:5px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.cal-tab-wrap{display:flex;gap:0;margin:0 16px 8px;background:var(--cz);border-radius:8px;padding:2px;border:1px solid var(--bd)}
+.cal-tab{flex:1;padding:6px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:var(--sb);cursor:pointer;border-radius:6px;transition:all .15s}
+.cal-tab.on{background:var(--card);color:var(--tx)}
+.cal-ocs-lista{padding:0 16px 14px;display:flex;flex-direction:column;gap:6px}
+.cal-item{background:var(--cz);border-radius:8px;padding:9px 12px;border:1px solid var(--bd);border-left:3px solid var(--az2)}
+.cal-item-nome{font-size:12px;font-weight:600}
+.cal-item-inf{font-size:11px;color:var(--sb);margin-top:2px}
+.cal-item.s-pnd{border-left-color:var(--pnd-dt)}
+.cal-item.s-ac{border-left-color:var(--ac-dt)}
+.cal-item.s-rv{border-left-color:var(--rv-dt)}
+.cal-item.s-ev{border-left-color:#8B5CF6;cursor:default}
+.ci-del{float:right;background:none;border:none;color:var(--sb);cursor:pointer;font-size:14px;padding:0 0 0 8px}
 /* GRÁFICO */
-.chart-controls { padding:14px 16px 10px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; }
-.seg-btns { display:flex; background:var(--cinza); border-radius:8px; padding:3px; gap:2px; border:1px solid var(--borda); }
-.seg-btn { background:transparent; border:none; border-radius:5px; padding:5px 10px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; color:var(--sub); transition:all .15s; white-space:nowrap; }
-.seg-btn.ativo { background:var(--bg-card); color:var(--texto); box-shadow:0 1px 4px rgba(0,0,0,0.08); }
-.chart-tipo-btn { background:var(--cinza); border:1px solid var(--borda); color:var(--sub); border-radius:7px; padding:6px 10px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; }
-.chart-area { padding:0 16px 16px; position:relative; height:200px; }
-.chart-area canvas { width:100% !important; height:100% !important; }
-.chart-legend { padding:0 16px 14px; display:flex; gap:14px; flex-wrap:wrap; }
-.leg-item { display:flex; align-items:center; gap:5px; font-size:10px; font-weight:500; color:var(--sub); }
-.leg-dot  { width:7px; height:7px; border-radius:50%; }
-
-/* ── CONFIGURAÇÕES ─────────────────────────── */
-.config-wrap { padding:16px; display:flex; flex-direction:column; gap:10px; }
-.config-section { background:var(--bg-card); border-radius:var(--radius); border:1px solid var(--borda); overflow:hidden; }
-.config-section-titulo { font-size:10px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.6px; padding:12px 16px 6px; }
-.config-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--borda); cursor:pointer; transition:background .15s; }
-.config-item:last-child { border-bottom:none; }
-.config-item:active { background:var(--cinza); }
-.config-item-left { display:flex; align-items:center; gap:10px; }
-.config-item-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
-.config-item-nome { font-size:13px; font-weight:500; color:var(--texto); }
-.config-item-sub  { font-size:11px; color:var(--sub); margin-top:1px; }
-.config-item-right { font-size:16px; color:var(--sub); }
-.config-toggle { width:40px; height:22px; border-radius:11px; background:var(--borda); border:none; cursor:pointer; position:relative; transition:background .2s; flex-shrink:0; }
-.config-toggle.on { background:var(--azul2); }
-.config-toggle::after { content:''; position:absolute; width:16px; height:16px; background:#fff; border-radius:50%; top:3px; left:3px; transition:transform .2s; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
-.config-toggle.on::after { transform:translateX(18px); }
-.config-badge { background:var(--vermelho); color:#fff; border-radius:20px; padding:1px 7px; font-size:9px; font-weight:700; }
-.config-badge.verde { background:#16A34A; }
-
-/* ── MODAIS ─────────────────────────────────── */
-.modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:500; align-items:flex-end; justify-content:center; padding:0; }
-.modal-bg.show { display:flex; }
-.modal { 
-  background:var(--bg-card); border-radius:20px 20px 0 0; padding:24px 22px 32px;
-  width:100%; max-width:430px; box-shadow:0 -8px 40px rgba(0,0,0,0.2); 
-  animation:slideUp .25s ease; border-top:1px solid var(--borda);
-  max-height:85vh; overflow-y:auto;
-}
-@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-.modal-handle { width:36px; height:4px; background:var(--borda); border-radius:2px; margin:0 auto 20px; }
-.modal h3 { font-size:16px; font-weight:700; color:var(--texto); margin-bottom:4px; }
-.modal p  { font-size:13px; color:var(--sub); margin-bottom:16px; }
-.modal-icon { font-size:32px; display:block; text-align:center; margin-bottom:8px; }
-.modal-btns { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px; }
-.btn-confirmar { padding:12px; border:none; border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:var(--vermelho); color:#fff; }
-.btn-cancelar  { padding:12px; border:1px solid var(--borda); border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:var(--cinza); color:var(--sub); }
-.erro-msg    { color:var(--vermelho); font-size:12px; font-weight:600; margin-top:8px; display:none; background:#FEE2E2; padding:8px 12px; border-radius:7px; }
-.erro-msg.show { display:block; }
-.sucesso-msg { color:#166534; font-size:12px; font-weight:600; margin-top:8px; display:none; background:#DCFCE7; padding:8px 12px; border-radius:7px; }
-.sucesso-msg.show { display:block; }
-html[data-tema="escuro"] .erro-msg,html[data-tema="black"] .erro-msg { background:#2A0A0A; color:#FCA5A5; }
-html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { background:#041A10; color:#86EFAC; }
-.login-loading { display:none; text-align:center; margin-top:8px; font-size:12px; color:var(--sub); }
-.login-loading.show { display:block; }
-
-/* ── TOAST ──────────────────────────────────── */
-.toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:#0F1729; color:#fff; padding:10px 20px; border-radius:20px; font-size:12px; font-weight:600; transition:transform .25s ease, opacity .25s ease; z-index:9999; white-space:nowrap; pointer-events:none; }
-html[data-tema="black"] .toast { background:#222; }
-.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
-
-/* ── MODAL TEMA ─────────────────────────────── */
-.tema-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
-.tema-opcao { border-radius:12px; padding:12px 8px 10px; text-align:center; cursor:pointer; border:1.5px solid var(--borda); transition:border .2s; position:relative; }
-.tema-opcao.selecionado { border-color:var(--azul2); }
-.tema-opcao-claro  { background:#F5F6FA; }
-.tema-opcao-escuro { background:#0C1220; }
-.tema-opcao-black  { background:#000000; border-color:#222; }
-.tema-preview { display:flex; flex-direction:column; gap:3px; margin-bottom:7px; }
-.tp-bar  { border-radius:3px; height:5px; }
-.tp-card { border-radius:5px; height:18px; }
-.tema-opcao-claro  .tp-bar  { background:#2A5BD7; }
-.tema-opcao-claro  .tp-card { background:#fff; border:1px solid #E8EAF0; }
-.tema-opcao-escuro .tp-bar  { background:#1B3FAA; }
-.tema-opcao-escuro .tp-card { background:#141C2E; border:1px solid #2A3A5A; }
-.tema-opcao-black  .tp-bar  { background:#333; }
-.tema-opcao-black  .tp-card { background:#0D0D0D; border:1px solid #1E1E1E; }
-.tema-opcao-nome { font-size:10px; font-weight:700; margin-top:5px; }
-.tema-opcao-claro  .tema-opcao-nome { color:#1B3F8B; }
-.tema-opcao-escuro .tema-opcao-nome { color:#93C5FD; }
-.tema-opcao-black  .tema-opcao-nome { color:#888; }
-.tema-check { position:absolute; top:5px; right:6px; font-size:11px; opacity:0; transition:opacity .2s; }
-.tema-opcao.selecionado .tema-check { opacity:1; }
-
-/* ── ICONE EMOJI PICKER ─────────────────────── */
-.emoji-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; margin-top:8px; max-height:180px; overflow-y:auto; }
-.emoji-op { font-size:22px; border:1.5px solid var(--borda); border-radius:8px; padding:6px; cursor:pointer; text-align:center; background:var(--cinza); transition:border-color .15s; }
-.emoji-op.selecionado { border-color:var(--azul2); }
-.emoji-op:active { opacity:.6; }
-
-/* ── SENHA PLAIN VIEW ──────────────────────── */
-.senha-plain { font-family:monospace; font-size:13px; background:var(--cinza); padding:8px 12px; border-radius:7px; border:1px solid var(--borda); letter-spacing:1px; word-break:break-all; }
+.chart-ctrls{padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.seg{display:flex;background:var(--cz);border-radius:8px;padding:3px;gap:2px;border:1px solid var(--bd)}
+.seg-btn{background:transparent;border:none;border-radius:5px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--sb);transition:all .15s;white-space:nowrap}
+.seg-btn.on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.chart-tipo{background:var(--cz);border:1px solid var(--bd);color:var(--sb);border-radius:7px;padding:6px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.chart-area{padding:0 16px 16px;position:relative;height:200px}
+.chart-area canvas{width:100%!important;height:100%!important}
+.chart-leg{padding:0 16px 14px;display:flex;gap:14px;flex-wrap:wrap}
+.leg-i{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:500;color:var(--sb)}
+.leg-d{width:7px;height:7px;border-radius:50%}
+/* CONFIGURAÇÕES */
+.cfg-wrap{padding:16px;display:flex;flex-direction:column;gap:10px}
+.cfg-sec{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);overflow:hidden}
+.cfg-sec-t{font-size:10px;font-weight:700;color:var(--sb);text-transform:uppercase;letter-spacing:.6px;padding:12px 16px 6px}
+.cfg-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s}
+.cfg-item:last-child{border-bottom:none}
+.cfg-item:active{background:var(--cz)}
+.cfg-l{display:flex;align-items:center;gap:10px}
+.cfg-ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.cfg-nome{font-size:13px;font-weight:500}
+.cfg-sub{font-size:11px;color:var(--sb);margin-top:1px}
+.cfg-r{font-size:16px;color:var(--sb)}
+.tog{width:40px;height:22px;border-radius:11px;background:var(--bd);border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.tog.on{background:var(--az2)}
+.tog::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog.on::after{transform:translateX(18px)}
+.cfg-badge{background:var(--vm);color:#fff;border-radius:20px;padding:1px 7px;font-size:9px;font-weight:700}
+.cfg-badge.vd{background:#16A34A}
+/* TURMAS CONFIG */
+.turma-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.turma-tag{display:flex;align-items:center;gap:4px;background:var(--cz);border:1px solid var(--bd);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--sb)}
+.turma-tag button{background:none;border:none;cursor:pointer;color:var(--vm);font-size:12px;padding:0;line-height:1}
+/* MODAIS */
+.mb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:flex-end;justify-content:center}
+.mb.show{display:flex}
+.modal{background:var(--card);border-radius:20px 20px 0 0;padding:24px 22px 32px;width:100%;max-width:430px;box-shadow:0 -8px 40px rgba(0,0,0,.2);animation:su .25s ease;border-top:1px solid var(--bd);max-height:88vh;overflow-y:auto}
+@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.mh{width:36px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 20px}
+.modal h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.modal p{font-size:13px;color:var(--sb);margin-bottom:16px}
+.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.btn-ok{padding:12px;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;background:var(--vm);color:#fff}
+.btn-can{padding:12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;background:var(--cz);color:var(--sb)}
+.err{color:var(--vm);font-size:12px;font-weight:600;margin-top:8px;display:none;background:#FEE2E2;padding:8px 12px;border-radius:7px}
+.err.show{display:block}
+.suc{color:#166534;font-size:12px;font-weight:600;margin-top:8px;display:none;background:#DCFCE7;padding:8px 12px;border-radius:7px}
+.suc.show{display:block}
+html[data-tema="escuro"] .err,html[data-tema="black"] .err{background:#2A0A0A;color:#FCA5A5}
+html[data-tema="escuro"] .suc,html[data-tema="black"] .suc{background:#041A10;color:#86EFAC}
+.ll{display:none;text-align:center;margin-top:8px;font-size:12px;color:var(--sb)}.ll.show{display:block}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:#0F1729;color:#fff;padding:10px 20px;border-radius:20px;font-size:12px;font-weight:600;transition:transform .25s,opacity .25s;z-index:9999;white-space:nowrap;pointer-events:none}
+html[data-tema="black"] .toast{background:#222}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+/* TEMA MODAL */
+.tema-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+.tm-op{border-radius:12px;padding:12px 8px 10px;text-align:center;cursor:pointer;border:1.5px solid var(--bd);transition:border .2s;position:relative}
+.tm-op.sel{border-color:var(--az2)}
+.tm-cl{background:#F5F6FA}.tm-es{background:#0C1220}.tm-bk{background:#000;border-color:#222}
+.tp{display:flex;flex-direction:column;gap:3px;margin-bottom:7px}
+.tpb{border-radius:3px;height:5px}.tpc{border-radius:5px;height:18px}
+.tm-cl .tpb{background:#2A5BD7}.tm-cl .tpc{background:#fff;border:1px solid #E8EAF0}
+.tm-es .tpb{background:#1B3FAA}.tm-es .tpc{background:#141C2E;border:1px solid #2A3A5A}
+.tm-bk .tpb{background:#333}.tm-bk .tpc{background:#0D0D0D;border:1px solid #1E1E1E}
+.tm-nm{font-size:10px;font-weight:700;margin-top:5px}
+.tm-cl .tm-nm{color:#1B3F8B}.tm-es .tm-nm{color:#93C5FD}.tm-bk .tm-nm{color:#888}
+.tm-ck{position:absolute;top:5px;right:6px;font-size:11px;opacity:0;transition:opacity .2s}
+.tm-op.sel .tm-ck{opacity:1}
+/* EMOJIS */
+.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px;max-height:180px;overflow-y:auto}
+.em-op{font-size:22px;border:1.5px solid var(--bd);border-radius:8px;padding:6px;cursor:pointer;text-align:center;background:var(--cz);transition:border-color .15s}
+.em-op.sel{border-color:var(--az2)}.em-op:active{opacity:.6}
+/* SENHA VISÍVEL */
+.senha-plain{font-family:monospace;font-size:12px;background:var(--cz);padding:4px 8px;border-radius:6px;border:1px solid var(--bd);letter-spacing:1px;word-break:break-all;display:inline-block}
 </style>
 </head>
 <body>
-
 <div id="app-root">
 
 <!-- HEADER -->
-<div class="header">
-  <div class="header-left">
-    <div class="logo" id="logo-btn" onclick="modoAdminAtivo()?abrirModalIcone():null" title="Ícone da escola">
+<div class="hdr">
+  <div class="hdr-l">
+    <div class="logo" id="logo-btn" onclick="modoAdm()?abrirModalIcone():null" title="Ícone">
       <span id="icone-logo">🏫</span>
     </div>
     <div>
-      <div class="header-nome" id="header-nome-inst">Carregando...</div>
-      <div class="header-sub">Gestão de Ocorrências</div>
+      <div class="hdr-nome" id="hdr-inst">Carregando...</div>
+      <div class="hdr-sub">Gestão de Ocorrências</div>
     </div>
   </div>
-  <div class="header-right">
-    <button class="btn-nova" id="btn-novo-global" onclick="irParaNovo()">+ Nova</button>
+  <div class="hdr-r">
+    <button class="btn-nova" id="btn-nova" onclick="irNovo()">+ Nova</button>
   </div>
 </div>
 
 <!-- BANNERS -->
-<div class="admin-banner" id="admin-banner">
-  <span>Admin ativo <span class="admin-user-badge" id="admin-user-badge">—</span></span>
-  <button class="admin-config-btn" onclick="irParaPainel()">⚙️ Config</button>
+<div class="adm-ban" id="adm-ban">
+  <span>Admin: <span class="adm-badge" id="adm-badge-nome">—</span></span>
+  <button class="adm-cfg" onclick="irPainel()">⚙️ Config</button>
 </div>
-<div class="conn-banner" id="conn-banner">⚠️ Sem conexão — dados salvos localmente</div>
-<div class="fila-banner" id="fila-banner">
-  <span id="fila-txt">📦 1 aguardando envio</span>
-  <button class="fila-sync-btn" onclick="tentarSyncFila()">⟳ Enviar</button>
+<div class="conn-ban" id="conn-ban">⚠️ Sem conexão — dados salvos localmente</div>
+<div class="fila-ban" id="fila-ban">
+  <span id="fila-txt">📦 aguardando</span>
+  <button class="fila-sync" onclick="syncFila()">⟳ Enviar</button>
 </div>
 
-<!-- CONTEÚDO SCROLLÁVEL -->
-<div class="main-scroll" id="main-scroll">
+<div class="main-scroll" id="ms">
 
-  <!-- ──── LISTA ──── -->
-  <div class="view active" id="view-lista">
+  <!-- LISTA -->
+  <div class="view active" id="v-lista">
     <div class="cards-row">
-      <div class="stat-card c-amarelo"><div class="stat-num" id="cnt-pendente">0</div><div class="stat-label">Pendentes</div></div>
-      <div class="stat-card c-azul">   <div class="stat-num" id="cnt-acomp">0</div>   <div class="stat-label">Acomp.</div></div>
-      <div class="stat-card c-verde">  <div class="stat-num" id="cnt-resolvido">0</div><div class="stat-label">Resolv.</div></div>
-      <div class="stat-card c-cinza">  <div class="stat-num" id="cnt-total">0</div>   <div class="stat-label">Total</div></div>
+      <div class="stat-card c-am"><div class="stat-num" id="cnt-p">0</div><div class="stat-label">Pendentes</div></div>
+      <div class="stat-card c-az"><div class="stat-num" id="cnt-a">0</div><div class="stat-label">Acomp.</div></div>
+      <div class="stat-card c-vd"><div class="stat-num" id="cnt-r">0</div><div class="stat-label">Resolv.</div></div>
+      <div class="stat-card c-cz"><div class="stat-num" id="cnt-t">0</div><div class="stat-label">Total</div></div>
     </div>
-    <div class="busca-wrap">
-      <input class="busca-input" type="text" id="busca" placeholder="Buscar aluno, turma..." oninput="renderLista()">
-    </div>
-    <div class="lista" id="lista-container">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
+    <div class="busca-w"><input class="busca" id="busca" type="text" placeholder="Buscar aluno, turma..." oninput="renderLista()"></div>
+    <div class="lista" id="lista"><div class="loading"><div class="spin"></div></div></div>
   </div>
 
-  <!-- ──── ANALYTICS ──── -->
-  <div class="view" id="view-analytics">
-    <div class="analytics-wrap">
-
-      <!-- Calendário -->
-      <div class="section-card">
-        <div class="cal-header">
-          <div class="cal-titulo" id="cal-mes-ano">—</div>
+  <!-- ANALYTICS -->
+  <div class="view" id="v-an">
+    <div class="an-wrap">
+      <div class="sc">
+        <div class="cal-hdr">
+          <div class="cal-t" id="cal-mes">—</div>
           <div class="cal-nav">
-            <button class="cal-nav-btn" onclick="navCal(-1)">‹</button>
-            <button class="cal-nav-btn" onclick="navCal(1)">›</button>
+            <button class="cal-nb" onclick="navCal(-1)">‹</button>
+            <button class="cal-nb" onclick="navCal(1)">›</button>
           </div>
         </div>
-        <div class="cal-dias-semana">
+        <div class="cal-dw">
           <div class="cal-ds">Dom</div><div class="cal-ds">Seg</div><div class="cal-ds">Ter</div>
           <div class="cal-ds">Qua</div><div class="cal-ds">Qui</div><div class="cal-ds">Sex</div><div class="cal-ds">Sáb</div>
         </div>
         <div class="cal-grid" id="cal-grid"></div>
-        <div class="cal-ocs-dia">
-          <div class="cal-ocs-titulo">
-            <span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span>
-            <button class="btn-dl-rel" id="btn-dl-rel" onclick="baixarRelatorio()" style="display:none">⬇️ Relatório</button>
+        <div class="cal-bot">
+          <div class="cal-oc-hdr" id="cal-oc-hdr">
+            <span class="cal-oc-tit" id="cal-dia-t">Selecione um dia</span>
           </div>
-          <div class="cal-tipo-tabs" id="cal-tipo-tabs" style="display:none">
-            <button class="cal-tipo-tab ativo" onclick="calMudarTipo('ocorrencias')" id="cal-tab-oc">📋 Ocorrências</button>
-            <button class="cal-tipo-tab" onclick="calMudarTipo('eventos')" id="cal-tab-ev">🗓️ Eventos</button>
+          <div class="cal-tab-wrap" id="cal-tabs" style="display:none">
+            <button class="cal-tab on" id="ctab-oc" onclick="calTab('oc')">📋 Ocorrências</button>
+            <button class="cal-tab" id="ctab-ev" onclick="calTab('ev')">🗓️ Eventos</button>
           </div>
-          <div id="cal-ocs-lista" class="cal-ocs-lista">
-            <div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>
+          <div class="cal-ocs-lista" id="cal-lista">
+            <div class="empty" style="padding:10px 0;font-size:12px">Toque em um dia</div>
           </div>
         </div>
       </div>
-
-      <!-- Gráfico -->
-      <div class="section-card">
-        <div class="chart-controls">
-          <div class="seg-btns" id="seg-periodo">
-            <button class="seg-btn ativo" onclick="setPeriodo('semana')" data-p="semana">Semana</button>
-            <button class="seg-btn" onclick="setPeriodo('mes')" data-p="mes">Mês</button>
-            <button class="seg-btn" onclick="setPeriodo('ano')" data-p="ano">Ano</button>
+      <!-- GRÁFICO -->
+      <div class="sc">
+        <div class="chart-ctrls">
+          <div class="seg" id="seg">
+            <button class="seg-btn on" onclick="setPer('semana')" data-p="semana">Semana</button>
+            <button class="seg-btn" onclick="setPer('mes')" data-p="mes">Mês</button>
+            <button class="seg-btn" onclick="setPer('ano')" data-p="ano">Ano</button>
           </div>
-          <button class="chart-tipo-btn" id="btn-chart-tipo" onclick="toggleChartTipo()">Barras</button>
+          <button class="chart-tipo" id="chart-tipo-btn" onclick="togChartTipo()">Barras</button>
         </div>
-        <div class="chart-area">
-          <canvas id="chart-canvas"></canvas>
+        <div class="chart-area"><canvas id="chart-c"></canvas></div>
+        <div class="chart-leg">
+          <div class="leg-i"><div class="leg-d" style="background:#F59E0B"></div>Pendente</div>
+          <div class="leg-i"><div class="leg-d" style="background:#1D4ED8"></div>Acompan.</div>
+          <div class="leg-i"><div class="leg-d" style="background:#22C55E"></div>Resolvido</div>
+          <div class="leg-i"><div class="leg-d" style="background:#6D28D9"></div>Total</div>
         </div>
-        <div class="chart-legend">
-          <div class="leg-item"><div class="leg-dot" style="background:#F59E0B"></div>Pendente</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#1D4ED8"></div>Acompan.</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#22C55E"></div>Resolvido</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#6D28D9"></div>Total</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ──── NOVA OCORRÊNCIA ──── -->
-  <div class="view" id="view-novo">
-    <div class="form-wrap">
-      <div class="form-card">
-        <div class="form-header">
-          <button class="btn-back" onclick="irParaLista()">← Voltar</button>
-          <div class="form-title">Nova Ocorrência</div>
-        </div>
-        <div class="form-group"><label>Aluno *</label><input id="f-aluno" type="text" placeholder="Nome completo"></div>
-        <div class="form-row">
-          <div class="form-group"><label>Turma</label><input id="f-turma" type="text" placeholder="Ex: 3A"></div>
-          <div class="form-group">
-            <label>Tipo *</label>
-            <select id="f-tipo">
-              <option>Agressão verbal</option><option>Agressão física</option>
-              <option>Uso de celular</option><option>Desrespeito ao professor</option>
-              <option>Bagunça em sala</option><option>Bullying</option>
-              <option>Vandalismo</option><option>Outros</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group"><label>Professor *</label><input id="f-professor" type="text" placeholder="Seu nome"></div>
-        <div class="form-group"><label>Descrição *</label><textarea id="f-descricao" placeholder="Descreva o ocorrido..."></textarea></div>
-        <button class="btn-salvar" id="btn-salvar" onclick="salvarOcorrencia()">Salvar Ocorrência</button>
       </div>
     </div>
   </div>
 
-  <!-- ──── EDITAR ──── -->
-  <div class="view" id="view-editar">
-    <div class="form-wrap">
-      <div class="form-card">
-        <div class="form-header">
-          <button class="btn-back" onclick="voltarDetalhe()">← Voltar</button>
-          <div class="form-title">Editar Ocorrência</div>
-        </div>
-        <div class="form-group"><label>Aluno *</label><input id="e-aluno" type="text"></div>
-        <div class="form-row">
-          <div class="form-group"><label>Turma</label><input id="e-turma" type="text"></div>
-          <div class="form-group">
-            <label>Tipo *</label>
-            <select id="e-tipo">
-              <option>Agressão verbal</option><option>Agressão física</option>
-              <option>Uso de celular</option><option>Desrespeito ao professor</option>
-              <option>Bagunça em sala</option><option>Bullying</option>
-              <option>Vandalismo</option><option>Outros</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group"><label>Professor *</label><input id="e-professor" type="text"></div>
-        <div class="form-group"><label>Descrição *</label><textarea id="e-descricao"></textarea></div>
-        <div id="admin-dt-wrap" style="display:none">
-          <div class="form-group">
-            <label>Data e Hora da Ocorrência (Admin)</label>
-            <input type="datetime-local" id="e-datetime">
-          </div>
-        </div>
-        <button class="btn-salvar btn-vermelho" id="btn-editar-salvar" onclick="salvarEdicao()">Salvar Alterações</button>
+  <!-- NOVA OCORRÊNCIA -->
+  <div class="view" id="v-novo">
+    <div class="fw"><div class="fc">
+      <div class="fhdr"><button class="btn-back" onclick="irLista()">← Voltar</button><div class="ftitle">Nova Ocorrência</div></div>
+      <div class="fg"><label>Aluno *</label><input id="f-aluno" type="text" placeholder="Nome completo"></div>
+      <div class="fg" id="fg-turma">
+        <label>Turma</label>
+        <!-- Chips de turma ou input livre serão inseridos aqui via JS -->
+        <div id="turma-chips-wrap"></div>
+        <input id="f-turma" type="text" placeholder="Turma (ex: 3A)" style="margin-top:4px">
       </div>
-    </div>
+      <div class="fg">
+        <label>Tipo *</label>
+        <select id="f-tipo">
+          <option>Agressão verbal</option><option>Agressão física</option><option>Uso de celular</option>
+          <option>Desrespeito ao professor</option><option>Bagunça em sala</option>
+          <option>Bullying</option><option>Vandalismo</option><option>Outros</option>
+        </select>
+      </div>
+      <div class="fg"><label>Professor *</label><input id="f-prof" type="text" placeholder="Seu nome"></div>
+      <div class="fg"><label>Descrição *</label><textarea id="f-desc" placeholder="Descreva o ocorrido..."></textarea></div>
+      <button class="btn-save" id="btn-save" onclick="salvarOc()">Salvar Ocorrência</button>
+    </div></div>
   </div>
 
-  <!-- ──── DETALHE ──── -->
-  <div class="view" id="view-detalhe">
-    <div class="detalhe-card" id="detalhe-conteudo"></div>
+  <!-- EDITAR -->
+  <div class="view" id="v-edit">
+    <div class="fw"><div class="fc">
+      <div class="fhdr"><button class="btn-back" onclick="voltarDet()">← Voltar</button><div class="ftitle">Editar Ocorrência</div></div>
+      <div class="fg"><label>Aluno *</label><input id="e-aluno" type="text"></div>
+      <div class="frow">
+        <div class="fg"><label>Turma</label><input id="e-turma" type="text"></div>
+        <div class="fg"><label>Tipo *</label>
+          <select id="e-tipo">
+            <option>Agressão verbal</option><option>Agressão física</option><option>Uso de celular</option>
+            <option>Desrespeito ao professor</option><option>Bagunça em sala</option>
+            <option>Bullying</option><option>Vandalismo</option><option>Outros</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Professor *</label><input id="e-prof" type="text"></div>
+      <div class="fg"><label>Descrição *</label><textarea id="e-desc"></textarea></div>
+      <div id="adm-dt-wrap" style="display:none">
+        <div class="fg"><label>Data e Hora (Admin)</label><input type="datetime-local" id="e-dt"></div>
+      </div>
+      <button class="btn-save btn-blue" id="btn-edit-save" onclick="salvarEdit()">Salvar Alterações</button>
+    </div></div>
   </div>
 
-  <!-- ──── PAINEL ADMIN ──── -->
-  <div class="view" id="view-painel">
-    <div class="form-wrap">
-      <div class="form-card">
-        <div class="form-header">
-          <button class="btn-back" onclick="irParaLista()">← Voltar</button>
-          <div class="form-title">⚙️ Painel Admin</div>
-        </div>
+  <!-- DETALHE -->
+  <div class="view" id="v-det"><div class="det-card" id="det-content"></div></div>
 
-        <!-- ABAS ADMIN -->
-        <div class="admin-tabs">
-          <button class="admin-tab ativo" onclick="adminMudarAba('inst')" id="atab-inst">🏫 Inst.</button>
-          <button class="admin-tab" onclick="adminMudarAba('admins')" id="atab-admins">👥 Admins</button>
-          <button class="admin-tab" onclick="adminMudarAba('senha')" id="atab-senha">🔑 Senha</button>
-          <button class="admin-tab" onclick="adminMudarAba('log')" id="atab-log">📋 Log</button>
-        </div>
-
-        <!-- TAB: INSTITUIÇÃO -->
-        <div class="admin-tabpanel ativo" id="apanel-inst">
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">🏫 Nome da Instituição</div>
-            <div class="form-group"><label>Nome exibido no cabeçalho</label><input type="text" id="p-nome-inst" placeholder="Nome da escola"></div>
-            <div class="erro-msg" id="erro-inst"></div><div class="sucesso-msg" id="sucesso-inst"></div>
-            <button class="btn-salvar btn-vermelho" onclick="alterarInstituicao()" style="font-size:12px;padding:10px">Salvar Nome</button>
-          </div>
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">😀 Ícone do App</div>
-            <div id="emoji-grid-painel" class="emoji-grid"></div>
-            <div class="sucesso-msg" id="sucesso-icone" style="margin-top:8px"></div>
-          </div>
-        </div>
-
-        <!-- TAB: ADMINS -->
-        <div class="admin-tabpanel" id="apanel-admins">
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">👥 Administradores Cadastrados</div>
-            <div id="lista-admins-container"><div class="loading"><div class="spinner"></div></div></div>
-          </div>
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">➕ Adicionar Novo Admin</div>
-            <div class="form-group"><label>Usuário</label><input type="text" id="novo-admin-usuario" placeholder="Nome de usuário"></div>
-            <div class="form-group"><label>Senha</label>
-              <div class="senha-wrap"><input type="password" id="novo-admin-senha" placeholder="Mínimo 6 caracteres"><button class="btn-olho" onclick="toggleOlho('novo-admin-senha','olho-nas')" id="olho-nas">👁️</button></div>
-            </div>
-            <div class="form-group"><label>Tipo</label>
-              <select id="novo-admin-tipo">
-                <option value="admin">Admin</option>
-                <option value="principal">Principal (pode tudo)</option>
-              </select>
-            </div>
-            <div class="erro-msg" id="erro-novo-admin"></div>
-            <div class="sucesso-msg" id="sucesso-novo-admin"></div>
-            <button class="btn-salvar btn-vermelho" onclick="adicionarAdmin()" style="font-size:12px;padding:10px">Adicionar Admin</button>
-          </div>
-        </div>
-
-        <!-- TAB: SENHA (admin logado) -->
-        <div class="admin-tabpanel" id="apanel-senha">
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">👤 Alterar Meu Usuário</div>
-            <div class="form-group"><label>Novo Usuário</label><input type="text" id="p-novo-usuario" placeholder="Nome de usuário"></div>
-            <div class="form-group"><label>Senha Atual (confirmação)</label>
-              <div class="senha-wrap"><input type="password" id="p-conf-senha-usuario" placeholder="••••••"><button class="btn-olho" onclick="toggleOlho('p-conf-senha-usuario','olho-cu')" id="olho-cu">👁️</button></div>
-            </div>
-            <div class="erro-msg" id="erro-usuario"></div><div class="sucesso-msg" id="sucesso-usuario"></div>
-            <button class="btn-salvar btn-vermelho" onclick="alterarUsuario()" style="font-size:12px;padding:10px">Salvar Usuário</button>
-          </div>
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">🔑 Alterar Minha Senha</div>
-            <div class="form-group"><label>Senha Atual</label>
-              <div class="senha-wrap"><input type="password" id="p-senha-atual" placeholder="••••••"><button class="btn-olho" onclick="toggleOlho('p-senha-atual','olho-atual')" id="olho-atual">👁️</button></div>
-            </div>
-            <div class="form-group"><label>Nova Senha</label>
-              <div class="senha-wrap"><input type="password" id="p-senha-nova" placeholder="Mínimo 6 caracteres"><button class="btn-olho" onclick="toggleOlho('p-senha-nova','olho-nova')" id="olho-nova">👁️</button></div>
-            </div>
-            <div class="form-group"><label>Confirmar Nova Senha</label>
-              <div class="senha-wrap"><input type="password" id="p-senha-conf" placeholder="Repita"><button class="btn-olho" onclick="toggleOlho('p-senha-conf','olho-conf')" id="olho-conf">👁️</button></div>
-            </div>
-            <div class="erro-msg" id="painel-erro"></div><div class="sucesso-msg" id="painel-sucesso"></div>
-            <button class="btn-salvar btn-vermelho" onclick="alterarSenha()" style="font-size:12px;padding:10px">Salvar Senha</button>
-          </div>
-        </div>
-
-        <!-- TAB: LOG DE AÇÕES -->
-        <div class="admin-tabpanel" id="apanel-log">
-          <div class="painel-secao">
-            <div class="painel-secao-titulo">📋 Registro de Ações Admin</div>
-            <div id="log-container"><div class="loading"><div class="spinner"></div></div></div>
-          </div>
-        </div>
-
-        <div style="font-size:11px;color:var(--sub);text-align:center;padding-top:4px">Para sair do admin, vá em Configurações</div>
+  <!-- PAINEL ADMIN -->
+  <div class="view" id="v-painel">
+    <div class="fw"><div class="fc">
+      <div class="fhdr"><button class="btn-back" onclick="irLista()">← Voltar</button><div class="ftitle">⚙️ Painel Admin</div></div>
+      <div class="adm-tabs">
+        <button class="adm-tab on" onclick="admTab('inst')" id="at-inst">🏫 Inst.</button>
+        <button class="adm-tab" onclick="admTab('admins')" id="at-admins">👥 Admins</button>
+        <button class="adm-tab" onclick="admTab('senha')" id="at-senha">🔑 Senha</button>
+        <button class="adm-tab" onclick="admTab('log')" id="at-log">📋 Log</button>
       </div>
-    </div>
+
+      <!-- INST -->
+      <div class="adm-panel on" id="ap-inst">
+        <div class="sec">
+          <div class="sec-t">🏫 Nome da Instituição</div>
+          <div class="fg"><label>Nome no cabeçalho</label><input type="text" id="p-inst" placeholder="Nome da escola"></div>
+          <div class="err" id="err-inst"></div><div class="suc" id="suc-inst"></div>
+          <button class="btn-save btn-blue" onclick="salvarInst()" style="font-size:12px;padding:10px">Salvar Nome</button>
+        </div>
+        <div class="sec">
+          <div class="sec-t">😀 Ícone do App</div>
+          <div id="eg-painel" class="emoji-grid"></div>
+          <div class="suc" id="suc-icone" style="margin-top:8px"></div>
+        </div>
+      </div>
+
+      <!-- ADMINS -->
+      <div class="adm-panel" id="ap-admins">
+        <div class="sec">
+          <div class="sec-t">👥 Administradores</div>
+          <div id="lista-adms"></div>
+        </div>
+        <div class="sec">
+          <div class="sec-t">➕ Novo Admin</div>
+          <div class="fg"><label>Usuário</label><input type="text" id="na-user" placeholder="Nome de usuário"></div>
+          <div class="fg"><label>Senha</label>
+            <div class="pw"><input type="password" id="na-pass" placeholder="Mín. 6 caracteres"><button class="eye" onclick="togOlho('na-pass','oe-na')">👁️</button></div>
+          </div>
+          <div class="fg"><label>Tipo</label>
+            <select id="na-tipo"><option value="admin">Admin</option><option value="principal">Principal</option></select>
+          </div>
+          <div class="err" id="err-na"></div><div class="suc" id="suc-na"></div>
+          <button class="btn-save btn-blue" onclick="addAdmin()" style="font-size:12px;padding:10px">Adicionar Admin</button>
+        </div>
+      </div>
+
+      <!-- SENHA -->
+      <div class="adm-panel" id="ap-senha">
+        <div class="sec">
+          <div class="sec-t">👤 Alterar Meu Usuário</div>
+          <div class="fg"><label>Novo usuário</label><input type="text" id="p-user" placeholder="Nome de usuário"></div>
+          <div class="fg"><label>Senha atual (confirmação)</label>
+            <div class="pw"><input type="password" id="p-cu" placeholder="••••••"><button class="eye" onclick="togOlho('p-cu','oe-cu')">👁️</button></div>
+          </div>
+          <div class="err" id="err-user"></div><div class="suc" id="suc-user"></div>
+          <button class="btn-save btn-blue" onclick="alterarUser()" style="font-size:12px;padding:10px">Salvar Usuário</button>
+        </div>
+        <div class="sec">
+          <div class="sec-t">🔑 Alterar Minha Senha</div>
+          <div class="fg"><label>Senha atual</label>
+            <div class="pw"><input type="password" id="p-sa" placeholder="••••••"><button class="eye" onclick="togOlho('p-sa','oe-sa')">👁️</button></div>
+          </div>
+          <div class="fg"><label>Nova senha</label>
+            <div class="pw"><input type="password" id="p-sn" placeholder="Mín. 6 caracteres"><button class="eye" onclick="togOlho('p-sn','oe-sn')">👁️</button></div>
+          </div>
+          <div class="fg"><label>Confirmar nova senha</label>
+            <div class="pw"><input type="password" id="p-sc" placeholder="Repita"><button class="eye" onclick="togOlho('p-sc','oe-sc')">👁️</button></div>
+          </div>
+          <div class="err" id="err-sen"></div><div class="suc" id="suc-sen"></div>
+          <button class="btn-save btn-blue" onclick="alterarSenha()" style="font-size:12px;padding:10px">Salvar Senha</button>
+        </div>
+      </div>
+
+      <!-- LOG — só principal -->
+      <div class="adm-panel" id="ap-log">
+        <div class="sec">
+          <div class="sec-t">📋 Registro de Ações</div>
+          <div id="log-container"><div class="loading"><div class="spin"></div></div></div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:var(--sb);text-align:center;padding-top:4px">Para sair vá em Configurações</div>
+    </div></div>
   </div>
 
-  <!-- ──── CONFIGURAÇÕES ──── -->
-  <div class="view" id="view-config">
-    <div class="config-wrap">
-
-      <!-- TEMA -->
-      <div class="config-section">
-        <div class="config-section-titulo">Aparência</div>
-        <div class="config-item" onclick="abrirModalTema()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#EFF6FF">🎨</div>
-            <div>
-              <div class="config-item-nome">Tema do App</div>
-              <div class="config-item-sub" id="config-tema-atual">Claro</div>
-            </div>
-          </div>
-          <div class="config-item-right">›</div>
+  <!-- CONFIGURAÇÕES -->
+  <div class="view" id="v-cfg">
+    <div class="cfg-wrap">
+      <div class="cfg-sec">
+        <div class="cfg-sec-t">Aparência</div>
+        <div class="cfg-item" onclick="abrirTema()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#EFF6FF">🎨</div>
+            <div><div class="cfg-nome">Tema do App</div><div class="cfg-sub" id="cfg-tema-sub">Claro</div></div>
+          </div><div class="cfg-r">›</div>
         </div>
       </div>
-
-      <!-- PROFESSOR -->
-      <div class="config-section">
-        <div class="config-section-titulo">Meu Perfil</div>
-        <div class="config-item" onclick="abrirModalNomeProfessor()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#F0FDF4">👩‍🏫</div>
-            <div>
-              <div class="config-item-nome">Meu Nome</div>
-              <div class="config-item-sub" id="config-prof-nome">Não definido</div>
-            </div>
-          </div>
-          <div class="config-item-right">›</div>
+      <div class="cfg-sec">
+        <div class="cfg-sec-t">Meu Perfil</div>
+        <div class="cfg-item" onclick="abrirNomeProf()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#F0FDF4">👩‍🏫</div>
+            <div><div class="cfg-nome">Meu Nome</div><div class="cfg-sub" id="cfg-prof-sub">Não definido</div></div>
+          </div><div class="cfg-r">›</div>
         </div>
-        <div class="config-item" onclick="abrirModalTurmaPadrao()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#FFFBEB">🏷️</div>
-            <div>
-              <div class="config-item-nome">Turma Padrão</div>
-              <div class="config-item-sub" id="config-turma-padrao">Não definida</div>
-            </div>
-          </div>
-          <div class="config-item-right">›</div>
+        <div class="cfg-item" onclick="abrirTurmasProf()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#FFFBEB">🏷️</div>
+            <div><div class="cfg-nome">Minhas Turmas</div><div class="cfg-sub" id="cfg-turmas-sub">Nenhuma definida</div></div>
+          </div><div class="cfg-r">›</div>
         </div>
       </div>
-
-      <!-- ACESSO -->
-      <div class="config-section">
-        <div class="config-section-titulo">Acesso</div>
-        <div class="config-item" id="config-admin-item" onclick="clicarAdmin()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#FEF2F2" id="config-admin-icon-bg">🔐</div>
-            <div>
-              <div class="config-item-nome">Modo Admin</div>
-              <div class="config-item-sub" id="config-admin-sub">Toque para entrar</div>
-            </div>
-          </div>
-          <div class="config-item-right" id="config-admin-badge-wrap"></div>
+      <div class="cfg-sec">
+        <div class="cfg-sec-t">Acesso</div>
+        <div class="cfg-item" id="cfg-adm-item" onclick="clicarAdm()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#FEF2F2">🔐</div>
+            <div><div class="cfg-nome">Modo Admin</div><div class="cfg-sub" id="cfg-adm-sub">Toque para entrar</div></div>
+          </div><div id="cfg-adm-badge"></div>
         </div>
-        <div class="config-item" id="config-painel-item" style="display:none" onclick="irParaPainel()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#EFF6FF">⚙️</div>
-            <div>
-              <div class="config-item-nome">Painel Admin</div>
-              <div class="config-item-sub">Configurações avançadas</div>
-            </div>
-          </div>
-          <div class="config-item-right">›</div>
+        <div class="cfg-item" id="cfg-painel-item" style="display:none" onclick="irPainel()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#EFF6FF">⚙️</div>
+            <div><div class="cfg-nome">Painel Admin</div><div class="cfg-sub">Configurações avançadas</div></div>
+          </div><div class="cfg-r">›</div>
         </div>
       </div>
-
-      <!-- NOTIFICAÇÕES -->
-      <div class="config-section">
-        <div class="config-section-titulo">Preferências</div>
-        <div class="config-item">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#F5F3FF">🔔</div>
-            <div>
-              <div class="config-item-nome">Sons de Notificação</div>
-              <div class="config-item-sub">Feedback ao salvar</div>
-            </div>
-          </div>
-          <button class="config-toggle" id="toggle-sons" onclick="toggleSons()"></button>
+      <div class="cfg-sec">
+        <div class="cfg-sec-t">Preferências</div>
+        <div class="cfg-item">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#F5F3FF">🔔</div>
+            <div><div class="cfg-nome">Sons de Notificação</div><div class="cfg-sub">Feedback ao salvar</div></div>
+          </div><button class="tog" id="tog-sons" onclick="togSons()"></button>
         </div>
-        <div class="config-item">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#ECFDF5">💾</div>
-            <div>
-              <div class="config-item-nome">Salvar Rascunho</div>
-              <div class="config-item-sub">Manter preenchimento ao sair</div>
-            </div>
-          </div>
-          <button class="config-toggle on" id="toggle-rascunho" onclick="toggleRascunho()"></button>
+        <div class="cfg-item">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#ECFDF5">💾</div>
+            <div><div class="cfg-nome">Salvar Rascunho</div><div class="cfg-sub">Manter preenchimento ao sair</div></div>
+          </div><button class="tog on" id="tog-rasc" onclick="togRasc()"></button>
         </div>
       </div>
-
-      <!-- DADOS OFFLINE -->
-      <div class="config-section">
-        <div class="config-section-titulo">Dados & Sincronização</div>
-        <div class="config-item" onclick="tentarSyncFila()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#FFFBEB">⟳</div>
-            <div>
-              <div class="config-item-nome">Sincronizar Agora</div>
-              <div class="config-item-sub" id="config-sync-sub">Enviar ocorrências pendentes</div>
-            </div>
-          </div>
-          <div class="config-item-right">›</div>
+      <div class="cfg-sec">
+        <div class="cfg-sec-t">Dados</div>
+        <div class="cfg-item" onclick="syncFila()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#FFFBEB">⟳</div>
+            <div><div class="cfg-nome">Sincronizar Agora</div><div class="cfg-sub" id="cfg-sync-sub">Tudo sincronizado</div></div>
+          </div><div class="cfg-r">›</div>
         </div>
-        <div class="config-item" onclick="limparRascunho()">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#FEF2F2">🗑️</div>
-            <div>
-              <div class="config-item-nome">Limpar Dados Locais</div>
-              <div class="config-item-sub">Remove rascunhos e cache local</div>
-            </div>
-          </div>
-          <div class="config-item-right">›</div>
+        <div class="cfg-item" onclick="limparLocal()">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#FEF2F2">🗑️</div>
+            <div><div class="cfg-nome">Limpar Dados Locais</div><div class="cfg-sub">Remove cache e rascunhos</div></div>
+          </div><div class="cfg-r">›</div>
         </div>
       </div>
-
-      <!-- SOBRE -->
-      <div class="config-section">
-        <div class="config-section-titulo">Sobre</div>
-        <div class="config-item">
-          <div class="config-item-left">
-            <div class="config-item-icon" style="background:#EFF6FF">ℹ️</div>
-            <div>
-              <div class="config-item-nome">CETI — Gestão de Ocorrências</div>
-              <div class="config-item-sub">Versão 2.0</div>
-            </div>
+      <div class="cfg-sec">
+        <div class="cfg-sec-t">Sobre</div>
+        <div class="cfg-item">
+          <div class="cfg-l"><div class="cfg-ic" style="background:#EFF6FF">ℹ️</div>
+            <div><div class="cfg-nome">CETI — Gestão de Ocorrências</div><div class="cfg-sub">Versão 2.1</div></div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
 </div><!-- /main-scroll -->
 
-<!-- TAB BAR INFERIOR -->
+<!-- TAB BAR -->
 <div class="tab-bar">
-  <button class="tab-btn ativo" id="tab-lista" onclick="mudarAba('lista')">
-    <span class="tab-btn-icon">📋</span>Ocorrências
-  </button>
-  <button class="tab-btn" id="tab-analytics" onclick="mudarAba('analytics')">
-    <span class="tab-btn-icon">📊</span>Análises
-  </button>
-  <button class="tab-btn" id="tab-config" onclick="mudarAba('config')">
-    <span class="tab-btn-icon">⚙️</span>Config.
-  </button>
+  <button class="tab-btn on" id="tab-lista" onclick="mudarAba('lista')"><span class="tab-btn-ic">📋</span>Ocorrências</button>
+  <button class="tab-btn" id="tab-an" onclick="mudarAba('an')"><span class="tab-btn-ic">📊</span>Análises</button>
+  <button class="tab-btn" id="tab-cfg" onclick="mudarAba('cfg')"><span class="tab-btn-ic">⚙️</span>Config.</button>
 </div>
-
 </div><!-- /app-root -->
 
 <div class="toast" id="toast"></div>
 
 <!-- MODAL LOGIN -->
-<div class="modal-bg" id="modal-login">
+<div class="mb" id="m-login">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Acesso Admin</h3>
-    <p>Entre com seu usuário e senha</p>
-    <div class="form-group"><label>Usuário</label><input type="text" id="login-usuario" placeholder="usuário" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('login-senha').focus()"></div>
-    <div class="form-group"><label>Senha</label>
-      <div class="senha-wrap"><input type="password" id="login-senha" placeholder="••••••" onkeydown="if(event.key==='Enter')confirmarLogin()"><button class="btn-olho" onclick="toggleOlho('login-senha','olho-ls')" id="olho-ls">👁️</button></div>
-    </div>
-    <div class="erro-msg" id="login-erro"></div>
-    <div class="login-loading" id="login-loading"><div class="spinner" style="width:18px;height:18px;border-width:2px;display:inline-block"></div> Verificando...</div>
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModalLogin()">Cancelar</button>
-      <button class="btn-confirmar" id="btn-entrar" onclick="confirmarLogin()">Entrar</button>
-    </div>
+    <div class="mh"></div><h3>Acesso Admin</h3><p>Entre com seu usuário e senha</p>
+    <div class="fg"><label>Usuário</label><input type="text" id="l-user" placeholder="usuário" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('l-pass').focus()"></div>
+    <div class="fg"><label>Senha</label><div class="pw"><input type="password" id="l-pass" placeholder="••••••" onkeydown="if(event.key==='Enter')confirmarLogin()"><button class="eye" onclick="togOlho('l-pass','oe-lp')">👁️</button></div></div>
+    <div class="err" id="l-err"></div>
+    <div class="ll" id="l-load"><div class="spin" style="width:18px;height:18px;border-width:2px;display:inline-block"></div> Verificando...</div>
+    <div class="mbtns"><button class="btn-can" onclick="fecharM('m-login')">Cancelar</button><button class="btn-ok" id="btn-login" onclick="confirmarLogin()">Entrar</button></div>
   </div>
 </div>
 
 <!-- MODAL EXCLUIR -->
-<div class="modal-bg" id="modal-excluir">
+<div class="mb" id="m-del">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Excluir Ocorrência</h3>
-    <p>Tem certeza? Esta ação não pode ser desfeita.</p>
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModalExcluir()">Cancelar</button>
-      <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
-    </div>
+    <div class="mh"></div><h3>Excluir Ocorrência</h3><p>Tem certeza? Não pode ser desfeito.</p>
+    <div class="mbtns"><button class="btn-can" onclick="fecharM('m-del')">Cancelar</button><button class="btn-ok" onclick="confirmarDel()">Excluir</button></div>
   </div>
 </div>
 
 <!-- MODAL TEMA -->
-<div class="modal-bg" id="modal-tema">
+<div class="mb" id="m-tema">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Aparência</h3>
-    <p>Tema do app neste dispositivo</p>
+    <div class="mh"></div><h3>Aparência</h3><p>Tema do app neste dispositivo</p>
     <div class="tema-grid">
-      <div class="tema-opcao tema-opcao-claro" id="tema-op-claro" onclick="selecionarTema('claro')">
-        <span class="tema-check">✔</span>
-        <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
-        <div class="tema-opcao-nome">Claro</div>
-      </div>
-      <div class="tema-opcao tema-opcao-escuro" id="tema-op-escuro" onclick="selecionarTema('escuro')">
-        <span class="tema-check" style="color:#93C5FD">✔</span>
-        <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
-        <div class="tema-opcao-nome">Escuro</div>
-      </div>
-      <div class="tema-opcao tema-opcao-black" id="tema-op-black" onclick="selecionarTema('black')">
-        <span class="tema-check" style="color:#888">✔</span>
-        <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
-        <div class="tema-opcao-nome">Black</div>
-      </div>
+      <div class="tm-op tm-cl" id="tm-cl" onclick="selTema('claro')"><span class="tm-ck">✔</span><div class="tp"><div class="tpb"></div><div class="tpc"></div></div><div class="tm-nm">Claro</div></div>
+      <div class="tm-op tm-es" id="tm-es" onclick="selTema('escuro')"><span class="tm-ck" style="color:#93C5FD">✔</span><div class="tp"><div class="tpb"></div><div class="tpc"></div></div><div class="tm-nm">Escuro</div></div>
+      <div class="tm-op tm-bk" id="tm-bk" onclick="selTema('black')"><span class="tm-ck" style="color:#888">✔</span><div class="tp"><div class="tpb"></div><div class="tpc"></div></div><div class="tm-nm">Black</div></div>
     </div>
-    <button class="btn-cancelar" style="width:100%;margin-top:14px" onclick="fecharModalTema()">Fechar</button>
+    <button class="btn-can" style="width:100%;margin-top:14px" onclick="fecharM('m-tema')">Fechar</button>
   </div>
 </div>
 
 <!-- MODAL ÍCONE -->
-<div class="modal-bg" id="modal-icone">
+<div class="mb" id="m-icone">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Ícone do App</h3>
-    <p>Escolha o ícone exibido no cabeçalho</p>
-    <div id="emoji-grid-modal" class="emoji-grid"></div>
-    <button class="btn-cancelar" style="width:100%;margin-top:14px" onclick="fecharModalIcone()">Fechar</button>
+    <div class="mh"></div><h3>Ícone do App</h3><p>Ícone exibido no cabeçalho</p>
+    <div id="eg-modal" class="emoji-grid"></div>
+    <button class="btn-can" style="width:100%;margin-top:14px" onclick="fecharM('m-icone')">Fechar</button>
   </div>
 </div>
 
-<!-- MODAL NOME PROFESSOR -->
-<div class="modal-bg" id="modal-nome-prof">
+<!-- MODAL NOME PROF -->
+<div class="mb" id="m-nome">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Meu Nome</h3>
-    <p>Será preenchido automaticamente ao criar ocorrências</p>
-    <div class="form-group"><label>Seu nome completo</label><input type="text" id="input-nome-prof" placeholder="Ex: Prof. João Silva"></div>
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModal('modal-nome-prof')">Cancelar</button>
-      <button class="btn-confirmar" style="background:var(--azul2)" onclick="salvarNomeProfessor()">Salvar</button>
-    </div>
+    <div class="mh"></div><h3>Meu Nome</h3><p>Preenchido automaticamente nas ocorrências</p>
+    <div class="fg"><label>Seu nome completo</label><input type="text" id="inp-nome" placeholder="Ex: Prof. João Silva"></div>
+    <div class="mbtns"><button class="btn-can" onclick="fecharM('m-nome')">Cancelar</button><button class="btn-ok" style="background:var(--az2)" onclick="salvarNome()">Salvar</button></div>
   </div>
 </div>
 
-<!-- MODAL TURMA PADRÃO -->
-<div class="modal-bg" id="modal-turma-padrao">
+<!-- MODAL TURMAS -->
+<div class="mb" id="m-turmas">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Turma Padrão</h3>
-    <p>Será preenchida automaticamente ao criar ocorrências</p>
-    <div class="form-group"><label>Turma</label><input type="text" id="input-turma-padrao" placeholder="Ex: 3A, 2B..."></div>
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModal('modal-turma-padrao')">Cancelar</button>
-      <button class="btn-confirmar" style="background:var(--azul2)" onclick="salvarTurmaPadrao()">Salvar</button>
+    <div class="mh"></div><h3>Minhas Turmas</h3><p>Adicione suas turmas para seleção rápida ao criar ocorrências</p>
+    <div class="turma-list" id="turma-list-cfg"></div>
+    <div class="fg" style="margin-top:4px">
+      <label>Adicionar turma</label>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="inp-nova-turma" placeholder="Ex: 3A" style="flex:1" onkeydown="if(event.key==='Enter')adicionarTurma()">
+        <button class="btn-save btn-blue" onclick="adicionarTurma()" style="width:auto;padding:9px 14px;font-size:12px">+ Add</button>
+      </div>
     </div>
+    <button class="btn-can" style="width:100%;margin-top:10px" onclick="fecharM('m-turmas')">Fechar</button>
   </div>
 </div>
 
-<!-- MODAL NOVO EVENTO -->
-<div class="modal-bg" id="modal-novo-evento">
+<!-- MODAL EVENTO -->
+<div class="mb" id="m-ev">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Novo Evento</h3>
-    <p id="modal-evento-data-txt">—</p>
-    <div class="form-group"><label>Título do Evento *</label><input type="text" id="evento-titulo" placeholder="Ex: Reunião de pais, Conselho de classe..."></div>
-    <div class="form-group"><label>Horário</label><input type="text" id="evento-hora" placeholder="Ex: 09:00 – 11:00"></div>
-    <div class="form-group"><label>Observação</label><textarea id="evento-obs" style="min-height:60px" placeholder="Detalhes opcionais..."></textarea></div>
-    <div class="erro-msg" id="evento-erro"></div>
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModal('modal-novo-evento')">Cancelar</button>
-      <button class="btn-confirmar" style="background:var(--azul2)" onclick="salvarEvento()">Salvar</button>
-    </div>
+    <div class="mh"></div><h3>Novo Evento</h3><p id="m-ev-dt">—</p>
+    <div class="fg"><label>Título *</label><input type="text" id="ev-tit" placeholder="Ex: Reunião de pais..."></div>
+    <div class="fg"><label>Horário</label><input type="text" id="ev-hr" placeholder="Ex: 09:00 – 11:00"></div>
+    <div class="fg"><label>Observação</label><textarea id="ev-obs" style="min-height:60px" placeholder="Detalhes opcionais..."></textarea></div>
+    <div class="err" id="ev-err"></div>
+    <div class="mbtns"><button class="btn-can" onclick="fecharM('m-ev')">Cancelar</button><button class="btn-ok" style="background:var(--az2)" onclick="salvarEvento()">Salvar</button></div>
   </div>
 </div>
 
@@ -994,1083 +683,880 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/fireba
 import { getDatabase, ref, push, update, remove, onValue, get, set }
   from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDzKQbEeoA7U38vh9Cw_oy8iF7OSjzQUJE",
-  authDomain: "teste-a6f2f.firebaseapp.com",
-  databaseURL: "https://teste-a6f2f-default-rtdb.firebaseio.com",
-  projectId: "teste-a6f2f",
-  storageBucket: "teste-a6f2f.firebasestorage.app",
-  messagingSenderId: "124639888953",
-  appId: "1:124639888953:web:5641e647734ef38f926fe8",
-  measurementId: "G-SC442ZNRBK"
+const FC = {
+  apiKey:"AIzaSyDzKQbEeoA7U38vh9Cw_oy8iF7OSjzQUJE",
+  authDomain:"teste-a6f2f.firebaseapp.com",
+  databaseURL:"https://teste-a6f2f-default-rtdb.firebaseio.com",
+  projectId:"teste-a6f2f",
+  storageBucket:"teste-a6f2f.firebasestorage.app",
+  messagingSenderId:"124639888953",
+  appId:"1:124639888953:web:5641e647734ef38f926fe8"
 };
+const app = initializeApp(FC);
+const db  = getDatabase(app);
+const OC  = ref(db,'ocorrencias');
+const EV  = ref(db,'eventos');
+const ADM = ref(db,'administradores');
+const LOG = ref(db,'admin_log');
 
-const app    = initializeApp(firebaseConfig);
-const db     = getDatabase(app);
-const ocRef  = ref(db, 'ocorrencias');
-const evRef  = ref(db, 'eventos');
-const admRef = ref(db, 'administradores');
-const logRef = ref(db, 'admin_log');
+// Estado global
+let _ocs=[], _evs=[], _admins={}, _logs=[];
+let _adminAtivo=false, _adminUser='', _adminTipo='', _adminKey=null;
+let _abaAtiva='lista', _idAtual=null, _online=true;
+let _calAno=new Date().getFullYear(), _calMes=new Date().getMonth(), _diaSel=null, _calTab='oc';
+let _chartPer='semana', _chartTipo='bar', _chartInst=null;
 
-// ── Garantir estrutura inicial ───────────────────────────────────────────────
-async function garantirEstrutura() {
-  const snap = await get(ref(db,'administradores'));
+// ── INIT ─────────────────────────────────────────────────────────
+async function init() {
+  const snap = await get(ADM);
   if (!snap.exists()) {
-    // Criar admin principal padrão (senha em texto claro no Firebase)
-    await set(ref(db,'administradores'), {
-      principal: {
-        usuario: 'Messi',
-        senha: 'Bra2407',
-        tipo: 'principal',
-        criadoEm: new Date().toISOString()
-      }
-    });
-    // Remover config antiga se existir
-    await set(ref(db,'admin_config/usuario'), null);
-    await set(ref(db,'admin_config/senha_hash'), null);
+    await set(ADM, { principal:{ usuario:'Messi', senha:'Bra2407', tipo:'principal', criadoEm:new Date().toISOString() }});
   }
+  // Migração: apagar admin_config/senha_hash e usuario antigo
+  await set(ref(db,'admin_config/usuario'), null).catch(()=>{});
+  await set(ref(db,'admin_config/senha_hash'), null).catch(()=>{});
 }
-garantirEstrutura().catch(console.error);
+init().catch(console.error);
 
-// ── Listeners Firebase ───────────────────────────────────────────────────────
-onValue(ref(db,'admin_config/nome_instituicao'), snap => {
-  const nome = snap.val() || 'Minha Instituição';
-  document.getElementById('header-nome-inst').textContent = nome;
-  document.title = nome;
+// ── LISTENERS ────────────────────────────────────────────────────
+onValue(ref(db,'admin_config/nome_instituicao'), s => {
+  const n = s.val() || 'Minha Instituição';
+  document.getElementById('hdr-inst').textContent = n;
+  document.title = n;
+});
+onValue(ref(db,'admin_config/icone_logo'), s => {
+  const ic = s.val() || '🏫';
+  document.getElementById('icone-logo').textContent = ic;
+  window._iconeAtual = ic;
+  document.querySelectorAll('.em-op').forEach(e => e.classList.toggle('sel', e.dataset.e===ic));
+});
+onValue(OC, s => {
+  _ocs = [];
+  s.forEach(c => _ocs.push({firebaseKey:c.key, ...c.val()}));
+  _ocs.reverse();
+  renderLista(); renderCal(); renderChart();
+});
+onValue(EV, s => {
+  _evs = [];
+  s.forEach(c => _evs.push({firebaseKey:c.key, ...c.val()}));
+  renderCal();
+  if (_diaSel) renderDia(_diaSel);
+});
+onValue(ADM, s => {
+  _admins = s.val() || {};
+  if (document.getElementById('ap-admins').classList.contains('on')) renderAdmins();
+});
+onValue(LOG, s => {
+  _logs = [];
+  s.forEach(c => _logs.push({key:c.key, ...c.val()}));
+  _logs.reverse();
+  if (document.getElementById('ap-log').classList.contains('on')) renderLog();
+});
+onValue(ref(db,'.info/connected'), s => {
+  _online = s.val()===true;
+  document.getElementById('conn-ban').classList.toggle('show', !_online);
+  if (_online) syncFila();
 });
 
-onValue(ref(db,'admin_config/icone_logo'), snap => {
-  const icone = snap.val() || '🏫';
-  document.getElementById('icone-logo').textContent = icone;
-  window._iconeAtual = icone;
-  document.querySelectorAll('.emoji-op').forEach(el => {
-    el.classList.toggle('selecionado', el.dataset.emoji === icone);
-  });
-});
-
-onValue(ocRef, snapshot => {
-  const lista = [];
-  snapshot.forEach(child => lista.push(Object.assign({firebaseKey: child.key}, child.val())));
-  lista.reverse();
-  window._ocs = lista;
-  renderLista(); renderCalendario(); renderChart();
-});
-
-onValue(evRef, snapshot => {
-  const lista = [];
-  snapshot.forEach(child => lista.push(Object.assign({firebaseKey: child.key}, child.val())));
-  window._eventos = lista;
-  renderCalendario();
-  if (window._diaSel) renderOcsDia(window._diaSel);
-});
-
-onValue(admRef, snapshot => {
-  window._admins = snapshot.val() || {};
-  if (document.getElementById('apanel-admins').classList.contains('ativo')) renderListaAdmins();
-});
-
-onValue(logRef, snapshot => {
-  const lista = [];
-  snapshot.forEach(child => lista.push(Object.assign({key: child.key}, child.val())));
-  lista.reverse();
-  window._logs = lista;
-  if (document.getElementById('apanel-log').classList.contains('ativo')) renderLog();
-});
-
-// ── Registrar ação no log ────────────────────────────────────────────────────
-async function registrarLog(acao, detalhe) {
+// ── LOG ──────────────────────────────────────────────────────────
+async function log(acao, det='') {
+  // Só registra se for admin principal
+  if (_adminTipo !== 'principal') return;
   try {
-    await push(logRef, {
-      acao,
-      detalhe: detalhe || '',
-      admin: window._adminUsuario || '?',
-      timestamp: Date.now(),
-      data: new Date().toLocaleDateString('pt-BR'),
-      hora: new Date().toTimeString().slice(0,5)
-    });
-  } catch(e) { console.warn('Log error', e); }
+    await push(LOG, { acao, detalhe:det, admin:_adminUser, timestamp:Date.now(),
+      data:new Date().toLocaleDateString('pt-BR'), hora:new Date().toTimeString().slice(0,5) });
+  } catch(e) { console.warn('log err',e); }
 }
-window._registrarLog = registrarLog;
 
-// ═══════════════════════════════════
-//  TEMA
-// ═══════════════════════════════════
-const TEMAS = {claro:{icon:'☀️',nome:'Claro'}, escuro:{icon:'🌙',nome:'Escuro'}, black:{icon:'⚫',nome:'Black'}};
+// ── TEMA ─────────────────────────────────────────────────────────
+const TEMAS = { claro:{n:'Claro'}, escuro:{n:'Escuro'}, black:{n:'Black'} };
 function aplicarTema(t) {
   document.documentElement.setAttribute('data-tema', t);
   localStorage.setItem('ceti_tema', t);
   ['claro','escuro','black'].forEach(k => {
-    const el = document.getElementById('tema-op-'+k);
-    if (el) el.classList.toggle('selecionado', k === t);
+    const el = document.getElementById('tm-'+k.slice(0,2));
+    if (el) el.classList.toggle('sel', k===t);
   });
-  const nomeEl = document.getElementById('config-tema-atual');
-  if (nomeEl) nomeEl.textContent = TEMAS[t] ? TEMAS[t].nome : 'Claro';
-  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
-  renderChart();
+  const sub = document.getElementById('cfg-tema-sub');
+  if (sub) sub.textContent = TEMAS[t]?.n || 'Claro';
+  if (_chartInst) { _chartInst.destroy(); _chartInst=null; renderChart(); }
 }
-(function(){ const t = localStorage.getItem('ceti_tema') || 'claro'; aplicarTema(t); })();
+(()=>{ aplicarTema(localStorage.getItem('ceti_tema')||'claro'); })();
 
-window.abrirModalTema = function() {
-  const atual = localStorage.getItem('ceti_tema') || 'claro'; aplicarTema(atual);
-  document.getElementById('modal-tema').classList.add('show');
-};
-window.fecharModalTema = function() { document.getElementById('modal-tema').classList.remove('show'); };
-window.selecionarTema = function(t) {
-  aplicarTema(t); mostrarToast(TEMAS[t].icon+' Tema ativado');
-  setTimeout(fecharModalTema, 500);
-};
+window.abrirTema = () => { aplicarTema(localStorage.getItem('ceti_tema')||'claro'); document.getElementById('m-tema').classList.add('show'); };
+window.selTema = t => { aplicarTema(t); toast('Tema ativado'); setTimeout(()=>fecharM('m-tema'),400); };
 
-// ═══════════════════════════════════
-//  ÍCONE
-// ═══════════════════════════════════
+// ── ÍCONE ────────────────────────────────────────────────────────
 const EMOJIS = ['🏫','🎓','📚','✏️','🔬','🧪','🎨','🖥️','📐','📏','🏛️','🌟','🎯','💡','📖','🔭','🧬','⚗️','🎭','🏆','🌍','🤝','👩‍🏫','👨‍🏫','📝','🔐','🏠','🌱','🎪','🔷'];
-
-function popularEmojiGrid(containerId) {
-  const iconeAtual = window._iconeAtual || '🏫';
-  const html = EMOJIS.map(e =>
-    `<div class="emoji-op${e===iconeAtual?' selecionado':''}" data-emoji="${e}" onclick="selecionarIcone('${e}')">${e}</div>`
-  ).join('');
-  const el = document.getElementById(containerId);
-  if (el) el.innerHTML = html;
+function popularEmojis(id) {
+  const ic = window._iconeAtual||'🏫';
+  const el = document.getElementById(id); if (!el) return;
+  el.innerHTML = EMOJIS.map(e=>`<div class="em-op${e===ic?' sel':''}" data-e="${e}" onclick="selIcone('${e}')">${e}</div>`).join('');
 }
-
 window._iconeAtual = '🏫';
-window.abrirModalIcone = function() { popularEmojiGrid('emoji-grid-modal'); document.getElementById('modal-icone').classList.add('show'); };
-window.fecharModalIcone = function() { document.getElementById('modal-icone').classList.remove('show'); };
-window.selecionarIcone = async function(emoji) {
-  try {
-    await update(ref(db,'admin_config'), {icone_logo: emoji});
-    await registrarLog('Ícone alterado', `Novo ícone: ${emoji}`);
-    mostrarToast(emoji+' Ícone atualizado!');
-    const sucEl = document.getElementById('sucesso-icone');
-    if (sucEl) { sucEl.textContent = '✓ Ícone salvo!'; sucEl.classList.add('show'); setTimeout(() => sucEl.classList.remove('show'), 2000); }
-    setTimeout(fecharModalIcone, 400);
-  } catch(e) { mostrarToast('Erro: '+e.message); }
+window.abrirModalIcone = () => { popularEmojis('eg-modal'); document.getElementById('m-icone').classList.add('show'); };
+window.selIcone = async e => {
+  await update(ref(db,'admin_config'),{icone_logo:e});
+  await log('Ícone alterado',`→ ${e}`);
+  toast(e+' Ícone atualizado!');
+  const s=document.getElementById('suc-icone'); if(s){s.textContent='✓';s.classList.add('show');setTimeout(()=>s.classList.remove('show'),2000);}
+  setTimeout(()=>fecharM('m-icone'),400);
+};
+window.salvarInst = async () => {
+  const n=document.getElementById('p-inst').value.trim();
+  const err=document.getElementById('err-inst'),suc=document.getElementById('suc-inst');
+  err.classList.remove('show'); suc.classList.remove('show');
+  if (!n) { err.textContent='❌ Informe o nome.'; err.classList.add('show'); return; }
+  await update(ref(db,'admin_config'),{nome_instituicao:n});
+  await log('Nome da instituição alterado',`→ "${n}"`);
+  suc.textContent='✅ Nome salvo!'; suc.classList.add('show');
+  document.getElementById('p-inst').value=''; toast('✓ Nome salvo!');
 };
 
-window.alterarInstituicao = async function() {
-  const novoNome = document.getElementById('p-nome-inst').value.trim();
-  const erroEl = document.getElementById('erro-inst'), sucEl = document.getElementById('sucesso-inst');
-  erroEl.classList.remove('show'); sucEl.classList.remove('show');
-  if (!novoNome) { erroEl.textContent = '❌ Informe o nome.'; erroEl.classList.add('show'); return; }
-  try {
-    await update(ref(db,'admin_config'), {nome_instituicao: novoNome});
-    await registrarLog('Nome da instituição alterado', `Novo nome: "${novoNome}"`);
-    sucEl.textContent = '✅ Nome atualizado!'; sucEl.classList.add('show');
-    document.getElementById('p-nome-inst').value = ''; mostrarToast('✓ Nome salvo!');
-  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
-};
-
-// ═══════════════════════════════════
-//  ADMINS
-// ═══════════════════════════════════
-window.renderListaAdmins = function() {
-  const admins = window._admins || {};
-  const container = document.getElementById('lista-admins-container');
-  if (!container) return;
-  const keys = Object.keys(admins);
-  if (!keys.length) { container.innerHTML = '<div class="log-vazio">Nenhum admin cadastrado</div>'; return; }
-  container.innerHTML = keys.map(k => {
-    const a = admins[k];
-    const isPrincipal = a.tipo === 'principal';
-    const isSelf = a.usuario === window._adminUsuario;
-    return `<div class="admin-usuario-card">
+// ── ADMINS ───────────────────────────────────────────────────────
+window.renderAdmins = () => {
+  const c = document.getElementById('lista-adms'); if (!c) return;
+  const keys = Object.keys(_admins);
+  if (!keys.length) { c.innerHTML='<div class="log-empty">Nenhum admin</div>'; return; }
+  // Só principal vê senhas e pode remover
+  const isPrincipal = _adminTipo === 'principal';
+  c.innerHTML = keys.map(k => {
+    const a = _admins[k];
+    const isP = a.tipo === 'principal';
+    const isSelf = a.usuario === _adminUser;
+    return `<div class="aucard">
       <div>
-        <div class="admin-usuario-nome">${a.usuario}</div>
-        <div class="admin-usuario-sub">Senha: <span class="senha-plain" style="display:inline;padding:2px 6px;font-size:11px">${a.senha}</span></div>
-        <div class="admin-usuario-sub" style="margin-top:2px">${a.criadoEm ? 'Criado: '+new Date(a.criadoEm).toLocaleDateString('pt-BR') : ''}</div>
+        <div class="au-nome">${a.usuario}</div>
+        ${isPrincipal ? `<div class="au-sub">Senha: <span class="senha-plain">${a.senha}</span></div>` : ''}
+        <div class="au-sub">${a.criadoEm ? 'Criado: '+new Date(a.criadoEm).toLocaleDateString('pt-BR') : ''}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-        <span class="admin-usuario-badge ${isPrincipal?'principal':''}">${isPrincipal?'Principal':'Admin'}</span>
-        ${(!isPrincipal && !isSelf) ? `<button class="btn-remover-admin" onclick="removerAdmin('${k}','${a.usuario}')">Remover</button>` : ''}
+        <span class="au-badge${isP?' princ':''}">${isP?'Principal':'Admin'}</span>
+        ${(isPrincipal && !isP && !isSelf) ? `<button class="btn-rm-adm" onclick="rmAdmin('${k}','${a.usuario}')">Remover</button>` : ''}
       </div>
     </div>`;
   }).join('');
 };
-
-window.adicionarAdmin = async function() {
-  const usuario = document.getElementById('novo-admin-usuario').value.trim();
-  const senha = document.getElementById('novo-admin-senha').value;
-  const tipo = document.getElementById('novo-admin-tipo').value;
-  const erroEl = document.getElementById('erro-novo-admin');
-  const sucEl = document.getElementById('sucesso-novo-admin');
-  erroEl.classList.remove('show'); sucEl.classList.remove('show');
-  if (!usuario) { erroEl.textContent = '❌ Informe o usuário.'; erroEl.classList.add('show'); return; }
-  if (senha.length < 6) { erroEl.textContent = '❌ Senha mínimo 6 caracteres.'; erroEl.classList.add('show'); return; }
-  // Verificar duplicado
-  const admins = window._admins || {};
-  const jaExiste = Object.values(admins).some(a => a.usuario === usuario);
-  if (jaExiste) { erroEl.textContent = '❌ Usuário já existe.'; erroEl.classList.add('show'); return; }
-  try {
-    const novoId = 'admin_' + Date.now();
-    await set(ref(db, 'administradores/'+novoId), {
-      usuario, senha, tipo, criadoEm: new Date().toISOString(), criadoPor: window._adminUsuario
-    });
-    await registrarLog('Admin adicionado', `Novo admin: "${usuario}" (${tipo})`);
-    sucEl.textContent = '✅ Admin adicionado!'; sucEl.classList.add('show');
-    document.getElementById('novo-admin-usuario').value = '';
-    document.getElementById('novo-admin-senha').value = '';
-    mostrarToast('✓ Admin criado!');
-  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
+window.addAdmin = async () => {
+  const u=document.getElementById('na-user').value.trim();
+  const p=document.getElementById('na-pass').value;
+  const t=document.getElementById('na-tipo').value;
+  const err=document.getElementById('err-na'),suc=document.getElementById('suc-na');
+  err.classList.remove('show'); suc.classList.remove('show');
+  if (!u) { err.textContent='❌ Informe o usuário.'; err.classList.add('show'); return; }
+  if (p.length<6) { err.textContent='❌ Senha mínimo 6 chars.'; err.classList.add('show'); return; }
+  if (Object.values(_admins).some(a=>a.usuario===u)) { err.textContent='❌ Usuário já existe.'; err.classList.add('show'); return; }
+  const id='adm_'+Date.now();
+  await set(ref(db,'administradores/'+id),{usuario:u,senha:p,tipo:t,criadoEm:new Date().toISOString(),criadoPor:_adminUser});
+  await log('Admin adicionado',`"${u}" (${t})`);
+  suc.textContent='✅ Admin criado!'; suc.classList.add('show');
+  document.getElementById('na-user').value=''; document.getElementById('na-pass').value='';
+  toast('✓ Admin adicionado!');
+};
+window.rmAdmin = async (k,u) => {
+  if (!confirm(`Remover admin "${u}"?`)) return;
+  await remove(ref(db,'administradores/'+k));
+  await log('Admin removido',`"${u}"`);
+  toast('🗑️ Admin removido!');
+};
+window.renderLog = () => {
+  const c=document.getElementById('log-container'); if(!c) return;
+  if (!_logs.length) { c.innerHTML='<div class="log-empty">Nenhuma ação</div>'; return; }
+  c.innerHTML = _logs.slice(0,50).map(l=>`
+    <div class="log-item">
+      <div class="log-top"><span class="log-acao">${l.acao}</span><span class="log-quem">${l.admin}</span></div>
+      ${l.detalhe?`<div class="log-det">${l.detalhe}</div>`:''}
+      <div class="log-dt">${l.data} às ${l.hora}</div>
+    </div>`).join('');
 };
 
-window.removerAdmin = async function(key, usuario) {
-  if (!confirm(`Remover admin "${usuario}"?`)) return;
+// ── LOGIN ────────────────────────────────────────────────────────
+window.confirmarLogin = async () => {
+  const u=document.getElementById('l-user').value.trim(), p=document.getElementById('l-pass').value;
+  const err=document.getElementById('l-err'),load=document.getElementById('l-load'),btn=document.getElementById('btn-login');
+  if (!u||!p) { err.textContent='❌ Preencha os campos.'; err.classList.add('show'); return; }
+  err.classList.remove('show'); load.classList.add('show'); btn.disabled=true;
   try {
-    await remove(ref(db, 'administradores/'+key));
-    await registrarLog('Admin removido', `Admin removido: "${usuario}"`);
-    mostrarToast('🗑️ Admin removido!');
-  } catch(e) { mostrarToast('Erro: '+e.message); }
-};
-
-// ═══════════════════════════════════
-//  LOG
-// ═══════════════════════════════════
-window.renderLog = function() {
-  const container = document.getElementById('log-container');
-  if (!container) return;
-  const logs = window._logs || [];
-  if (!logs.length) { container.innerHTML = '<div class="log-vazio">Nenhuma ação registrada</div>'; return; }
-  container.innerHTML = logs.slice(0, 50).map(l =>
-    `<div class="log-item">
-      <div class="log-item-topo">
-        <span class="log-item-acao">${l.acao}</span>
-        <span class="log-item-quem">${l.admin}</span>
-      </div>
-      ${l.detalhe ? `<div class="log-item-detalhe">${l.detalhe}</div>` : ''}
-      <div class="log-item-data">${l.data} às ${l.hora}</div>
-    </div>`
-  ).join('');
-};
-
-// ═══════════════════════════════════
-//  LOGIN
-// ═══════════════════════════════════
-window.confirmarLogin = async function() {
-  const usuario = document.getElementById('login-usuario').value.trim();
-  const senha = document.getElementById('login-senha').value;
-  const erroEl = document.getElementById('login-erro'), loadEl = document.getElementById('login-loading'), btnEl = document.getElementById('btn-entrar');
-  if (!usuario || !senha) { erroEl.textContent = '❌ Preencha usuário e senha.'; erroEl.classList.add('show'); return; }
-  erroEl.classList.remove('show'); loadEl.classList.add('show'); btnEl.disabled = true;
-  try {
-    const snap = await get(ref(db,'administradores'));
-    if (!snap.exists()) throw new Error('Nenhum admin configurado.');
-    const admins = snap.val();
-    let adminEncontrado = null, adminKey = null;
-    for (const [k, a] of Object.entries(admins)) {
-      if (a.usuario === usuario && a.senha === senha) { adminEncontrado = a; adminKey = k; break; }
-    }
-    if (adminEncontrado) {
-      window._adminAtivo = true;
-      window._adminUsuario = usuario;
-      window._adminTipo = adminEncontrado.tipo;
-      window._adminKey = adminKey;
-      document.getElementById('modal-login').classList.remove('show');
-      document.getElementById('admin-banner').classList.add('show');
-      document.getElementById('admin-user-badge').textContent = usuario;
-      document.getElementById('logo-btn').title = 'Clique para alterar ícone';
-      atualizarUIAdmin(true);
-      renderLista();
-      mostrarToast('✓ Bem-vindo, '+usuario+'!');
-      await registrarLog('Login', `Admin "${usuario}" entrou no sistema`);
+    const s=await get(ADM); if(!s.exists()) throw new Error('Nenhum admin configurado.');
+    const admins=s.val(); let found=null, fkey=null;
+    for (const [k,a] of Object.entries(admins)) { if (a.usuario===u && a.senha===p) { found=a; fkey=k; break; } }
+    if (found) {
+      _adminAtivo=true; _adminUser=u; _adminTipo=found.tipo; _adminKey=fkey;
+      fecharM('m-login');
+      document.getElementById('adm-ban').classList.add('show');
+      document.getElementById('adm-badge-nome').textContent=u;
+      document.getElementById('logo-btn').title='Clique para alterar ícone';
+      uiAdmin(true); renderLista();
+      toast('✓ Bem-vindo, '+u+'!');
+      await log('Login',`"${u}" entrou`);
     } else {
-      erroEl.textContent = '❌ Usuário ou senha incorretos.'; erroEl.classList.add('show');
-      document.getElementById('login-senha').value = ''; document.getElementById('login-senha').focus();
+      err.textContent='❌ Usuário ou senha incorretos.'; err.classList.add('show');
+      document.getElementById('l-pass').value=''; document.getElementById('l-pass').focus();
     }
-  } catch(e) { erroEl.textContent = '❌ Erro: '+e.message; erroEl.classList.add('show'); }
-  loadEl.classList.remove('show'); btnEl.disabled = false;
+  } catch(e) { err.textContent='❌ '+e.message; err.classList.add('show'); }
+  load.classList.remove('show'); btn.disabled=false;
 };
-
-function atualizarUIAdmin(ativo) {
-  const subEl = document.getElementById('config-admin-sub');
-  const painelItem = document.getElementById('config-painel-item');
-  const badgeWrap = document.getElementById('config-admin-badge-wrap');
-  if (ativo) {
-    if (subEl) subEl.textContent = 'Ativo: '+window._adminUsuario;
-    if (painelItem) painelItem.style.display = '';
-    if (badgeWrap) badgeWrap.innerHTML = '<span class="config-badge verde">Ativo</span>';
-    document.getElementById('admin-banner').classList.add('show');
+function uiAdmin(on) {
+  const sub=document.getElementById('cfg-adm-sub'), bw=document.getElementById('cfg-adm-badge'), pi=document.getElementById('cfg-painel-item');
+  if (on) {
+    if(sub) sub.textContent='Ativo: '+_adminUser;
+    if(bw) bw.innerHTML='<span class="cfg-badge vd">Ativo</span>';
+    if(pi) pi.style.display='';
+    document.getElementById('adm-ban').classList.add('show');
+    // Mostrar/ocultar aba log no painel conforme tipo
+    const atLog = document.getElementById('at-log');
+    if (atLog) atLog.style.display = _adminTipo==='principal' ? '' : 'none';
   } else {
-    if (subEl) subEl.textContent = 'Toque para entrar';
-    if (painelItem) painelItem.style.display = 'none';
-    if (badgeWrap) badgeWrap.innerHTML = '';
-    document.getElementById('admin-banner').classList.remove('show');
+    if(sub) sub.textContent='Toque para entrar';
+    if(bw) bw.innerHTML='';
+    if(pi) pi.style.display='none';
+    document.getElementById('adm-ban').classList.remove('show');
   }
 }
-
-window.fecharModalLogin = function() { document.getElementById('modal-login').classList.remove('show'); };
-
-window.alterarUsuario = async function() {
-  const novoUsuario = document.getElementById('p-novo-usuario').value.trim();
-  const senhaConf = document.getElementById('p-conf-senha-usuario').value;
-  const erroEl = document.getElementById('erro-usuario'), sucEl = document.getElementById('sucesso-usuario');
-  erroEl.classList.remove('show'); sucEl.classList.remove('show');
-  if (!novoUsuario) { erroEl.textContent = '❌ Informe o novo usuário.'; erroEl.classList.add('show'); return; }
-  if (!senhaConf) { erroEl.textContent = '❌ Confirme sua senha.'; erroEl.classList.add('show'); return; }
-  const admins = window._admins || {};
-  const myAdmin = admins[window._adminKey];
-  if (!myAdmin || myAdmin.senha !== senhaConf) { erroEl.textContent = '❌ Senha incorreta.'; erroEl.classList.add('show'); return; }
-  try {
-    await update(ref(db, 'administradores/'+window._adminKey), {usuario: novoUsuario});
-    await registrarLog('Usuário admin alterado', `De "${window._adminUsuario}" para "${novoUsuario}"`);
-    window._adminUsuario = novoUsuario;
-    document.getElementById('admin-user-badge').textContent = novoUsuario;
-    atualizarUIAdmin(true);
-    sucEl.textContent = '✅ Usuário alterado!'; sucEl.classList.add('show');
-    document.getElementById('p-novo-usuario').value = ''; document.getElementById('p-conf-senha-usuario').value = '';
-    mostrarToast('✓ Usuário atualizado!');
-  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
+window.alterarUser = async () => {
+  const nu=document.getElementById('p-user').value.trim(), pc=document.getElementById('p-cu').value;
+  const err=document.getElementById('err-user'),suc=document.getElementById('suc-user');
+  err.classList.remove('show'); suc.classList.remove('show');
+  if (!nu) { err.textContent='❌ Informe o usuário.'; err.classList.add('show'); return; }
+  if (!pc) { err.textContent='❌ Confirme sua senha.'; err.classList.add('show'); return; }
+  const myA = _admins[_adminKey];
+  if (!myA||myA.senha!==pc) { err.textContent='❌ Senha incorreta.'; err.classList.add('show'); return; }
+  await update(ref(db,'administradores/'+_adminKey),{usuario:nu});
+  await log('Usuário alterado',`de "${_adminUser}" → "${nu}"`);
+  _adminUser=nu;
+  document.getElementById('adm-badge-nome').textContent=nu;
+  uiAdmin(true); suc.textContent='✅ Usuário alterado!'; suc.classList.add('show');
+  document.getElementById('p-user').value=''; document.getElementById('p-cu').value='';
+  toast('✓ Usuário atualizado!');
+};
+window.alterarSenha = async () => {
+  const sa=document.getElementById('p-sa').value, sn=document.getElementById('p-sn').value, sc=document.getElementById('p-sc').value;
+  const err=document.getElementById('err-sen'),suc=document.getElementById('suc-sen');
+  err.classList.remove('show'); suc.classList.remove('show');
+  if (!sa||!sn||!sc) { err.textContent='❌ Preencha todos.'; err.classList.add('show'); return; }
+  if (sn.length<6) { err.textContent='❌ Mín. 6 caracteres.'; err.classList.add('show'); return; }
+  if (sn!==sc) { err.textContent='❌ Senhas não coincidem.'; err.classList.add('show'); return; }
+  const myA=_admins[_adminKey];
+  if (!myA||myA.senha!==sa) { err.textContent='❌ Senha atual incorreta.'; err.classList.add('show'); return; }
+  await update(ref(db,'administradores/'+_adminKey),{senha:sn});
+  await log('Senha alterada',`admin "${_adminUser}"`);
+  suc.textContent='✅ Senha alterada!'; suc.classList.add('show');
+  ['p-sa','p-sn','p-sc'].forEach(i=>document.getElementById(i).value='');
+  toast('✓ Senha atualizada!');
 };
 
-window.alterarSenha = async function() {
-  const atual = document.getElementById('p-senha-atual').value;
-  const nova = document.getElementById('p-senha-nova').value;
-  const conf = document.getElementById('p-senha-conf').value;
-  const erroEl = document.getElementById('painel-erro'), sucEl = document.getElementById('painel-sucesso');
-  erroEl.classList.remove('show'); sucEl.classList.remove('show');
-  if (!atual || !nova || !conf) { erroEl.textContent = '❌ Preencha todos os campos.'; erroEl.classList.add('show'); return; }
-  if (nova.length < 6) { erroEl.textContent = '❌ Mínimo 6 caracteres.'; erroEl.classList.add('show'); return; }
-  if (nova !== conf) { erroEl.textContent = '❌ Senhas não coincidem.'; erroEl.classList.add('show'); return; }
-  const admins = window._admins || {};
-  const myAdmin = admins[window._adminKey];
-  if (!myAdmin || myAdmin.senha !== atual) { erroEl.textContent = '❌ Senha atual incorreta.'; erroEl.classList.add('show'); return; }
-  try {
-    await update(ref(db, 'administradores/'+window._adminKey), {senha: nova});
-    await registrarLog('Senha alterada', `Admin "${window._adminUsuario}" alterou sua senha`);
-    sucEl.textContent = '✅ Senha alterada!'; sucEl.classList.add('show');
-    ['p-senha-atual','p-senha-nova','p-senha-conf'].forEach(id => document.getElementById(id).value = '');
-    mostrarToast('✓ Senha atualizada!');
-  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
-};
-
-// ═══════════════════════════════════
-//  FILA OFFLINE
-// ═══════════════════════════════════
-const FILA_KEY = 'ceti_fila_offline';
-function lerFila() { try { return JSON.parse(localStorage.getItem(FILA_KEY) || '[]'); } catch(e) { return []; } }
-function salvarFila(fila) { localStorage.setItem(FILA_KEY, JSON.stringify(fila)); }
-function adicionarNaFila(dados) {
-  const fila = lerFila();
-  const id = 'local_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
-  fila.push(Object.assign({}, dados, {_localId: id}));
-  salvarFila(fila); atualizarBannerFila(); return id;
+// ── FILA OFFLINE ─────────────────────────────────────────────────
+const FK='ceti_fila';
+function lerFila() { try { return JSON.parse(localStorage.getItem(FK)||'[]'); } catch(e){ return []; } }
+function salvFila(f) { localStorage.setItem(FK,JSON.stringify(f)); }
+function addFila(d) {
+  const f=lerFila(), id='loc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+  f.push({...d,_lid:id}); salvFila(f); updBannerFila(); return id;
 }
-function removerDaFila(localId) { salvarFila(lerFila().filter(x => x._localId !== localId)); atualizarBannerFila(); }
-function atualizarBannerFila() {
-  const fila = lerFila();
-  const banner = document.getElementById('fila-banner'), txt = document.getElementById('fila-txt');
-  if (fila.length > 0) { txt.textContent = '📦 '+fila.length+' aguardando envio'; banner.classList.add('show'); }
-  else banner.classList.remove('show');
-  const sub = document.getElementById('config-sync-sub');
-  if (sub) sub.textContent = fila.length > 0 ? fila.length+' pendente(s)' : 'Tudo sincronizado';
+function rmFila(lid) { salvFila(lerFila().filter(x=>x._lid!==lid)); updBannerFila(); }
+function updBannerFila() {
+  const f=lerFila(), ban=document.getElementById('fila-ban'), txt=document.getElementById('fila-txt');
+  if (f.length>0) { txt.textContent='📦 '+f.length+' aguardando envio'; ban.classList.add('show'); }
+  else ban.classList.remove('show');
+  const s=document.getElementById('cfg-sync-sub');
+  if(s) s.textContent=f.length>0?f.length+' pendente(s)':'Tudo sincronizado';
 }
-
-window.tentarSyncFila = async function() {
-  const fila = lerFila(); if (!fila.length) { mostrarToast('✓ Nada para sincronizar'); return; }
-  let enviados = 0;
-  for (const item of fila) {
-    const localId = item._localId; const dados = Object.assign({}, item); delete dados._localId; delete dados._offline;
-    try { await push(ocRef, dados); removerDaFila(localId); enviados++; } catch(e) { break; }
+window.syncFila = async () => {
+  const f=lerFila(); if(!f.length){toast('✓ Nada para sincronizar');return;}
+  let ok=0;
+  for (const item of f) {
+    const lid=item._lid; const d={...item}; delete d._lid; delete d._off;
+    try { await push(OC,d); rmFila(lid); ok++; } catch(e){ break; }
   }
-  if (enviados > 0) mostrarToast('✓ '+enviados+' enviada(s)!');
-  atualizarBannerFila();
+  if(ok>0) toast('✓ '+ok+' enviada(s)!');
+  updBannerFila();
 };
 
-let _online = true;
-onValue(ref(db,'.info/connected'), snap => {
-  _online = snap.val() === true;
-  document.getElementById('conn-banner').classList.toggle('show', !_online);
-  if (_online) tentarSyncFila();
-});
-
-// ═══════════════════════════════════
-//  SALVAR OCORRÊNCIA
-// ═══════════════════════════════════
-window.salvarOcorrencia = async function() {
-  const btn = document.getElementById('btn-salvar');
-  const aluno = document.getElementById('f-aluno').value.trim();
-  const turma = document.getElementById('f-turma').value.trim();
-  const tipo = document.getElementById('f-tipo').value;
-  const professor = document.getElementById('f-professor').value.trim();
-  const descricao = document.getElementById('f-descricao').value.trim();
-  if (!aluno || !professor || !descricao) { mostrarToast('⚠️ Preencha os campos obrigatórios'); return; }
-  const dados = {aluno, turma, tipo, professor, descricao, status:'Pendente',
-    data: new Date().toLocaleDateString('pt-BR'), hora: new Date().toTimeString().slice(0,5), timestamp: Date.now()};
-  btn.disabled = true; btn.textContent = 'Salvando...';
+// ── OCORRÊNCIAS ──────────────────────────────────────────────────
+window.salvarOc = async () => {
+  const btn=document.getElementById('btn-save');
+  const aluno=document.getElementById('f-aluno').value.trim();
+  // turma: preferir chip selecionado, senão input
+  const turma = (() => {
+    const chips = window._turmaChipSel;
+    if (chips && chips !== '__outras__') return chips;
+    return document.getElementById('f-turma').value.trim();
+  })();
+  const tipo=document.getElementById('f-tipo').value;
+  const prof=document.getElementById('f-prof').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+  if (!aluno||!prof||!desc) { toast('⚠️ Preencha os campos obrigatórios'); return; }
+  const d={aluno,turma,tipo,professor:prof,descricao:desc,status:'Pendente',
+    data:new Date().toLocaleDateString('pt-BR'),hora:new Date().toTimeString().slice(0,5),timestamp:Date.now()};
+  btn.disabled=true; btn.textContent='Salvando...';
   if (!_online) {
-    const localId = adicionarNaFila(dados);
-    const lista = window._ocs || []; lista.unshift(Object.assign({}, dados, {firebaseKey: localId, _offline: true}));
-    window._ocs = lista; renderLista(); mostrarToast('📦 Salvo localmente!');
-    limparFormNovo(); irParaLista();
+    const lid=addFila(d);
+    _ocs.unshift({...d,firebaseKey:lid,_off:true});
+    renderLista(); toast('📦 Salvo localmente!'); limparNovo(); irLista();
   } else {
-    try {
-      await push(ocRef, dados); mostrarToast('✓ Ocorrência salva!');
-      limparFormNovo(); irParaLista();
-    } catch(e) { adicionarNaFila(dados); mostrarToast('📦 Guardado para envio automático'); irParaLista(); }
+    try { await push(OC,d); toast('✓ Ocorrência salva!'); limparNovo(); irLista(); }
+    catch(e) { addFila(d); toast('📦 Guardado para envio'); irLista(); }
   }
-  btn.disabled = false; btn.textContent = 'Salvar Ocorrência';
+  btn.disabled=false; btn.textContent='Salvar Ocorrência';
 };
-
-function limparFormNovo() {
-  ['f-aluno','f-professor','f-descricao'].forEach(id => document.getElementById(id).value = '');
-  // Manter turma padrão
-  const turmaPadrao = localStorage.getItem('ceti_turma_padrao') || '';
-  document.getElementById('f-turma').value = turmaPadrao;
-  document.getElementById('f-tipo').selectedIndex = 0;
+function limparNovo() {
+  document.getElementById('f-aluno').value='';
+  document.getElementById('f-prof').value='';
+  document.getElementById('f-desc').value='';
+  // Resetar chips
+  window._turmaChipSel = null;
+  document.getElementById('f-turma').value='';
+  renderTurmaChips();
+  document.getElementById('f-tipo').selectedIndex=0;
+  // Repor nome padrão
+  const pn=localStorage.getItem('ceti_prof_nome')||''; if(pn) document.getElementById('f-prof').value=pn;
 }
 
-window.salvarEdicao = async function() {
-  const btn = document.getElementById('btn-editar-salvar'); const key = window._idAtual; if (!key) return;
-  const aluno = document.getElementById('e-aluno').value.trim();
-  const turma = document.getElementById('e-turma').value.trim();
-  const tipo = document.getElementById('e-tipo').value;
-  const professor = document.getElementById('e-professor').value.trim();
-  const descricao = document.getElementById('e-descricao').value.trim();
-  if (!aluno || !professor || !descricao) { mostrarToast('⚠️ Preencha os campos obrigatórios'); return; }
-  const updateData = {aluno, turma, tipo, professor, descricao};
-  if (window._adminAtivo) {
-    const dtVal = document.getElementById('e-datetime').value;
-    if (dtVal) {
-      const dt = new Date(dtVal);
-      updateData.data = String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')+'/'+dt.getFullYear();
-      updateData.hora = String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0');
-      updateData.timestamp = dt.getTime();
+window.salvarEdit = async () => {
+  const btn=document.getElementById('btn-edit-save'); if(!_idAtual) return;
+  const aluno=document.getElementById('e-aluno').value.trim();
+  const turma=document.getElementById('e-turma').value.trim();
+  const tipo=document.getElementById('e-tipo').value;
+  const prof=document.getElementById('e-prof').value.trim();
+  const desc=document.getElementById('e-desc').value.trim();
+  if (!aluno||!prof||!desc) { toast('⚠️ Preencha os obrigatórios'); return; }
+  const upd={aluno,turma,tipo,professor:prof,descricao:desc};
+  if (_adminAtivo) {
+    const dv=document.getElementById('e-dt').value;
+    if (dv) {
+      const dt=new Date(dv);
+      upd.data=String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')+'/'+dt.getFullYear();
+      upd.hora=String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0');
+      upd.timestamp=dt.getTime();
     }
   }
-  btn.disabled = true; btn.textContent = 'Salvando...';
+  btn.disabled=true; btn.textContent='Salvando...';
   try {
-    await update(ref(db,'ocorrencias/'+key), updateData);
-    await registrarLog('Ocorrência editada', `Aluno: "${aluno}", key: ${key}`);
-    mostrarToast('✓ Ocorrência atualizada!'); irParaLista();
-  } catch(e) { mostrarToast('Erro: '+e.message); }
-  btn.disabled = false; btn.textContent = 'Salvar Alterações';
+    await update(ref(db,'ocorrencias/'+_idAtual),upd);
+    await log('Ocorrência editada',`Aluno: "${aluno}"`);
+    toast('✓ Atualizada!'); irLista();
+  } catch(e) { toast('Erro: '+e.message); }
+  btn.disabled=false; btn.textContent='Salvar Alterações';
 };
-
-window.confirmarExclusao = async function() {
-  const key = window._idAtual; if (!key) return;
-  if (String(key).startsWith('local_')) {
-    removerDaFila(key); window._ocs = (window._ocs||[]).filter(x => x.firebaseKey !== key);
-    renderLista(); mostrarToast('🗑️ Removido!'); fecharModalExcluir(); irParaLista(); return;
+window.confirmarDel = async () => {
+  if (!_idAtual) return;
+  if (String(_idAtual).startsWith('loc_')) {
+    rmFila(_idAtual); _ocs=_ocs.filter(x=>x.firebaseKey!==_idAtual);
+    renderLista(); toast('🗑️ Removido!'); fecharM('m-del'); irLista(); return;
   }
-  const oc = (window._ocs||[]).find(x => x.firebaseKey === key);
+  const oc=_ocs.find(x=>x.firebaseKey===_idAtual);
   try {
-    await remove(ref(db,'ocorrencias/'+key));
-    await registrarLog('Ocorrência excluída', `Aluno: "${oc ? oc.aluno : '?'}", key: ${key}`);
-    mostrarToast('🗑️ Excluída!'); fecharModalExcluir(); irParaLista();
-  } catch(e) { mostrarToast('Erro: '+e.message); }
+    await remove(ref(db,'ocorrencias/'+_idAtual));
+    await log('Ocorrência excluída',`Aluno: "${oc?.aluno||'?'}"`);
+    toast('🗑️ Excluída!'); fecharM('m-del'); irLista();
+  } catch(e) { toast('Erro: '+e.message); }
 };
-
-window.atualizarStatus = async function(novoStatus) {
-  const key = window._idAtual; if (!key) return;
-  if (String(key).startsWith('local_')) { mostrarToast('⚠️ Aguarde sincronização.'); return; }
-  const oc = (window._ocs||[]).find(x => x.firebaseKey === key);
+window.updStatus = async ns => {
+  if (!_idAtual||String(_idAtual).startsWith('loc_')) { toast('⚠️ Aguarde sync.'); return; }
+  const oc=_ocs.find(x=>x.firebaseKey===_idAtual);
   try {
-    await update(ref(db,'ocorrencias/'+key), {status: novoStatus});
-    await registrarLog('Status alterado', `Aluno: "${oc ? oc.aluno : '?'}" → "${novoStatus}"`);
-    mostrarToast('✓ Status atualizado!'); setTimeout(irParaLista, 400);
-  } catch(e) { mostrarToast('Erro: '+e.message); }
+    await update(ref(db,'ocorrencias/'+_idAtual),{status:ns});
+    await log('Status alterado',`"${oc?.aluno}" → "${ns}"`);
+    toast('✓ Status atualizado!'); setTimeout(irLista,400);
+  } catch(e) { toast('Erro: '+e.message); }
 };
 
-// ═══════════════════════════════════
-//  EVENTOS DO CALENDÁRIO
-// ═══════════════════════════════════
-window._calTipoAtivo = 'ocorrencias';
-
-window.calMudarTipo = function(tipo) {
-  window._calTipoAtivo = tipo;
-  document.getElementById('cal-tab-oc').classList.toggle('ativo', tipo === 'ocorrencias');
-  document.getElementById('cal-tab-ev').classList.toggle('ativo', tipo === 'eventos');
-  if (window._diaSel) renderOcsDia(window._diaSel);
-};
-
-window.abrirModalNovoEvento = function(dataStr) {
-  document.getElementById('modal-evento-data-txt').textContent = 'Data: '+dataStr;
-  document.getElementById('evento-titulo').value = '';
-  document.getElementById('evento-hora').value = '';
-  document.getElementById('evento-obs').value = '';
-  document.getElementById('evento-erro').classList.remove('show');
-  window._eventoDataSel = dataStr;
-  document.getElementById('modal-novo-evento').classList.add('show');
-};
-
-window.salvarEvento = async function() {
-  const titulo = document.getElementById('evento-titulo').value.trim();
-  const hora = document.getElementById('evento-hora').value.trim();
-  const obs = document.getElementById('evento-obs').value.trim();
-  const erroEl = document.getElementById('evento-erro');
-  erroEl.classList.remove('show');
-  if (!titulo) { erroEl.textContent = '❌ Informe o título do evento.'; erroEl.classList.add('show'); return; }
-  const dataStr = window._eventoDataSel;
-  if (!dataStr) return;
-  const parts = dataStr.split('/');
-  const dt = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
-  const hoje = new Date(); hoje.setHours(0,0,0,0);
-  if (dt < hoje) { erroEl.textContent = '❌ Só é possível criar eventos a partir de hoje.'; erroEl.classList.add('show'); return; }
-  try {
-    await push(evRef, {titulo, hora: hora || '—', obs: obs || '', data: dataStr, timestamp: dt.getTime(), criadoPor: window._adminAtivo ? window._adminUsuario : 'Professor'});
-    fecharModal('modal-novo-evento');
-    mostrarToast('📅 Evento criado!');
-    if (window._adminAtivo) await registrarLog('Evento criado', `"${titulo}" em ${dataStr}`);
-  } catch(e) { erroEl.textContent = '❌ Erro: '+e.message; erroEl.classList.add('show'); }
-};
-
-window.removerEvento = async function(key) {
-  if (!confirm('Remover este evento?')) return;
-  try {
-    await remove(ref(db,'eventos/'+key));
-    if (window._adminAtivo) await registrarLog('Evento removido', `key: ${key}`);
-    mostrarToast('🗑️ Evento removido!');
-  } catch(e) { mostrarToast('Erro: '+e.message); }
-};
-
-// ═══════════════════════════════════
-//  RENDER LISTA
-// ═══════════════════════════════════
+// ── RENDER LISTA ─────────────────────────────────────────────────
 function renderLista() {
-  const filaLocal = lerFila();
-  const ocs = window._ocs || [];
-  const keysFirebase = ocs.map(o => o.firebaseKey);
-  const locaisExclusivos = filaLocal.filter(x => !keysFirebase.includes(x._localId));
-  const locais = locaisExclusivos.map(x => { const item = Object.assign({}, x); item.firebaseKey = x._localId; item._offline = true; delete item._localId; return item; });
-  const todos = locais.concat(ocs);
-  const busca = (document.getElementById('busca') ? document.getElementById('busca').value : '').toLowerCase();
-  const fil = todos.filter(o => (o.aluno||'').toLowerCase().includes(busca) || (o.turma||'').toLowerCase().includes(busca));
-
-  document.getElementById('cnt-pendente').textContent = ocs.filter(o => o.status === 'Pendente').length;
-  document.getElementById('cnt-acomp').textContent = ocs.filter(o => o.status === 'Em acompanhamento').length;
-  document.getElementById('cnt-resolvido').textContent = ocs.filter(o => o.status === 'Resolvido').length;
-  document.getElementById('cnt-total').textContent = ocs.length;
-
-  const c = document.getElementById('lista-container');
-  if (!fil.length) { c.innerHTML = '<div class="empty">Nenhuma ocorrência encontrada</div>'; c.className = 'lista'; return; }
-  const ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-  c.innerHTML = fil.map(o => {
-    const cls = o.status === 'Pendente' ? 'pendente' : o.status === 'Resolvido' ? 'resolvido' : 'acomp';
-    const offlineTag = o._offline ? '<span class="offline-tag">Offline</span>' : '';
-    const offlineCls = o._offline ? ' offline-pending' : '';
-    return `<div class="oc-card${offlineCls}" onclick="verDetalhe('${o.firebaseKey}')">
-      <button class="btn-excluir-card" onclick="event.stopPropagation();pedirExclusao('${o.firebaseKey}')">🗑️</button>
-      <div class="oc-top"><span class="oc-nome">${o.aluno}${offlineTag}</span><span class="oc-turma">${o.turma||'—'}</span></div>
-      <div class="oc-tipo">${ICON[o.tipo]||'📋'} ${o.tipo}</div>
+  const listaEl=document.getElementById('lista'); if(!listaEl) return;
+  const filaLocal=lerFila();
+  const keysF=_ocs.map(o=>o.firebaseKey);
+  const locais=filaLocal.filter(x=>!keysF.includes(x._lid)).map(x=>{
+    const it={...x}; it.firebaseKey=x._lid; it._off=true; delete it._lid; return it;
+  });
+  const todos=locais.concat(_ocs);
+  const q=(document.getElementById('busca')?.value||'').toLowerCase();
+  const fil=todos.filter(o=>(o.aluno||'').toLowerCase().includes(q)||(o.turma||'').toLowerCase().includes(q));
+  document.getElementById('cnt-p').textContent=_ocs.filter(o=>o.status==='Pendente').length;
+  document.getElementById('cnt-a').textContent=_ocs.filter(o=>o.status==='Em acompanhamento').length;
+  document.getElementById('cnt-r').textContent=_ocs.filter(o=>o.status==='Resolvido').length;
+  document.getElementById('cnt-t').textContent=_ocs.length;
+  if (!fil.length) { listaEl.innerHTML='<div class="empty">Nenhuma ocorrência encontrada</div>'; listaEl.className='lista'; return; }
+  const IC={"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  listaEl.innerHTML=fil.map(o=>{
+    const cls=o.status==='Pendente'?'b-pnd':o.status==='Resolvido'?'b-rv':'b-ac';
+    const ot=o._off?'<span class="off-tag">Offline</span>':'';
+    const oc2=o._off?' off-pend':'';
+    return `<div class="oc-card${oc2}" onclick="verDet('${o.firebaseKey}')">
+      <button class="btn-del-card" onclick="event.stopPropagation();pedirDel('${o.firebaseKey}')">🗑️</button>
+      <div class="oc-top"><span class="oc-nome">${o.aluno}${ot}</span><span class="oc-turma">${o.turma||'—'}</span></div>
+      <div class="oc-tipo">${IC[o.tipo]||'📋'} ${o.tipo}</div>
       <div class="oc-meta"><span class="oc-data">${o.data} · ${o.hora} · ${o.professor}</span>
-      <span class="badge badge-${cls}"><span class="badge-dot"></span>${o.status}</span></div></div>`;
+      <span class="badge ${cls}"><span class="bdot"></span>${o.status}</span></div>
+    </div>`;
   }).join('');
-  c.className = 'lista'+(window._adminAtivo ? ' modo-admin' : '');
-  atualizarBannerFila();
+  listaEl.className='lista'+(_adminAtivo?' modo-adm':'');
+  updBannerFila();
 }
 
-// ═══════════════════════════════════
-//  DETALHE
-// ═══════════════════════════════════
-window.verDetalhe = function(key) {
-  window._idAtual = key;
-  let o = (window._ocs||[]).find(x => x.firebaseKey === key);
-  if (!o) { const fl = lerFila().find(x => x._localId === key); if (fl) o = Object.assign({}, fl, {firebaseKey: fl._localId, _offline: true}); }
+// ── TURMAS CHIPS ─────────────────────────────────────────────────
+window._turmaChipSel = null;
+function getTurmasPadrao() {
+  try { return JSON.parse(localStorage.getItem('ceti_turmas')||'[]'); } catch(e){ return []; }
+}
+function renderTurmaChips() {
+  const turmas = getTurmasPadrao();
+  const wrap = document.getElementById('turma-chips-wrap');
+  const inp = document.getElementById('f-turma');
+  if (!wrap) return;
+  if (!turmas.length) {
+    // Sem turmas: só input livre
+    wrap.innerHTML='';
+    inp.style.display='';
+    inp.value='';
+    return;
+  }
+  // Com turmas: chips + chip "Outras"
+  wrap.innerHTML = turmas.map(t=>`
+    <button type="button" class="tchip${_turmaChipSel===t?' sel':''}" onclick="selChip('${t}')">${t}</button>
+  `).join('') + `<button type="button" class="tchip outras${_turmaChipSel==='__outras__'?' sel':''}" onclick="selChip('__outras__')">+ Outras</button>`;
+  // Mostrar input só se "Outras" selecionado
+  inp.style.display = _turmaChipSel==='__outras__' ? '' : 'none';
+  if (_turmaChipSel && _turmaChipSel !== '__outras__') inp.value = _turmaChipSel;
+  else if (_turmaChipSel !== '__outras__') inp.value='';
+}
+window.selChip = t => {
+  window._turmaChipSel = t;
+  renderTurmaChips();
+};
+
+// ── DETALHE ──────────────────────────────────────────────────────
+window.verDet = k => {
+  _idAtual=k;
+  let o=_ocs.find(x=>x.firebaseKey===k);
+  if (!o) { const fl=lerFila().find(x=>x._lid===k); if(fl) o={...fl,firebaseKey:fl._lid,_off:true}; }
   if (!o) return;
-  const ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-  const cls = o.status === 'Pendente' ? 'pendente' : o.status === 'Resolvido' ? 'resolvido' : 'acomp';
-  const offlineAviso = o._offline ? '<div style="background:var(--badge-pendente-bg);color:var(--badge-pendente-txt);padding:8px 12px;border-radius:7px;font-size:11px;font-weight:600;margin:8px 0;">📦 Aguardando sincronização</div>' : '';
-  mostrarView('view-detalhe');
-  document.getElementById('detalhe-conteudo').innerHTML =
-    `<button class="btn-back" onclick="irParaLista()">← Voltar</button>
-    <div class="detalhe-nome">${o.aluno}</div>
-    <span class="badge badge-${cls}"><span class="badge-dot"></span>${o.status}</span>
-    ${offlineAviso}
-    <div class="detalhe-info">
-      <div class="info-item"><div class="info-label">Turma</div><div class="info-val">${o.turma||'—'}</div></div>
-      <div class="info-item"><div class="info-label">Tipo</div><div class="info-val">${ICON[o.tipo]||'📋'} ${o.tipo}</div></div>
-      <div class="info-item"><div class="info-label">Data</div><div class="info-val">${o.data}</div></div>
-      <div class="info-item"><div class="info-label">Hora</div><div class="info-val">${o.hora}</div></div>
-      <div class="info-item" style="grid-column:1/-1"><div class="info-label">Professor</div><div class="info-val">${o.professor}</div></div>
+  const IC={"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  const cls=o.status==='Pendente'?'b-pnd':o.status==='Resolvido'?'b-rv':'b-ac';
+  const offAv=o._off?'<div style="background:var(--pnd-bg);color:var(--pnd-tx);padding:8px 12px;border-radius:7px;font-size:11px;font-weight:600;margin:8px 0">📦 Aguardando sync</div>':'';
+  mostrarView('v-det');
+  document.getElementById('det-content').innerHTML=`
+    <button class="btn-back" onclick="irLista()">← Voltar</button>
+    <div class="det-nome">${o.aluno}</div>
+    <span class="badge ${cls}"><span class="bdot"></span>${o.status}</span>
+    ${offAv}
+    <div class="det-info">
+      <div class="ii"><div class="il">Turma</div><div class="iv">${o.turma||'—'}</div></div>
+      <div class="ii"><div class="il">Tipo</div><div class="iv">${IC[o.tipo]||'📋'} ${o.tipo}</div></div>
+      <div class="ii"><div class="il">Data</div><div class="iv">${o.data}</div></div>
+      <div class="ii"><div class="il">Hora</div><div class="iv">${o.hora}</div></div>
+      <div class="ii" style="grid-column:1/-1"><div class="il">Professor</div><div class="iv">${o.professor}</div></div>
     </div>
-    <div class="detalhe-desc">${o.descricao}</div>
-    ${o._offline ? '' :
-      `<div style="font-size:10px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Atualizar Status</div>
-      <div class="status-btns">
-        <button class="status-btn" onclick="atualizarStatus('Pendente')">⏳ Pendente</button>
-        <button class="status-btn" onclick="atualizarStatus('Em acompanhamento')">👀 Acomp.</button>
-        <button class="status-btn" onclick="atualizarStatus('Resolvido')">✅ Resolvido</button>
-      </div>`
-    }
-    <div class="admin-acoes${window._adminAtivo ? ' show' : ''}">
-      ${o._offline ?
-        `<button class="btn-del" style="grid-column:1/-1" onclick="pedirExclusao('${key}')">🗑️ Remover da fila</button>` :
-        `<button class="btn-editar" onclick="abrirEdicao()">✏️ Editar</button>
-        <button class="btn-del" onclick="pedirExclusao('${key}')">🗑️ Excluir</button>`
+    <div class="det-desc">${o.descricao}</div>
+    ${o._off?'':`<div style="font-size:10px;font-weight:600;color:var(--sb);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Atualizar Status</div>
+      <div class="st-btns">
+        <button class="st-btn" onclick="updStatus('Pendente')">⏳ Pendente</button>
+        <button class="st-btn" onclick="updStatus('Em acompanhamento')">👀 Acomp.</button>
+        <button class="st-btn" onclick="updStatus('Resolvido')">✅ Resolvido</button>
+      </div>`}
+    <div class="adm-act${_adminAtivo?' show':''}">
+      ${o._off
+        ?`<button class="btn-del" style="grid-column:1/-1" onclick="pedirDel('${k}')">🗑️ Remover da fila</button>`
+        :`<button class="btn-edit" onclick="abrirEdit()">✏️ Editar</button><button class="btn-del" onclick="pedirDel('${k}')">🗑️ Excluir</button>`
       }
     </div>`;
 };
-
-window.abrirEdicao = function() {
-  const o = (window._ocs||[]).find(x => x.firebaseKey === window._idAtual); if (!o) return;
-  document.getElementById('e-aluno').value = o.aluno || '';
-  document.getElementById('e-turma').value = o.turma || '';
-  document.getElementById('e-professor').value = o.professor || '';
-  document.getElementById('e-descricao').value = o.descricao || '';
-  const sel = document.getElementById('e-tipo');
-  for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value === o.tipo) { sel.selectedIndex = i; break; } }
-  const adminDt = document.getElementById('admin-dt-wrap');
-  if (window._adminAtivo) {
-    adminDt.style.display = 'block';
-    if (o.data && o.hora) {
-      const parts = o.data.split('/');
-      document.getElementById('e-datetime').value = `${parts[2]}-${parts[1]}-${parts[0]}T${o.hora}`;
-    }
-  } else adminDt.style.display = 'none';
-  mostrarView('view-editar');
+window.abrirEdit = () => {
+  const o=_ocs.find(x=>x.firebaseKey===_idAtual); if(!o) return;
+  document.getElementById('e-aluno').value=o.aluno||'';
+  document.getElementById('e-turma').value=o.turma||'';
+  document.getElementById('e-prof').value=o.professor||'';
+  document.getElementById('e-desc').value=o.descricao||'';
+  const sel=document.getElementById('e-tipo');
+  for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===o.tipo){sel.selectedIndex=i;break;}}
+  const adtw=document.getElementById('adm-dt-wrap');
+  if (_adminAtivo) {
+    adtw.style.display='block';
+    if(o.data&&o.hora){const p=o.data.split('/');document.getElementById('e-dt').value=`${p[2]}-${p[1]}-${p[0]}T${o.hora}`;}
+  } else adtw.style.display='none';
+  mostrarView('v-edit');
 };
-window.voltarDetalhe = function() { verDetalhe(window._idAtual); };
+window.voltarDet = () => verDet(_idAtual);
 
-// ═══════════════════════════════════
-//  NAVEGAÇÃO
-// ═══════════════════════════════════
-var _abaAtiva = 'lista';
-
-window.mudarAba = function(aba) {
-  _abaAtiva = aba;
-  document.getElementById('tab-lista').classList.toggle('ativo', aba === 'lista');
-  document.getElementById('tab-analytics').classList.toggle('ativo', aba === 'analytics');
-  document.getElementById('tab-config').classList.toggle('ativo', aba === 'config');
-  document.getElementById('btn-novo-global').style.display = (aba === 'analytics' || aba === 'config') ? 'none' : '';
-  if (aba === 'lista') mostrarViewSemTabs('view-lista');
-  else if (aba === 'analytics') { mostrarViewSemTabs('view-analytics'); renderCalendario(); renderChart(); }
-  else mostrarViewSemTabs('view-config');
-};
-
-function mostrarViewSemTabs(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('main-scroll').scrollTop = 0;
-  const isAnalytics = id === 'view-analytics';
-  const isConfig = id === 'view-config';
-  document.getElementById('tab-lista').classList.toggle('ativo', id === 'view-lista');
-  document.getElementById('tab-analytics').classList.toggle('ativo', isAnalytics);
-  document.getElementById('tab-config').classList.toggle('ativo', isConfig);
-  document.getElementById('btn-novo-global').style.display = (isAnalytics || isConfig) ? 'none' : '';
-}
-
+// ── NAVEGAÇÃO ────────────────────────────────────────────────────
 function mostrarView(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.getElementById('main-scroll').scrollTop = 0;
+  document.getElementById('ms').scrollTop=0;
 }
-
-window.modoAdminAtivo = function() { return window._adminAtivo || false; };
-window.irParaLista = function() {
-  if (_abaAtiva === 'analytics') mostrarViewSemTabs('view-analytics');
-  else if (_abaAtiva === 'config') mostrarViewSemTabs('view-config');
-  else mostrarViewSemTabs('view-lista');
+window.modoAdm = () => _adminAtivo;
+window.mudarAba = aba => {
+  _abaAtiva=aba;
+  ['lista','an','cfg'].forEach(a=>document.getElementById('tab-'+a).classList.toggle('on',a===aba));
+  document.getElementById('btn-nova').style.display=(aba==='an'||aba==='cfg')?'none':'';
+  if(aba==='lista') mostrarView('v-lista');
+  else if(aba==='an'){mostrarView('v-an');renderCal();renderChart();}
+  else mostrarView('v-cfg');
 };
-window.irParaNovo = function() { _abaAtiva = 'lista'; mostrarView('view-novo'); };
-window.irParaPainel = function() {
-  const nomeAtual = document.getElementById('header-nome-inst').textContent;
-  document.getElementById('p-nome-inst').value = nomeAtual === 'Minha Instituição' ? '' : nomeAtual;
-  ['p-novo-usuario','p-conf-senha-usuario','p-senha-atual','p-senha-nova','p-senha-conf'].forEach(id => document.getElementById(id).value = '');
-  ['erro-inst','sucesso-inst','erro-usuario','sucesso-usuario','painel-erro','painel-sucesso'].forEach(id => document.getElementById(id).classList.remove('show'));
-  popularEmojiGrid('emoji-grid-painel');
-  adminMudarAba('inst');
-  renderListaAdmins();
-  renderLog();
-  mostrarView('view-painel');
+window.irLista = () => {
+  if(_abaAtiva==='an') mostrarView('v-an');
+  else if(_abaAtiva==='cfg') mostrarView('v-cfg');
+  else mostrarView('v-lista');
 };
-
-window._adminAtivo = false; window._adminUsuario = ''; window._adminTipo = '';
-
-window.clicarAdmin = function() {
-  if (window._adminAtivo) {
-    window._adminAtivo = false; window._adminUsuario = ''; window._adminTipo = ''; window._adminKey = null;
-    document.getElementById('admin-banner').classList.remove('show');
-    document.getElementById('logo-btn').title = 'Ícone da escola';
-    atualizarUIAdmin(false);
-    renderLista(); mostrarToast('Modo admin desativado');
+window.irNovo = () => {
+  _abaAtiva='lista';
+  renderTurmaChips();
+  // Pre-preencher
+  const pn=localStorage.getItem('ceti_prof_nome')||''; if(pn){document.getElementById('f-prof').value=pn;}
+  mostrarView('v-novo');
+};
+window.irPainel = () => {
+  const n=document.getElementById('hdr-inst').textContent;
+  document.getElementById('p-inst').value=n==='Minha Instituição'?'':n;
+  ['p-user','p-cu','p-sa','p-sn','p-sc'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
+  popularEmojis('eg-painel');
+  admTab('inst'); renderAdmins(); renderLog();
+  mostrarView('v-painel');
+};
+window.clicarAdm = () => {
+  if (_adminAtivo) {
+    _adminAtivo=false; _adminUser=''; _adminTipo=''; _adminKey=null;
+    uiAdmin(false); renderLista(); toast('Modo admin desativado');
   } else {
-    document.getElementById('login-usuario').value = '';
-    document.getElementById('login-senha').value = '';
-    document.getElementById('login-erro').classList.remove('show');
-    document.getElementById('login-loading').classList.remove('show');
-    document.getElementById('btn-entrar').disabled = false;
-    document.getElementById('modal-login').classList.add('show');
-    setTimeout(() => document.getElementById('login-usuario').focus(), 150);
+    document.getElementById('l-user').value=''; document.getElementById('l-pass').value='';
+    document.getElementById('l-err').classList.remove('show');
+    document.getElementById('l-load').classList.remove('show');
+    document.getElementById('btn-login').disabled=false;
+    document.getElementById('m-login').classList.add('show');
+    setTimeout(()=>document.getElementById('l-user').focus(),150);
+  }
+};
+window.pedirDel = k => { _idAtual=k; document.getElementById('m-del').classList.add('show'); };
+window.fecharM = id => document.getElementById(id).classList.remove('show');
+window.togOlho = (inp,btn) => {
+  const i=document.getElementById(inp),b=document.getElementById(btn);
+  i.type=i.type==='password'?'text':'password'; b.textContent=i.type==='password'?'👁️':'🙈';
+};
+window.admTab = a => {
+  ['inst','admins','senha','log'].forEach(t=>{
+    document.getElementById('at-'+t)?.classList.toggle('on',t===a);
+    document.getElementById('ap-'+t)?.classList.toggle('on',t===a);
+  });
+  if(a==='admins') renderAdmins();
+  if(a==='log') {
+    if (_adminTipo!=='principal') {
+      document.getElementById('log-container').innerHTML='<div class="log-empty">🔒 Apenas o admin principal tem acesso</div>';
+      return;
+    }
+    renderLog();
   }
 };
 
-window.pedirExclusao = function(key) { window._idAtual = key; document.getElementById('modal-excluir').classList.add('show'); };
-window.fecharModalExcluir = function() { document.getElementById('modal-excluir').classList.remove('show'); };
-window.fecharModal = function(id) { document.getElementById(id).classList.remove('show'); };
+// ── PERFIL PROFESSOR ─────────────────────────────────────────────
+window.abrirNomeProf = () => { document.getElementById('inp-nome').value=localStorage.getItem('ceti_prof_nome')||''; document.getElementById('m-nome').classList.add('show'); };
+window.salvarNome = () => {
+  const n=document.getElementById('inp-nome').value.trim();
+  localStorage.setItem('ceti_prof_nome',n);
+  const s=document.getElementById('cfg-prof-sub'); if(s) s.textContent=n||'Não definido';
+  fecharM('m-nome'); toast('✓ Nome salvo!');
+};
+window.abrirTurmasProf = () => {
+  renderTurmasCfg();
+  document.getElementById('inp-nova-turma').value='';
+  document.getElementById('m-turmas').classList.add('show');
+};
+window.adicionarTurma = () => {
+  const inp=document.getElementById('inp-nova-turma');
+  const t=inp.value.trim(); if(!t) return;
+  const arr=getTurmasPadrao();
+  if (!arr.includes(t)) { arr.push(t); localStorage.setItem('ceti_turmas',JSON.stringify(arr)); }
+  inp.value=''; renderTurmasCfg(); atualizarCfgTurmasSub(); toast('✓ Turma adicionada!');
+};
+function renderTurmasCfg() {
+  const arr=getTurmasPadrao();
+  const el=document.getElementById('turma-list-cfg'); if(!el) return;
+  if (!arr.length) { el.innerHTML='<div style="font-size:12px;color:var(--sb)">Nenhuma turma adicionada</div>'; return; }
+  el.innerHTML=arr.map(t=>`
+    <div class="turma-tag">${t}<button onclick="rmTurma('${t}')">✕</button></div>
+  `).join('');
+}
+window.rmTurma = t => {
+  const arr=getTurmasPadrao().filter(x=>x!==t);
+  localStorage.setItem('ceti_turmas',JSON.stringify(arr));
+  renderTurmasCfg(); atualizarCfgTurmasSub(); renderTurmaChips();
+};
+function atualizarCfgTurmasSub() {
+  const arr=getTurmasPadrao();
+  const el=document.getElementById('cfg-turmas-sub');
+  if(el) el.textContent=arr.length?arr.join(', '):'Nenhuma definida';
+}
 
-window.toggleOlho = function(inputId, btnId) {
-  const input = document.getElementById(inputId), btn = document.getElementById(btnId);
-  input.type = input.type === 'password' ? 'text' : 'password';
-  btn.textContent = input.type === 'password' ? '👁️' : '🙈';
-};
-
-// ── Abas do painel admin ─────────────────────────────────────────────────────
-window.adminMudarAba = function(aba) {
-  ['inst','admins','senha','log'].forEach(a => {
-    document.getElementById('atab-'+a).classList.toggle('ativo', a === aba);
-    document.getElementById('apanel-'+a).classList.toggle('ativo', a === aba);
-  });
-  if (aba === 'admins') renderListaAdmins();
-  if (aba === 'log') renderLog();
-};
-
-// ── Preferências do professor ────────────────────────────────────────────────
-window.abrirModalNomeProfessor = function() {
-  document.getElementById('input-nome-prof').value = localStorage.getItem('ceti_prof_nome') || '';
-  document.getElementById('modal-nome-prof').classList.add('show');
-};
-window.salvarNomeProfessor = function() {
-  const nome = document.getElementById('input-nome-prof').value.trim();
-  localStorage.setItem('ceti_prof_nome', nome);
-  document.getElementById('config-prof-nome').textContent = nome || 'Não definido';
-  // Preencher campo de professor no form
-  const profField = document.getElementById('f-professor');
-  if (profField && nome) profField.value = nome;
-  fecharModal('modal-nome-prof');
-  mostrarToast('✓ Nome salvo!');
-};
-
-window.abrirModalTurmaPadrao = function() {
-  document.getElementById('input-turma-padrao').value = localStorage.getItem('ceti_turma_padrao') || '';
-  document.getElementById('modal-turma-padrao').classList.add('show');
-};
-window.salvarTurmaPadrao = function() {
-  const turma = document.getElementById('input-turma-padrao').value.trim();
-  localStorage.setItem('ceti_turma_padrao', turma);
-  document.getElementById('config-turma-padrao').textContent = turma || 'Não definida';
-  const turmaField = document.getElementById('f-turma');
-  if (turmaField && turma) turmaField.value = turma;
-  fecharModal('modal-turma-padrao');
-  mostrarToast('✓ Turma padrão salva!');
-};
-
-// Toggles de preferência
-window.toggleSons = function() {
-  const t = document.getElementById('toggle-sons');
-  t.classList.toggle('on');
-  localStorage.setItem('ceti_sons', t.classList.contains('on') ? '1' : '0');
-};
-window.toggleRascunho = function() {
-  const t = document.getElementById('toggle-rascunho');
-  t.classList.toggle('on');
-  localStorage.setItem('ceti_rascunho', t.classList.contains('on') ? '1' : '0');
-};
-window.limparRascunho = function() {
-  if (!confirm('Limpar dados locais (rascunhos e cache)?')) return;
-  const keysParaManter = ['ceti_tema','ceti_prof_nome','ceti_turma_padrao','ceti_sons','ceti_rascunho'];
-  const backup = {};
-  keysParaManter.forEach(k => { backup[k] = localStorage.getItem(k); });
+// ── TOGGLES ──────────────────────────────────────────────────────
+window.togSons = () => { const t=document.getElementById('tog-sons'); t.classList.toggle('on'); localStorage.setItem('ceti_sons',t.classList.contains('on')?'1':'0'); };
+window.togRasc = () => { const t=document.getElementById('tog-rasc'); t.classList.toggle('on'); localStorage.setItem('ceti_rasc',t.classList.contains('on')?'1':'0'); };
+window.limparLocal = () => {
+  if (!confirm('Limpar dados locais?')) return;
+  const keep=['ceti_tema','ceti_prof_nome','ceti_turmas','ceti_sons','ceti_rasc'];
+  const bk={}; keep.forEach(k=>bk[k]=localStorage.getItem(k));
   localStorage.clear();
-  keysParaManter.forEach(k => { if (backup[k] !== null) localStorage.setItem(k, backup[k]); });
-  mostrarToast('✓ Dados locais limpos!');
+  keep.forEach(k=>{if(bk[k]!==null)localStorage.setItem(k,bk[k]);});
+  toast('✓ Dados locais limpos!');
 };
 
-// Carregar preferências salvas
-(function carregarPrefs() {
-  const profNome = localStorage.getItem('ceti_prof_nome') || '';
-  const turmaPadrao = localStorage.getItem('ceti_turma_padrao') || '';
-  const sons = localStorage.getItem('ceti_sons');
-  const rascunho = localStorage.getItem('ceti_rascunho');
-  const el = document.getElementById('config-prof-nome');
-  if (el) el.textContent = profNome || 'Não definido';
-  const el2 = document.getElementById('config-turma-padrao');
-  if (el2) el2.textContent = turmaPadrao || 'Não definida';
-  if (sons === '1') document.getElementById('toggle-sons')?.classList.add('on');
-  if (rascunho === '0') document.getElementById('toggle-rascunho')?.classList.remove('on');
-  // Pre-preencher form
-  if (profNome) { const f = document.getElementById('f-professor'); if (f) f.value = profNome; }
-  if (turmaPadrao) { const f = document.getElementById('f-turma'); if (f) f.value = turmaPadrao; }
+// ── INIT PREFS ───────────────────────────────────────────────────
+(()=>{
+  const pn=localStorage.getItem('ceti_prof_nome')||'';
+  const s=document.getElementById('cfg-prof-sub'); if(s) s.textContent=pn||'Não definido';
+  atualizarCfgTurmasSub();
+  if(localStorage.getItem('ceti_sons')==='1') document.getElementById('tog-sons')?.classList.add('on');
+  if(localStorage.getItem('ceti_rasc')==='0') document.getElementById('tog-rasc')?.classList.remove('on');
 })();
 
-function mostrarToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+function toast(m) {
+  const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-// ═══════════════════════════════════
-//  CALENDÁRIO
-// ═══════════════════════════════════
-var _calAno = new Date().getFullYear();
-var _calMes = new Date().getMonth();
-window._diaSel = null;
-const MESES_BR = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-
-function parseDateBR(dateStr) {
-  if (!dateStr) return null;
-  const p = dateStr.split('/'); if (p.length < 3) return null;
-  return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
+// ── CALENDÁRIO ───────────────────────────────────────────────────
+const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+function parseBR(s) {
+  if(!s) return null; const p=s.split('/'); if(p.length<3) return null;
+  return new Date(+p[2],+p[1]-1,+p[0]);
 }
-
-function renderCalendario() {
-  document.getElementById('cal-mes-ano').textContent = MESES_BR[_calMes]+' '+_calAno;
-  const primeiroDia = new Date(_calAno, _calMes, 1).getDay();
-  const diasNoMes = new Date(_calAno, _calMes+1, 0).getDate();
-  const hoje = new Date(); hoje.setHours(0,0,0,0);
-  const ocs = window._ocs || [];
-  const eventos = window._eventos || [];
-  const ocPorData = {}, evPorData = {};
-  ocs.forEach(o => { if (!o.data) return; if (!ocPorData[o.data]) ocPorData[o.data] = []; ocPorData[o.data].push(o); });
-  eventos.forEach(e => { if (!e.data) return; if (!evPorData[e.data]) evPorData[e.data] = []; evPorData[e.data].push(e); });
-
-  let cells = '';
-  for (let i = 0; i < primeiroDia; i++) cells += '<div class="cal-dia vazio"></div>';
-  for (let d = 1; d <= diasNoMes; d++) {
-    const dataStr = String(d).padStart(2,'0')+'/'+String(_calMes+1).padStart(2,'0')+'/'+_calAno;
-    const dtObj = new Date(_calAno, _calMes, d);
-    const eHoje = hoje.getDate() === d && hoje.getMonth() === _calMes && hoje.getFullYear() === _calAno;
-    const ePassado = dtObj < hoje;
-    const eSel = window._diaSel === dataStr;
-    const temOc = ocPorData[dataStr] && ocPorData[dataStr].length > 0;
-    const temEv = evPorData[dataStr] && evPorData[dataStr].length > 0;
-    const todosResolvidos = temOc && ocPorData[dataStr].every(o => o.status === 'Resolvido');
-    let cls = 'cal-dia';
-    if (eHoje) cls += ' hoje';
-    if (eSel) cls += ' selecionado';
-    if (temOc) cls += ' tem-oc';
-    if (todosResolvidos) cls += ' resolvido-dia';
-    if (ePassado && !eHoje) cls += ' passado';
-    const bolinhas = (temOc ? '<div class="cal-bolinha"></div>' : '') + (temEv ? '<div class="cal-bolinha-ev"></div>' : '');
-    const bolinhaWrap = (temOc || temEv) ? `<div class="cal-bolinha-wrap">${bolinhas}</div>` : '';
-    cells += `<div class="${cls}" onclick="selecionarDia('${dataStr}')">${d}${bolinhaWrap}</div>`;
+function renderCal() {
+  document.getElementById('cal-mes').textContent=MESES[_calMes]+' '+_calAno;
+  const prim=new Date(_calAno,_calMes,1).getDay();
+  const dias=new Date(_calAno,_calMes+1,0).getDate();
+  const hoje=new Date(); hoje.setHours(0,0,0,0);
+  const ocPD={}, evPD={};
+  _ocs.forEach(o=>{if(!o.data)return;if(!ocPD[o.data])ocPD[o.data]=[];ocPD[o.data].push(o);});
+  _evs.forEach(e=>{if(!e.data)return;if(!evPD[e.data])evPD[e.data]=[];evPD[e.data].push(e);});
+  let h='';
+  for(let i=0;i<prim;i++) h+='<div class="cd vz"></div>';
+  for(let d=1;d<=dias;d++){
+    const ds=String(d).padStart(2,'0')+'/'+String(_calMes+1).padStart(2,'0')+'/'+_calAno;
+    const dto=new Date(_calAno,_calMes,d);
+    const eH=hoje.getDate()===d&&hoje.getMonth()===_calMes&&hoje.getFullYear()===_calAno;
+    const eP=dto<hoje&&!eH;
+    const eS=_diaSel===ds;
+    const tOC=!!ocPD[ds]?.length, tEV=!!evPD[ds]?.length;
+    const tRV=tOC&&ocPD[ds].every(o=>o.status==='Resolvido');
+    let cls='cd';
+    if(eH) cls+=' hj';
+    if(eS) cls+=' sel';
+    if(tOC) cls+=' tem-oc';
+    if(tRV) cls+=' rv-dia';
+    if(eP) cls+=' past';
+    const bols=(tOC?'<div class="bol"></div>':'')+(tEV?'<div class="bol-ev"></div>':'');
+    const bolw=(tOC||tEV)?`<div class="bols">${bols}</div>`:'';
+    h+=`<div class="${cls}" onclick="selDia('${ds}')">${d}${bolw}</div>`;
   }
-  document.getElementById('cal-grid').innerHTML = cells;
-  if (window._diaSel) renderOcsDia(window._diaSel);
+  document.getElementById('cal-grid').innerHTML=h;
+  if(_diaSel) renderDia(_diaSel);
 }
-
-window.selecionarDia = function(dataStr) {
-  const parts = dataStr.split('/');
-  const dtObj = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
-  const hoje = new Date(); hoje.setHours(0,0,0,0);
-  if (dtObj < hoje) {
-    // Dia passado: só mostrar ocorrências, sem botão de evento
-    window._diaSel = dataStr;
-    renderCalendario();
-    renderOcsDia(dataStr);
-    return;
-  }
-  window._diaSel = dataStr;
-  renderCalendario();
-  renderOcsDia(dataStr);
+window.selDia = ds => {
+  _diaSel=ds; renderCal(); renderDia(ds);
 };
-
-function renderOcsDia(dataStr) {
-  const ocs = (window._ocs||[]).filter(o => o.data === dataStr);
-  const eventos = (window._eventos||[]).filter(e => e.data === dataStr);
-  const parts = dataStr.split('/');
-  const dtObj = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
-  const hoje = new Date(); hoje.setHours(0,0,0,0);
-  const label = parts[0]+' de '+MESES_BR[parseInt(parts[1])-1];
-  const ehFuturoOuHoje = dtObj >= hoje;
-
-  document.getElementById('cal-dia-titulo').textContent = label+' ('+ocs.length+' oc.)';
-  document.getElementById('btn-dl-rel').style.display = ocs.length > 0 ? '' : 'none';
-
-  // Mostrar abas e botão add evento
-  const tabsEl = document.getElementById('cal-tipo-tabs');
-  tabsEl.style.display = '';
-  
-  // Cabeçalho com botão de add evento (só se for hoje ou futuro)
-  const cabWrap = document.getElementById('cal-ocs-titulo');
-  let btnAddHtml = '';
-  if (ehFuturoOuHoje) {
-    btnAddHtml = `<button class="btn-add-evento" onclick="abrirModalNovoEvento('${dataStr}')">+ Evento</button>`;
-  }
-  cabWrap.innerHTML = `<span class="cal-ocs-titulo-txt" id="cal-dia-titulo">${label} (${ocs.length} oc.)</span>
-    <div style="display:flex;gap:6px;align-items:center">
-      ${ehFuturoOuHoje ? btnAddHtml : ''}
-      <button class="btn-dl-rel" id="btn-dl-rel" onclick="baixarRelatorio()" style="${ocs.length > 0 ? '' : 'display:none'}">⬇️ Rel.</button>
-    </div>`;
-
-  const lista = document.getElementById('cal-ocs-lista');
-  const ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-
-  if (window._calTipoAtivo === 'ocorrencias') {
-    if (!ocs.length) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhuma ocorrência</div>'; return; }
-    lista.innerHTML = ocs.map(o => {
-      const cls = o.status === 'Pendente' ? 's-pendente' : o.status === 'Resolvido' ? 's-resolvido' : 's-acomp';
-      return `<div class="cal-oc-item ${cls}" onclick="irDetalheAnalytics('${o.firebaseKey}')">
-        <div class="cal-oc-item-nome">${o.aluno}${o.turma ? ' · '+o.turma : ''}</div>
-        <div class="cal-oc-item-info">${ICON[o.tipo]||'📋'} ${o.tipo} · ${o.hora}</div>
+window.calTab = t => {
+  _calTab=t;
+  document.getElementById('ctab-oc').classList.toggle('on',t==='oc');
+  document.getElementById('ctab-ev').classList.toggle('on',t==='ev');
+  if(_diaSel) renderDia(_diaSel);
+};
+function renderDia(ds) {
+  const ocs=_ocs.filter(o=>o.data===ds);
+  const evs=_evs.filter(e=>e.data===ds);
+  const p=ds.split('/');
+  const dto=new Date(+p[2],+p[1]-1,+p[0]);
+  const hoje=new Date(); hoje.setHours(0,0,0,0);
+  const eHojeOuFut=dto>=hoje;
+  const lab=p[0]+' de '+MESES[+p[1]-1];
+  // Cabeçalho
+  const hdr=document.getElementById('cal-oc-hdr');
+  const btnEv=eHojeOuFut?`<button class="btn-add-ev" onclick="abrirEvento('${ds}')">+ Evento</button>`:'';
+  const btnDl=ocs.length?`<button class="btn-dl" onclick="dlRelatorio()">⬇️ Rel.</button>`:'';
+  const btnIcs=(ocs.length||evs.length)?`<button class="btn-exp-ics" onclick="exportICS('${ds}')">📅 .ics</button>`:'';
+  hdr.innerHTML=`<span class="cal-oc-tit">${lab} (${ocs.length} oc.)</span><div class="cal-hdr-btns">${btnEv}${btnDl}${btnIcs}</div>`;
+  // Tabs
+  const tabsEl=document.getElementById('cal-tabs');
+  tabsEl.style.display=(ocs.length||evs.length)?'':'none';
+  const lista=document.getElementById('cal-lista');
+  const IC={"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  if (_calTab==='oc') {
+    if (!ocs.length) { lista.innerHTML='<div class="empty" style="padding:10px 0;font-size:12px">Nenhuma ocorrência</div>'; return; }
+    lista.innerHTML=ocs.map(o=>{
+      const cs=o.status==='Pendente'?'s-pnd':o.status==='Resolvido'?'s-rv':'s-ac';
+      return `<div class="cal-item ${cs}" onclick="irDetAn('${o.firebaseKey}')">
+        <div class="cal-item-nome">${o.aluno}${o.turma?' · '+o.turma:''}</div>
+        <div class="cal-item-inf">${IC[o.tipo]||'📋'} ${o.tipo} · ${o.hora}</div>
       </div>`;
     }).join('');
   } else {
-    if (!eventos.length) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhum evento</div>'; return; }
-    lista.innerHTML = eventos.map(e =>
-      `<div class="cal-oc-item s-evento">
-        <div class="cal-oc-item-nome" style="display:flex;justify-content:space-between;align-items:center">
-          📅 ${e.titulo}
-          <button class="cal-oc-item-del" onclick="removerEvento('${e.firebaseKey}')">🗑️</button>
+    if (!evs.length) { lista.innerHTML='<div class="empty" style="padding:10px 0;font-size:12px">Nenhum evento</div>'; return; }
+    lista.innerHTML=evs.map(e=>`
+      <div class="cal-item s-ev">
+        <div class="cal-item-nome" style="display:flex;justify-content:space-between;align-items:center">
+          📅 ${e.titulo}<button class="ci-del" onclick="rmEvento('${e.firebaseKey}')">🗑️</button>
         </div>
-        <div class="cal-oc-item-info">🕐 ${e.hora}${e.obs ? ' · '+e.obs : ''}</div>
-        <div class="cal-oc-item-info" style="margin-top:2px">Por: ${e.criadoPor || '—'}</div>
-      </div>`
-    ).join('');
+        <div class="cal-item-inf">🕐 ${e.hora}${e.obs?' · '+e.obs:''}</div>
+        <div class="cal-item-inf" style="margin-top:1px">Por: ${e.criadoPor||'—'}</div>
+      </div>`).join('');
   }
 }
-
-window.irDetalheAnalytics = function(key) {
-  _abaAtiva = 'lista';
-  ['tab-lista','tab-analytics','tab-config'].forEach((id,i) => document.getElementById(id).classList.toggle('ativo', i===0));
-  document.getElementById('btn-novo-global').style.display = '';
-  verDetalhe(key);
+window.irDetAn = k => { _abaAtiva='lista'; ['tab-lista','tab-an','tab-cfg'].forEach((id,i)=>document.getElementById(id).classList.toggle('on',i===0)); document.getElementById('btn-nova').style.display=''; verDet(k); };
+window.navCal = dir => {
+  _calMes+=dir;
+  if(_calMes<0){_calMes=11;_calAno--;}
+  if(_calMes>11){_calMes=0;_calAno++;}
+  _diaSel=null;
+  document.getElementById('cal-oc-hdr').innerHTML='<span class="cal-oc-tit" id="cal-dia-t">Selecione um dia</span>';
+  document.getElementById('cal-lista').innerHTML='<div class="empty" style="padding:10px 0;font-size:12px">Toque em um dia</div>';
+  document.getElementById('cal-tabs').style.display='none';
+  renderCal();
+};
+// EVENTOS
+window.abrirEvento = ds => {
+  document.getElementById('m-ev-dt').textContent='Data: '+ds;
+  document.getElementById('ev-tit').value=''; document.getElementById('ev-hr').value=''; document.getElementById('ev-obs').value='';
+  document.getElementById('ev-err').classList.remove('show');
+  window._evDS=ds; document.getElementById('m-ev').classList.add('show');
+};
+window.salvarEvento = async () => {
+  const tit=document.getElementById('ev-tit').value.trim(), hr=document.getElementById('ev-hr').value.trim(), obs=document.getElementById('ev-obs').value.trim();
+  const err=document.getElementById('ev-err'); err.classList.remove('show');
+  if(!tit){err.textContent='❌ Informe o título.';err.classList.add('show');return;}
+  const ds=window._evDS; const p=ds.split('/');
+  const dto=new Date(+p[2],+p[1]-1,+p[0]); const hoje=new Date();hoje.setHours(0,0,0,0);
+  if(dto<hoje){err.textContent='❌ Só eventos a partir de hoje.';err.classList.add('show');return;}
+  try{
+    await push(EV,{titulo:tit,hora:hr||'—',obs:obs||'',data:ds,timestamp:dto.getTime(),criadoPor:_adminAtivo?_adminUser:(localStorage.getItem('ceti_prof_nome')||'Professor')});
+    fecharM('m-ev'); toast('📅 Evento criado!');
+    await log('Evento criado',`"${tit}" em ${ds}`);
+  }catch(e){err.textContent='❌ '+e.message;err.classList.add('show');}
+};
+window.rmEvento = async k => {
+  if(!confirm('Remover evento?')) return;
+  await remove(ref(db,'eventos/'+k));
+  await log('Evento removido',`key:${k}`);
+  toast('🗑️ Evento removido!');
 };
 
-window.navCal = function(dir) {
-  _calMes += dir;
-  if (_calMes < 0) { _calMes = 11; _calAno--; }
-  if (_calMes > 11) { _calMes = 0; _calAno++; }
-  window._diaSel = null;
-  document.getElementById('cal-ocs-titulo').innerHTML = '<span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span><button class="btn-dl-rel" id="btn-dl-rel" onclick="baixarRelatorio()" style="display:none">⬇️ Relatório</button>';
-  document.getElementById('cal-ocs-lista').innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>';
-  document.getElementById('cal-tipo-tabs').style.display = 'none';
-  renderCalendario();
+// ── EXPORT ICS ───────────────────────────────────────────────────
+window.exportICS = ds => {
+  const ocs=_ocs.filter(o=>o.data===ds);
+  const evs=_evs.filter(e=>e.data===ds);
+  const inst=document.getElementById('hdr-inst').textContent;
+  const p=ds.split('/'); const dtb=`${p[2]}${String(p[1]).padStart(2,'0')}${String(p[0]).padStart(2,'0')}`;
+  let cal=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CETI//Ocorrencias//PT','CALSCALE:GREGORIAN'];
+  ocs.forEach(o=>{
+    const uid=`oc-${o.firebaseKey}@ceti`;
+    cal.push('BEGIN:VEVENT',`UID:${uid}`,`DTSTAMP:${dtb}T000000Z`,`DTSTART;VALUE=DATE:${dtb}`,`DTEND;VALUE=DATE:${dtb}`,`SUMMARY:Ocorrência: ${o.aluno} (${o.tipo})`,`DESCRIPTION:Prof: ${o.professor}\\nStatus: ${o.status}\\n${o.descricao}`,`CATEGORIES:Ocorrência`,`ORGANIZER:CN=${inst}`,`STATUS:CONFIRMED`,'END:VEVENT');
+  });
+  evs.forEach(e=>{
+    const uid=`ev-${e.firebaseKey}@ceti`;
+    cal.push('BEGIN:VEVENT',`UID:${uid}`,`DTSTAMP:${dtb}T000000Z`,`DTSTART;VALUE=DATE:${dtb}`,`DTEND;VALUE=DATE:${dtb}`,`SUMMARY:📅 ${e.titulo}`,`DESCRIPTION:Horário: ${e.hora}\\n${e.obs}`,`CATEGORIES:Evento`,`STATUS:CONFIRMED`,'END:VEVENT');
+  });
+  cal.push('END:VCALENDAR');
+  const blob=new Blob([cal.join('\r\n')],{type:'text/calendar;charset=utf-8'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=`ceti_${ds.replace(/\//g,'-')}.ics`; a.click();
+  URL.revokeObjectURL(url); toast('📅 .ics exportado!');
 };
 
-window.baixarRelatorio = function() {
-  if (!window._diaSel) return;
-  const ocs = (window._ocs||[]).filter(o => o.data === window._diaSel);
-  const evs = (window._eventos||[]).filter(e => e.data === window._diaSel);
-  if (!ocs.length && !evs.length) { mostrarToast('Nenhum dado neste dia'); return; }
-  const nomeInst = document.getElementById('header-nome-inst').textContent;
-  const linhas = [nomeInst, 'Relatório — '+window._diaSel, 'Gerado: '+new Date().toLocaleString('pt-BR'), '─'.repeat(50)];
-  if (ocs.length) {
-    linhas.push('', 'OCORRÊNCIAS ('+ocs.length+')', '─'.repeat(50));
-    ocs.forEach((o,i) => { linhas.push('','#'+(i+1)+' — '+o.aluno+(o.turma?' ('+o.turma+')':''),'Tipo: '+o.tipo,'Professor: '+o.professor,'Hora: '+o.hora,'Status: '+o.status,'','Descrição:',o.descricao,'─'.repeat(50)); });
-  }
-  if (evs.length) {
-    linhas.push('', 'EVENTOS ('+evs.length+')', '─'.repeat(50));
-    evs.forEach((e,i) => { linhas.push('','#'+(i+1)+' — '+e.titulo,'Horário: '+e.hora, e.obs ? 'Obs: '+e.obs : ''); });
-  }
-  const blob = new Blob([linhas.join('\n')], {type:'text/plain;charset=utf-8'});
-  const url = URL.createObjectURL(blob); const a = document.createElement('a');
-  a.href = url; a.download = 'relatorio_'+window._diaSel.replace(/\//g,'-')+'.txt'; a.click();
-  URL.revokeObjectURL(url); mostrarToast('✓ Relatório baixado!');
+// RELATÓRIO TXT
+window.dlRelatorio = () => {
+  if (!_diaSel) return;
+  const ocs=_ocs.filter(o=>o.data===_diaSel), evs=_evs.filter(e=>e.data===_diaSel);
+  const inst=document.getElementById('hdr-inst').textContent;
+  const linhas=[inst,'Relatório — '+_diaSel,'Gerado: '+new Date().toLocaleString('pt-BR'),'─'.repeat(50)];
+  if(ocs.length){linhas.push('','OCORRÊNCIAS ('+ocs.length+')',  '─'.repeat(50));ocs.forEach((o,i)=>{linhas.push('','#'+(i+1)+' — '+o.aluno+(o.turma?' ('+o.turma+')':''),'Tipo: '+o.tipo,'Prof: '+o.professor,'Hora: '+o.hora,'Status: '+o.status,'','Descrição:',o.descricao,'─'.repeat(50));});}
+  if(evs.length){linhas.push('','EVENTOS ('+evs.length+')','─'.repeat(50));evs.forEach((e,i)=>{linhas.push('','#'+(i+1)+' '+e.titulo,'Horário: '+e.hora,e.obs?'Obs: '+e.obs:'');});}
+  const blob=new Blob([linhas.join('\n')],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='rel_'+_diaSel.replace(/\//g,'-')+'.txt';a.click();
+  URL.revokeObjectURL(url); toast('✓ Relatório baixado!');
 };
 
-// ═══════════════════════════════════
-//  GRÁFICO — Chart.js (sem opção Dia)
-// ═══════════════════════════════════
-var _chartPeriodo = 'semana';
-var _chartTipo = 'bar';
+// ── GRÁFICO ──────────────────────────────────────────────────────
+function txColor(){const t=document.documentElement.getAttribute('data-tema')||'claro';return t==='black'?'#555':t==='escuro'?'#6B7A99':'#94A3B8';}
+function grColor(){const t=document.documentElement.getAttribute('data-tema')||'claro';return t==='black'?'rgba(255,255,255,.04)':t==='escuro'?'rgba(255,255,255,.06)':'rgba(0,0,0,.05)';}
 
-window.setPeriodo = function(p) {
-  _chartPeriodo = p;
-  document.querySelectorAll('#seg-periodo .seg-btn').forEach(b => b.classList.toggle('ativo', b.dataset.p === p));
+window.setPer = p => {
+  _chartPer=p;
+  document.querySelectorAll('#seg .seg-btn').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
   renderChart();
 };
-
-window.toggleChartTipo = function() {
-  _chartTipo = _chartTipo === 'bar' ? 'line' : 'bar';
-  document.getElementById('btn-chart-tipo').textContent = _chartTipo === 'bar' ? 'Barras' : 'Linha';
+window.togChartTipo = () => {
+  _chartTipo=_chartTipo==='bar'?'line':'bar';
+  document.getElementById('chart-tipo-btn').textContent=_chartTipo==='bar'?'Barras':'Linha';
   renderChart();
 };
-
-function getTextColor() {
-  const tema = document.documentElement.getAttribute('data-tema') || 'claro';
-  if (tema === 'black') return '#555'; if (tema === 'escuro') return '#6B7A99'; return '#94A3B8';
-}
-function getGridColor() {
-  const tema = document.documentElement.getAttribute('data-tema') || 'claro';
-  if (tema === 'black') return 'rgba(255,255,255,0.04)'; if (tema === 'escuro') return 'rgba(255,255,255,0.06)'; return 'rgba(0,0,0,0.05)';
-}
-
-function buildChartData() {
-  const ocs = window._ocs || []; const agora = new Date();
-  let labels = [], dataPend = [], dataAcomp = [], dataResolvido = [], dataTotal = [];
-
-  if (_chartPeriodo === 'semana') {
-    const DS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date(agora); d.setDate(agora.getDate()-i); d.setHours(0,0,0,0);
-      const dateStr = String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
-      const fil = ocs.filter(o => o.data === dateStr);
-      labels.push(DS[d.getDay()]);
-      dataPend.push(fil.filter(o => o.status === 'Pendente').length);
-      dataAcomp.push(fil.filter(o => o.status === 'Em acompanhamento').length);
-      dataResolvido.push(fil.filter(o => o.status === 'Resolvido').length);
-      dataTotal.push(fil.length);
+function buildData(){
+  const agora=new Date();
+  let labels=[],dP=[],dA=[],dR=[],dT=[];
+  if(_chartPer==='semana'){
+    const DS=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+    for(let i=6;i>=0;i--){
+      const d=new Date(agora);d.setDate(agora.getDate()-i);d.setHours(0,0,0,0);
+      const ds=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+      const f=_ocs.filter(o=>o.data===ds);
+      labels.push(DS[d.getDay()]);dP.push(f.filter(o=>o.status==='Pendente').length);dA.push(f.filter(o=>o.status==='Em acompanhamento').length);dR.push(f.filter(o=>o.status==='Resolvido').length);dT.push(f.length);
     }
-  } else if (_chartPeriodo === 'mes') {
-    for (let w = 3; w >= 0; w--) {
-      const inicio = new Date(agora); inicio.setDate(agora.getDate()-(w+1)*7+1); inicio.setHours(0,0,0,0);
-      const fim = new Date(agora); fim.setDate(agora.getDate()-w*7); fim.setHours(23,59,59,999);
-      const fil = ocs.filter(o => { const d = parseDateBR(o.data); if (!d) return false; return d >= inicio && d <= fim; });
-      labels.push(String(inicio.getDate()).padStart(2,'0')+'/'+String(inicio.getMonth()+1).padStart(2,'0'));
-      dataPend.push(fil.filter(o => o.status === 'Pendente').length);
-      dataAcomp.push(fil.filter(o => o.status === 'Em acompanhamento').length);
-      dataResolvido.push(fil.filter(o => o.status === 'Resolvido').length);
-      dataTotal.push(fil.length);
+  }else if(_chartPer==='mes'){
+    for(let w=3;w>=0;w--){
+      const ini=new Date(agora);ini.setDate(agora.getDate()-(w+1)*7+1);ini.setHours(0,0,0,0);
+      const fim=new Date(agora);fim.setDate(agora.getDate()-w*7);fim.setHours(23,59,59,999);
+      const f=_ocs.filter(o=>{const d=parseBR(o.data);return d&&d>=ini&&d<=fim;});
+      labels.push(String(ini.getDate()).padStart(2,'0')+'/'+String(ini.getMonth()+1).padStart(2,'0'));
+      dP.push(f.filter(o=>o.status==='Pendente').length);dA.push(f.filter(o=>o.status==='Em acompanhamento').length);dR.push(f.filter(o=>o.status==='Resolvido').length);dT.push(f.length);
     }
-  } else { // ano
-    const ML = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    for (let m = 0; m < 12; m++) {
-      const fil = ocs.filter(o => { const d = parseDateBR(o.data); if (!d) return false; return d.getMonth() === m && d.getFullYear() === agora.getFullYear(); });
-      labels.push(ML[m]);
-      dataPend.push(fil.filter(o => o.status === 'Pendente').length);
-      dataAcomp.push(fil.filter(o => o.status === 'Em acompanhamento').length);
-      dataResolvido.push(fil.filter(o => o.status === 'Resolvido').length);
-      dataTotal.push(fil.length);
+  }else{
+    const ML=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    for(let m=0;m<12;m++){
+      const f=_ocs.filter(o=>{const d=parseBR(o.data);return d&&d.getMonth()===m&&d.getFullYear()===agora.getFullYear();});
+      labels.push(ML[m]);dP.push(f.filter(o=>o.status==='Pendente').length);dA.push(f.filter(o=>o.status==='Em acompanhamento').length);dR.push(f.filter(o=>o.status==='Resolvido').length);dT.push(f.length);
     }
   }
-  return {labels, dataPend, dataAcomp, dataResolvido, dataTotal};
+  return{labels,dP,dA,dR,dT};
 }
-
-function renderChart() {
-  const canvas = document.getElementById('chart-canvas'); if (!canvas) return;
-  const data = buildChartData();
-  const textColor = getTextColor(), gridColor = getGridColor();
-  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
-  const isBar = _chartTipo === 'bar';
-  const datasets = [
-    { label:'Pendente', data:data.dataPend,
-      backgroundColor: isBar ? 'rgba(245,158,11,0.85)' : 'rgba(245,158,11,0.15)',
-      borderColor:'#F59E0B', borderWidth:isBar?0:2.5,
-      pointBackgroundColor:'#F59E0B', pointRadius:isBar?0:4, pointHoverRadius:5,
-      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 },
-    { label:'Acomp.', data:data.dataAcomp,
-      backgroundColor: isBar ? 'rgba(29,78,216,0.85)' : 'rgba(29,78,216,0.15)',
-      borderColor:'#1D4ED8', borderWidth:isBar?0:2.5,
-      pointBackgroundColor:'#1D4ED8', pointRadius:isBar?0:4, pointHoverRadius:5,
-      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 },
-    { label:'Resolvido', data:data.dataResolvido,
-      backgroundColor: isBar ? 'rgba(34,197,94,0.85)' : 'rgba(34,197,94,0.10)',
-      borderColor:'#22C55E', borderWidth:isBar?0:2.5,
-      pointBackgroundColor:'#22C55E', pointRadius:isBar?0:4, pointHoverRadius:5,
-      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 },
-    { label:'Total', data:data.dataTotal,
-      backgroundColor: isBar ? 'rgba(109,40,217,0.85)' : 'rgba(109,40,217,0.10)',
-      borderColor:'#6D28D9', borderWidth:isBar?0:2.5,
-      pointBackgroundColor:'#6D28D9', pointRadius:isBar?0:4, pointHoverRadius:5,
-      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 }
+function renderChart(){
+  const canvas=document.getElementById('chart-c');if(!canvas)return;
+  const data=buildData(); const tc=txColor(),gc=grColor();
+  if(_chartInst){_chartInst.destroy();_chartInst=null;}
+  const isBar=_chartTipo==='bar';
+  // Para gráfico de linha: ponto só aparece se valor > 0
+  const mkDS=(lbl,arr,clr,bgClr)=>({
+    label:lbl,data:arr,
+    backgroundColor:isBar?bgClr.replace(')',',0.85)').replace('rgb','rgba'):(bgClr.replace(')',',0.12)').replace('rgb','rgba')),
+    borderColor:clr,borderWidth:isBar?0:2.5,
+    pointRadius:isBar?0:arr.map(v=>v>0?4:0),
+    pointHoverRadius:isBar?0:arr.map(v=>v>0?5:0),
+    pointBackgroundColor:clr,
+    fill:!isBar,tension:0.4,borderRadius:isBar?6:0
+  });
+  const datasets=[
+    mkDS('Pendente', data.dP,'#F59E0B','rgb(245,158,11)'),
+    mkDS('Acomp.',   data.dA,'#1D4ED8','rgb(29,78,216)'),
+    mkDS('Resolvido',data.dR,'#22C55E','rgb(34,197,94)'),
+    mkDS('Total',    data.dT,'#6D28D9','rgb(109,40,217)'),
   ];
-  window._chartInst = new Chart(canvas, {
-    type: isBar ? 'bar' : 'line',
-    data: {labels: data.labels, datasets},
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      animation:{duration:600, easing:'easeOutQuart'},
-      interaction:{intersect:false, mode:'index'},
+  _chartInst=new Chart(canvas,{
+    type:isBar?'bar':'line',
+    data:{labels:data.labels,datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      animation:{duration:600,easing:'easeOutQuart'},
+      interaction:{intersect:false,mode:'index'},
       plugins:{
         legend:{display:false},
-        tooltip:{
-          backgroundColor:'rgba(15,23,41,0.92)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.75)',
-          padding:10, cornerRadius:8,
-          titleFont:{family:'DM Sans',size:11,weight:'600'},
-          bodyFont:{family:'DM Sans',size:11}
-        }
+        tooltip:{backgroundColor:'rgba(15,23,41,.92)',titleColor:'#fff',bodyColor:'rgba(255,255,255,.75)',padding:10,cornerRadius:8,titleFont:{family:'DM Sans',size:11,weight:'600'},bodyFont:{family:'DM Sans',size:11}}
       },
       scales:{
-        x:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0}, border:{display:false} },
-        y:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0}, border:{display:false}, beginAtZero:true }
+        x:{grid:{color:gc,drawBorder:false},ticks:{color:tc,font:{family:'DM Sans',size:10},maxRotation:0},border:{display:false}},
+        y:{grid:{color:gc,drawBorder:false},ticks:{color:tc,font:{family:'DM Sans',size:10},stepSize:1,precision:0},border:{display:false},beginAtZero:true}
       },
-      ...(isBar && { datasets:{ bar:{ barThickness:'flex', maxBarThickness:18 } } })
+      ...(isBar&&{datasets:{bar:{barThickness:'flex',maxBarThickness:18}}})
     }
   });
 }
 
-atualizarBannerFila();
-renderCalendario();
+updBannerFila();
+renderCal();
 </script>
 </body>
 </html>
