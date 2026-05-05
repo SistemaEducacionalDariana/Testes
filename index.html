@@ -113,14 +113,6 @@ html,body { height:100%; font-family:'DM Sans',sans-serif; background:var(--bg-p
 }
 html[data-tema="escuro"] .btn-nova,html[data-tema="black"] .btn-nova { background:#fff; color:#000; }
 .btn-nova:active { opacity:.7; }
-.btn-icon { 
-  background:var(--cinza); color:var(--sub); border:1px solid var(--borda); 
-  border-radius:8px; width:34px; height:34px; display:flex; align-items:center; 
-  justify-content:center; font-size:14px; cursor:pointer; transition:background .15s;
-  flex-shrink:0;
-}
-.btn-icon:active { background:var(--borda); }
-.btn-icon.ativo { background:var(--vermelho); color:#fff; border-color:var(--vermelho); }
 
 /* ── BANNERS ─────────────────────────────────── */
 .admin-banner { 
@@ -132,11 +124,6 @@ html[data-tema="escuro"] .btn-nova,html[data-tema="black"] .btn-nova { backgroun
 .admin-user-badge { 
   background:var(--vermelho); color:#fff; border-radius:20px; 
   padding:2px 10px; font-size:10px; font-weight:600;
-}
-.admin-config-btn { 
-  background:var(--cinza); border:1px solid var(--borda); color:var(--sub); 
-  border-radius:6px; padding:3px 10px; font-size:10px; font-weight:600; cursor:pointer;
-  font-family:'DM Sans',sans-serif;
 }
 .conn-banner { background:#FEF3C7; color:#92400E; padding:7px 18px; font-size:11px; font-weight:600; text-align:center; display:none; }
 .conn-banner.show { display:block; }
@@ -254,10 +241,42 @@ html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { b
 .btn-editar { padding:11px; border:1px solid var(--borda); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:var(--cinza); color:var(--sub); }
 .btn-del    { padding:11px; border:none; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; background:#FEE2E2; color:#991B1B; }
 
-/* ── PAINEL ADMIN ───────────────────────────── */
-.painel-admin { background:var(--bg-card); margin:16px; border-radius:var(--radius); padding:18px; border:1px solid var(--borda); }
+/* ── PAINEL CONFIG (antiga admin) ───────────── */
 .painel-secao { border:1px solid var(--borda); border-radius:10px; padding:14px; margin-bottom:12px; }
 .painel-secao-titulo { font-size:11px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
+
+/* ── CONFIG VIEW ─────────────────────────────── */
+.config-wrap { padding:16px; }
+
+/* Tema cards */
+.tema-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.tema-opcao { border-radius:12px; padding:12px 8px 10px; text-align:center; cursor:pointer; border:1.5px solid var(--borda); transition:border .2s; position:relative; }
+.tema-opcao.selecionado { border-color:var(--azul2); }
+.tema-opcao-claro  { background:#F5F6FA; }
+.tema-opcao-escuro { background:#0C1220; }
+.tema-opcao-black  { background:#000000; border-color:#222; }
+.tema-preview { display:flex; flex-direction:column; gap:3px; margin-bottom:7px; }
+.tp-bar  { border-radius:3px; height:5px; }
+.tp-card { border-radius:5px; height:18px; }
+.tema-opcao-claro  .tp-bar  { background:#2A5BD7; }
+.tema-opcao-claro  .tp-card { background:#fff; border:1px solid #E8EAF0; }
+.tema-opcao-escuro .tp-bar  { background:#1B3FAA; }
+.tema-opcao-escuro .tp-card { background:#141C2E; border:1px solid #2A3A5A; }
+.tema-opcao-black  .tp-bar  { background:#333; }
+.tema-opcao-black  .tp-card { background:#0D0D0D; border:1px solid #1E1E1E; }
+.tema-opcao-nome { font-size:10px; font-weight:700; margin-top:5px; }
+.tema-opcao-claro  .tema-opcao-nome { color:#1B3F8B; }
+.tema-opcao-escuro .tema-opcao-nome { color:#93C5FD; }
+.tema-opcao-black  .tema-opcao-nome { color:#888; }
+.tema-check { position:absolute; top:5px; right:6px; font-size:11px; opacity:0; transition:opacity .2s; }
+.tema-opcao.selecionado .tema-check { opacity:1; }
+
+/* Admin section dentro de config */
+.admin-login-area { background:var(--bg-card); border-radius:var(--radius); padding:18px; border:1px solid var(--borda); margin-bottom:12px; }
+.admin-login-titulo { font-size:13px; font-weight:700; color:var(--texto); margin-bottom:4px; }
+.admin-login-sub { font-size:11px; color:var(--sub); margin-bottom:14px; }
+.admin-logado-area { background:var(--bg-card); border-radius:var(--radius); padding:18px; border:1px solid var(--borda); margin-bottom:12px; }
+.admin-logado-badge { display:inline-flex; align-items:center; gap:8px; background:#FEE2E2; color:#991B1B; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:600; margin-bottom:14px; }
 
 /* ── TAB BAR (FUNDO) ────────────────────────── */
 .tab-bar {
@@ -358,39 +377,15 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 html[data-tema="black"] .toast { background:#222; }
 .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 
-/* ── MODAL TEMA ─────────────────────────────── */
-.tema-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
-.tema-opcao { border-radius:12px; padding:12px 8px 10px; text-align:center; cursor:pointer; border:1.5px solid var(--borda); transition:border .2s; position:relative; }
-.tema-opcao.selecionado { border-color:var(--azul2); }
-.tema-opcao-claro  { background:#F5F6FA; }
-.tema-opcao-escuro { background:#0C1220; }
-.tema-opcao-black  { background:#000000; border-color:#222; }
-.tema-preview { display:flex; flex-direction:column; gap:3px; margin-bottom:7px; }
-.tp-bar  { border-radius:3px; height:5px; }
-.tp-card { border-radius:5px; height:18px; }
-.tema-opcao-claro  .tp-bar  { background:#2A5BD7; }
-.tema-opcao-claro  .tp-card { background:#fff; border:1px solid #E8EAF0; }
-.tema-opcao-escuro .tp-bar  { background:#1B3FAA; }
-.tema-opcao-escuro .tp-card { background:#141C2E; border:1px solid #2A3A5A; }
-.tema-opcao-black  .tp-bar  { background:#333; }
-.tema-opcao-black  .tp-card { background:#0D0D0D; border:1px solid #1E1E1E; }
-.tema-opcao-nome { font-size:10px; font-weight:700; margin-top:5px; }
-.tema-opcao-claro  .tema-opcao-nome { color:#1B3F8B; }
-.tema-opcao-escuro .tema-opcao-nome { color:#93C5FD; }
-.tema-opcao-black  .tema-opcao-nome { color:#888; }
-.tema-check { position:absolute; top:5px; right:6px; font-size:11px; opacity:0; transition:opacity .2s; }
-.tema-opcao.selecionado .tema-check { opacity:1; }
-
-/* ── EDITAR DATA ADMIN ──────────────────────── */
-.admin-data-edit { display:none; margin-top:10px; padding:10px 12px; background:var(--cinza); border-radius:8px; border:1px solid var(--borda); gap:8px; }
-.admin-data-edit.show { display:flex; flex-direction:column; }
-.btn-edit-dt { font-size:10px; color:var(--azul2); cursor:pointer; font-weight:600; background:none; border:none; font-family:'DM Sans',sans-serif; text-decoration:underline; padding:0; margin-top:4px; }
-
 /* ── ICONE EMOJI PICKER ─────────────────────── */
 .emoji-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; margin-top:8px; max-height:180px; overflow-y:auto; }
 .emoji-op { font-size:22px; border:1.5px solid var(--borda); border-radius:8px; padding:6px; cursor:pointer; text-align:center; background:var(--cinza); transition:border-color .15s; }
 .emoji-op.selecionado { border-color:var(--azul2); }
 .emoji-op:active { opacity:.6; }
+
+/* ── MODAL ÍCONE ────────────────────────────── */
+.modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:500; align-items:flex-end; justify-content:center; padding:0; }
+.modal-bg.show { display:flex; }
 </style>
 </head>
 <body>
@@ -410,15 +405,13 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
   <div class="header-right">
     <button class="btn-nova" id="btn-novo-global" onclick="irParaNovo()">+ Nova</button>
-    <button class="btn-icon" id="btn-tema" onclick="abrirModalTema()" title="Tema">☀️</button>
-    <button class="btn-icon" id="btn-admin" onclick="clicarAdmin()">🔐</button>
   </div>
 </div>
 
 <!-- BANNERS -->
 <div class="admin-banner" id="admin-banner">
   <span>Admin ativo <span class="admin-user-badge" id="admin-user-badge">—</span></span>
-  <button class="admin-config-btn" onclick="irParaPainel()">⚙️ Config</button>
+  <button style="background:var(--cinza);border:1px solid var(--borda);color:var(--sub);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="irParaPainel()">⚙️ Config</button>
 </div>
 <div class="conn-banner" id="conn-banner">⚠️ Sem conexão — dados salvos localmente</div>
 <div class="fila-banner" id="fila-banner">
@@ -474,12 +467,11 @@ html[data-tema="black"] .toast { background:#222; }
         </div>
       </div>
 
-      <!-- Gráfico -->
+      <!-- Gráfico — sem opção "Dia" -->
       <div class="section-card">
         <div class="chart-controls">
           <div class="seg-btns" id="seg-periodo">
-            <button class="seg-btn ativo" onclick="setPeriodo('dia')" data-p="dia">Dia</button>
-            <button class="seg-btn" onclick="setPeriodo('semana')" data-p="semana">Semana</button>
+            <button class="seg-btn ativo" onclick="setPeriodo('semana')" data-p="semana">Semana</button>
             <button class="seg-btn" onclick="setPeriodo('mes')" data-p="mes">Mês</button>
             <button class="seg-btn" onclick="setPeriodo('ano')" data-p="ano">Ano</button>
           </div>
@@ -550,7 +542,6 @@ html[data-tema="black"] .toast { background:#222; }
         </div>
         <div class="form-group"><label>Professor *</label><input id="e-professor" type="text"></div>
         <div class="form-group"><label>Descrição *</label><textarea id="e-descricao"></textarea></div>
-        <!-- EDITAR DATA/HORA (admin) -->
         <div id="admin-dt-wrap" style="display:none">
           <div class="form-group">
             <label>Data e Hora da Ocorrência (Admin)</label>
@@ -567,26 +558,71 @@ html[data-tema="black"] .toast { background:#222; }
     <div class="detalhe-card" id="detalhe-conteudo"></div>
   </div>
 
-  <!-- ──── PAINEL ADMIN ──── -->
-  <div class="view" id="view-painel">
-    <div class="form-wrap">
-      <div class="form-card">
-        <div class="form-header">
-          <button class="btn-back" onclick="irParaLista()">← Voltar</button>
-          <div class="form-title">⚙️ Admin</div>
+  <!-- ──── CONFIGURAÇÕES ──── -->
+  <div class="view" id="view-config">
+    <div class="config-wrap">
+
+      <!-- TEMA -->
+      <div class="admin-logado-area" style="margin-bottom:12px;">
+        <div style="font-size:13px;font-weight:700;color:var(--texto);margin-bottom:4px;">🎨 Aparência</div>
+        <div style="font-size:11px;color:var(--sub);margin-bottom:12px;">Tema do app neste dispositivo</div>
+        <div class="tema-grid">
+          <div class="tema-opcao tema-opcao-claro" id="tema-op-claro" onclick="selecionarTema('claro')">
+            <span class="tema-check">✔</span>
+            <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
+            <div class="tema-opcao-nome">Claro</div>
+          </div>
+          <div class="tema-opcao tema-opcao-escuro" id="tema-op-escuro" onclick="selecionarTema('escuro')">
+            <span class="tema-check" style="color:#93C5FD">✔</span>
+            <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
+            <div class="tema-opcao-nome">Escuro</div>
+          </div>
+          <div class="tema-opcao tema-opcao-black" id="tema-op-black" onclick="selecionarTema('black')">
+            <span class="tema-check" style="color:#888">✔</span>
+            <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
+            <div class="tema-opcao-nome">Black</div>
+          </div>
         </div>
+      </div>
+
+      <!-- ADMIN: logado ou não -->
+      <div id="config-admin-deslogado" class="admin-login-area">
+        <div class="admin-login-titulo">🔐 Acesso Admin</div>
+        <div class="admin-login-sub">Entre para acessar configurações avançadas</div>
+        <div class="form-group"><label>Usuário</label><input type="text" id="cfg-usuario" placeholder="usuário" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('cfg-senha').focus()"></div>
+        <div class="form-group"><label>Senha</label>
+          <div class="senha-wrap">
+            <input type="password" id="cfg-senha" placeholder="••••••" onkeydown="if(event.key==='Enter')fazerLoginConfig()">
+            <button class="btn-olho" onclick="toggleOlho('cfg-senha','olho-cfg')" id="olho-cfg">👁️</button>
+          </div>
+        </div>
+        <div class="erro-msg" id="cfg-login-erro"></div>
+        <div class="login-loading" id="cfg-login-loading"><div class="spinner" style="width:18px;height:18px;border-width:2px;display:inline-block"></div> Verificando...</div>
+        <button class="btn-salvar" style="margin-top:4px;" onclick="fazerLoginConfig()">Entrar</button>
+      </div>
+
+      <div id="config-admin-logado" style="display:none;">
+        <div class="admin-logado-area">
+          <div class="admin-logado-badge">🔴 Admin: <span id="cfg-admin-nome">—</span></div>
+          <button class="btn-salvar btn-vermelho" style="font-size:12px;padding:10px;" onclick="sairAdminConfig()">Sair do modo admin</button>
+        </div>
+
+        <!-- INSTITUIÇÃO -->
         <div class="painel-secao">
           <div class="painel-secao-titulo">🏫 Instituição</div>
           <div class="form-group"><label>Nome exibido no cabeçalho</label><input type="text" id="p-nome-inst" placeholder="Nome da escola"></div>
           <div class="erro-msg" id="erro-inst"></div><div class="sucesso-msg" id="sucesso-inst"></div>
           <button class="btn-salvar btn-vermelho" onclick="alterarInstituicao()" style="font-size:12px;padding:10px">Salvar Nome</button>
         </div>
+
+        <!-- ÍCONE -->
         <div class="painel-secao">
           <div class="painel-secao-titulo">😀 Ícone do App</div>
-          <div class="form-group"><label>Ícone exibido ao lado do nome</label></div>
           <div id="emoji-grid-painel" class="emoji-grid"></div>
           <div class="sucesso-msg" id="sucesso-icone" style="margin-top:8px"></div>
         </div>
+
+        <!-- ALTERAR USUÁRIO -->
         <div class="painel-secao">
           <div class="painel-secao-titulo">👤 Alterar Usuário</div>
           <div class="form-group"><label>Novo Usuário</label><input type="text" id="p-novo-usuario" placeholder="Nome de usuário"></div>
@@ -596,6 +632,8 @@ html[data-tema="black"] .toast { background:#222; }
           <div class="erro-msg" id="erro-usuario"></div><div class="sucesso-msg" id="sucesso-usuario"></div>
           <button class="btn-salvar btn-vermelho" onclick="alterarUsuario()" style="font-size:12px;padding:10px">Salvar Usuário</button>
         </div>
+
+        <!-- ALTERAR SENHA -->
         <div class="painel-secao">
           <div class="painel-secao-titulo">🔑 Alterar Senha</div>
           <div class="form-group"><label>Senha Atual</label>
@@ -610,8 +648,9 @@ html[data-tema="black"] .toast { background:#222; }
           <div class="erro-msg" id="painel-erro"></div><div class="sucesso-msg" id="painel-sucesso"></div>
           <button class="btn-salvar btn-vermelho" onclick="alterarSenha()" style="font-size:12px;padding:10px">Salvar Senha</button>
         </div>
-        <div style="font-size:11px;color:var(--sub);text-align:center;padding-top:4px">Para sair, toque no ícone 🔐 no topo</div>
-      </div>
+
+      </div><!-- /config-admin-logado -->
+
     </div>
   </div>
 
@@ -625,30 +664,14 @@ html[data-tema="black"] .toast { background:#222; }
   <button class="tab-btn" id="tab-analytics" onclick="mudarAba('analytics')">
     <span class="tab-btn-icon">📊</span>Análises
   </button>
+  <button class="tab-btn" id="tab-config" onclick="mudarAba('config')">
+    <span class="tab-btn-icon">⚙️</span>Config
+  </button>
 </div>
 
 </div><!-- /app-root -->
 
 <div class="toast" id="toast"></div>
-
-<!-- MODAL LOGIN -->
-<div class="modal-bg" id="modal-login">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Acesso Admin</h3>
-    <p>Entre com seu usuário e senha</p>
-    <div class="form-group"><label>Usuário</label><input type="text" id="login-usuario" placeholder="usuário" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('login-senha').focus()"></div>
-    <div class="form-group"><label>Senha</label>
-      <div class="senha-wrap"><input type="password" id="login-senha" placeholder="••••••" onkeydown="if(event.key==='Enter')confirmarLogin()"><button class="btn-olho" onclick="toggleOlho('login-senha','olho-ls')" id="olho-ls">👁️</button></div>
-    </div>
-    <div class="erro-msg" id="login-erro"></div>
-    <div class="login-loading" id="login-loading"><div class="spinner" style="width:18px;height:18px;border-width:2px;display:inline-block"></div> Verificando...</div>
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModalLogin()">Cancelar</button>
-      <button class="btn-confirmar" id="btn-entrar" onclick="confirmarLogin()">Entrar</button>
-    </div>
-  </div>
-</div>
 
 <!-- MODAL EXCLUIR -->
 <div class="modal-bg" id="modal-excluir">
@@ -660,33 +683,6 @@ html[data-tema="black"] .toast { background:#222; }
       <button class="btn-cancelar" onclick="fecharModalExcluir()">Cancelar</button>
       <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
     </div>
-  </div>
-</div>
-
-<!-- MODAL TEMA -->
-<div class="modal-bg" id="modal-tema">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>Aparência</h3>
-    <p>Tema do app neste dispositivo</p>
-    <div class="tema-grid">
-      <div class="tema-opcao tema-opcao-claro" id="tema-op-claro" onclick="selecionarTema('claro')">
-        <span class="tema-check">✔</span>
-        <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
-        <div class="tema-opcao-nome">Claro</div>
-      </div>
-      <div class="tema-opcao tema-opcao-escuro" id="tema-op-escuro" onclick="selecionarTema('escuro')">
-        <span class="tema-check" style="color:#93C5FD">✔</span>
-        <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
-        <div class="tema-opcao-nome">Escuro</div>
-      </div>
-      <div class="tema-opcao tema-opcao-black" id="tema-op-black" onclick="selecionarTema('black')">
-        <span class="tema-check" style="color:#888">✔</span>
-        <div class="tema-preview"><div class="tp-bar"></div><div class="tp-card"></div></div>
-        <div class="tema-opcao-nome">Black</div>
-      </div>
-    </div>
-    <button class="btn-cancelar" style="width:100%;margin-top:14px" onclick="fecharModalTema()">Fechar</button>
   </div>
 </div>
 
@@ -746,7 +742,6 @@ onValue(ref(db,'admin_config/icone_logo'),function(snap){
   var icone=snap.val()||'🏫';
   document.getElementById('icone-logo').textContent=icone;
   window._iconeAtual=icone;
-  // Atualiza selecionado nos grids de emoji
   document.querySelectorAll('.emoji-op').forEach(function(el){
     el.classList.toggle('selecionado',el.dataset.emoji===icone);
   });
@@ -759,7 +754,6 @@ var TEMAS={claro:{icon:'☀️'},escuro:{icon:'🌙'},black:{icon:'⚫'}};
 function aplicarTema(t){
   document.documentElement.setAttribute('data-tema',t);
   localStorage.setItem('ceti_tema',t);
-  document.getElementById('btn-tema').textContent=TEMAS[t]?TEMAS[t].icon:'☀️';
   ['claro','escuro','black'].forEach(function(k){
     var el=document.getElementById('tema-op-'+k);
     if(el) el.classList.toggle('selecionado',k===t);
@@ -769,12 +763,7 @@ function aplicarTema(t){
 }
 (function(){var t=localStorage.getItem('ceti_tema')||'claro';aplicarTema(t);})();
 
-window.abrirModalTema=function(){
-  var atual=localStorage.getItem('ceti_tema')||'claro';aplicarTema(atual);
-  document.getElementById('modal-tema').classList.add('show');
-};
-window.fecharModalTema=function(){document.getElementById('modal-tema').classList.remove('show');};
-window.selecionarTema=function(t){aplicarTema(t);mostrarToast(TEMAS[t].icon+' Tema ativado');setTimeout(fecharModalTema,500);};
+window.selecionarTema=function(t){aplicarTema(t);mostrarToast(TEMAS[t].icon+' Tema ativado');};
 
 // ═══════════════════════════════════
 //  ÍCONE
@@ -800,9 +789,8 @@ window.selecionarIcone=async function(emoji){
   try{
     await update(ref(db,'admin_config'),{icone_logo:emoji});
     mostrarToast(emoji+' Ícone atualizado!');
-    document.getElementById('sucesso-icone').textContent='✓ Ícone salvo!';
-    document.getElementById('sucesso-icone').classList.add('show');
-    setTimeout(function(){document.getElementById('sucesso-icone').classList.remove('show');},2000);
+    var sucEl=document.getElementById('sucesso-icone');
+    if(sucEl){sucEl.textContent='✓ Ícone salvo!';sucEl.classList.add('show');setTimeout(function(){sucEl.classList.remove('show');},2000);}
     setTimeout(fecharModalIcone,400);
   }catch(e){mostrarToast('Erro: '+e.message);}
 };
@@ -877,13 +865,19 @@ window.mudarAba=function(aba){
   _abaAtiva=aba;
   document.getElementById('tab-lista').classList.toggle('ativo',aba==='lista');
   document.getElementById('tab-analytics').classList.toggle('ativo',aba==='analytics');
-  document.getElementById('btn-novo-global').style.display=aba==='analytics'?'none':'';
+  document.getElementById('tab-config').classList.toggle('ativo',aba==='config');
+  document.getElementById('btn-novo-global').style.display=(aba==='analytics'||aba==='config')?'none':'';
   if(aba==='lista'){mostrarViewSemTabs('view-lista');}
-  else{mostrarViewSemTabs('view-analytics');renderCalendario();renderChart();}
+  else if(aba==='analytics'){mostrarViewSemTabs('view-analytics');renderCalendario();renderChart();}
+  else if(aba==='config'){
+    mostrarViewSemTabs('view-config');
+    atualizarUiAdminConfig();
+    var tema=localStorage.getItem('ceti_tema')||'claro';aplicarTema(tema);
+  }
 };
 
 function mostrarViewSemTabs(id){
-  ['view-lista','view-analytics','view-novo','view-editar','view-detalhe','view-painel'].forEach(function(v){
+  ['view-lista','view-analytics','view-novo','view-editar','view-detalhe','view-config'].forEach(function(v){
     document.getElementById(v).classList.remove('active');
   });
   document.getElementById(id).classList.add('active');
@@ -891,37 +885,54 @@ function mostrarViewSemTabs(id){
 }
 
 // ═══════════════════════════════════
-//  LOGIN
+//  LOGIN ADMIN — DENTRO DA ABA CONFIG
 // ═══════════════════════════════════
-window.confirmarLogin=async function(){
-  var usuario=document.getElementById('login-usuario').value.trim();
-  var senha=document.getElementById('login-senha').value;
-  var erroEl=document.getElementById('login-erro'),loadEl=document.getElementById('login-loading'),btnEl=document.getElementById('btn-entrar');
+function atualizarUiAdminConfig(){
+  var logado=window._adminAtivo||false;
+  document.getElementById('config-admin-deslogado').style.display=logado?'none':'block';
+  document.getElementById('config-admin-logado').style.display=logado?'block':'none';
+  if(logado){
+    document.getElementById('cfg-admin-nome').textContent=window._adminUsuario||'—';
+    popularEmojiGrid('emoji-grid-painel');
+    var nomeAtual=document.getElementById('header-nome-inst').textContent;
+    document.getElementById('p-nome-inst').value=nomeAtual==='Minha Instituição'?'':nomeAtual;
+  }
+  // Atualiza banner de admin no topo
+  document.getElementById('admin-banner').classList.toggle('show',logado);
+  if(logado) document.getElementById('admin-user-badge').textContent=window._adminUsuario||'—';
+}
+
+window.fazerLoginConfig=async function(){
+  var usuario=document.getElementById('cfg-usuario').value.trim();
+  var senha=document.getElementById('cfg-senha').value;
+  var erroEl=document.getElementById('cfg-login-erro'),loadEl=document.getElementById('cfg-login-loading');
   if(!usuario||!senha){erroEl.textContent='❌ Preencha usuário e senha.';erroEl.classList.add('show');return;}
-  erroEl.classList.remove('show');loadEl.classList.add('show');btnEl.disabled=true;
+  erroEl.classList.remove('show');loadEl.classList.add('show');
   try{
     const snap=await get(ref(db,'admin_config'));
     if(!snap.exists())throw new Error('Config não encontrada.');
     const cfg=snap.val();const hashDigitado=await sha256(senha);
     if(usuario===cfg.usuario&&hashDigitado===cfg.senha_hash){
       window._adminAtivo=true;window._adminUsuario=usuario;
-      document.getElementById('modal-login').classList.remove('show');
-      document.getElementById('btn-admin').classList.add('ativo');
-      document.getElementById('btn-admin').textContent='🔴';
-      document.getElementById('admin-banner').classList.add('show');
-      document.getElementById('admin-user-badge').textContent=usuario;
-      // Logo clicável quando admin
+      document.getElementById('cfg-usuario').value='';
+      document.getElementById('cfg-senha').value='';
       document.getElementById('logo-btn').title='Clique para alterar ícone';
       renderLista();mostrarToast('✓ Bem-vindo, '+usuario+'!');
-      popularEmojiGrid('emoji-grid-painel');
+      atualizarUiAdminConfig();
     }else{
       erroEl.textContent='❌ Usuário ou senha incorretos.';erroEl.classList.add('show');
-      document.getElementById('login-senha').value='';document.getElementById('login-senha').focus();
+      document.getElementById('cfg-senha').value='';
     }
   }catch(e){erroEl.textContent='❌ Erro: '+e.message;erroEl.classList.add('show');}
-  loadEl.classList.remove('show');btnEl.disabled=false;
+  loadEl.classList.remove('show');
 };
-window.fecharModalLogin=function(){document.getElementById('modal-login').classList.remove('show');};
+
+window.sairAdminConfig=function(){
+  window._adminAtivo=false;window._adminUsuario='';
+  document.getElementById('logo-btn').title='Ícone da escola';
+  renderLista();mostrarToast('Modo admin desativado');
+  atualizarUiAdminConfig();
+};
 
 window.alterarUsuario=async function(){
   var novoUsuario=document.getElementById('p-novo-usuario').value.trim();
@@ -936,6 +947,7 @@ window.alterarUsuario=async function(){
     if(hashDigitado!==cfg.senha_hash){erroEl.textContent='❌ Senha incorreta.';erroEl.classList.add('show');return;}
     await update(ref(db,'admin_config'),{usuario:novoUsuario});
     window._adminUsuario=novoUsuario;
+    document.getElementById('cfg-admin-nome').textContent=novoUsuario;
     document.getElementById('admin-user-badge').textContent=novoUsuario;
     sucEl.textContent='✅ Usuário alterado!';sucEl.classList.add('show');
     document.getElementById('p-novo-usuario').value='';document.getElementById('p-conf-senha-usuario').value='';
@@ -1002,10 +1014,7 @@ window.salvarEdicao=async function(){
   var professor=document.getElementById('e-professor').value.trim();
   var descricao=document.getElementById('e-descricao').value.trim();
   if(!aluno||!professor||!descricao){mostrarToast('⚠️ Preencha os campos obrigatórios');return;}
-  
   var updateData={aluno,turma,tipo,professor,descricao};
-  
-  // Atualizar data/hora se admin editou
   if(window._adminAtivo){
     var dtVal=document.getElementById('e-datetime').value;
     if(dtVal){
@@ -1015,7 +1024,6 @@ window.salvarEdicao=async function(){
       updateData.timestamp=dt.getTime();
     }
   }
-  
   btn.disabled=true;btn.textContent='Salvando...';
   try{
     await update(ref(db,'ocorrencias/'+key),updateData);
@@ -1127,19 +1135,15 @@ window.abrirEdicao=function(){
   document.getElementById('e-descricao').value=o.descricao||'';
   var sel=document.getElementById('e-tipo');
   for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===o.tipo){sel.selectedIndex=i;break;}}
-  
-  // Admin pode editar data/hora
   var adminDt=document.getElementById('admin-dt-wrap');
   if(window._adminAtivo){
     adminDt.style.display='block';
-    // Converter data "DD/MM/YYYY" + hora "HH:MM" → datetime-local
     if(o.data&&o.hora){
       var parts=o.data.split('/');
       var dtStr=parts[2]+'-'+parts[1]+'-'+parts[0]+'T'+o.hora;
       document.getElementById('e-datetime').value=dtStr;
     }
   }else{adminDt.style.display='none';}
-  
   mostrarView('view-editar');
 };
 window.voltarDetalhe=function(){verDetalhe(window._idAtual);};
@@ -1152,45 +1156,30 @@ function mostrarView(id){
   document.getElementById(id).classList.add('active');
   document.getElementById('main-scroll').scrollTop=0;
   var isAnalytics=id==='view-analytics';
-  document.getElementById('tab-lista').classList.toggle('ativo',id==='view-lista'||(!isAnalytics&&id!=='view-analytics'));
+  var isConfig=id==='view-config';
+  document.getElementById('tab-lista').classList.toggle('ativo',id==='view-lista');
   document.getElementById('tab-analytics').classList.toggle('ativo',isAnalytics);
-  document.getElementById('btn-novo-global').style.display=isAnalytics?'none':'';
+  document.getElementById('tab-config').classList.toggle('ativo',isConfig);
+  document.getElementById('btn-novo-global').style.display=(isAnalytics||isConfig)?'none':'';
 }
 
 window.modoAdminAtivo=function(){return window._adminAtivo||false;};
 window.irParaLista=function(){
   if(_abaAtiva==='analytics'){mostrarView('view-analytics');}
+  else if(_abaAtiva==='config'){mostrarView('view-config');}
   else{mostrarView('view-lista');}
 };
 window.irParaNovo=function(){_abaAtiva='lista';mostrarView('view-novo');};
 window.irParaPainel=function(){
-  var nomeAtual=document.getElementById('header-nome-inst').textContent;
-  document.getElementById('p-nome-inst').value=nomeAtual==='Minha Instituição'?'':nomeAtual;
-  ['p-novo-usuario','p-conf-senha-usuario','p-senha-atual','p-senha-nova','p-senha-conf'].forEach(function(id){document.getElementById(id).value='';});
-  ['erro-inst','sucesso-inst','erro-usuario','sucesso-usuario','painel-erro','painel-sucesso'].forEach(function(id){document.getElementById(id).classList.remove('show');});
-  popularEmojiGrid('emoji-grid-painel');
-  mostrarView('view-painel');
+  _abaAtiva='config';
+  mostrarView('view-config');
+  document.getElementById('tab-config').classList.add('ativo');
+  document.getElementById('tab-lista').classList.remove('ativo');
+  document.getElementById('tab-analytics').classList.remove('ativo');
+  atualizarUiAdminConfig();
 };
 
 window._adminAtivo=false;window._adminUsuario='';
-window.clicarAdmin=function(){
-  if(window._adminAtivo){
-    window._adminAtivo=false;window._adminUsuario='';
-    document.getElementById('btn-admin').classList.remove('ativo');
-    document.getElementById('btn-admin').textContent='🔐';
-    document.getElementById('admin-banner').classList.remove('show');
-    document.getElementById('logo-btn').title='Ícone da escola';
-    renderLista();mostrarToast('Modo admin desativado');
-  }else{
-    document.getElementById('login-usuario').value='';
-    document.getElementById('login-senha').value='';
-    document.getElementById('login-erro').classList.remove('show');
-    document.getElementById('login-loading').classList.remove('show');
-    document.getElementById('btn-entrar').disabled=false;
-    document.getElementById('modal-login').classList.add('show');
-    setTimeout(function(){document.getElementById('login-usuario').focus();},150);
-  }
-};
 
 window.pedirExclusao=function(key){window._idAtual=key;document.getElementById('modal-excluir').classList.add('show');};
 window.fecharModalExcluir=function(){document.getElementById('modal-excluir').classList.remove('show');};
@@ -1266,6 +1255,7 @@ window.irDetalheAnalytics=function(key){
   _abaAtiva='lista';
   document.getElementById('tab-lista').classList.add('ativo');
   document.getElementById('tab-analytics').classList.remove('ativo');
+  document.getElementById('tab-config').classList.remove('ativo');
   document.getElementById('btn-novo-global').style.display='';
   verDetalhe(key);
 };
@@ -1298,9 +1288,9 @@ window.baixarRelatorio=function(){
 };
 
 // ═══════════════════════════════════
-//  GRÁFICO — Chart.js
+//  GRÁFICO — sem "Dia"
 // ═══════════════════════════════════
-var _chartPeriodo='dia';
+var _chartPeriodo='semana';
 var _chartTipo='bar';
 var _chartInst=null;
 
@@ -1329,21 +1319,7 @@ function buildChartData(){
   var ocs=window._ocs||[];var agora=new Date();
   var labels=[],dataPend=[],dataAcomp=[],dataResolvido=[],dataTotal=[];
 
-  if(_chartPeriodo==='dia'){
-    for(var h=23;h>=0;h--){
-      var d=new Date(agora);d.setHours(agora.getHours()-h,0,0,0);
-      var filtered=ocs.filter(function(o){
-        if(!o.timestamp)return false;
-        var t=new Date(o.timestamp);
-        return t.getHours()===d.getHours()&&t.getDate()===d.getDate()&&t.getMonth()===d.getMonth()&&t.getFullYear()===d.getFullYear();
-      });
-      labels.push(String(d.getHours()).padStart(2,'0')+'h');
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
-    }
-  }else if(_chartPeriodo==='semana'){
+  if(_chartPeriodo==='semana'){
     var DS=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
     for(var i=6;i>=0;i--){
       var d=new Date(agora);d.setDate(agora.getDate()-i);d.setHours(0,0,0,0);
@@ -1385,77 +1361,30 @@ function renderChart(){
   var canvas=document.getElementById('chart-canvas');if(!canvas)return;
   var data=buildChartData();
   var textColor=getTextColor();var gridColor=getGridColor();
-
   if(window._chartInst){window._chartInst.destroy();window._chartInst=null;}
-
   var isBar=_chartTipo==='bar';
-
-  // Datasets
   var datasets=[
-    {
-      label:'Pendente',data:data.dataPend,
-      backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',
-      borderColor:'#F59E0B',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#F59E0B',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    },
-    {
-      label:'Acomp.',data:data.dataAcomp,
-      backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',
-      borderColor:'#3B82F6',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#3B82F6',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    },
-    {
-      label:'Resolvido',data:data.dataResolvido,
-      backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',
-      borderColor:'#22C55E',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#22C55E',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    },
-    {
-      label:'Total',data:data.dataTotal,
-      backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)',
-      borderColor:'#8B5CF6',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#8B5CF6',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    }
+    {label:'Pendente',data:data.dataPend,backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',borderColor:'#F59E0B',borderWidth:isBar?0:2,pointBackgroundColor:'#F59E0B',pointRadius:isBar?0:4,pointHoverRadius:5,fill:!isBar,tension:0.4,borderRadius:isBar?6:0},
+    {label:'Acomp.',data:data.dataAcomp,backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',borderColor:'#3B82F6',borderWidth:isBar?0:2,pointBackgroundColor:'#3B82F6',pointRadius:isBar?0:4,pointHoverRadius:5,fill:!isBar,tension:0.4,borderRadius:isBar?6:0},
+    {label:'Resolvido',data:data.dataResolvido,backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',borderColor:'#22C55E',borderWidth:isBar?0:2,pointBackgroundColor:'#22C55E',pointRadius:isBar?0:4,pointHoverRadius:5,fill:!isBar,tension:0.4,borderRadius:isBar?6:0},
+    {label:'Total',data:data.dataTotal,backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)',borderColor:'#8B5CF6',borderWidth:isBar?0:2,pointBackgroundColor:'#8B5CF6',pointRadius:isBar?0:4,pointHoverRadius:5,fill:!isBar,tension:0.4,borderRadius:isBar?6:0}
   ];
-
   window._chartInst=new Chart(canvas,{
     type:isBar?'bar':'line',
     data:{labels:data.labels,datasets:datasets},
     options:{
-      responsive:true,
-      maintainAspectRatio:false,
+      responsive:true,maintainAspectRatio:false,
       animation:{duration:600,easing:'easeOutQuart'},
       interaction:{intersect:false,mode:'index'},
       plugins:{
         legend:{display:false},
-        tooltip:{
-          backgroundColor:'rgba(15,23,41,0.9)',
-          titleColor:'#fff',bodyColor:'rgba(255,255,255,0.75)',
-          padding:10,cornerRadius:8,
-          titleFont:{family:'DM Sans',size:11,weight:'600'},
-          bodyFont:{family:'DM Sans',size:11},
-        }
+        tooltip:{backgroundColor:'rgba(15,23,41,0.9)',titleColor:'#fff',bodyColor:'rgba(255,255,255,0.75)',padding:10,cornerRadius:8,titleFont:{family:'DM Sans',size:11,weight:'600'},bodyFont:{family:'DM Sans',size:11}}
       },
       scales:{
-        x:{
-          grid:{color:gridColor,drawBorder:false},
-          ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0},
-          border:{display:false},
-        },
-        y:{
-          grid:{color:gridColor,drawBorder:false},
-          ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0},
-          border:{display:false},
-          beginAtZero:true,
-        }
+        x:{grid:{color:gridColor,drawBorder:false},ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0},border:{display:false}},
+        y:{grid:{color:gridColor,drawBorder:false},ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0},border:{display:false},beginAtZero:true}
       },
-      ...(isBar&&{
-        datasets:{bar:{barThickness:'flex',maxBarThickness:18}},
-      })
+      ...(isBar&&{datasets:{bar:{barThickness:'flex',maxBarThickness:18}}})
     }
   });
 }
