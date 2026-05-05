@@ -235,8 +235,9 @@ select option { background:var(--bg-card); color:var(--texto); }
 html[data-tema="escuro"] .btn-salvar,html[data-tema="black"] .btn-salvar { background:#fff; color:#000; }
 .btn-salvar:disabled { opacity:.4; cursor:not-allowed; }
 .btn-salvar:active { opacity:.75; }
-.btn-vermelho { background:linear-gradient(135deg,#7F1D1D,#991B1B); color:#fff; }
-html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { background:linear-gradient(135deg,#7F1D1D,#991B1B); color:#fff; }
+.btn-vermelho { background:linear-gradient(135deg,#1B3F8B,#2A5BD7) !important; color:#fff !important; }
+html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { background:linear-gradient(135deg,#1B3F8B,#2A5BD7) !important; color:#fff !important; }
+.btn-danger { background:linear-gradient(135deg,#7F1D1D,#991B1B) !important; color:#fff !important; }
 
 /* ── DETALHE ────────────────────────────────── */
 .detalhe-card { background:var(--bg-card); margin:16px; border-radius:var(--radius); padding:18px; border:1px solid var(--borda); }
@@ -258,6 +259,30 @@ html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { b
 .painel-admin { background:var(--bg-card); margin:16px; border-radius:var(--radius); padding:18px; border:1px solid var(--borda); }
 .painel-secao { border:1px solid var(--borda); border-radius:10px; padding:14px; margin-bottom:12px; }
 .painel-secao-titulo { font-size:11px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
+
+/* ── ADMIN ABAS ─────────────────────────────── */
+.admin-tabs { display:flex; gap:0; background:var(--cinza); border-radius:10px; padding:3px; margin-bottom:14px; border:1px solid var(--borda); overflow-x:auto; }
+.admin-tab { flex:1; min-width:60px; padding:7px 8px; border:none; background:transparent; font-family:'DM Sans',sans-serif; font-size:10px; font-weight:600; color:var(--sub); cursor:pointer; border-radius:7px; transition:all .15s; white-space:nowrap; text-align:center; }
+.admin-tab.ativo { background:var(--bg-card); color:var(--texto); box-shadow:0 1px 4px rgba(0,0,0,0.1); }
+.admin-tabpanel { display:none; }
+.admin-tabpanel.ativo { display:block; }
+
+/* ── LOG DE AÇÕES ────────────────────────────── */
+.log-item { background:var(--cinza); border-radius:8px; padding:9px 12px; border:1px solid var(--borda); margin-bottom:6px; }
+.log-item-topo { display:flex; justify-content:space-between; align-items:center; }
+.log-item-acao { font-size:11px; font-weight:600; color:var(--texto); }
+.log-item-quem { font-size:10px; color:var(--azul2); font-weight:600; }
+.log-item-detalhe { font-size:10px; color:var(--sub); margin-top:3px; }
+.log-item-data { font-size:9px; color:var(--sub); margin-top:2px; }
+.log-vazio { text-align:center; color:var(--sub); padding:20px; font-size:12px; }
+
+/* ── LISTA ADMINS ────────────────────────────── */
+.admin-usuario-card { background:var(--cinza); border-radius:9px; padding:12px 14px; border:1px solid var(--borda); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+.admin-usuario-nome { font-size:13px; font-weight:600; }
+.admin-usuario-sub  { font-size:10px; color:var(--sub); margin-top:2px; }
+.admin-usuario-badge { background:var(--azul2); color:#fff; border-radius:20px; padding:2px 9px; font-size:10px; font-weight:600; }
+.admin-usuario-badge.principal { background:#16A34A; }
+.btn-remover-admin { background:#FEE2E2; color:#991B1B; border:none; border-radius:6px; padding:5px 10px; font-size:10px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
 
 /* ── TAB BAR (FUNDO) ────────────────────────── */
 .tab-bar {
@@ -300,13 +325,19 @@ html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { b
 .cal-dia.selecionado { background:var(--texto) !important; color:var(--bg-card) !important; }
 html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.selecionado { background:#fff !important; color:#000 !important; }
 .cal-dia.tem-oc { font-weight:700; }
+.cal-dia.passado { opacity:0.4; cursor:default; }
+.cal-bolinha-wrap { display:flex; gap:2px; }
 .cal-bolinha { width:4px; height:4px; border-radius:50%; background:var(--amarelo); flex-shrink:0; }
-.cal-dia.selecionado .cal-bolinha { background:rgba(255,255,255,0.7); }
+.cal-bolinha-ev { width:4px; height:4px; border-radius:50%; background:#8B5CF6; flex-shrink:0; }
+.cal-dia.selecionado .cal-bolinha,
+.cal-dia.selecionado .cal-bolinha-ev { background:rgba(255,255,255,0.7); }
 .cal-dia.tem-oc.resolvido-dia .cal-bolinha { background:var(--verde); }
 
 .cal-ocs-dia { border-top:1px solid var(--borda); }
 .cal-ocs-titulo { padding:12px 16px 8px; display:flex; align-items:center; justify-content:space-between; }
 .cal-ocs-titulo-txt { font-size:12px; font-weight:600; color:var(--sub); }
+.cal-ocs-cabecalho { display:flex; align-items:center; justify-content:space-between; padding:0 16px 8px; }
+.btn-add-evento { background:var(--azul2); color:#fff; border:none; border-radius:7px; padding:6px 12px; font-size:11px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
 .btn-dl-rel { background:var(--cinza); border:1px solid var(--borda); color:var(--sub); border-radius:7px; padding:5px 10px; font-size:10px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
 .cal-ocs-lista { padding:0 16px 14px; display:flex; flex-direction:column; gap:6px; }
 .cal-oc-item { background:var(--cinza); border-radius:8px; padding:9px 12px; border-left:3px solid var(--azul2); cursor:pointer; border:1px solid var(--borda); border-left:3px solid var(--azul2); }
@@ -315,6 +346,13 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 .cal-oc-item.s-pendente  { border-left-color:var(--badge-pendente-dot); }
 .cal-oc-item.s-acomp     { border-left-color:var(--badge-acomp-dot); }
 .cal-oc-item.s-resolvido { border-left-color:var(--badge-resolvido-dot); }
+.cal-oc-item.s-evento    { border-left-color:#8B5CF6; cursor:default; }
+.cal-oc-item-del { float:right; background:none; border:none; color:var(--sub); cursor:pointer; font-size:14px; padding:0 0 0 8px; }
+
+/* ABAS DO CALENDÁRIO */
+.cal-tipo-tabs { display:flex; gap:0; margin:0 16px 8px; background:var(--cinza); border-radius:8px; padding:2px; border:1px solid var(--borda); }
+.cal-tipo-tab { flex:1; padding:6px; border:none; background:transparent; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; color:var(--sub); cursor:pointer; border-radius:6px; transition:all .15s; }
+.cal-tipo-tab.ativo { background:var(--bg-card); color:var(--texto); }
 
 /* GRÁFICO */
 .chart-controls { padding:14px 16px 10px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; }
@@ -328,6 +366,25 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 .leg-item { display:flex; align-items:center; gap:5px; font-size:10px; font-weight:500; color:var(--sub); }
 .leg-dot  { width:7px; height:7px; border-radius:50%; }
 
+/* ── CONFIGURAÇÕES ─────────────────────────── */
+.config-wrap { padding:16px; display:flex; flex-direction:column; gap:10px; }
+.config-section { background:var(--bg-card); border-radius:var(--radius); border:1px solid var(--borda); overflow:hidden; }
+.config-section-titulo { font-size:10px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.6px; padding:12px 16px 6px; }
+.config-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--borda); cursor:pointer; transition:background .15s; }
+.config-item:last-child { border-bottom:none; }
+.config-item:active { background:var(--cinza); }
+.config-item-left { display:flex; align-items:center; gap:10px; }
+.config-item-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+.config-item-nome { font-size:13px; font-weight:500; color:var(--texto); }
+.config-item-sub  { font-size:11px; color:var(--sub); margin-top:1px; }
+.config-item-right { font-size:16px; color:var(--sub); }
+.config-toggle { width:40px; height:22px; border-radius:11px; background:var(--borda); border:none; cursor:pointer; position:relative; transition:background .2s; flex-shrink:0; }
+.config-toggle.on { background:var(--azul2); }
+.config-toggle::after { content:''; position:absolute; width:16px; height:16px; background:#fff; border-radius:50%; top:3px; left:3px; transition:transform .2s; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+.config-toggle.on::after { transform:translateX(18px); }
+.config-badge { background:var(--vermelho); color:#fff; border-radius:20px; padding:1px 7px; font-size:9px; font-weight:700; }
+.config-badge.verde { background:#16A34A; }
+
 /* ── MODAIS ─────────────────────────────────── */
 .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:500; align-items:flex-end; justify-content:center; padding:0; }
 .modal-bg.show { display:flex; }
@@ -335,6 +392,7 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
   background:var(--bg-card); border-radius:20px 20px 0 0; padding:24px 22px 32px;
   width:100%; max-width:430px; box-shadow:0 -8px 40px rgba(0,0,0,0.2); 
   animation:slideUp .25s ease; border-top:1px solid var(--borda);
+  max-height:85vh; overflow-y:auto;
 }
 @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 .modal-handle { width:36px; height:4px; background:var(--borda); border-radius:2px; margin:0 auto 20px; }
@@ -381,16 +439,14 @@ html[data-tema="black"] .toast { background:#222; }
 .tema-check { position:absolute; top:5px; right:6px; font-size:11px; opacity:0; transition:opacity .2s; }
 .tema-opcao.selecionado .tema-check { opacity:1; }
 
-/* ── EDITAR DATA ADMIN ──────────────────────── */
-.admin-data-edit { display:none; margin-top:10px; padding:10px 12px; background:var(--cinza); border-radius:8px; border:1px solid var(--borda); gap:8px; }
-.admin-data-edit.show { display:flex; flex-direction:column; }
-.btn-edit-dt { font-size:10px; color:var(--azul2); cursor:pointer; font-weight:600; background:none; border:none; font-family:'DM Sans',sans-serif; text-decoration:underline; padding:0; margin-top:4px; }
-
 /* ── ICONE EMOJI PICKER ─────────────────────── */
 .emoji-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; margin-top:8px; max-height:180px; overflow-y:auto; }
 .emoji-op { font-size:22px; border:1.5px solid var(--borda); border-radius:8px; padding:6px; cursor:pointer; text-align:center; background:var(--cinza); transition:border-color .15s; }
 .emoji-op.selecionado { border-color:var(--azul2); }
 .emoji-op:active { opacity:.6; }
+
+/* ── SENHA PLAIN VIEW ──────────────────────── */
+.senha-plain { font-family:monospace; font-size:13px; background:var(--cinza); padding:8px 12px; border-radius:7px; border:1px solid var(--borda); letter-spacing:1px; word-break:break-all; }
 </style>
 </head>
 <body>
@@ -410,8 +466,6 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
   <div class="header-right">
     <button class="btn-nova" id="btn-novo-global" onclick="irParaNovo()">+ Nova</button>
-    <button class="btn-icon" id="btn-tema" onclick="abrirModalTema()" title="Tema">☀️</button>
-    <button class="btn-icon" id="btn-admin" onclick="clicarAdmin()">🔐</button>
   </div>
 </div>
 
@@ -468,7 +522,11 @@ html[data-tema="black"] .toast { background:#222; }
             <span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span>
             <button class="btn-dl-rel" id="btn-dl-rel" onclick="baixarRelatorio()" style="display:none">⬇️ Relatório</button>
           </div>
-          <div class="cal-ocs-lista" id="cal-ocs-lista">
+          <div class="cal-tipo-tabs" id="cal-tipo-tabs" style="display:none">
+            <button class="cal-tipo-tab ativo" onclick="calMudarTipo('ocorrencias')" id="cal-tab-oc">📋 Ocorrências</button>
+            <button class="cal-tipo-tab" onclick="calMudarTipo('eventos')" id="cal-tab-ev">🗓️ Eventos</button>
+          </div>
+          <div id="cal-ocs-lista" class="cal-ocs-lista">
             <div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>
           </div>
         </div>
@@ -478,8 +536,7 @@ html[data-tema="black"] .toast { background:#222; }
       <div class="section-card">
         <div class="chart-controls">
           <div class="seg-btns" id="seg-periodo">
-            <button class="seg-btn ativo" onclick="setPeriodo('dia')" data-p="dia">Dia</button>
-            <button class="seg-btn" onclick="setPeriodo('semana')" data-p="semana">Semana</button>
+            <button class="seg-btn ativo" onclick="setPeriodo('semana')" data-p="semana">Semana</button>
             <button class="seg-btn" onclick="setPeriodo('mes')" data-p="mes">Mês</button>
             <button class="seg-btn" onclick="setPeriodo('ano')" data-p="ano">Ano</button>
           </div>
@@ -490,9 +547,9 @@ html[data-tema="black"] .toast { background:#222; }
         </div>
         <div class="chart-legend">
           <div class="leg-item"><div class="leg-dot" style="background:#F59E0B"></div>Pendente</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#3B82F6"></div>Acompan.</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#1D4ED8"></div>Acompan.</div>
           <div class="leg-item"><div class="leg-dot" style="background:#22C55E"></div>Resolvido</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#8B5CF6"></div>Total</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#6D28D9"></div>Total</div>
         </div>
       </div>
 
@@ -550,7 +607,6 @@ html[data-tema="black"] .toast { background:#222; }
         </div>
         <div class="form-group"><label>Professor *</label><input id="e-professor" type="text"></div>
         <div class="form-group"><label>Descrição *</label><textarea id="e-descricao"></textarea></div>
-        <!-- EDITAR DATA/HORA (admin) -->
         <div id="admin-dt-wrap" style="display:none">
           <div class="form-group">
             <label>Data e Hora da Ocorrência (Admin)</label>
@@ -573,45 +629,229 @@ html[data-tema="black"] .toast { background:#222; }
       <div class="form-card">
         <div class="form-header">
           <button class="btn-back" onclick="irParaLista()">← Voltar</button>
-          <div class="form-title">⚙️ Admin</div>
+          <div class="form-title">⚙️ Painel Admin</div>
         </div>
-        <div class="painel-secao">
-          <div class="painel-secao-titulo">🏫 Instituição</div>
-          <div class="form-group"><label>Nome exibido no cabeçalho</label><input type="text" id="p-nome-inst" placeholder="Nome da escola"></div>
-          <div class="erro-msg" id="erro-inst"></div><div class="sucesso-msg" id="sucesso-inst"></div>
-          <button class="btn-salvar btn-vermelho" onclick="alterarInstituicao()" style="font-size:12px;padding:10px">Salvar Nome</button>
+
+        <!-- ABAS ADMIN -->
+        <div class="admin-tabs">
+          <button class="admin-tab ativo" onclick="adminMudarAba('inst')" id="atab-inst">🏫 Inst.</button>
+          <button class="admin-tab" onclick="adminMudarAba('admins')" id="atab-admins">👥 Admins</button>
+          <button class="admin-tab" onclick="adminMudarAba('senha')" id="atab-senha">🔑 Senha</button>
+          <button class="admin-tab" onclick="adminMudarAba('log')" id="atab-log">📋 Log</button>
         </div>
-        <div class="painel-secao">
-          <div class="painel-secao-titulo">😀 Ícone do App</div>
-          <div class="form-group"><label>Ícone exibido ao lado do nome</label></div>
-          <div id="emoji-grid-painel" class="emoji-grid"></div>
-          <div class="sucesso-msg" id="sucesso-icone" style="margin-top:8px"></div>
-        </div>
-        <div class="painel-secao">
-          <div class="painel-secao-titulo">👤 Alterar Usuário</div>
-          <div class="form-group"><label>Novo Usuário</label><input type="text" id="p-novo-usuario" placeholder="Nome de usuário"></div>
-          <div class="form-group"><label>Senha Atual</label>
-            <div class="senha-wrap"><input type="password" id="p-conf-senha-usuario" placeholder="••••••"><button class="btn-olho" onclick="toggleOlho('p-conf-senha-usuario','olho-cu')" id="olho-cu">👁️</button></div>
+
+        <!-- TAB: INSTITUIÇÃO -->
+        <div class="admin-tabpanel ativo" id="apanel-inst">
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">🏫 Nome da Instituição</div>
+            <div class="form-group"><label>Nome exibido no cabeçalho</label><input type="text" id="p-nome-inst" placeholder="Nome da escola"></div>
+            <div class="erro-msg" id="erro-inst"></div><div class="sucesso-msg" id="sucesso-inst"></div>
+            <button class="btn-salvar btn-vermelho" onclick="alterarInstituicao()" style="font-size:12px;padding:10px">Salvar Nome</button>
           </div>
-          <div class="erro-msg" id="erro-usuario"></div><div class="sucesso-msg" id="sucesso-usuario"></div>
-          <button class="btn-salvar btn-vermelho" onclick="alterarUsuario()" style="font-size:12px;padding:10px">Salvar Usuário</button>
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">😀 Ícone do App</div>
+            <div id="emoji-grid-painel" class="emoji-grid"></div>
+            <div class="sucesso-msg" id="sucesso-icone" style="margin-top:8px"></div>
+          </div>
         </div>
-        <div class="painel-secao">
-          <div class="painel-secao-titulo">🔑 Alterar Senha</div>
-          <div class="form-group"><label>Senha Atual</label>
-            <div class="senha-wrap"><input type="password" id="p-senha-atual" placeholder="••••••"><button class="btn-olho" onclick="toggleOlho('p-senha-atual','olho-atual')" id="olho-atual">👁️</button></div>
+
+        <!-- TAB: ADMINS -->
+        <div class="admin-tabpanel" id="apanel-admins">
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">👥 Administradores Cadastrados</div>
+            <div id="lista-admins-container"><div class="loading"><div class="spinner"></div></div></div>
           </div>
-          <div class="form-group"><label>Nova Senha</label>
-            <div class="senha-wrap"><input type="password" id="p-senha-nova" placeholder="Mínimo 6 caracteres"><button class="btn-olho" onclick="toggleOlho('p-senha-nova','olho-nova')" id="olho-nova">👁️</button></div>
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">➕ Adicionar Novo Admin</div>
+            <div class="form-group"><label>Usuário</label><input type="text" id="novo-admin-usuario" placeholder="Nome de usuário"></div>
+            <div class="form-group"><label>Senha</label>
+              <div class="senha-wrap"><input type="password" id="novo-admin-senha" placeholder="Mínimo 6 caracteres"><button class="btn-olho" onclick="toggleOlho('novo-admin-senha','olho-nas')" id="olho-nas">👁️</button></div>
+            </div>
+            <div class="form-group"><label>Tipo</label>
+              <select id="novo-admin-tipo">
+                <option value="admin">Admin</option>
+                <option value="principal">Principal (pode tudo)</option>
+              </select>
+            </div>
+            <div class="erro-msg" id="erro-novo-admin"></div>
+            <div class="sucesso-msg" id="sucesso-novo-admin"></div>
+            <button class="btn-salvar btn-vermelho" onclick="adicionarAdmin()" style="font-size:12px;padding:10px">Adicionar Admin</button>
           </div>
-          <div class="form-group"><label>Confirmar Nova Senha</label>
-            <div class="senha-wrap"><input type="password" id="p-senha-conf" placeholder="Repita"><button class="btn-olho" onclick="toggleOlho('p-senha-conf','olho-conf')" id="olho-conf">👁️</button></div>
-          </div>
-          <div class="erro-msg" id="painel-erro"></div><div class="sucesso-msg" id="painel-sucesso"></div>
-          <button class="btn-salvar btn-vermelho" onclick="alterarSenha()" style="font-size:12px;padding:10px">Salvar Senha</button>
         </div>
-        <div style="font-size:11px;color:var(--sub);text-align:center;padding-top:4px">Para sair, toque no ícone 🔐 no topo</div>
+
+        <!-- TAB: SENHA (admin logado) -->
+        <div class="admin-tabpanel" id="apanel-senha">
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">👤 Alterar Meu Usuário</div>
+            <div class="form-group"><label>Novo Usuário</label><input type="text" id="p-novo-usuario" placeholder="Nome de usuário"></div>
+            <div class="form-group"><label>Senha Atual (confirmação)</label>
+              <div class="senha-wrap"><input type="password" id="p-conf-senha-usuario" placeholder="••••••"><button class="btn-olho" onclick="toggleOlho('p-conf-senha-usuario','olho-cu')" id="olho-cu">👁️</button></div>
+            </div>
+            <div class="erro-msg" id="erro-usuario"></div><div class="sucesso-msg" id="sucesso-usuario"></div>
+            <button class="btn-salvar btn-vermelho" onclick="alterarUsuario()" style="font-size:12px;padding:10px">Salvar Usuário</button>
+          </div>
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">🔑 Alterar Minha Senha</div>
+            <div class="form-group"><label>Senha Atual</label>
+              <div class="senha-wrap"><input type="password" id="p-senha-atual" placeholder="••••••"><button class="btn-olho" onclick="toggleOlho('p-senha-atual','olho-atual')" id="olho-atual">👁️</button></div>
+            </div>
+            <div class="form-group"><label>Nova Senha</label>
+              <div class="senha-wrap"><input type="password" id="p-senha-nova" placeholder="Mínimo 6 caracteres"><button class="btn-olho" onclick="toggleOlho('p-senha-nova','olho-nova')" id="olho-nova">👁️</button></div>
+            </div>
+            <div class="form-group"><label>Confirmar Nova Senha</label>
+              <div class="senha-wrap"><input type="password" id="p-senha-conf" placeholder="Repita"><button class="btn-olho" onclick="toggleOlho('p-senha-conf','olho-conf')" id="olho-conf">👁️</button></div>
+            </div>
+            <div class="erro-msg" id="painel-erro"></div><div class="sucesso-msg" id="painel-sucesso"></div>
+            <button class="btn-salvar btn-vermelho" onclick="alterarSenha()" style="font-size:12px;padding:10px">Salvar Senha</button>
+          </div>
+        </div>
+
+        <!-- TAB: LOG DE AÇÕES -->
+        <div class="admin-tabpanel" id="apanel-log">
+          <div class="painel-secao">
+            <div class="painel-secao-titulo">📋 Registro de Ações Admin</div>
+            <div id="log-container"><div class="loading"><div class="spinner"></div></div></div>
+          </div>
+        </div>
+
+        <div style="font-size:11px;color:var(--sub);text-align:center;padding-top:4px">Para sair do admin, vá em Configurações</div>
       </div>
+    </div>
+  </div>
+
+  <!-- ──── CONFIGURAÇÕES ──── -->
+  <div class="view" id="view-config">
+    <div class="config-wrap">
+
+      <!-- TEMA -->
+      <div class="config-section">
+        <div class="config-section-titulo">Aparência</div>
+        <div class="config-item" onclick="abrirModalTema()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#EFF6FF">🎨</div>
+            <div>
+              <div class="config-item-nome">Tema do App</div>
+              <div class="config-item-sub" id="config-tema-atual">Claro</div>
+            </div>
+          </div>
+          <div class="config-item-right">›</div>
+        </div>
+      </div>
+
+      <!-- PROFESSOR -->
+      <div class="config-section">
+        <div class="config-section-titulo">Meu Perfil</div>
+        <div class="config-item" onclick="abrirModalNomeProfessor()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#F0FDF4">👩‍🏫</div>
+            <div>
+              <div class="config-item-nome">Meu Nome</div>
+              <div class="config-item-sub" id="config-prof-nome">Não definido</div>
+            </div>
+          </div>
+          <div class="config-item-right">›</div>
+        </div>
+        <div class="config-item" onclick="abrirModalTurmaPadrao()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#FFFBEB">🏷️</div>
+            <div>
+              <div class="config-item-nome">Turma Padrão</div>
+              <div class="config-item-sub" id="config-turma-padrao">Não definida</div>
+            </div>
+          </div>
+          <div class="config-item-right">›</div>
+        </div>
+      </div>
+
+      <!-- ACESSO -->
+      <div class="config-section">
+        <div class="config-section-titulo">Acesso</div>
+        <div class="config-item" id="config-admin-item" onclick="clicarAdmin()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#FEF2F2" id="config-admin-icon-bg">🔐</div>
+            <div>
+              <div class="config-item-nome">Modo Admin</div>
+              <div class="config-item-sub" id="config-admin-sub">Toque para entrar</div>
+            </div>
+          </div>
+          <div class="config-item-right" id="config-admin-badge-wrap"></div>
+        </div>
+        <div class="config-item" id="config-painel-item" style="display:none" onclick="irParaPainel()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#EFF6FF">⚙️</div>
+            <div>
+              <div class="config-item-nome">Painel Admin</div>
+              <div class="config-item-sub">Configurações avançadas</div>
+            </div>
+          </div>
+          <div class="config-item-right">›</div>
+        </div>
+      </div>
+
+      <!-- NOTIFICAÇÕES -->
+      <div class="config-section">
+        <div class="config-section-titulo">Preferências</div>
+        <div class="config-item">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#F5F3FF">🔔</div>
+            <div>
+              <div class="config-item-nome">Sons de Notificação</div>
+              <div class="config-item-sub">Feedback ao salvar</div>
+            </div>
+          </div>
+          <button class="config-toggle" id="toggle-sons" onclick="toggleSons()"></button>
+        </div>
+        <div class="config-item">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#ECFDF5">💾</div>
+            <div>
+              <div class="config-item-nome">Salvar Rascunho</div>
+              <div class="config-item-sub">Manter preenchimento ao sair</div>
+            </div>
+          </div>
+          <button class="config-toggle on" id="toggle-rascunho" onclick="toggleRascunho()"></button>
+        </div>
+      </div>
+
+      <!-- DADOS OFFLINE -->
+      <div class="config-section">
+        <div class="config-section-titulo">Dados & Sincronização</div>
+        <div class="config-item" onclick="tentarSyncFila()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#FFFBEB">⟳</div>
+            <div>
+              <div class="config-item-nome">Sincronizar Agora</div>
+              <div class="config-item-sub" id="config-sync-sub">Enviar ocorrências pendentes</div>
+            </div>
+          </div>
+          <div class="config-item-right">›</div>
+        </div>
+        <div class="config-item" onclick="limparRascunho()">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#FEF2F2">🗑️</div>
+            <div>
+              <div class="config-item-nome">Limpar Dados Locais</div>
+              <div class="config-item-sub">Remove rascunhos e cache local</div>
+            </div>
+          </div>
+          <div class="config-item-right">›</div>
+        </div>
+      </div>
+
+      <!-- SOBRE -->
+      <div class="config-section">
+        <div class="config-section-titulo">Sobre</div>
+        <div class="config-item">
+          <div class="config-item-left">
+            <div class="config-item-icon" style="background:#EFF6FF">ℹ️</div>
+            <div>
+              <div class="config-item-nome">CETI — Gestão de Ocorrências</div>
+              <div class="config-item-sub">Versão 2.0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -624,6 +864,9 @@ html[data-tema="black"] .toast { background:#222; }
   </button>
   <button class="tab-btn" id="tab-analytics" onclick="mudarAba('analytics')">
     <span class="tab-btn-icon">📊</span>Análises
+  </button>
+  <button class="tab-btn" id="tab-config" onclick="mudarAba('config')">
+    <span class="tab-btn-icon">⚙️</span>Config.
   </button>
 </div>
 
@@ -701,6 +944,51 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
 </div>
 
+<!-- MODAL NOME PROFESSOR -->
+<div class="modal-bg" id="modal-nome-prof">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Meu Nome</h3>
+    <p>Será preenchido automaticamente ao criar ocorrências</p>
+    <div class="form-group"><label>Seu nome completo</label><input type="text" id="input-nome-prof" placeholder="Ex: Prof. João Silva"></div>
+    <div class="modal-btns">
+      <button class="btn-cancelar" onclick="fecharModal('modal-nome-prof')">Cancelar</button>
+      <button class="btn-confirmar" style="background:var(--azul2)" onclick="salvarNomeProfessor()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TURMA PADRÃO -->
+<div class="modal-bg" id="modal-turma-padrao">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Turma Padrão</h3>
+    <p>Será preenchida automaticamente ao criar ocorrências</p>
+    <div class="form-group"><label>Turma</label><input type="text" id="input-turma-padrao" placeholder="Ex: 3A, 2B..."></div>
+    <div class="modal-btns">
+      <button class="btn-cancelar" onclick="fecharModal('modal-turma-padrao')">Cancelar</button>
+      <button class="btn-confirmar" style="background:var(--azul2)" onclick="salvarTurmaPadrao()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVO EVENTO -->
+<div class="modal-bg" id="modal-novo-evento">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>Novo Evento</h3>
+    <p id="modal-evento-data-txt">—</p>
+    <div class="form-group"><label>Título do Evento *</label><input type="text" id="evento-titulo" placeholder="Ex: Reunião de pais, Conselho de classe..."></div>
+    <div class="form-group"><label>Horário</label><input type="text" id="evento-hora" placeholder="Ex: 09:00 – 11:00"></div>
+    <div class="form-group"><label>Observação</label><textarea id="evento-obs" style="min-height:60px" placeholder="Detalhes opcionais..."></textarea></div>
+    <div class="erro-msg" id="evento-erro"></div>
+    <div class="modal-btns">
+      <button class="btn-cancelar" onclick="fecharModal('modal-novo-evento')">Cancelar</button>
+      <button class="btn-confirmar" style="background:var(--azul2)" onclick="salvarEvento()">Salvar</button>
+    </div>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getDatabase, ref, push, update, remove, onValue, get, set }
@@ -717,745 +1005,1066 @@ const firebaseConfig = {
   measurementId: "G-SC442ZNRBK"
 };
 
-const app   = initializeApp(firebaseConfig);
-const db    = getDatabase(app);
-const ocRef = ref(db, 'ocorrencias');
+const app    = initializeApp(firebaseConfig);
+const db     = getDatabase(app);
+const ocRef  = ref(db, 'ocorrencias');
+const evRef  = ref(db, 'eventos');
+const admRef = ref(db, 'administradores');
+const logRef = ref(db, 'admin_log');
 
-// ── SHA-256 ──────────────────────────────────────────────────────────────────
-async function sha256(texto) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(texto));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-async function garantirCredenciaisIniciais() {
-  const snap = await get(ref(db,'admin_config'));
+// ── Garantir estrutura inicial ───────────────────────────────────────────────
+async function garantirEstrutura() {
+  const snap = await get(ref(db,'administradores'));
   if (!snap.exists()) {
-    const hash = await sha256('Bra2407');
-    await set(ref(db,'admin_config'),{usuario:'Messi',senha_hash:hash});
+    // Criar admin principal padrão (senha em texto claro no Firebase)
+    await set(ref(db,'administradores'), {
+      principal: {
+        usuario: 'Messi',
+        senha: 'Bra2407',
+        tipo: 'principal',
+        criadoEm: new Date().toISOString()
+      }
+    });
+    // Remover config antiga se existir
+    await set(ref(db,'admin_config/usuario'), null);
+    await set(ref(db,'admin_config/senha_hash'), null);
   }
 }
-garantirCredenciaisIniciais().catch(()=>{});
+garantirEstrutura().catch(console.error);
 
-onValue(ref(db,'admin_config/nome_instituicao'),function(snap){
-  var nome=snap.val()||'Minha Instituição';
-  document.getElementById('header-nome-inst').textContent=nome;
-  document.title=nome;
+// ── Listeners Firebase ───────────────────────────────────────────────────────
+onValue(ref(db,'admin_config/nome_instituicao'), snap => {
+  const nome = snap.val() || 'Minha Instituição';
+  document.getElementById('header-nome-inst').textContent = nome;
+  document.title = nome;
 });
 
-onValue(ref(db,'admin_config/icone_logo'),function(snap){
-  var icone=snap.val()||'🏫';
-  document.getElementById('icone-logo').textContent=icone;
-  window._iconeAtual=icone;
-  // Atualiza selecionado nos grids de emoji
-  document.querySelectorAll('.emoji-op').forEach(function(el){
-    el.classList.toggle('selecionado',el.dataset.emoji===icone);
+onValue(ref(db,'admin_config/icone_logo'), snap => {
+  const icone = snap.val() || '🏫';
+  document.getElementById('icone-logo').textContent = icone;
+  window._iconeAtual = icone;
+  document.querySelectorAll('.emoji-op').forEach(el => {
+    el.classList.toggle('selecionado', el.dataset.emoji === icone);
   });
 });
+
+onValue(ocRef, snapshot => {
+  const lista = [];
+  snapshot.forEach(child => lista.push(Object.assign({firebaseKey: child.key}, child.val())));
+  lista.reverse();
+  window._ocs = lista;
+  renderLista(); renderCalendario(); renderChart();
+});
+
+onValue(evRef, snapshot => {
+  const lista = [];
+  snapshot.forEach(child => lista.push(Object.assign({firebaseKey: child.key}, child.val())));
+  window._eventos = lista;
+  renderCalendario();
+  if (window._diaSel) renderOcsDia(window._diaSel);
+});
+
+onValue(admRef, snapshot => {
+  window._admins = snapshot.val() || {};
+  if (document.getElementById('apanel-admins').classList.contains('ativo')) renderListaAdmins();
+});
+
+onValue(logRef, snapshot => {
+  const lista = [];
+  snapshot.forEach(child => lista.push(Object.assign({key: child.key}, child.val())));
+  lista.reverse();
+  window._logs = lista;
+  if (document.getElementById('apanel-log').classList.contains('ativo')) renderLog();
+});
+
+// ── Registrar ação no log ────────────────────────────────────────────────────
+async function registrarLog(acao, detalhe) {
+  try {
+    await push(logRef, {
+      acao,
+      detalhe: detalhe || '',
+      admin: window._adminUsuario || '?',
+      timestamp: Date.now(),
+      data: new Date().toLocaleDateString('pt-BR'),
+      hora: new Date().toTimeString().slice(0,5)
+    });
+  } catch(e) { console.warn('Log error', e); }
+}
+window._registrarLog = registrarLog;
 
 // ═══════════════════════════════════
 //  TEMA
 // ═══════════════════════════════════
-var TEMAS={claro:{icon:'☀️'},escuro:{icon:'🌙'},black:{icon:'⚫'}};
-function aplicarTema(t){
-  document.documentElement.setAttribute('data-tema',t);
-  localStorage.setItem('ceti_tema',t);
-  document.getElementById('btn-tema').textContent=TEMAS[t]?TEMAS[t].icon:'☀️';
-  ['claro','escuro','black'].forEach(function(k){
-    var el=document.getElementById('tema-op-'+k);
-    if(el) el.classList.toggle('selecionado',k===t);
+const TEMAS = {claro:{icon:'☀️',nome:'Claro'}, escuro:{icon:'🌙',nome:'Escuro'}, black:{icon:'⚫',nome:'Black'}};
+function aplicarTema(t) {
+  document.documentElement.setAttribute('data-tema', t);
+  localStorage.setItem('ceti_tema', t);
+  ['claro','escuro','black'].forEach(k => {
+    const el = document.getElementById('tema-op-'+k);
+    if (el) el.classList.toggle('selecionado', k === t);
   });
-  if(window._chartInst){window._chartInst.destroy();window._chartInst=null;}
+  const nomeEl = document.getElementById('config-tema-atual');
+  if (nomeEl) nomeEl.textContent = TEMAS[t] ? TEMAS[t].nome : 'Claro';
+  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
   renderChart();
 }
-(function(){var t=localStorage.getItem('ceti_tema')||'claro';aplicarTema(t);})();
+(function(){ const t = localStorage.getItem('ceti_tema') || 'claro'; aplicarTema(t); })();
 
-window.abrirModalTema=function(){
-  var atual=localStorage.getItem('ceti_tema')||'claro';aplicarTema(atual);
+window.abrirModalTema = function() {
+  const atual = localStorage.getItem('ceti_tema') || 'claro'; aplicarTema(atual);
   document.getElementById('modal-tema').classList.add('show');
 };
-window.fecharModalTema=function(){document.getElementById('modal-tema').classList.remove('show');};
-window.selecionarTema=function(t){aplicarTema(t);mostrarToast(TEMAS[t].icon+' Tema ativado');setTimeout(fecharModalTema,500);};
+window.fecharModalTema = function() { document.getElementById('modal-tema').classList.remove('show'); };
+window.selecionarTema = function(t) {
+  aplicarTema(t); mostrarToast(TEMAS[t].icon+' Tema ativado');
+  setTimeout(fecharModalTema, 500);
+};
 
 // ═══════════════════════════════════
 //  ÍCONE
 // ═══════════════════════════════════
-var EMOJIS = ['🏫','🎓','📚','✏️','🔬','🧪','🎨','🖥️','📐','📏','🏛️','🌟','🎯','💡','📖','🔭','🧬','⚗️','🎭','🏆','🌍','🤝','👩‍🏫','👨‍🏫','📝','🔐','🏠','🌱','🎪','🔷'];
+const EMOJIS = ['🏫','🎓','📚','✏️','🔬','🧪','🎨','🖥️','📐','📏','🏛️','🌟','🎯','💡','📖','🔭','🧬','⚗️','🎭','🏆','🌍','🤝','👩‍🏫','👨‍🏫','📝','🔐','🏠','🌱','🎪','🔷'];
 
-function popularEmojiGrid(containerId){
-  var iconeAtual=window._iconeAtual||'🏫';
-  var html=EMOJIS.map(function(e){
-    return '<div class="emoji-op'+(e===iconeAtual?' selecionado':'')+'" data-emoji="'+e+'" onclick="selecionarIcone(\''+e+'\')">'+ e+'</div>';
-  }).join('');
-  var el=document.getElementById(containerId);
-  if(el) el.innerHTML=html;
+function popularEmojiGrid(containerId) {
+  const iconeAtual = window._iconeAtual || '🏫';
+  const html = EMOJIS.map(e =>
+    `<div class="emoji-op${e===iconeAtual?' selecionado':''}" data-emoji="${e}" onclick="selecionarIcone('${e}')">${e}</div>`
+  ).join('');
+  const el = document.getElementById(containerId);
+  if (el) el.innerHTML = html;
 }
 
-window._iconeAtual='🏫';
-window.abrirModalIcone=function(){
-  popularEmojiGrid('emoji-grid-modal');
-  document.getElementById('modal-icone').classList.add('show');
-};
-window.fecharModalIcone=function(){document.getElementById('modal-icone').classList.remove('show');};
-window.selecionarIcone=async function(emoji){
-  try{
-    await update(ref(db,'admin_config'),{icone_logo:emoji});
+window._iconeAtual = '🏫';
+window.abrirModalIcone = function() { popularEmojiGrid('emoji-grid-modal'); document.getElementById('modal-icone').classList.add('show'); };
+window.fecharModalIcone = function() { document.getElementById('modal-icone').classList.remove('show'); };
+window.selecionarIcone = async function(emoji) {
+  try {
+    await update(ref(db,'admin_config'), {icone_logo: emoji});
+    await registrarLog('Ícone alterado', `Novo ícone: ${emoji}`);
     mostrarToast(emoji+' Ícone atualizado!');
-    document.getElementById('sucesso-icone').textContent='✓ Ícone salvo!';
-    document.getElementById('sucesso-icone').classList.add('show');
-    setTimeout(function(){document.getElementById('sucesso-icone').classList.remove('show');},2000);
-    setTimeout(fecharModalIcone,400);
-  }catch(e){mostrarToast('Erro: '+e.message);}
+    const sucEl = document.getElementById('sucesso-icone');
+    if (sucEl) { sucEl.textContent = '✓ Ícone salvo!'; sucEl.classList.add('show'); setTimeout(() => sucEl.classList.remove('show'), 2000); }
+    setTimeout(fecharModalIcone, 400);
+  } catch(e) { mostrarToast('Erro: '+e.message); }
 };
 
-window.alterarInstituicao=async function(){
-  var novoNome=document.getElementById('p-nome-inst').value.trim();
-  var erroEl=document.getElementById('erro-inst'),sucEl=document.getElementById('sucesso-inst');
-  erroEl.classList.remove('show');sucEl.classList.remove('show');
-  if(!novoNome){erroEl.textContent='❌ Informe o nome.';erroEl.classList.add('show');return;}
-  try{
-    await update(ref(db,'admin_config'),{nome_instituicao:novoNome});
-    sucEl.textContent='✅ Nome atualizado!';sucEl.classList.add('show');
-    document.getElementById('p-nome-inst').value='';mostrarToast('✓ Nome salvo!');
-  }catch(e){erroEl.textContent='❌ '+e.message;erroEl.classList.add('show');}
+window.alterarInstituicao = async function() {
+  const novoNome = document.getElementById('p-nome-inst').value.trim();
+  const erroEl = document.getElementById('erro-inst'), sucEl = document.getElementById('sucesso-inst');
+  erroEl.classList.remove('show'); sucEl.classList.remove('show');
+  if (!novoNome) { erroEl.textContent = '❌ Informe o nome.'; erroEl.classList.add('show'); return; }
+  try {
+    await update(ref(db,'admin_config'), {nome_instituicao: novoNome});
+    await registrarLog('Nome da instituição alterado', `Novo nome: "${novoNome}"`);
+    sucEl.textContent = '✅ Nome atualizado!'; sucEl.classList.add('show');
+    document.getElementById('p-nome-inst').value = ''; mostrarToast('✓ Nome salvo!');
+  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
+};
+
+// ═══════════════════════════════════
+//  ADMINS
+// ═══════════════════════════════════
+window.renderListaAdmins = function() {
+  const admins = window._admins || {};
+  const container = document.getElementById('lista-admins-container');
+  if (!container) return;
+  const keys = Object.keys(admins);
+  if (!keys.length) { container.innerHTML = '<div class="log-vazio">Nenhum admin cadastrado</div>'; return; }
+  container.innerHTML = keys.map(k => {
+    const a = admins[k];
+    const isPrincipal = a.tipo === 'principal';
+    const isSelf = a.usuario === window._adminUsuario;
+    return `<div class="admin-usuario-card">
+      <div>
+        <div class="admin-usuario-nome">${a.usuario}</div>
+        <div class="admin-usuario-sub">Senha: <span class="senha-plain" style="display:inline;padding:2px 6px;font-size:11px">${a.senha}</span></div>
+        <div class="admin-usuario-sub" style="margin-top:2px">${a.criadoEm ? 'Criado: '+new Date(a.criadoEm).toLocaleDateString('pt-BR') : ''}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+        <span class="admin-usuario-badge ${isPrincipal?'principal':''}">${isPrincipal?'Principal':'Admin'}</span>
+        ${(!isPrincipal && !isSelf) ? `<button class="btn-remover-admin" onclick="removerAdmin('${k}','${a.usuario}')">Remover</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+};
+
+window.adicionarAdmin = async function() {
+  const usuario = document.getElementById('novo-admin-usuario').value.trim();
+  const senha = document.getElementById('novo-admin-senha').value;
+  const tipo = document.getElementById('novo-admin-tipo').value;
+  const erroEl = document.getElementById('erro-novo-admin');
+  const sucEl = document.getElementById('sucesso-novo-admin');
+  erroEl.classList.remove('show'); sucEl.classList.remove('show');
+  if (!usuario) { erroEl.textContent = '❌ Informe o usuário.'; erroEl.classList.add('show'); return; }
+  if (senha.length < 6) { erroEl.textContent = '❌ Senha mínimo 6 caracteres.'; erroEl.classList.add('show'); return; }
+  // Verificar duplicado
+  const admins = window._admins || {};
+  const jaExiste = Object.values(admins).some(a => a.usuario === usuario);
+  if (jaExiste) { erroEl.textContent = '❌ Usuário já existe.'; erroEl.classList.add('show'); return; }
+  try {
+    const novoId = 'admin_' + Date.now();
+    await set(ref(db, 'administradores/'+novoId), {
+      usuario, senha, tipo, criadoEm: new Date().toISOString(), criadoPor: window._adminUsuario
+    });
+    await registrarLog('Admin adicionado', `Novo admin: "${usuario}" (${tipo})`);
+    sucEl.textContent = '✅ Admin adicionado!'; sucEl.classList.add('show');
+    document.getElementById('novo-admin-usuario').value = '';
+    document.getElementById('novo-admin-senha').value = '';
+    mostrarToast('✓ Admin criado!');
+  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
+};
+
+window.removerAdmin = async function(key, usuario) {
+  if (!confirm(`Remover admin "${usuario}"?`)) return;
+  try {
+    await remove(ref(db, 'administradores/'+key));
+    await registrarLog('Admin removido', `Admin removido: "${usuario}"`);
+    mostrarToast('🗑️ Admin removido!');
+  } catch(e) { mostrarToast('Erro: '+e.message); }
+};
+
+// ═══════════════════════════════════
+//  LOG
+// ═══════════════════════════════════
+window.renderLog = function() {
+  const container = document.getElementById('log-container');
+  if (!container) return;
+  const logs = window._logs || [];
+  if (!logs.length) { container.innerHTML = '<div class="log-vazio">Nenhuma ação registrada</div>'; return; }
+  container.innerHTML = logs.slice(0, 50).map(l =>
+    `<div class="log-item">
+      <div class="log-item-topo">
+        <span class="log-item-acao">${l.acao}</span>
+        <span class="log-item-quem">${l.admin}</span>
+      </div>
+      ${l.detalhe ? `<div class="log-item-detalhe">${l.detalhe}</div>` : ''}
+      <div class="log-item-data">${l.data} às ${l.hora}</div>
+    </div>`
+  ).join('');
+};
+
+// ═══════════════════════════════════
+//  LOGIN
+// ═══════════════════════════════════
+window.confirmarLogin = async function() {
+  const usuario = document.getElementById('login-usuario').value.trim();
+  const senha = document.getElementById('login-senha').value;
+  const erroEl = document.getElementById('login-erro'), loadEl = document.getElementById('login-loading'), btnEl = document.getElementById('btn-entrar');
+  if (!usuario || !senha) { erroEl.textContent = '❌ Preencha usuário e senha.'; erroEl.classList.add('show'); return; }
+  erroEl.classList.remove('show'); loadEl.classList.add('show'); btnEl.disabled = true;
+  try {
+    const snap = await get(ref(db,'administradores'));
+    if (!snap.exists()) throw new Error('Nenhum admin configurado.');
+    const admins = snap.val();
+    let adminEncontrado = null, adminKey = null;
+    for (const [k, a] of Object.entries(admins)) {
+      if (a.usuario === usuario && a.senha === senha) { adminEncontrado = a; adminKey = k; break; }
+    }
+    if (adminEncontrado) {
+      window._adminAtivo = true;
+      window._adminUsuario = usuario;
+      window._adminTipo = adminEncontrado.tipo;
+      window._adminKey = adminKey;
+      document.getElementById('modal-login').classList.remove('show');
+      document.getElementById('admin-banner').classList.add('show');
+      document.getElementById('admin-user-badge').textContent = usuario;
+      document.getElementById('logo-btn').title = 'Clique para alterar ícone';
+      atualizarUIAdmin(true);
+      renderLista();
+      mostrarToast('✓ Bem-vindo, '+usuario+'!');
+      await registrarLog('Login', `Admin "${usuario}" entrou no sistema`);
+    } else {
+      erroEl.textContent = '❌ Usuário ou senha incorretos.'; erroEl.classList.add('show');
+      document.getElementById('login-senha').value = ''; document.getElementById('login-senha').focus();
+    }
+  } catch(e) { erroEl.textContent = '❌ Erro: '+e.message; erroEl.classList.add('show'); }
+  loadEl.classList.remove('show'); btnEl.disabled = false;
+};
+
+function atualizarUIAdmin(ativo) {
+  const subEl = document.getElementById('config-admin-sub');
+  const painelItem = document.getElementById('config-painel-item');
+  const badgeWrap = document.getElementById('config-admin-badge-wrap');
+  if (ativo) {
+    if (subEl) subEl.textContent = 'Ativo: '+window._adminUsuario;
+    if (painelItem) painelItem.style.display = '';
+    if (badgeWrap) badgeWrap.innerHTML = '<span class="config-badge verde">Ativo</span>';
+    document.getElementById('admin-banner').classList.add('show');
+  } else {
+    if (subEl) subEl.textContent = 'Toque para entrar';
+    if (painelItem) painelItem.style.display = 'none';
+    if (badgeWrap) badgeWrap.innerHTML = '';
+    document.getElementById('admin-banner').classList.remove('show');
+  }
+}
+
+window.fecharModalLogin = function() { document.getElementById('modal-login').classList.remove('show'); };
+
+window.alterarUsuario = async function() {
+  const novoUsuario = document.getElementById('p-novo-usuario').value.trim();
+  const senhaConf = document.getElementById('p-conf-senha-usuario').value;
+  const erroEl = document.getElementById('erro-usuario'), sucEl = document.getElementById('sucesso-usuario');
+  erroEl.classList.remove('show'); sucEl.classList.remove('show');
+  if (!novoUsuario) { erroEl.textContent = '❌ Informe o novo usuário.'; erroEl.classList.add('show'); return; }
+  if (!senhaConf) { erroEl.textContent = '❌ Confirme sua senha.'; erroEl.classList.add('show'); return; }
+  const admins = window._admins || {};
+  const myAdmin = admins[window._adminKey];
+  if (!myAdmin || myAdmin.senha !== senhaConf) { erroEl.textContent = '❌ Senha incorreta.'; erroEl.classList.add('show'); return; }
+  try {
+    await update(ref(db, 'administradores/'+window._adminKey), {usuario: novoUsuario});
+    await registrarLog('Usuário admin alterado', `De "${window._adminUsuario}" para "${novoUsuario}"`);
+    window._adminUsuario = novoUsuario;
+    document.getElementById('admin-user-badge').textContent = novoUsuario;
+    atualizarUIAdmin(true);
+    sucEl.textContent = '✅ Usuário alterado!'; sucEl.classList.add('show');
+    document.getElementById('p-novo-usuario').value = ''; document.getElementById('p-conf-senha-usuario').value = '';
+    mostrarToast('✓ Usuário atualizado!');
+  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
+};
+
+window.alterarSenha = async function() {
+  const atual = document.getElementById('p-senha-atual').value;
+  const nova = document.getElementById('p-senha-nova').value;
+  const conf = document.getElementById('p-senha-conf').value;
+  const erroEl = document.getElementById('painel-erro'), sucEl = document.getElementById('painel-sucesso');
+  erroEl.classList.remove('show'); sucEl.classList.remove('show');
+  if (!atual || !nova || !conf) { erroEl.textContent = '❌ Preencha todos os campos.'; erroEl.classList.add('show'); return; }
+  if (nova.length < 6) { erroEl.textContent = '❌ Mínimo 6 caracteres.'; erroEl.classList.add('show'); return; }
+  if (nova !== conf) { erroEl.textContent = '❌ Senhas não coincidem.'; erroEl.classList.add('show'); return; }
+  const admins = window._admins || {};
+  const myAdmin = admins[window._adminKey];
+  if (!myAdmin || myAdmin.senha !== atual) { erroEl.textContent = '❌ Senha atual incorreta.'; erroEl.classList.add('show'); return; }
+  try {
+    await update(ref(db, 'administradores/'+window._adminKey), {senha: nova});
+    await registrarLog('Senha alterada', `Admin "${window._adminUsuario}" alterou sua senha`);
+    sucEl.textContent = '✅ Senha alterada!'; sucEl.classList.add('show');
+    ['p-senha-atual','p-senha-nova','p-senha-conf'].forEach(id => document.getElementById(id).value = '');
+    mostrarToast('✓ Senha atualizada!');
+  } catch(e) { erroEl.textContent = '❌ '+e.message; erroEl.classList.add('show'); }
 };
 
 // ═══════════════════════════════════
 //  FILA OFFLINE
 // ═══════════════════════════════════
-var FILA_KEY='ceti_fila_offline';
-function lerFila(){try{return JSON.parse(localStorage.getItem(FILA_KEY)||'[]');}catch(e){return[];}}
-function salvarFila(fila){localStorage.setItem(FILA_KEY,JSON.stringify(fila));}
-function adicionarNaFila(dados){
-  var fila=lerFila();
-  var id='local_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
-  fila.push(Object.assign({},dados,{_localId:id}));
-  salvarFila(fila);atualizarBannerFila();return id;
+const FILA_KEY = 'ceti_fila_offline';
+function lerFila() { try { return JSON.parse(localStorage.getItem(FILA_KEY) || '[]'); } catch(e) { return []; } }
+function salvarFila(fila) { localStorage.setItem(FILA_KEY, JSON.stringify(fila)); }
+function adicionarNaFila(dados) {
+  const fila = lerFila();
+  const id = 'local_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+  fila.push(Object.assign({}, dados, {_localId: id}));
+  salvarFila(fila); atualizarBannerFila(); return id;
 }
-function removerDaFila(localId){
-  var fila=lerFila().filter(function(x){return x._localId!==localId;});
-  salvarFila(fila);atualizarBannerFila();
-}
-function atualizarBannerFila(){
-  var fila=lerFila();
-  var banner=document.getElementById('fila-banner'),txt=document.getElementById('fila-txt');
-  if(fila.length>0){txt.textContent='📦 '+fila.length+' aguardando envio';banner.classList.add('show');}
-  else{banner.classList.remove('show');}
+function removerDaFila(localId) { salvarFila(lerFila().filter(x => x._localId !== localId)); atualizarBannerFila(); }
+function atualizarBannerFila() {
+  const fila = lerFila();
+  const banner = document.getElementById('fila-banner'), txt = document.getElementById('fila-txt');
+  if (fila.length > 0) { txt.textContent = '📦 '+fila.length+' aguardando envio'; banner.classList.add('show'); }
+  else banner.classList.remove('show');
+  const sub = document.getElementById('config-sync-sub');
+  if (sub) sub.textContent = fila.length > 0 ? fila.length+' pendente(s)' : 'Tudo sincronizado';
 }
 
-window.tentarSyncFila=async function(){
-  var fila=lerFila();if(!fila.length)return;
-  var enviados=0;
-  for(var i=0;i<fila.length;i++){
-    var item=Object.assign({},fila[i]);var localId=item._localId;delete item._localId;delete item._offline;
-    try{await push(ocRef,item);removerDaFila(localId);enviados++;}catch(e){break;}
+window.tentarSyncFila = async function() {
+  const fila = lerFila(); if (!fila.length) { mostrarToast('✓ Nada para sincronizar'); return; }
+  let enviados = 0;
+  for (const item of fila) {
+    const localId = item._localId; const dados = Object.assign({}, item); delete dados._localId; delete dados._offline;
+    try { await push(ocRef, dados); removerDaFila(localId); enviados++; } catch(e) { break; }
   }
-  if(enviados>0)mostrarToast('✓ '+enviados+' enviada(s)!');
+  if (enviados > 0) mostrarToast('✓ '+enviados+' enviada(s)!');
   atualizarBannerFila();
 };
 
-var _online=true;
-onValue(ref(db,'.info/connected'),function(snap){
-  _online=snap.val()===true;
-  document.getElementById('conn-banner').classList.toggle('show',!_online);
-  if(_online)tentarSyncFila();
+let _online = true;
+onValue(ref(db,'.info/connected'), snap => {
+  _online = snap.val() === true;
+  document.getElementById('conn-banner').classList.toggle('show', !_online);
+  if (_online) tentarSyncFila();
 });
-
-onValue(ocRef,function(snapshot){
-  var lista=[];
-  snapshot.forEach(function(child){lista.push(Object.assign({firebaseKey:child.key},child.val()));});
-  lista.reverse();
-  window._ocs=lista;
-  renderLista();renderCalendario();renderChart();
-});
-
-// ═══════════════════════════════════
-//  ABAS
-// ═══════════════════════════════════
-var _abaAtiva='lista';
-
-window.mudarAba=function(aba){
-  _abaAtiva=aba;
-  document.getElementById('tab-lista').classList.toggle('ativo',aba==='lista');
-  document.getElementById('tab-analytics').classList.toggle('ativo',aba==='analytics');
-  document.getElementById('btn-novo-global').style.display=aba==='analytics'?'none':'';
-  if(aba==='lista'){mostrarViewSemTabs('view-lista');}
-  else{mostrarViewSemTabs('view-analytics');renderCalendario();renderChart();}
-};
-
-function mostrarViewSemTabs(id){
-  ['view-lista','view-analytics','view-novo','view-editar','view-detalhe','view-painel'].forEach(function(v){
-    document.getElementById(v).classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
-  document.getElementById('main-scroll').scrollTop=0;
-}
-
-// ═══════════════════════════════════
-//  LOGIN
-// ═══════════════════════════════════
-window.confirmarLogin=async function(){
-  var usuario=document.getElementById('login-usuario').value.trim();
-  var senha=document.getElementById('login-senha').value;
-  var erroEl=document.getElementById('login-erro'),loadEl=document.getElementById('login-loading'),btnEl=document.getElementById('btn-entrar');
-  if(!usuario||!senha){erroEl.textContent='❌ Preencha usuário e senha.';erroEl.classList.add('show');return;}
-  erroEl.classList.remove('show');loadEl.classList.add('show');btnEl.disabled=true;
-  try{
-    const snap=await get(ref(db,'admin_config'));
-    if(!snap.exists())throw new Error('Config não encontrada.');
-    const cfg=snap.val();const hashDigitado=await sha256(senha);
-    if(usuario===cfg.usuario&&hashDigitado===cfg.senha_hash){
-      window._adminAtivo=true;window._adminUsuario=usuario;
-      document.getElementById('modal-login').classList.remove('show');
-      document.getElementById('btn-admin').classList.add('ativo');
-      document.getElementById('btn-admin').textContent='🔴';
-      document.getElementById('admin-banner').classList.add('show');
-      document.getElementById('admin-user-badge').textContent=usuario;
-      // Logo clicável quando admin
-      document.getElementById('logo-btn').title='Clique para alterar ícone';
-      renderLista();mostrarToast('✓ Bem-vindo, '+usuario+'!');
-      popularEmojiGrid('emoji-grid-painel');
-    }else{
-      erroEl.textContent='❌ Usuário ou senha incorretos.';erroEl.classList.add('show');
-      document.getElementById('login-senha').value='';document.getElementById('login-senha').focus();
-    }
-  }catch(e){erroEl.textContent='❌ Erro: '+e.message;erroEl.classList.add('show');}
-  loadEl.classList.remove('show');btnEl.disabled=false;
-};
-window.fecharModalLogin=function(){document.getElementById('modal-login').classList.remove('show');};
-
-window.alterarUsuario=async function(){
-  var novoUsuario=document.getElementById('p-novo-usuario').value.trim();
-  var senhaConf=document.getElementById('p-conf-senha-usuario').value;
-  var erroEl=document.getElementById('erro-usuario'),sucEl=document.getElementById('sucesso-usuario');
-  erroEl.classList.remove('show');sucEl.classList.remove('show');
-  if(!novoUsuario){erroEl.textContent='❌ Informe o novo usuário.';erroEl.classList.add('show');return;}
-  if(!senhaConf){erroEl.textContent='❌ Confirme sua senha.';erroEl.classList.add('show');return;}
-  try{
-    const snap=await get(ref(db,'admin_config'));const cfg=snap.val();
-    const hashDigitado=await sha256(senhaConf);
-    if(hashDigitado!==cfg.senha_hash){erroEl.textContent='❌ Senha incorreta.';erroEl.classList.add('show');return;}
-    await update(ref(db,'admin_config'),{usuario:novoUsuario});
-    window._adminUsuario=novoUsuario;
-    document.getElementById('admin-user-badge').textContent=novoUsuario;
-    sucEl.textContent='✅ Usuário alterado!';sucEl.classList.add('show');
-    document.getElementById('p-novo-usuario').value='';document.getElementById('p-conf-senha-usuario').value='';
-    mostrarToast('✓ Usuário atualizado!');
-  }catch(e){erroEl.textContent='❌ '+e.message;erroEl.classList.add('show');}
-};
-
-window.alterarSenha=async function(){
-  var atual=document.getElementById('p-senha-atual').value;
-  var nova=document.getElementById('p-senha-nova').value;
-  var conf=document.getElementById('p-senha-conf').value;
-  var erroEl=document.getElementById('painel-erro'),sucEl=document.getElementById('painel-sucesso');
-  erroEl.classList.remove('show');sucEl.classList.remove('show');
-  if(!atual||!nova||!conf){erroEl.textContent='❌ Preencha todos os campos.';erroEl.classList.add('show');return;}
-  if(nova.length<6){erroEl.textContent='❌ Mínimo 6 caracteres.';erroEl.classList.add('show');return;}
-  if(nova!==conf){erroEl.textContent='❌ Senhas não coincidem.';erroEl.classList.add('show');return;}
-  try{
-    const snap=await get(ref(db,'admin_config'));const cfg=snap.val();
-    const hashAtual=await sha256(atual);
-    if(hashAtual!==cfg.senha_hash){erroEl.textContent='❌ Senha atual incorreta.';erroEl.classList.add('show');return;}
-    const novoHash=await sha256(nova);
-    await update(ref(db,'admin_config'),{senha_hash:novoHash});
-    sucEl.textContent='✅ Senha alterada!';sucEl.classList.add('show');
-    ['p-senha-atual','p-senha-nova','p-senha-conf'].forEach(function(id){document.getElementById(id).value='';});
-    mostrarToast('✓ Senha atualizada!');
-  }catch(e){erroEl.textContent='❌ '+e.message;erroEl.classList.add('show');}
-};
 
 // ═══════════════════════════════════
 //  SALVAR OCORRÊNCIA
 // ═══════════════════════════════════
-window.salvarOcorrencia=async function(){
-  var btn=document.getElementById('btn-salvar');
-  var aluno=document.getElementById('f-aluno').value.trim();
-  var turma=document.getElementById('f-turma').value.trim();
-  var tipo=document.getElementById('f-tipo').value;
-  var professor=document.getElementById('f-professor').value.trim();
-  var descricao=document.getElementById('f-descricao').value.trim();
-  if(!aluno||!professor||!descricao){mostrarToast('⚠️ Preencha os campos obrigatórios');return;}
-  var dados={aluno,turma,tipo,professor,descricao,status:'Pendente',
-    data:new Date().toLocaleDateString('pt-BR'),hora:new Date().toTimeString().slice(0,5),timestamp:Date.now()};
-  btn.disabled=true;btn.textContent='Salvando...';
-  if(!_online){
-    var localId=adicionarNaFila(dados);
-    var lista=window._ocs||[];lista.unshift(Object.assign({},dados,{firebaseKey:localId,_offline:true}));
-    window._ocs=lista;renderLista();mostrarToast('📦 Salvo localmente!');
-    ['f-aluno','f-turma','f-professor','f-descricao'].forEach(function(id){document.getElementById(id).value='';});
-    document.getElementById('f-tipo').selectedIndex=0;irParaLista();
-  }else{
-    try{
-      await push(ocRef,dados);mostrarToast('✓ Ocorrência salva!');
-      ['f-aluno','f-turma','f-professor','f-descricao'].forEach(function(id){document.getElementById(id).value='';});
-      document.getElementById('f-tipo').selectedIndex=0;irParaLista();
-    }catch(e){adicionarNaFila(dados);mostrarToast('📦 Guardado para envio automático');irParaLista();}
+window.salvarOcorrencia = async function() {
+  const btn = document.getElementById('btn-salvar');
+  const aluno = document.getElementById('f-aluno').value.trim();
+  const turma = document.getElementById('f-turma').value.trim();
+  const tipo = document.getElementById('f-tipo').value;
+  const professor = document.getElementById('f-professor').value.trim();
+  const descricao = document.getElementById('f-descricao').value.trim();
+  if (!aluno || !professor || !descricao) { mostrarToast('⚠️ Preencha os campos obrigatórios'); return; }
+  const dados = {aluno, turma, tipo, professor, descricao, status:'Pendente',
+    data: new Date().toLocaleDateString('pt-BR'), hora: new Date().toTimeString().slice(0,5), timestamp: Date.now()};
+  btn.disabled = true; btn.textContent = 'Salvando...';
+  if (!_online) {
+    const localId = adicionarNaFila(dados);
+    const lista = window._ocs || []; lista.unshift(Object.assign({}, dados, {firebaseKey: localId, _offline: true}));
+    window._ocs = lista; renderLista(); mostrarToast('📦 Salvo localmente!');
+    limparFormNovo(); irParaLista();
+  } else {
+    try {
+      await push(ocRef, dados); mostrarToast('✓ Ocorrência salva!');
+      limparFormNovo(); irParaLista();
+    } catch(e) { adicionarNaFila(dados); mostrarToast('📦 Guardado para envio automático'); irParaLista(); }
   }
-  btn.disabled=false;btn.textContent='Salvar Ocorrência';
+  btn.disabled = false; btn.textContent = 'Salvar Ocorrência';
 };
 
-window.salvarEdicao=async function(){
-  var btn=document.getElementById('btn-editar-salvar');var key=window._idAtual;if(!key)return;
-  var aluno=document.getElementById('e-aluno').value.trim();
-  var turma=document.getElementById('e-turma').value.trim();
-  var tipo=document.getElementById('e-tipo').value;
-  var professor=document.getElementById('e-professor').value.trim();
-  var descricao=document.getElementById('e-descricao').value.trim();
-  if(!aluno||!professor||!descricao){mostrarToast('⚠️ Preencha os campos obrigatórios');return;}
-  
-  var updateData={aluno,turma,tipo,professor,descricao};
-  
-  // Atualizar data/hora se admin editou
-  if(window._adminAtivo){
-    var dtVal=document.getElementById('e-datetime').value;
-    if(dtVal){
-      var dt=new Date(dtVal);
-      updateData.data=String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')+'/'+dt.getFullYear();
-      updateData.hora=String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0');
-      updateData.timestamp=dt.getTime();
+function limparFormNovo() {
+  ['f-aluno','f-professor','f-descricao'].forEach(id => document.getElementById(id).value = '');
+  // Manter turma padrão
+  const turmaPadrao = localStorage.getItem('ceti_turma_padrao') || '';
+  document.getElementById('f-turma').value = turmaPadrao;
+  document.getElementById('f-tipo').selectedIndex = 0;
+}
+
+window.salvarEdicao = async function() {
+  const btn = document.getElementById('btn-editar-salvar'); const key = window._idAtual; if (!key) return;
+  const aluno = document.getElementById('e-aluno').value.trim();
+  const turma = document.getElementById('e-turma').value.trim();
+  const tipo = document.getElementById('e-tipo').value;
+  const professor = document.getElementById('e-professor').value.trim();
+  const descricao = document.getElementById('e-descricao').value.trim();
+  if (!aluno || !professor || !descricao) { mostrarToast('⚠️ Preencha os campos obrigatórios'); return; }
+  const updateData = {aluno, turma, tipo, professor, descricao};
+  if (window._adminAtivo) {
+    const dtVal = document.getElementById('e-datetime').value;
+    if (dtVal) {
+      const dt = new Date(dtVal);
+      updateData.data = String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')+'/'+dt.getFullYear();
+      updateData.hora = String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0');
+      updateData.timestamp = dt.getTime();
     }
   }
-  
-  btn.disabled=true;btn.textContent='Salvando...';
-  try{
-    await update(ref(db,'ocorrencias/'+key),updateData);
-    mostrarToast('✓ Ocorrência atualizada!');irParaLista();
-  }catch(e){mostrarToast('Erro: '+e.message);}
-  btn.disabled=false;btn.textContent='Salvar Alterações';
+  btn.disabled = true; btn.textContent = 'Salvando...';
+  try {
+    await update(ref(db,'ocorrencias/'+key), updateData);
+    await registrarLog('Ocorrência editada', `Aluno: "${aluno}", key: ${key}`);
+    mostrarToast('✓ Ocorrência atualizada!'); irParaLista();
+  } catch(e) { mostrarToast('Erro: '+e.message); }
+  btn.disabled = false; btn.textContent = 'Salvar Alterações';
 };
 
-window.confirmarExclusao=async function(){
-  var key=window._idAtual;if(!key)return;
-  if(String(key).startsWith('local_')){
-    removerDaFila(key);window._ocs=(window._ocs||[]).filter(function(x){return x.firebaseKey!==key;});
-    renderLista();mostrarToast('🗑️ Removido!');fecharModalExcluir();irParaLista();return;
+window.confirmarExclusao = async function() {
+  const key = window._idAtual; if (!key) return;
+  if (String(key).startsWith('local_')) {
+    removerDaFila(key); window._ocs = (window._ocs||[]).filter(x => x.firebaseKey !== key);
+    renderLista(); mostrarToast('🗑️ Removido!'); fecharModalExcluir(); irParaLista(); return;
   }
-  try{
+  const oc = (window._ocs||[]).find(x => x.firebaseKey === key);
+  try {
     await remove(ref(db,'ocorrencias/'+key));
-    mostrarToast('🗑️ Excluída!');fecharModalExcluir();irParaLista();
-  }catch(e){mostrarToast('Erro: '+e.message);}
+    await registrarLog('Ocorrência excluída', `Aluno: "${oc ? oc.aluno : '?'}", key: ${key}`);
+    mostrarToast('🗑️ Excluída!'); fecharModalExcluir(); irParaLista();
+  } catch(e) { mostrarToast('Erro: '+e.message); }
 };
 
-window.atualizarStatus=async function(novoStatus){
-  var key=window._idAtual;if(!key)return;
-  if(String(key).startsWith('local_')){mostrarToast('⚠️ Aguarde sincronização.');return;}
-  try{await update(ref(db,'ocorrencias/'+key),{status:novoStatus});mostrarToast('✓ Status atualizado!');setTimeout(irParaLista,400);}
-  catch(e){mostrarToast('Erro: '+e.message);}
+window.atualizarStatus = async function(novoStatus) {
+  const key = window._idAtual; if (!key) return;
+  if (String(key).startsWith('local_')) { mostrarToast('⚠️ Aguarde sincronização.'); return; }
+  const oc = (window._ocs||[]).find(x => x.firebaseKey === key);
+  try {
+    await update(ref(db,'ocorrencias/'+key), {status: novoStatus});
+    await registrarLog('Status alterado', `Aluno: "${oc ? oc.aluno : '?'}" → "${novoStatus}"`);
+    mostrarToast('✓ Status atualizado!'); setTimeout(irParaLista, 400);
+  } catch(e) { mostrarToast('Erro: '+e.message); }
+};
+
+// ═══════════════════════════════════
+//  EVENTOS DO CALENDÁRIO
+// ═══════════════════════════════════
+window._calTipoAtivo = 'ocorrencias';
+
+window.calMudarTipo = function(tipo) {
+  window._calTipoAtivo = tipo;
+  document.getElementById('cal-tab-oc').classList.toggle('ativo', tipo === 'ocorrencias');
+  document.getElementById('cal-tab-ev').classList.toggle('ativo', tipo === 'eventos');
+  if (window._diaSel) renderOcsDia(window._diaSel);
+};
+
+window.abrirModalNovoEvento = function(dataStr) {
+  document.getElementById('modal-evento-data-txt').textContent = 'Data: '+dataStr;
+  document.getElementById('evento-titulo').value = '';
+  document.getElementById('evento-hora').value = '';
+  document.getElementById('evento-obs').value = '';
+  document.getElementById('evento-erro').classList.remove('show');
+  window._eventoDataSel = dataStr;
+  document.getElementById('modal-novo-evento').classList.add('show');
+};
+
+window.salvarEvento = async function() {
+  const titulo = document.getElementById('evento-titulo').value.trim();
+  const hora = document.getElementById('evento-hora').value.trim();
+  const obs = document.getElementById('evento-obs').value.trim();
+  const erroEl = document.getElementById('evento-erro');
+  erroEl.classList.remove('show');
+  if (!titulo) { erroEl.textContent = '❌ Informe o título do evento.'; erroEl.classList.add('show'); return; }
+  const dataStr = window._eventoDataSel;
+  if (!dataStr) return;
+  const parts = dataStr.split('/');
+  const dt = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  if (dt < hoje) { erroEl.textContent = '❌ Só é possível criar eventos a partir de hoje.'; erroEl.classList.add('show'); return; }
+  try {
+    await push(evRef, {titulo, hora: hora || '—', obs: obs || '', data: dataStr, timestamp: dt.getTime(), criadoPor: window._adminAtivo ? window._adminUsuario : 'Professor'});
+    fecharModal('modal-novo-evento');
+    mostrarToast('📅 Evento criado!');
+    if (window._adminAtivo) await registrarLog('Evento criado', `"${titulo}" em ${dataStr}`);
+  } catch(e) { erroEl.textContent = '❌ Erro: '+e.message; erroEl.classList.add('show'); }
+};
+
+window.removerEvento = async function(key) {
+  if (!confirm('Remover este evento?')) return;
+  try {
+    await remove(ref(db,'eventos/'+key));
+    if (window._adminAtivo) await registrarLog('Evento removido', `key: ${key}`);
+    mostrarToast('🗑️ Evento removido!');
+  } catch(e) { mostrarToast('Erro: '+e.message); }
 };
 
 // ═══════════════════════════════════
 //  RENDER LISTA
 // ═══════════════════════════════════
-function renderLista(){
-  var filaLocal=lerFila();var ocs=window._ocs||[];
-  var keysFirebase=ocs.map(function(o){return o.firebaseKey;});
-  filaLocal=filaLocal.filter(function(x){return !keysFirebase.includes(x._localId);});
-  var locais=filaLocal.map(function(x){var item=Object.assign({},x);item.firebaseKey=x._localId;item._offline=true;delete item._localId;return item;});
-  var todos=locais.concat(ocs);
-  var busca=(document.getElementById('busca')?document.getElementById('busca').value:'').toLowerCase();
-  var fil=todos.filter(function(o){return(o.aluno||'').toLowerCase().includes(busca)||(o.turma||'').toLowerCase().includes(busca);});
+function renderLista() {
+  const filaLocal = lerFila();
+  const ocs = window._ocs || [];
+  const keysFirebase = ocs.map(o => o.firebaseKey);
+  const locaisExclusivos = filaLocal.filter(x => !keysFirebase.includes(x._localId));
+  const locais = locaisExclusivos.map(x => { const item = Object.assign({}, x); item.firebaseKey = x._localId; item._offline = true; delete item._localId; return item; });
+  const todos = locais.concat(ocs);
+  const busca = (document.getElementById('busca') ? document.getElementById('busca').value : '').toLowerCase();
+  const fil = todos.filter(o => (o.aluno||'').toLowerCase().includes(busca) || (o.turma||'').toLowerCase().includes(busca));
 
-  document.getElementById('cnt-pendente').textContent=ocs.filter(function(o){return o.status==='Pendente';}).length;
-  document.getElementById('cnt-acomp').textContent=ocs.filter(function(o){return o.status==='Em acompanhamento';}).length;
-  document.getElementById('cnt-resolvido').textContent=ocs.filter(function(o){return o.status==='Resolvido';}).length;
-  document.getElementById('cnt-total').textContent=ocs.length;
+  document.getElementById('cnt-pendente').textContent = ocs.filter(o => o.status === 'Pendente').length;
+  document.getElementById('cnt-acomp').textContent = ocs.filter(o => o.status === 'Em acompanhamento').length;
+  document.getElementById('cnt-resolvido').textContent = ocs.filter(o => o.status === 'Resolvido').length;
+  document.getElementById('cnt-total').textContent = ocs.length;
 
-  var c=document.getElementById('lista-container');
-  if(!fil.length){c.innerHTML='<div class="empty">Nenhuma ocorrência encontrada</div>';c.className='lista';return;}
-  var ICON={"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-  c.innerHTML=fil.map(function(o){
-    var cls=o.status==='Pendente'?'pendente':o.status==='Resolvido'?'resolvido':'acomp';
-    var offlineTag=o._offline?'<span class="offline-tag">Offline</span>':'';
-    var offlineCls=o._offline?' offline-pending':'';
-    return '<div class="oc-card'+offlineCls+'" onclick="verDetalhe(\''+o.firebaseKey+'\')">'+
-      '<button class="btn-excluir-card" onclick="event.stopPropagation();pedirExclusao(\''+o.firebaseKey+'\')">🗑️</button>'+
-      '<div class="oc-top"><span class="oc-nome">'+o.aluno+offlineTag+'</span><span class="oc-turma">'+(o.turma||'—')+'</span></div>'+
-      '<div class="oc-tipo">'+(ICON[o.tipo]||'📋')+' '+o.tipo+'</div>'+
-      '<div class="oc-meta"><span class="oc-data">'+o.data+' · '+o.hora+' · '+o.professor+'</span>'+
-      '<span class="badge badge-'+cls+'"><span class="badge-dot"></span>'+o.status+'</span></div></div>';
+  const c = document.getElementById('lista-container');
+  if (!fil.length) { c.innerHTML = '<div class="empty">Nenhuma ocorrência encontrada</div>'; c.className = 'lista'; return; }
+  const ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  c.innerHTML = fil.map(o => {
+    const cls = o.status === 'Pendente' ? 'pendente' : o.status === 'Resolvido' ? 'resolvido' : 'acomp';
+    const offlineTag = o._offline ? '<span class="offline-tag">Offline</span>' : '';
+    const offlineCls = o._offline ? ' offline-pending' : '';
+    return `<div class="oc-card${offlineCls}" onclick="verDetalhe('${o.firebaseKey}')">
+      <button class="btn-excluir-card" onclick="event.stopPropagation();pedirExclusao('${o.firebaseKey}')">🗑️</button>
+      <div class="oc-top"><span class="oc-nome">${o.aluno}${offlineTag}</span><span class="oc-turma">${o.turma||'—'}</span></div>
+      <div class="oc-tipo">${ICON[o.tipo]||'📋'} ${o.tipo}</div>
+      <div class="oc-meta"><span class="oc-data">${o.data} · ${o.hora} · ${o.professor}</span>
+      <span class="badge badge-${cls}"><span class="badge-dot"></span>${o.status}</span></div></div>`;
   }).join('');
-  c.className='lista'+(window._adminAtivo?' modo-admin':'');
+  c.className = 'lista'+(window._adminAtivo ? ' modo-admin' : '');
   atualizarBannerFila();
 }
 
 // ═══════════════════════════════════
 //  DETALHE
 // ═══════════════════════════════════
-window.verDetalhe=function(key){
-  window._idAtual=key;
-  var o=(window._ocs||[]).find(function(x){return x.firebaseKey===key;});
-  if(!o){var fl=lerFila().find(function(x){return x._localId===key;});if(fl){o=Object.assign({},fl,{firebaseKey:fl._localId,_offline:true});}}
-  if(!o)return;
-  var ICON={"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-  var cls=o.status==='Pendente'?'pendente':o.status==='Resolvido'?'resolvido':'acomp';
-  var offlineAviso=o._offline?'<div style="background:var(--badge-pendente-bg);color:var(--badge-pendente-txt);padding:8px 12px;border-radius:7px;font-size:11px;font-weight:600;margin:8px 0;">📦 Aguardando sincronização</div>':'';
+window.verDetalhe = function(key) {
+  window._idAtual = key;
+  let o = (window._ocs||[]).find(x => x.firebaseKey === key);
+  if (!o) { const fl = lerFila().find(x => x._localId === key); if (fl) o = Object.assign({}, fl, {firebaseKey: fl._localId, _offline: true}); }
+  if (!o) return;
+  const ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  const cls = o.status === 'Pendente' ? 'pendente' : o.status === 'Resolvido' ? 'resolvido' : 'acomp';
+  const offlineAviso = o._offline ? '<div style="background:var(--badge-pendente-bg);color:var(--badge-pendente-txt);padding:8px 12px;border-radius:7px;font-size:11px;font-weight:600;margin:8px 0;">📦 Aguardando sincronização</div>' : '';
   mostrarView('view-detalhe');
-  document.getElementById('detalhe-conteudo').innerHTML=
-    '<button class="btn-back" onclick="irParaLista()">← Voltar</button>'+
-    '<div class="detalhe-nome">'+o.aluno+'</div>'+
-    '<span class="badge badge-'+cls+'"><span class="badge-dot"></span>'+o.status+'</span>'+
-    offlineAviso+
-    '<div class="detalhe-info">'+
-      '<div class="info-item"><div class="info-label">Turma</div><div class="info-val">'+(o.turma||'—')+'</div></div>'+
-      '<div class="info-item"><div class="info-label">Tipo</div><div class="info-val">'+(ICON[o.tipo]||'📋')+' '+o.tipo+'</div></div>'+
-      '<div class="info-item"><div class="info-label">Data</div><div class="info-val">'+o.data+'</div></div>'+
-      '<div class="info-item"><div class="info-label">Hora</div><div class="info-val">'+o.hora+'</div></div>'+
-      '<div class="info-item" style="grid-column:1/-1"><div class="info-label">Professor</div><div class="info-val">'+o.professor+'</div></div>'+
-    '</div>'+
-    '<div class="detalhe-desc">'+o.descricao+'</div>'+
-    (o._offline?'':
-      '<div style="font-size:10px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Atualizar Status</div>'+
-      '<div class="status-btns">'+
-        '<button class="status-btn" onclick="atualizarStatus(\'Pendente\')">⏳ Pendente</button>'+
-        '<button class="status-btn" onclick="atualizarStatus(\'Em acompanhamento\')">👀 Acomp.</button>'+
-        '<button class="status-btn" onclick="atualizarStatus(\'Resolvido\')">✅ Resolvido</button>'+
-      '</div>'
-    )+
-    '<div class="admin-acoes'+(window._adminAtivo?' show':'')+'">'+
-      (o._offline?'<button class="btn-del" style="grid-column:1/-1" onclick="pedirExclusao(\''+key+'\')">🗑️ Remover da fila</button>':
-        '<button class="btn-editar" onclick="abrirEdicao()">✏️ Editar</button>'+
-        '<button class="btn-del" onclick="pedirExclusao(\''+key+'\')">🗑️ Excluir</button>'
-      )+
-    '</div>';
+  document.getElementById('detalhe-conteudo').innerHTML =
+    `<button class="btn-back" onclick="irParaLista()">← Voltar</button>
+    <div class="detalhe-nome">${o.aluno}</div>
+    <span class="badge badge-${cls}"><span class="badge-dot"></span>${o.status}</span>
+    ${offlineAviso}
+    <div class="detalhe-info">
+      <div class="info-item"><div class="info-label">Turma</div><div class="info-val">${o.turma||'—'}</div></div>
+      <div class="info-item"><div class="info-label">Tipo</div><div class="info-val">${ICON[o.tipo]||'📋'} ${o.tipo}</div></div>
+      <div class="info-item"><div class="info-label">Data</div><div class="info-val">${o.data}</div></div>
+      <div class="info-item"><div class="info-label">Hora</div><div class="info-val">${o.hora}</div></div>
+      <div class="info-item" style="grid-column:1/-1"><div class="info-label">Professor</div><div class="info-val">${o.professor}</div></div>
+    </div>
+    <div class="detalhe-desc">${o.descricao}</div>
+    ${o._offline ? '' :
+      `<div style="font-size:10px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Atualizar Status</div>
+      <div class="status-btns">
+        <button class="status-btn" onclick="atualizarStatus('Pendente')">⏳ Pendente</button>
+        <button class="status-btn" onclick="atualizarStatus('Em acompanhamento')">👀 Acomp.</button>
+        <button class="status-btn" onclick="atualizarStatus('Resolvido')">✅ Resolvido</button>
+      </div>`
+    }
+    <div class="admin-acoes${window._adminAtivo ? ' show' : ''}">
+      ${o._offline ?
+        `<button class="btn-del" style="grid-column:1/-1" onclick="pedirExclusao('${key}')">🗑️ Remover da fila</button>` :
+        `<button class="btn-editar" onclick="abrirEdicao()">✏️ Editar</button>
+        <button class="btn-del" onclick="pedirExclusao('${key}')">🗑️ Excluir</button>`
+      }
+    </div>`;
 };
 
-window.abrirEdicao=function(){
-  var o=(window._ocs||[]).find(function(x){return x.firebaseKey===window._idAtual;});if(!o)return;
-  document.getElementById('e-aluno').value=o.aluno||'';
-  document.getElementById('e-turma').value=o.turma||'';
-  document.getElementById('e-professor').value=o.professor||'';
-  document.getElementById('e-descricao').value=o.descricao||'';
-  var sel=document.getElementById('e-tipo');
-  for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===o.tipo){sel.selectedIndex=i;break;}}
-  
-  // Admin pode editar data/hora
-  var adminDt=document.getElementById('admin-dt-wrap');
-  if(window._adminAtivo){
-    adminDt.style.display='block';
-    // Converter data "DD/MM/YYYY" + hora "HH:MM" → datetime-local
-    if(o.data&&o.hora){
-      var parts=o.data.split('/');
-      var dtStr=parts[2]+'-'+parts[1]+'-'+parts[0]+'T'+o.hora;
-      document.getElementById('e-datetime').value=dtStr;
+window.abrirEdicao = function() {
+  const o = (window._ocs||[]).find(x => x.firebaseKey === window._idAtual); if (!o) return;
+  document.getElementById('e-aluno').value = o.aluno || '';
+  document.getElementById('e-turma').value = o.turma || '';
+  document.getElementById('e-professor').value = o.professor || '';
+  document.getElementById('e-descricao').value = o.descricao || '';
+  const sel = document.getElementById('e-tipo');
+  for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value === o.tipo) { sel.selectedIndex = i; break; } }
+  const adminDt = document.getElementById('admin-dt-wrap');
+  if (window._adminAtivo) {
+    adminDt.style.display = 'block';
+    if (o.data && o.hora) {
+      const parts = o.data.split('/');
+      document.getElementById('e-datetime').value = `${parts[2]}-${parts[1]}-${parts[0]}T${o.hora}`;
     }
-  }else{adminDt.style.display='none';}
-  
+  } else adminDt.style.display = 'none';
   mostrarView('view-editar');
 };
-window.voltarDetalhe=function(){verDetalhe(window._idAtual);};
+window.voltarDetalhe = function() { verDetalhe(window._idAtual); };
 
 // ═══════════════════════════════════
 //  NAVEGAÇÃO
 // ═══════════════════════════════════
-function mostrarView(id){
-  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+var _abaAtiva = 'lista';
+
+window.mudarAba = function(aba) {
+  _abaAtiva = aba;
+  document.getElementById('tab-lista').classList.toggle('ativo', aba === 'lista');
+  document.getElementById('tab-analytics').classList.toggle('ativo', aba === 'analytics');
+  document.getElementById('tab-config').classList.toggle('ativo', aba === 'config');
+  document.getElementById('btn-novo-global').style.display = (aba === 'analytics' || aba === 'config') ? 'none' : '';
+  if (aba === 'lista') mostrarViewSemTabs('view-lista');
+  else if (aba === 'analytics') { mostrarViewSemTabs('view-analytics'); renderCalendario(); renderChart(); }
+  else mostrarViewSemTabs('view-config');
+};
+
+function mostrarViewSemTabs(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.getElementById('main-scroll').scrollTop=0;
-  var isAnalytics=id==='view-analytics';
-  document.getElementById('tab-lista').classList.toggle('ativo',id==='view-lista'||(!isAnalytics&&id!=='view-analytics'));
-  document.getElementById('tab-analytics').classList.toggle('ativo',isAnalytics);
-  document.getElementById('btn-novo-global').style.display=isAnalytics?'none':'';
+  document.getElementById('main-scroll').scrollTop = 0;
+  const isAnalytics = id === 'view-analytics';
+  const isConfig = id === 'view-config';
+  document.getElementById('tab-lista').classList.toggle('ativo', id === 'view-lista');
+  document.getElementById('tab-analytics').classList.toggle('ativo', isAnalytics);
+  document.getElementById('tab-config').classList.toggle('ativo', isConfig);
+  document.getElementById('btn-novo-global').style.display = (isAnalytics || isConfig) ? 'none' : '';
 }
 
-window.modoAdminAtivo=function(){return window._adminAtivo||false;};
-window.irParaLista=function(){
-  if(_abaAtiva==='analytics'){mostrarView('view-analytics');}
-  else{mostrarView('view-lista');}
+function mostrarView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('main-scroll').scrollTop = 0;
+}
+
+window.modoAdminAtivo = function() { return window._adminAtivo || false; };
+window.irParaLista = function() {
+  if (_abaAtiva === 'analytics') mostrarViewSemTabs('view-analytics');
+  else if (_abaAtiva === 'config') mostrarViewSemTabs('view-config');
+  else mostrarViewSemTabs('view-lista');
 };
-window.irParaNovo=function(){_abaAtiva='lista';mostrarView('view-novo');};
-window.irParaPainel=function(){
-  var nomeAtual=document.getElementById('header-nome-inst').textContent;
-  document.getElementById('p-nome-inst').value=nomeAtual==='Minha Instituição'?'':nomeAtual;
-  ['p-novo-usuario','p-conf-senha-usuario','p-senha-atual','p-senha-nova','p-senha-conf'].forEach(function(id){document.getElementById(id).value='';});
-  ['erro-inst','sucesso-inst','erro-usuario','sucesso-usuario','painel-erro','painel-sucesso'].forEach(function(id){document.getElementById(id).classList.remove('show');});
+window.irParaNovo = function() { _abaAtiva = 'lista'; mostrarView('view-novo'); };
+window.irParaPainel = function() {
+  const nomeAtual = document.getElementById('header-nome-inst').textContent;
+  document.getElementById('p-nome-inst').value = nomeAtual === 'Minha Instituição' ? '' : nomeAtual;
+  ['p-novo-usuario','p-conf-senha-usuario','p-senha-atual','p-senha-nova','p-senha-conf'].forEach(id => document.getElementById(id).value = '');
+  ['erro-inst','sucesso-inst','erro-usuario','sucesso-usuario','painel-erro','painel-sucesso'].forEach(id => document.getElementById(id).classList.remove('show'));
   popularEmojiGrid('emoji-grid-painel');
+  adminMudarAba('inst');
+  renderListaAdmins();
+  renderLog();
   mostrarView('view-painel');
 };
 
-window._adminAtivo=false;window._adminUsuario='';
-window.clicarAdmin=function(){
-  if(window._adminAtivo){
-    window._adminAtivo=false;window._adminUsuario='';
-    document.getElementById('btn-admin').classList.remove('ativo');
-    document.getElementById('btn-admin').textContent='🔐';
+window._adminAtivo = false; window._adminUsuario = ''; window._adminTipo = '';
+
+window.clicarAdmin = function() {
+  if (window._adminAtivo) {
+    window._adminAtivo = false; window._adminUsuario = ''; window._adminTipo = ''; window._adminKey = null;
     document.getElementById('admin-banner').classList.remove('show');
-    document.getElementById('logo-btn').title='Ícone da escola';
-    renderLista();mostrarToast('Modo admin desativado');
-  }else{
-    document.getElementById('login-usuario').value='';
-    document.getElementById('login-senha').value='';
+    document.getElementById('logo-btn').title = 'Ícone da escola';
+    atualizarUIAdmin(false);
+    renderLista(); mostrarToast('Modo admin desativado');
+  } else {
+    document.getElementById('login-usuario').value = '';
+    document.getElementById('login-senha').value = '';
     document.getElementById('login-erro').classList.remove('show');
     document.getElementById('login-loading').classList.remove('show');
-    document.getElementById('btn-entrar').disabled=false;
+    document.getElementById('btn-entrar').disabled = false;
     document.getElementById('modal-login').classList.add('show');
-    setTimeout(function(){document.getElementById('login-usuario').focus();},150);
+    setTimeout(() => document.getElementById('login-usuario').focus(), 150);
   }
 };
 
-window.pedirExclusao=function(key){window._idAtual=key;document.getElementById('modal-excluir').classList.add('show');};
-window.fecharModalExcluir=function(){document.getElementById('modal-excluir').classList.remove('show');};
-window.toggleOlho=function(inputId,btnId){
-  var input=document.getElementById(inputId),btn=document.getElementById(btnId);
-  input.type=input.type==='password'?'text':'password';
-  btn.textContent=input.type==='password'?'👁️':'🙈';
+window.pedirExclusao = function(key) { window._idAtual = key; document.getElementById('modal-excluir').classList.add('show'); };
+window.fecharModalExcluir = function() { document.getElementById('modal-excluir').classList.remove('show'); };
+window.fecharModal = function(id) { document.getElementById(id).classList.remove('show'); };
+
+window.toggleOlho = function(inputId, btnId) {
+  const input = document.getElementById(inputId), btn = document.getElementById(btnId);
+  input.type = input.type === 'password' ? 'text' : 'password';
+  btn.textContent = input.type === 'password' ? '👁️' : '🙈';
 };
 
-function mostrarToast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},2500);
+// ── Abas do painel admin ─────────────────────────────────────────────────────
+window.adminMudarAba = function(aba) {
+  ['inst','admins','senha','log'].forEach(a => {
+    document.getElementById('atab-'+a).classList.toggle('ativo', a === aba);
+    document.getElementById('apanel-'+a).classList.toggle('ativo', a === aba);
+  });
+  if (aba === 'admins') renderListaAdmins();
+  if (aba === 'log') renderLog();
+};
+
+// ── Preferências do professor ────────────────────────────────────────────────
+window.abrirModalNomeProfessor = function() {
+  document.getElementById('input-nome-prof').value = localStorage.getItem('ceti_prof_nome') || '';
+  document.getElementById('modal-nome-prof').classList.add('show');
+};
+window.salvarNomeProfessor = function() {
+  const nome = document.getElementById('input-nome-prof').value.trim();
+  localStorage.setItem('ceti_prof_nome', nome);
+  document.getElementById('config-prof-nome').textContent = nome || 'Não definido';
+  // Preencher campo de professor no form
+  const profField = document.getElementById('f-professor');
+  if (profField && nome) profField.value = nome;
+  fecharModal('modal-nome-prof');
+  mostrarToast('✓ Nome salvo!');
+};
+
+window.abrirModalTurmaPadrao = function() {
+  document.getElementById('input-turma-padrao').value = localStorage.getItem('ceti_turma_padrao') || '';
+  document.getElementById('modal-turma-padrao').classList.add('show');
+};
+window.salvarTurmaPadrao = function() {
+  const turma = document.getElementById('input-turma-padrao').value.trim();
+  localStorage.setItem('ceti_turma_padrao', turma);
+  document.getElementById('config-turma-padrao').textContent = turma || 'Não definida';
+  const turmaField = document.getElementById('f-turma');
+  if (turmaField && turma) turmaField.value = turma;
+  fecharModal('modal-turma-padrao');
+  mostrarToast('✓ Turma padrão salva!');
+};
+
+// Toggles de preferência
+window.toggleSons = function() {
+  const t = document.getElementById('toggle-sons');
+  t.classList.toggle('on');
+  localStorage.setItem('ceti_sons', t.classList.contains('on') ? '1' : '0');
+};
+window.toggleRascunho = function() {
+  const t = document.getElementById('toggle-rascunho');
+  t.classList.toggle('on');
+  localStorage.setItem('ceti_rascunho', t.classList.contains('on') ? '1' : '0');
+};
+window.limparRascunho = function() {
+  if (!confirm('Limpar dados locais (rascunhos e cache)?')) return;
+  const keysParaManter = ['ceti_tema','ceti_prof_nome','ceti_turma_padrao','ceti_sons','ceti_rascunho'];
+  const backup = {};
+  keysParaManter.forEach(k => { backup[k] = localStorage.getItem(k); });
+  localStorage.clear();
+  keysParaManter.forEach(k => { if (backup[k] !== null) localStorage.setItem(k, backup[k]); });
+  mostrarToast('✓ Dados locais limpos!');
+};
+
+// Carregar preferências salvas
+(function carregarPrefs() {
+  const profNome = localStorage.getItem('ceti_prof_nome') || '';
+  const turmaPadrao = localStorage.getItem('ceti_turma_padrao') || '';
+  const sons = localStorage.getItem('ceti_sons');
+  const rascunho = localStorage.getItem('ceti_rascunho');
+  const el = document.getElementById('config-prof-nome');
+  if (el) el.textContent = profNome || 'Não definido';
+  const el2 = document.getElementById('config-turma-padrao');
+  if (el2) el2.textContent = turmaPadrao || 'Não definida';
+  if (sons === '1') document.getElementById('toggle-sons')?.classList.add('on');
+  if (rascunho === '0') document.getElementById('toggle-rascunho')?.classList.remove('on');
+  // Pre-preencher form
+  if (profNome) { const f = document.getElementById('f-professor'); if (f) f.value = profNome; }
+  if (turmaPadrao) { const f = document.getElementById('f-turma'); if (f) f.value = turmaPadrao; }
+})();
+
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 // ═══════════════════════════════════
 //  CALENDÁRIO
 // ═══════════════════════════════════
-var _calAno=new Date().getFullYear();
-var _calMes=new Date().getMonth();
-var _diaSel=null;
-var MESES_BR=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+var _calAno = new Date().getFullYear();
+var _calMes = new Date().getMonth();
+window._diaSel = null;
+const MESES_BR = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
-function parseDateBR(dateStr){
-  if(!dateStr)return null;
-  var p=dateStr.split('/');if(p.length<3)return null;
-  return new Date(parseInt(p[2]),parseInt(p[1])-1,parseInt(p[0]));
+function parseDateBR(dateStr) {
+  if (!dateStr) return null;
+  const p = dateStr.split('/'); if (p.length < 3) return null;
+  return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
 }
 
-function renderCalendario(){
-  document.getElementById('cal-mes-ano').textContent=MESES_BR[_calMes]+' '+_calAno;
-  var primeiroDia=new Date(_calAno,_calMes,1).getDay();
-  var diasNoMes=new Date(_calAno,_calMes+1,0).getDate();
-  var hoje=new Date();var ocs=window._ocs||[];
-  var ocPorData={};
-  ocs.forEach(function(o){if(!o.data)return;if(!ocPorData[o.data])ocPorData[o.data]=[];ocPorData[o.data].push(o);});
-  var cells='';
-  for(var i=0;i<primeiroDia;i++)cells+='<div class="cal-dia vazio"></div>';
-  for(var d=1;d<=diasNoMes;d++){
-    var dataStr=String(d).padStart(2,'0')+'/'+String(_calMes+1).padStart(2,'0')+'/'+_calAno;
-    var eHoje=hoje.getDate()===d&&hoje.getMonth()===_calMes&&hoje.getFullYear()===_calAno;
-    var eSel=_diaSel===dataStr;
-    var temOc=ocPorData[dataStr]&&ocPorData[dataStr].length>0;
-    var todosResolvidos=temOc&&ocPorData[dataStr].every(function(o){return o.status==='Resolvido';});
-    var cls='cal-dia'+(eHoje?' hoje':'')+(eSel?' selecionado':'')+(temOc?' tem-oc':'')+(todosResolvidos?' resolvido-dia':'');
-    cells+='<div class="'+cls+'" onclick="selecionarDia(\''+dataStr+'\')">'+d+(temOc?'<div class="cal-bolinha"></div>':'')+'</div>';
+function renderCalendario() {
+  document.getElementById('cal-mes-ano').textContent = MESES_BR[_calMes]+' '+_calAno;
+  const primeiroDia = new Date(_calAno, _calMes, 1).getDay();
+  const diasNoMes = new Date(_calAno, _calMes+1, 0).getDate();
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const ocs = window._ocs || [];
+  const eventos = window._eventos || [];
+  const ocPorData = {}, evPorData = {};
+  ocs.forEach(o => { if (!o.data) return; if (!ocPorData[o.data]) ocPorData[o.data] = []; ocPorData[o.data].push(o); });
+  eventos.forEach(e => { if (!e.data) return; if (!evPorData[e.data]) evPorData[e.data] = []; evPorData[e.data].push(e); });
+
+  let cells = '';
+  for (let i = 0; i < primeiroDia; i++) cells += '<div class="cal-dia vazio"></div>';
+  for (let d = 1; d <= diasNoMes; d++) {
+    const dataStr = String(d).padStart(2,'0')+'/'+String(_calMes+1).padStart(2,'0')+'/'+_calAno;
+    const dtObj = new Date(_calAno, _calMes, d);
+    const eHoje = hoje.getDate() === d && hoje.getMonth() === _calMes && hoje.getFullYear() === _calAno;
+    const ePassado = dtObj < hoje;
+    const eSel = window._diaSel === dataStr;
+    const temOc = ocPorData[dataStr] && ocPorData[dataStr].length > 0;
+    const temEv = evPorData[dataStr] && evPorData[dataStr].length > 0;
+    const todosResolvidos = temOc && ocPorData[dataStr].every(o => o.status === 'Resolvido');
+    let cls = 'cal-dia';
+    if (eHoje) cls += ' hoje';
+    if (eSel) cls += ' selecionado';
+    if (temOc) cls += ' tem-oc';
+    if (todosResolvidos) cls += ' resolvido-dia';
+    if (ePassado && !eHoje) cls += ' passado';
+    const bolinhas = (temOc ? '<div class="cal-bolinha"></div>' : '') + (temEv ? '<div class="cal-bolinha-ev"></div>' : '');
+    const bolinhaWrap = (temOc || temEv) ? `<div class="cal-bolinha-wrap">${bolinhas}</div>` : '';
+    cells += `<div class="${cls}" onclick="selecionarDia('${dataStr}')">${d}${bolinhaWrap}</div>`;
   }
-  document.getElementById('cal-grid').innerHTML=cells;
-  if(_diaSel)renderOcsDia(_diaSel);
+  document.getElementById('cal-grid').innerHTML = cells;
+  if (window._diaSel) renderOcsDia(window._diaSel);
 }
 
-window.selecionarDia=function(dataStr){_diaSel=dataStr;renderCalendario();renderOcsDia(dataStr);};
+window.selecionarDia = function(dataStr) {
+  const parts = dataStr.split('/');
+  const dtObj = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  if (dtObj < hoje) {
+    // Dia passado: só mostrar ocorrências, sem botão de evento
+    window._diaSel = dataStr;
+    renderCalendario();
+    renderOcsDia(dataStr);
+    return;
+  }
+  window._diaSel = dataStr;
+  renderCalendario();
+  renderOcsDia(dataStr);
+};
 
-function renderOcsDia(dataStr){
-  var ocs=(window._ocs||[]).filter(function(o){return o.data===dataStr;});
-  var parts=dataStr.split('/');
-  var label=parts[0]+' de '+MESES_BR[parseInt(parts[1])-1];
-  document.getElementById('cal-dia-titulo').textContent=label+' ('+ocs.length+')';
-  document.getElementById('btn-dl-rel').style.display=ocs.length>0?'':'none';
-  var lista=document.getElementById('cal-ocs-lista');
-  if(!ocs.length){lista.innerHTML='<div class="empty" style="padding:10px 0;font-size:12px;">Nenhuma ocorrência</div>';return;}
-  var ICON={"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-  lista.innerHTML=ocs.map(function(o){
-    var cls=o.status==='Pendente'?'s-pendente':o.status==='Resolvido'?'s-resolvido':'s-acomp';
-    return '<div class="cal-oc-item '+cls+'" onclick="irDetalheAnalytics(\''+o.firebaseKey+'\')">'+
-      '<div class="cal-oc-item-nome">'+o.aluno+(o.turma?' · '+o.turma:'')+'</div>'+
-      '<div class="cal-oc-item-info">'+(ICON[o.tipo]||'📋')+' '+o.tipo+' · '+o.hora+'</div>'+
-    '</div>';
-  }).join('');
+function renderOcsDia(dataStr) {
+  const ocs = (window._ocs||[]).filter(o => o.data === dataStr);
+  const eventos = (window._eventos||[]).filter(e => e.data === dataStr);
+  const parts = dataStr.split('/');
+  const dtObj = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const label = parts[0]+' de '+MESES_BR[parseInt(parts[1])-1];
+  const ehFuturoOuHoje = dtObj >= hoje;
+
+  document.getElementById('cal-dia-titulo').textContent = label+' ('+ocs.length+' oc.)';
+  document.getElementById('btn-dl-rel').style.display = ocs.length > 0 ? '' : 'none';
+
+  // Mostrar abas e botão add evento
+  const tabsEl = document.getElementById('cal-tipo-tabs');
+  tabsEl.style.display = '';
+  
+  // Cabeçalho com botão de add evento (só se for hoje ou futuro)
+  const cabWrap = document.getElementById('cal-ocs-titulo');
+  let btnAddHtml = '';
+  if (ehFuturoOuHoje) {
+    btnAddHtml = `<button class="btn-add-evento" onclick="abrirModalNovoEvento('${dataStr}')">+ Evento</button>`;
+  }
+  cabWrap.innerHTML = `<span class="cal-ocs-titulo-txt" id="cal-dia-titulo">${label} (${ocs.length} oc.)</span>
+    <div style="display:flex;gap:6px;align-items:center">
+      ${ehFuturoOuHoje ? btnAddHtml : ''}
+      <button class="btn-dl-rel" id="btn-dl-rel" onclick="baixarRelatorio()" style="${ocs.length > 0 ? '' : 'display:none'}">⬇️ Rel.</button>
+    </div>`;
+
+  const lista = document.getElementById('cal-ocs-lista');
+  const ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+
+  if (window._calTipoAtivo === 'ocorrencias') {
+    if (!ocs.length) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhuma ocorrência</div>'; return; }
+    lista.innerHTML = ocs.map(o => {
+      const cls = o.status === 'Pendente' ? 's-pendente' : o.status === 'Resolvido' ? 's-resolvido' : 's-acomp';
+      return `<div class="cal-oc-item ${cls}" onclick="irDetalheAnalytics('${o.firebaseKey}')">
+        <div class="cal-oc-item-nome">${o.aluno}${o.turma ? ' · '+o.turma : ''}</div>
+        <div class="cal-oc-item-info">${ICON[o.tipo]||'📋'} ${o.tipo} · ${o.hora}</div>
+      </div>`;
+    }).join('');
+  } else {
+    if (!eventos.length) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhum evento</div>'; return; }
+    lista.innerHTML = eventos.map(e =>
+      `<div class="cal-oc-item s-evento">
+        <div class="cal-oc-item-nome" style="display:flex;justify-content:space-between;align-items:center">
+          📅 ${e.titulo}
+          <button class="cal-oc-item-del" onclick="removerEvento('${e.firebaseKey}')">🗑️</button>
+        </div>
+        <div class="cal-oc-item-info">🕐 ${e.hora}${e.obs ? ' · '+e.obs : ''}</div>
+        <div class="cal-oc-item-info" style="margin-top:2px">Por: ${e.criadoPor || '—'}</div>
+      </div>`
+    ).join('');
+  }
 }
 
-window.irDetalheAnalytics=function(key){
-  _abaAtiva='lista';
-  document.getElementById('tab-lista').classList.add('ativo');
-  document.getElementById('tab-analytics').classList.remove('ativo');
-  document.getElementById('btn-novo-global').style.display='';
+window.irDetalheAnalytics = function(key) {
+  _abaAtiva = 'lista';
+  ['tab-lista','tab-analytics','tab-config'].forEach((id,i) => document.getElementById(id).classList.toggle('ativo', i===0));
+  document.getElementById('btn-novo-global').style.display = '';
   verDetalhe(key);
 };
 
-window.navCal=function(dir){
-  _calMes+=dir;
-  if(_calMes<0){_calMes=11;_calAno--;}
-  if(_calMes>11){_calMes=0;_calAno++;}
-  _diaSel=null;
-  document.getElementById('cal-dia-titulo').textContent='Selecione um dia';
-  document.getElementById('cal-ocs-lista').innerHTML='<div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>';
-  document.getElementById('btn-dl-rel').style.display='none';
+window.navCal = function(dir) {
+  _calMes += dir;
+  if (_calMes < 0) { _calMes = 11; _calAno--; }
+  if (_calMes > 11) { _calMes = 0; _calAno++; }
+  window._diaSel = null;
+  document.getElementById('cal-ocs-titulo').innerHTML = '<span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span><button class="btn-dl-rel" id="btn-dl-rel" onclick="baixarRelatorio()" style="display:none">⬇️ Relatório</button>';
+  document.getElementById('cal-ocs-lista').innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>';
+  document.getElementById('cal-tipo-tabs').style.display = 'none';
   renderCalendario();
 };
 
-window.baixarRelatorio=function(){
-  if(!_diaSel)return;
-  var ocs=(window._ocs||[]).filter(function(o){return o.data===_diaSel;});
-  if(!ocs.length){mostrarToast('Nenhuma ocorrência neste dia');return;}
-  var nomeInst=document.getElementById('header-nome-inst').textContent;
-  var linhas=[nomeInst,'Relatório — '+_diaSel,'Gerado: '+new Date().toLocaleString('pt-BR'),'Total: '+ocs.length,'','─'.repeat(50)];
-  ocs.forEach(function(o,i){
-    linhas.push('','#'+(i+1)+' — '+o.aluno+(o.turma?' ('+o.turma+')':''));
-    linhas.push('Tipo: '+o.tipo,'Professor: '+o.professor,'Hora: '+o.hora,'Status: '+o.status,'','Descrição:',o.descricao,'─'.repeat(50));
-  });
-  var blob=new Blob([linhas.join('\n')],{type:'text/plain;charset=utf-8'});
-  var url=URL.createObjectURL(blob);var a=document.createElement('a');
-  a.href=url;a.download='relatorio_'+_diaSel.replace(/\//g,'-')+'.txt';a.click();
-  URL.revokeObjectURL(url);mostrarToast('✓ Relatório baixado!');
+window.baixarRelatorio = function() {
+  if (!window._diaSel) return;
+  const ocs = (window._ocs||[]).filter(o => o.data === window._diaSel);
+  const evs = (window._eventos||[]).filter(e => e.data === window._diaSel);
+  if (!ocs.length && !evs.length) { mostrarToast('Nenhum dado neste dia'); return; }
+  const nomeInst = document.getElementById('header-nome-inst').textContent;
+  const linhas = [nomeInst, 'Relatório — '+window._diaSel, 'Gerado: '+new Date().toLocaleString('pt-BR'), '─'.repeat(50)];
+  if (ocs.length) {
+    linhas.push('', 'OCORRÊNCIAS ('+ocs.length+')', '─'.repeat(50));
+    ocs.forEach((o,i) => { linhas.push('','#'+(i+1)+' — '+o.aluno+(o.turma?' ('+o.turma+')':''),'Tipo: '+o.tipo,'Professor: '+o.professor,'Hora: '+o.hora,'Status: '+o.status,'','Descrição:',o.descricao,'─'.repeat(50)); });
+  }
+  if (evs.length) {
+    linhas.push('', 'EVENTOS ('+evs.length+')', '─'.repeat(50));
+    evs.forEach((e,i) => { linhas.push('','#'+(i+1)+' — '+e.titulo,'Horário: '+e.hora, e.obs ? 'Obs: '+e.obs : ''); });
+  }
+  const blob = new Blob([linhas.join('\n')], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = 'relatorio_'+window._diaSel.replace(/\//g,'-')+'.txt'; a.click();
+  URL.revokeObjectURL(url); mostrarToast('✓ Relatório baixado!');
 };
 
 // ═══════════════════════════════════
-//  GRÁFICO — Chart.js
+//  GRÁFICO — Chart.js (sem opção Dia)
 // ═══════════════════════════════════
-var _chartPeriodo='dia';
-var _chartTipo='bar';
-var _chartInst=null;
+var _chartPeriodo = 'semana';
+var _chartTipo = 'bar';
 
-window.setPeriodo=function(p){
-  _chartPeriodo=p;
-  document.querySelectorAll('#seg-periodo .seg-btn').forEach(function(b){b.classList.toggle('ativo',b.dataset.p===p);});
+window.setPeriodo = function(p) {
+  _chartPeriodo = p;
+  document.querySelectorAll('#seg-periodo .seg-btn').forEach(b => b.classList.toggle('ativo', b.dataset.p === p));
   renderChart();
 };
 
-window.toggleChartTipo=function(){
-  _chartTipo=_chartTipo==='bar'?'line':'bar';
-  document.getElementById('btn-chart-tipo').textContent=_chartTipo==='bar'?'Barras':'Linha';
+window.toggleChartTipo = function() {
+  _chartTipo = _chartTipo === 'bar' ? 'line' : 'bar';
+  document.getElementById('btn-chart-tipo').textContent = _chartTipo === 'bar' ? 'Barras' : 'Linha';
   renderChart();
 };
 
-function getTextColor(){
-  var tema=document.documentElement.getAttribute('data-tema')||'claro';
-  if(tema==='black')return'#555';if(tema==='escuro')return'#6B7A99';return'#94A3B8';
+function getTextColor() {
+  const tema = document.documentElement.getAttribute('data-tema') || 'claro';
+  if (tema === 'black') return '#555'; if (tema === 'escuro') return '#6B7A99'; return '#94A3B8';
 }
-function getGridColor(){
-  var tema=document.documentElement.getAttribute('data-tema')||'claro';
-  if(tema==='black')return'rgba(255,255,255,0.04)';if(tema==='escuro')return'rgba(255,255,255,0.06)';return'rgba(0,0,0,0.05)';
+function getGridColor() {
+  const tema = document.documentElement.getAttribute('data-tema') || 'claro';
+  if (tema === 'black') return 'rgba(255,255,255,0.04)'; if (tema === 'escuro') return 'rgba(255,255,255,0.06)'; return 'rgba(0,0,0,0.05)';
 }
 
-function buildChartData(){
-  var ocs=window._ocs||[];var agora=new Date();
-  var labels=[],dataPend=[],dataAcomp=[],dataResolvido=[],dataTotal=[];
+function buildChartData() {
+  const ocs = window._ocs || []; const agora = new Date();
+  let labels = [], dataPend = [], dataAcomp = [], dataResolvido = [], dataTotal = [];
 
-  if(_chartPeriodo==='dia'){
-    for(var h=23;h>=0;h--){
-      var d=new Date(agora);d.setHours(agora.getHours()-h,0,0,0);
-      var filtered=ocs.filter(function(o){
-        if(!o.timestamp)return false;
-        var t=new Date(o.timestamp);
-        return t.getHours()===d.getHours()&&t.getDate()===d.getDate()&&t.getMonth()===d.getMonth()&&t.getFullYear()===d.getFullYear();
-      });
-      labels.push(String(d.getHours()).padStart(2,'0')+'h');
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
-    }
-  }else if(_chartPeriodo==='semana'){
-    var DS=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-    for(var i=6;i>=0;i--){
-      var d=new Date(agora);d.setDate(agora.getDate()-i);d.setHours(0,0,0,0);
-      var dateStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
-      var filtered=ocs.filter(function(o){return o.data===dateStr;});
+  if (_chartPeriodo === 'semana') {
+    const DS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(agora); d.setDate(agora.getDate()-i); d.setHours(0,0,0,0);
+      const dateStr = String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+      const fil = ocs.filter(o => o.data === dateStr);
       labels.push(DS[d.getDay()]);
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
+      dataPend.push(fil.filter(o => o.status === 'Pendente').length);
+      dataAcomp.push(fil.filter(o => o.status === 'Em acompanhamento').length);
+      dataResolvido.push(fil.filter(o => o.status === 'Resolvido').length);
+      dataTotal.push(fil.length);
     }
-  }else if(_chartPeriodo==='mes'){
-    for(var w=3;w>=0;w--){
-      var inicio=new Date(agora);inicio.setDate(agora.getDate()-(w+1)*7+1);inicio.setHours(0,0,0,0);
-      var fim=new Date(agora);fim.setDate(agora.getDate()-w*7);fim.setHours(23,59,59,999);
-      var filtered=ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d>=inicio&&d<=fim;});
-      var label=String(inicio.getDate()).padStart(2,'0')+'/'+String(inicio.getMonth()+1).padStart(2,'0');
-      labels.push(label);
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
+  } else if (_chartPeriodo === 'mes') {
+    for (let w = 3; w >= 0; w--) {
+      const inicio = new Date(agora); inicio.setDate(agora.getDate()-(w+1)*7+1); inicio.setHours(0,0,0,0);
+      const fim = new Date(agora); fim.setDate(agora.getDate()-w*7); fim.setHours(23,59,59,999);
+      const fil = ocs.filter(o => { const d = parseDateBR(o.data); if (!d) return false; return d >= inicio && d <= fim; });
+      labels.push(String(inicio.getDate()).padStart(2,'0')+'/'+String(inicio.getMonth()+1).padStart(2,'0'));
+      dataPend.push(fil.filter(o => o.status === 'Pendente').length);
+      dataAcomp.push(fil.filter(o => o.status === 'Em acompanhamento').length);
+      dataResolvido.push(fil.filter(o => o.status === 'Resolvido').length);
+      dataTotal.push(fil.length);
     }
-  }else{
-    var ML=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    for(var m=0;m<12;m++){
-      var filtered=ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d.getMonth()===m&&d.getFullYear()===agora.getFullYear();});
+  } else { // ano
+    const ML = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    for (let m = 0; m < 12; m++) {
+      const fil = ocs.filter(o => { const d = parseDateBR(o.data); if (!d) return false; return d.getMonth() === m && d.getFullYear() === agora.getFullYear(); });
       labels.push(ML[m]);
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
+      dataPend.push(fil.filter(o => o.status === 'Pendente').length);
+      dataAcomp.push(fil.filter(o => o.status === 'Em acompanhamento').length);
+      dataResolvido.push(fil.filter(o => o.status === 'Resolvido').length);
+      dataTotal.push(fil.length);
     }
   }
-  return{labels,dataPend,dataAcomp,dataResolvido,dataTotal};
+  return {labels, dataPend, dataAcomp, dataResolvido, dataTotal};
 }
 
-function renderChart(){
-  var canvas=document.getElementById('chart-canvas');if(!canvas)return;
-  var data=buildChartData();
-  var textColor=getTextColor();var gridColor=getGridColor();
-
-  if(window._chartInst){window._chartInst.destroy();window._chartInst=null;}
-
-  var isBar=_chartTipo==='bar';
-
-  // Datasets
-  var datasets=[
-    {
-      label:'Pendente',data:data.dataPend,
-      backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',
-      borderColor:'#F59E0B',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#F59E0B',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    },
-    {
-      label:'Acomp.',data:data.dataAcomp,
-      backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',
-      borderColor:'#3B82F6',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#3B82F6',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    },
-    {
-      label:'Resolvido',data:data.dataResolvido,
-      backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',
-      borderColor:'#22C55E',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#22C55E',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    },
-    {
-      label:'Total',data:data.dataTotal,
-      backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)',
-      borderColor:'#8B5CF6',borderWidth:isBar?0:2,
-      pointBackgroundColor:'#8B5CF6',pointRadius:isBar?0:4,pointHoverRadius:5,
-      fill:!isBar,tension:0.4,borderRadius:isBar?6:0,
-    }
+function renderChart() {
+  const canvas = document.getElementById('chart-canvas'); if (!canvas) return;
+  const data = buildChartData();
+  const textColor = getTextColor(), gridColor = getGridColor();
+  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
+  const isBar = _chartTipo === 'bar';
+  const datasets = [
+    { label:'Pendente', data:data.dataPend,
+      backgroundColor: isBar ? 'rgba(245,158,11,0.85)' : 'rgba(245,158,11,0.15)',
+      borderColor:'#F59E0B', borderWidth:isBar?0:2.5,
+      pointBackgroundColor:'#F59E0B', pointRadius:isBar?0:4, pointHoverRadius:5,
+      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 },
+    { label:'Acomp.', data:data.dataAcomp,
+      backgroundColor: isBar ? 'rgba(29,78,216,0.85)' : 'rgba(29,78,216,0.15)',
+      borderColor:'#1D4ED8', borderWidth:isBar?0:2.5,
+      pointBackgroundColor:'#1D4ED8', pointRadius:isBar?0:4, pointHoverRadius:5,
+      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 },
+    { label:'Resolvido', data:data.dataResolvido,
+      backgroundColor: isBar ? 'rgba(34,197,94,0.85)' : 'rgba(34,197,94,0.10)',
+      borderColor:'#22C55E', borderWidth:isBar?0:2.5,
+      pointBackgroundColor:'#22C55E', pointRadius:isBar?0:4, pointHoverRadius:5,
+      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 },
+    { label:'Total', data:data.dataTotal,
+      backgroundColor: isBar ? 'rgba(109,40,217,0.85)' : 'rgba(109,40,217,0.10)',
+      borderColor:'#6D28D9', borderWidth:isBar?0:2.5,
+      pointBackgroundColor:'#6D28D9', pointRadius:isBar?0:4, pointHoverRadius:5,
+      fill:!isBar, tension:0.4, borderRadius:isBar?6:0 }
   ];
-
-  window._chartInst=new Chart(canvas,{
-    type:isBar?'bar':'line',
-    data:{labels:data.labels,datasets:datasets},
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      animation:{duration:600,easing:'easeOutQuart'},
-      interaction:{intersect:false,mode:'index'},
+  window._chartInst = new Chart(canvas, {
+    type: isBar ? 'bar' : 'line',
+    data: {labels: data.labels, datasets},
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      animation:{duration:600, easing:'easeOutQuart'},
+      interaction:{intersect:false, mode:'index'},
       plugins:{
         legend:{display:false},
         tooltip:{
-          backgroundColor:'rgba(15,23,41,0.9)',
-          titleColor:'#fff',bodyColor:'rgba(255,255,255,0.75)',
-          padding:10,cornerRadius:8,
+          backgroundColor:'rgba(15,23,41,0.92)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.75)',
+          padding:10, cornerRadius:8,
           titleFont:{family:'DM Sans',size:11,weight:'600'},
-          bodyFont:{family:'DM Sans',size:11},
+          bodyFont:{family:'DM Sans',size:11}
         }
       },
       scales:{
-        x:{
-          grid:{color:gridColor,drawBorder:false},
-          ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0},
-          border:{display:false},
-        },
-        y:{
-          grid:{color:gridColor,drawBorder:false},
-          ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0},
-          border:{display:false},
-          beginAtZero:true,
-        }
+        x:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0}, border:{display:false} },
+        y:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0}, border:{display:false}, beginAtZero:true }
       },
-      ...(isBar&&{
-        datasets:{bar:{barThickness:'flex',maxBarThickness:18}},
-      })
+      ...(isBar && { datasets:{ bar:{ barThickness:'flex', maxBarThickness:18 } } })
     }
   });
 }
