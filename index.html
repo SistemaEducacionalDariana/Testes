@@ -718,17 +718,7 @@ function aplicarTema(t) {
 aplicarTema(localStorage.getItem('ceti_tema') || 'claro');
 
 // ── INIT ADMIN PADRÃO ────────────────────────────────────────────
-async function init() {
-  try {
-    const snap = await get(ADM);
-    if (!snap.exists()) {
-      await set(ADM, {
-        principal: { usuario:'messi', senha:'123456', tipo:'principal', criadoEm: new Date().toISOString() }
-      });
-    }
-  } catch(e) { console.warn('init err', e); }
-}
-init();
+// credenciais gerenciadas exclusivamente pelo Firebase
 
 // ── LISTENERS FIREBASE ───────────────────────────────────────────
 onValue(ref(db, 'admin_config/nome_instituicao'), s => {
