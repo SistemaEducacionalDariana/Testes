@@ -351,7 +351,7 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 .cal-ocs-titulo-txt { font-size:12px; font-weight:600; color:var(--sub); }
 .cal-ocs-acoes { display:flex; gap:6px; }
 
-/* BOTÃO RELATÓRIO — novo estilo */
+/* BOTÃO RELATÓRIO — sempre visível */
 .btn-dl-rel {
   background:var(--azul2); border:none; color:#fff;
   border-radius:7px; padding:5px 12px; font-size:10px; font-weight:700;
@@ -419,18 +419,25 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .login-loading { display:none; text-align:center; margin-top:8px; font-size:12px; color:var(--sub); }
 .login-loading.show { display:block; }
 
-/* ── MODAL RELATÓRIO ── */
-.periodo-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin:12px 0 16px; }
-.periodo-op {
-  border:2px solid var(--borda); border-radius:10px; padding:14px 8px 12px;
-  text-align:center; cursor:pointer; background:var(--cinza); transition:all .2s;
+/* ══ MODAL RELATÓRIO — novo layout com seleção de datas ══ */
+.rel-atalhos {
+  display:flex; gap:8px; margin:10px 0 14px; flex-wrap:wrap;
 }
-.periodo-op:active { opacity:.7; }
-.periodo-op.sel { border-color:var(--azul2); background:var(--azulc); }
-.periodo-op-icon { font-size:22px; margin-bottom:5px; }
-.periodo-op-nome { font-size:11px; font-weight:700; color:var(--texto); }
-.periodo-op-desc { font-size:9px; color:var(--sub); margin-top:2px; }
-.periodo-op.sel .periodo-op-nome { color:var(--azul2); }
+.rel-atalho-btn {
+  flex:1; min-width:0;
+  background:var(--cinza); border:1.5px solid var(--borda); color:var(--sub);
+  border-radius:9px; padding:9px 6px; font-size:11px; font-weight:700;
+  cursor:pointer; font-family:'DM Sans',sans-serif; text-align:center;
+  transition:all .15s; white-space:nowrap;
+}
+.rel-atalho-btn:active { opacity:.7; }
+.rel-atalho-btn.ativo {
+  border-color:var(--azul2); background:var(--azulc); color:var(--azul2);
+}
+.rel-datas-row {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px;
+}
+.rel-datas-row .form-group { margin-bottom:0; }
 
 /* TOAST */
 .toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:#0F1729; color:#fff; padding:10px 20px; border-radius:20px; font-size:12px; font-weight:600; transition:transform .25s ease, opacity .25s ease; z-index:9999; white-space:nowrap; pointer-events:none; }
@@ -530,7 +537,8 @@ html[data-tema="black"] .toast { background:#222; }
             <span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span>
             <div class="cal-ocs-acoes">
               <button class="btn-add-evento" id="btn-add-evento" onclick="abrirModalEvento()">+ Evento</button>
-              <button class="btn-dl-rel" id="btn-dl-rel" onclick="abrirModalRelatorio()" style="display:none">📄 Relatório</button>
+              <!-- ALTERAÇÃO 3: botão sempre visível, sem display:none -->
+              <button class="btn-dl-rel" id="btn-dl-rel" onclick="abrirModalRelatorio()">📄 Relatório</button>
             </div>
           </div>
           <div class="cal-ocs-lista" id="cal-ocs-lista">
@@ -873,31 +881,34 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     MODAL RELATÓRIO — seleção de período
-     ══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     MODAL RELATÓRIO — ALTERAÇÃO 1: seleção livre de datas
+     + atalhos rápidos (semana Dom→Sáb, mês)
+     ══════════════════════════════════════════════════════════ -->
 <div class="modal-bg" id="modal-relatorio">
   <div class="modal">
     <div class="modal-handle"></div>
     <h3>📄 Gerar Relatório</h3>
-    <p id="modal-rel-subtitulo">Escolha o período do relatório</p>
-    <div class="periodo-grid">
-      <div class="periodo-op sel" id="rel-op-dia" onclick="selecionarPeriodoRel('dia')">
-        <div class="periodo-op-icon">📅</div>
-        <div class="periodo-op-nome">Dia</div>
-        <div class="periodo-op-desc" id="rel-desc-dia">—</div>
+    <p>Selecione o período desejado</p>
+
+    <!-- Atalhos rápidos -->
+    <div class="rel-atalhos">
+      <button class="rel-atalho-btn" id="rel-btn-semana" onclick="aplicarAtalhoRel('semana')">📆 Semana atual<br><span id="rel-label-semana" style="font-weight:400;font-size:10px;opacity:.7">Dom → Sáb</span></button>
+      <button class="rel-atalho-btn" id="rel-btn-mes" onclick="aplicarAtalhoRel('mes')">🗓️ Mês atual<br><span id="rel-label-mes" style="font-weight:400;font-size:10px;opacity:.7">—</span></button>
+    </div>
+
+    <!-- Seleção manual de datas -->
+    <div class="rel-datas-row">
+      <div class="form-group">
+        <label>Data início</label>
+        <input type="date" id="rel-data-ini" onchange="limparAtalhosRel()">
       </div>
-      <div class="periodo-op" id="rel-op-semana" onclick="selecionarPeriodoRel('semana')">
-        <div class="periodo-op-icon">📆</div>
-        <div class="periodo-op-nome">Semana</div>
-        <div class="periodo-op-desc" id="rel-desc-semana">Últimos 7 dias</div>
-      </div>
-      <div class="periodo-op" id="rel-op-mes" onclick="selecionarPeriodoRel('mes')">
-        <div class="periodo-op-icon">🗓️</div>
-        <div class="periodo-op-nome">Mês</div>
-        <div class="periodo-op-desc" id="rel-desc-mes">—</div>
+      <div class="form-group">
+        <label>Data fim</label>
+        <input type="date" id="rel-data-fim" onchange="limparAtalhosRel()">
       </div>
     </div>
+
     <div class="modal-btns">
       <button class="btn-cancelar" onclick="fecharModalRelatorio()">Cancelar</button>
       <button class="btn-confirmar-azul" onclick="gerarRelatorio()">🖨️ Abrir para imprimir</button>
@@ -918,14 +929,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzKQbEeoA7U38vh9Cw_oy8iF7OSjzQUJE",
-  authDomain: "teste-a6f2f.firebaseapp.com",
-  databaseURL: "https://teste-a6f2f-default-rtdb.firebaseio.com",
-  projectId: "teste-a6f2f",
-  storageBucket: "teste-a6f2f.firebasestorage.app",
-  messagingSenderId: "124639888953",
-  appId: "1:124639888953:web:5641e647734ef38f926fe8",
-  measurementId: "G-SC442ZNRBK"
+  apiKey: "AIzaSyDpfUODyVcTWqOyMNrXbMM21-aweOdO1_Y",
+  authDomain: "cetidariana.firebaseapp.com",
+  databaseURL: "https://cetidariana-default-rtdb.firebaseio.com",
+  projectId: "cetidariana",
+  storageBucket: "cetidariana.firebasestorage.app",
+  messagingSenderId: "8069027724",
+  appId: "1:8069027724:web:7f3caf124fcae48900a8a9"
 };
 
 const app    = initializeApp(firebaseConfig);
@@ -1432,6 +1442,11 @@ function parseDateBR(dateStr) {
   return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
 }
 
+// Converte Date para string YYYY-MM-DD para input[type=date]
+function dateToInputVal(d) {
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
 function renderCalendario() {
   document.getElementById('cal-mes-ano').textContent = MESES_BR[_calMes] + ' ' + _calAno;
   var primeiroDia = new Date(_calAno, _calMes, 1).getDay();
@@ -1465,6 +1480,7 @@ window.selecionarDia = function(dataStr) {
   window._diaSel = dataStr;
   renderCalendario();
   renderOcsDia(dataStr);
+  // ALTERAÇÃO 3: exibe botão de evento ao selecionar dia (btn-dl-rel sempre visível agora)
   document.getElementById('btn-add-evento').style.display = '';
 };
 
@@ -1475,7 +1491,7 @@ function renderOcsDia(dataStr) {
   var label = parts[0] + ' de ' + MESES_BR[parseInt(parts[1])-1];
   var total = ocs.length + eventos.length;
   document.getElementById('cal-dia-titulo').textContent = label + ' (' + total + ')';
-  document.getElementById('btn-dl-rel').style.display = ocs.length > 0 ? '' : 'none';
+  // ALTERAÇÃO 3: btn-dl-rel não é mais controlado aqui — sempre visível
 
   var lista = document.getElementById('cal-ocs-lista');
   if (!total) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhum item neste dia</div>'; return; }
@@ -1522,34 +1538,40 @@ window.navCal = function(dir) {
   window._diaSel = null;
   document.getElementById('cal-dia-titulo').textContent = 'Selecione um dia';
   document.getElementById('cal-ocs-lista').innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>';
-  document.getElementById('btn-dl-rel').style.display = 'none';
+  // ALTERAÇÃO 3: não esconde mais o btn-dl-rel ao navegar
   document.getElementById('btn-add-evento').style.display = 'none';
   renderCalendario();
 };
 
-// ═══════════════════════════════════════════════════════
-//  RELATÓRIO — modal de período + janela de impressão
-// ═══════════════════════════════════════════════════════
-var _relPeriodoSel = 'dia';
+// ═══════════════════════════════════════════════════════════════
+//  RELATÓRIO — ALTERAÇÃO 1+2: modal de seleção livre de datas
+//  + semana fechada Dom→Sáb + sem coluna status + hora no lugar
+// ═══════════════════════════════════════════════════════════════
+
+var _relAtalhoAtivo = null; // 'semana' | 'mes' | null
 
 window.abrirModalRelatorio = function() {
-  if (!window._diaSel) return;
-  var parts = window._diaSel.split('/');
-  var labelDia = parts[0] + '/' + parts[1] + '/' + parts[2];
-  document.getElementById('rel-desc-dia').textContent = labelDia;
+  var hoje = new Date();
 
-  // label semana
-  var d = parseDateBR(window._diaSel) || new Date();
-  var ini = new Date(d); ini.setDate(d.getDate() - 6);
-  var iniStr = String(ini.getDate()).padStart(2,'0') + '/' + String(ini.getMonth()+1).padStart(2,'0');
-  var fimStr = String(d.getDate()).padStart(2,'0')   + '/' + String(d.getMonth()+1).padStart(2,'0');
-  document.getElementById('rel-desc-semana').textContent = iniStr + ' → ' + fimStr;
+  // Atualiza labels dos atalhos rápidos
+  // Semana atual: domingo anterior (ou hoje se domingo) → sábado da mesma semana
+  var diaSemana = hoje.getDay(); // 0=dom, 6=sab
+  var domAtual = new Date(hoje); domAtual.setDate(hoje.getDate() - diaSemana); domAtual.setHours(0,0,0,0);
+  var sabAtual = new Date(domAtual); sabAtual.setDate(domAtual.getDate() + 6);
+  var labelDom = String(domAtual.getDate()).padStart(2,'0') + '/' + String(domAtual.getMonth()+1).padStart(2,'0');
+  var labelSab = String(sabAtual.getDate()).padStart(2,'0') + '/' + String(sabAtual.getMonth()+1).padStart(2,'0');
+  document.getElementById('rel-label-semana').textContent = labelDom + ' → ' + labelSab;
 
-  // label mês
-  document.getElementById('rel-desc-mes').textContent = MESES_BR[parseInt(parts[1])-1] + ' ' + parts[2];
+  // Mês atual
+  document.getElementById('rel-label-mes').textContent = MESES_BR[hoje.getMonth()] + ' ' + hoje.getFullYear();
 
-  _relPeriodoSel = 'dia';
-  selecionarPeriodoRel('dia');
+  // Pré-preenche os inputs com a semana atual como padrão
+  _relAtalhoAtivo = 'semana';
+  document.getElementById('rel-data-ini').value = dateToInputVal(domAtual);
+  document.getElementById('rel-data-fim').value = dateToInputVal(sabAtual);
+  document.getElementById('rel-btn-semana').classList.add('ativo');
+  document.getElementById('rel-btn-mes').classList.remove('ativo');
+
   document.getElementById('modal-relatorio').classList.add('show');
 };
 
@@ -1557,60 +1579,74 @@ window.fecharModalRelatorio = function() {
   document.getElementById('modal-relatorio').classList.remove('show');
 };
 
-window.selecionarPeriodoRel = function(p) {
-  _relPeriodoSel = p;
-  ['dia','semana','mes'].forEach(function(k) {
-    document.getElementById('rel-op-' + k).classList.toggle('sel', k === p);
-  });
+// Atalhos rápidos: semana fechada Dom→Sáb ou mês completo
+window.aplicarAtalhoRel = function(tipo) {
+  var hoje = new Date();
+  _relAtalhoAtivo = tipo;
+  document.getElementById('rel-btn-semana').classList.toggle('ativo', tipo === 'semana');
+  document.getElementById('rel-btn-mes').classList.toggle('ativo', tipo === 'mes');
+
+  if (tipo === 'semana') {
+    // Semana fechada: domingo desta semana → sábado desta semana
+    var diaSemana = hoje.getDay();
+    var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana); dom.setHours(0,0,0,0);
+    var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
+    document.getElementById('rel-data-ini').value = dateToInputVal(dom);
+    document.getElementById('rel-data-fim').value = dateToInputVal(sab);
+  } else {
+    // Mês atual: dia 1 → último dia
+    var iniMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+    var fimMes = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0);
+    document.getElementById('rel-data-ini').value = dateToInputVal(iniMes);
+    document.getElementById('rel-data-fim').value = dateToInputVal(fimMes);
+  }
+};
+
+// Quando o usuário edita manualmente as datas, desmarca atalhos
+window.limparAtalhosRel = function() {
+  _relAtalhoAtivo = null;
+  document.getElementById('rel-btn-semana').classList.remove('ativo');
+  document.getElementById('rel-btn-mes').classList.remove('ativo');
 };
 
 window.gerarRelatorio = function() {
+  var iniVal = document.getElementById('rel-data-ini').value;
+  var fimVal = document.getElementById('rel-data-fim').value;
+
+  if (!iniVal || !fimVal) { mostrarToast('⚠️ Selecione as datas de início e fim'); return; }
+
+  var iniDate = new Date(iniVal + 'T00:00:00');
+  var fimDate = new Date(fimVal + 'T23:59:59');
+
+  if (iniDate > fimDate) { mostrarToast('⚠️ Data início maior que data fim'); return; }
+
   var ocs = window._ocs || [];
-  var nomeInst = document.getElementById('header-nome-inst').textContent;
+  var ocsFiltradas = ocs.filter(function(o) {
+    var d = parseDateBR(o.data);
+    return d && d >= iniDate && d <= fimDate;
+  });
 
-  var ocsFiltradas, tituloRelatorio;
+  if (!ocsFiltradas.length) { mostrarToast('⚠️ Nenhuma ocorrência neste período'); return; }
 
-  if (_relPeriodoSel === 'dia') {
-    var dia = window._diaSel;
-    ocsFiltradas = ocs.filter(function(o) { return o.data === dia; });
-    tituloRelatorio = 'Relatório do Dia — ' + dia;
-
-  } else if (_relPeriodoSel === 'semana') {
-    var dRef = parseDateBR(window._diaSel) || new Date();
-    var ini = new Date(dRef); ini.setDate(dRef.getDate() - 6); ini.setHours(0,0,0,0);
-    var fim = new Date(dRef); fim.setHours(23,59,59,999);
-    ocsFiltradas = ocs.filter(function(o) {
-      var d = parseDateBR(o.data); return d && d >= ini && d <= fim;
-    });
-    var iniStr = String(ini.getDate()).padStart(2,'0')+'/'+String(ini.getMonth()+1).padStart(2,'0')+'/'+ini.getFullYear();
-    var fimStr = String(fim.getDate()).padStart(2,'0')+'/'+String(fim.getMonth()+1).padStart(2,'0')+'/'+fim.getFullYear();
-    tituloRelatorio = 'Relatório Semanal — ' + iniStr + ' a ' + fimStr;
-
+  // Monta o título do relatório
+  var fmtDate = function(d) {
+    return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
+  };
+  var tituloRelatorio;
+  if (_relAtalhoAtivo === 'semana') {
+    tituloRelatorio = 'Relatório Semanal — ' + fmtDate(iniDate) + ' a ' + fmtDate(fimDate);
+  } else if (_relAtalhoAtivo === 'mes') {
+    tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[iniDate.getMonth()] + ' ' + iniDate.getFullYear();
   } else {
-    var parts = window._diaSel.split('/');
-    var mes = parseInt(parts[1]) - 1;
-    var ano = parseInt(parts[2]);
-    ocsFiltradas = ocs.filter(function(o) {
-      var d = parseDateBR(o.data); return d && d.getMonth() === mes && d.getFullYear() === ano;
-    });
-    tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[mes] + ' ' + ano;
-  }
-
-  if (!ocsFiltradas.length) {
-    mostrarToast('⚠️ Nenhuma ocorrência neste período');
-    return;
+    tituloRelatorio = 'Relatório — ' + fmtDate(iniDate) + ' a ' + fmtDate(fimDate);
   }
 
   fecharModalRelatorio();
 
-  // ── monta o HTML da janela de impressão ──────────────────────────
-  var statusBadge = function(s) {
-    if (s === 'Pendente')          return '<span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#FEF3C7;color:#92400E;">Pendente</span>';
-    if (s === 'Em acompanhamento') return '<span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#DBEAFE;color:#1D4ED8;">Em acompanhamento</span>';
-    return '<span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#DCFCE7;color:#166534;">Resolvido</span>';
-  };
+  var nomeInst = document.getElementById('header-nome-inst').textContent;
 
-  // agrupa por data para exibir separadores no relatório semanal/mensal
+  // Agrupa por data para exibir separadores quando período > 1 dia
+  var umDia = iniVal === fimVal;
   var porData = {};
   ocsFiltradas.forEach(function(o) {
     var k = o.data || '—';
@@ -1622,28 +1658,27 @@ window.gerarRelatorio = function() {
     return (da || 0) - (db || 0);
   });
 
+  // ALTERAÇÃO 2: sem coluna Status; coluna Professor exibe a hora registrada
   var registrosHtml = datasOrdenadas.map(function(data) {
-    var mostrarData = _relPeriodoSel !== 'dia';
-    var header = mostrarData
-      ? '<tr><td colspan="5" style="padding:10px 0 4px;font-size:12px;font-weight:700;color:#1B3F8B;border-bottom:2px solid #1B3F8B;letter-spacing:.3px;">📅 ' + data + '</td></tr>'
+    var header = !umDia
+      ? '<tr><td colspan="4" style="padding:10px 0 4px;font-size:12px;font-weight:700;color:#1B3F8B;border-bottom:2px solid #1B3F8B;letter-spacing:.3px;">📅 ' + data + '</td></tr>'
       : '';
     var linhas = porData[data].map(function(o, idx) {
       var bg = idx % 2 === 0 ? '#FFFFFF' : '#F8F9FF';
       return '<tr style="background:' + bg + ';page-break-inside:avoid;">' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:14px;font-weight:700;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + o.aluno + '</td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + (o.turma || '—') + '</td>' +
-        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">Prof(a). ' + o.professor + '<br><span style="font-size:11px;color:#64748B;">' + o.hora + '</span></td>' +
+        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">Prof(a). ' + o.professor + '<br><span style="font-size:11px;color:#64748B;">' + (o.data||'') + ' · ' + (o.hora||'') + '</span></td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;max-width:280px;line-height:1.6;">' +
           '<div style="font-size:11px;font-weight:600;color:#2A5BD7;margin-bottom:4px;">' + o.tipo + '</div>' +
           o.descricao +
         '</td>' +
-        '<td style="padding:14px 10px;vertical-align:top;border-bottom:1px solid #E8EEFF;white-space:nowrap;">' + statusBadge(o.status) + '</td>' +
       '</tr>';
     }).join('');
     return header + linhas;
   }).join('');
 
-  // estatísticas
+  // Estatísticas (mantidas para resumo no topo, mas sem status no corpo)
   var total     = ocsFiltradas.length;
   var pendentes = ocsFiltradas.filter(function(o){return o.status==='Pendente';}).length;
   var acomp     = ocsFiltradas.filter(function(o){return o.status==='Em acompanhamento';}).length;
@@ -1700,11 +1735,10 @@ window.gerarRelatorio = function() {
       '</div>' +
       '<table>' +
         '<thead><tr>' +
-          '<th style="width:18%">Aluno</th>' +
-          '<th style="width:8%">Turma</th>' +
-          '<th style="width:16%">Professor(a)</th>' +
-          '<th style="width:46%">Descrição</th>' +
-          '<th style="width:12%">Status</th>' +
+          '<th style="width:20%">Aluno</th>' +
+          '<th style="width:9%">Turma</th>' +
+          '<th style="width:19%">Professor(a) · Horário</th>' +
+          '<th style="width:52%">Descrição</th>' +
         '</tr></thead>' +
         '<tbody>' + registrosHtml + '</tbody>' +
       '</table>' +
