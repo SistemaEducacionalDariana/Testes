@@ -900,7 +900,9 @@ onValue(evRef, snap => {
 onValue(ocRef, snap => {
   const lista = [];
   snap.forEach(child => lista.push({ firebaseKey: child.key, ...child.val() }));
-  lista.reverse();
+  // Ordena por timestamp decrescente (mais recente primeiro)
+  // Fallback para firebaseKey caso timestamp seja igual ou ausente
+  lista.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0) || b.firebaseKey.localeCompare(a.firebaseKey));
   window._ocs = lista;
   renderLista(); renderCalendario(); renderChart();
 });
