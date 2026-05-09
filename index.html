@@ -419,7 +419,7 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .login-loading { display:none; text-align:center; margin-top:8px; font-size:12px; color:var(--sub); }
 .login-loading.show { display:block; }
 
-/* ══ MODAL RELATÓRIO — novo layout com seleção de datas ══ */
+/* ══ MODAL RELATÓRIO ══ */
 .rel-atalhos {
   display:flex; gap:8px; margin:10px 0 14px; flex-wrap:wrap;
 }
@@ -464,6 +464,9 @@ html[data-tema="black"] .toast { background:#222; }
 .tab-btn-icon { font-size:18px; line-height:1; transition:transform .2s; }
 .tab-btn.ativo { color:var(--azul2); }
 .tab-btn.ativo .tab-btn-icon { transform:translateY(-1px); }
+
+/* TURMA INPUT — exibe hint de formato */
+.turma-hint { font-size:10px; color:var(--sub); margin-top:3px; opacity:.7; }
 </style>
 </head>
 <body>
@@ -537,7 +540,6 @@ html[data-tema="black"] .toast { background:#222; }
             <span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span>
             <div class="cal-ocs-acoes">
               <button class="btn-add-evento" id="btn-add-evento" onclick="abrirModalEvento()">+ Evento</button>
-              <!-- ALTERAÇÃO 3: botão sempre visível, sem display:none -->
               <button class="btn-dl-rel" id="btn-dl-rel" onclick="abrirModalRelatorio()">📄 Relatório</button>
             </div>
           </div>
@@ -575,20 +577,36 @@ html[data-tema="black"] .toast { background:#222; }
           <button class="btn-back" onclick="irParaLista()">← Voltar</button>
           <div class="form-title">Nova Ocorrência</div>
         </div>
-        <div class="form-group"><label>Aluno *</label><input id="f-aluno" type="text" placeholder="Nome completo"></div>
+        <div class="form-group">
+          <label>Aluno *</label>
+          <input id="f-aluno" type="text" placeholder="Nome completo" autocomplete="off">
+        </div>
         <div class="form-row">
-          <div class="form-group"><label>Turma</label><input id="f-turma" type="text" placeholder="Ex: 3A"></div>
+          <div class="form-group">
+            <label>Turma</label>
+            <input id="f-turma" type="text" placeholder="Ex: 1°1" autocomplete="off" maxlength="10">
+            <span class="turma-hint">Formato: 1°1, 2°3…</span>
+          </div>
           <div class="form-group">
             <label>Tipo *</label>
             <select id="f-tipo">
-              <option>Agressão verbal</option><option>Agressão física</option>
-              <option>Uso de celular</option><option>Desrespeito ao professor</option>
-              <option>Bagunça em sala</option><option>Bullying</option>
-              <option>Vandalismo</option><option>Outros</option>
+              <option>Agressão verbal</option>
+              <option>Agressão física</option>
+              <option>Uso de celular</option>
+              <option>Desrespeito ao professor</option>
+              <option>Bagunça em sala</option>
+              <option>Bullying</option>
+              <option>Vandalismo</option>
+              <option>Gazetando</option>
+              <option>Sem nenhuma atividade</option>
+              <option>Outros</option>
             </select>
           </div>
         </div>
-        <div class="form-group"><label>Professor(a) *</label><input id="f-professor" type="text" placeholder="Nome do(a) professor(a)"></div>
+        <div class="form-group">
+          <label>Professor(a) *</label>
+          <input id="f-professor" type="text" placeholder="Nome do(a) professor(a)" autocomplete="off">
+        </div>
         <div class="form-group"><label>Descrição *</label><textarea id="f-descricao" placeholder="Descreva o ocorrido..."></textarea></div>
         <button class="btn-salvar" id="btn-salvar" onclick="salvarOcorrencia()">Salvar Ocorrência</button>
       </div>
@@ -603,20 +621,36 @@ html[data-tema="black"] .toast { background:#222; }
           <button class="btn-back" onclick="voltarDetalhe()">← Voltar</button>
           <div class="form-title">Editar Ocorrência</div>
         </div>
-        <div class="form-group"><label>Aluno *</label><input id="e-aluno" type="text"></div>
+        <div class="form-group">
+          <label>Aluno *</label>
+          <input id="e-aluno" type="text" autocomplete="off">
+        </div>
         <div class="form-row">
-          <div class="form-group"><label>Turma</label><input id="e-turma" type="text"></div>
+          <div class="form-group">
+            <label>Turma</label>
+            <input id="e-turma" type="text" maxlength="10" autocomplete="off">
+            <span class="turma-hint">Formato: 1°1, 2°3…</span>
+          </div>
           <div class="form-group">
             <label>Tipo *</label>
             <select id="e-tipo">
-              <option>Agressão verbal</option><option>Agressão física</option>
-              <option>Uso de celular</option><option>Desrespeito ao professor</option>
-              <option>Bagunça em sala</option><option>Bullying</option>
-              <option>Vandalismo</option><option>Outros</option>
+              <option>Agressão verbal</option>
+              <option>Agressão física</option>
+              <option>Uso de celular</option>
+              <option>Desrespeito ao professor</option>
+              <option>Bagunça em sala</option>
+              <option>Bullying</option>
+              <option>Vandalismo</option>
+              <option>Gazetando</option>
+              <option>Sem nenhuma atividade</option>
+              <option>Outros</option>
             </select>
           </div>
         </div>
-        <div class="form-group"><label>Professor(a) *</label><input id="e-professor" type="text"></div>
+        <div class="form-group">
+          <label>Professor(a) *</label>
+          <input id="e-professor" type="text" autocomplete="off">
+        </div>
         <div class="form-group"><label>Descrição *</label><textarea id="e-descricao"></textarea></div>
         <div id="admin-dt-wrap" style="display:none">
           <div class="form-group">
@@ -881,20 +915,18 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     MODAL RELATÓRIO — ALTERAÇÃO 1: seleção livre de datas
-     + atalhos rápidos (semana Dom→Sáb, mês)
-     ══════════════════════════════════════════════════════════ -->
+<!-- MODAL RELATÓRIO -->
 <div class="modal-bg" id="modal-relatorio">
   <div class="modal">
     <div class="modal-handle"></div>
     <h3>📄 Gerar Relatório</h3>
     <p>Selecione o período desejado</p>
 
-    <!-- Atalhos rápidos -->
+    <!-- Atalhos rápidos: Dia, Semana, Mês -->
     <div class="rel-atalhos">
-      <button class="rel-atalho-btn" id="rel-btn-semana" onclick="aplicarAtalhoRel('semana')">📆 Semana atual<br><span id="rel-label-semana" style="font-weight:400;font-size:10px;opacity:.7">Dom → Sáb</span></button>
-      <button class="rel-atalho-btn" id="rel-btn-mes" onclick="aplicarAtalhoRel('mes')">🗓️ Mês atual<br><span id="rel-label-mes" style="font-weight:400;font-size:10px;opacity:.7">—</span></button>
+      <button class="rel-atalho-btn" id="rel-btn-dia" onclick="aplicarAtalhoRel('dia')">📅 Hoje<br><span id="rel-label-dia" style="font-weight:400;font-size:10px;opacity:.7">—</span></button>
+      <button class="rel-atalho-btn" id="rel-btn-semana" onclick="aplicarAtalhoRel('semana')">🗓️ Semana<br><span id="rel-label-semana" style="font-weight:400;font-size:10px;opacity:.7">Dom → Sáb</span></button>
+      <button class="rel-atalho-btn" id="rel-btn-mes" onclick="aplicarAtalhoRel('mes')">📆 Mês<br><span id="rel-label-mes" style="font-weight:400;font-size:10px;opacity:.7">—</span></button>
     </div>
 
     <!-- Seleção manual de datas -->
@@ -948,6 +980,78 @@ const evRef  = ref(db, 'eventos_calendario');
 window._adminAtivo   = false;
 window._adminUsuario = '';
 window._eventos      = [];
+
+// ═══ CAPITALIZAÇÃO AUTOMÁTICA DE NOMES ═══
+// Capitaliza a primeira letra de cada palavra
+function capitalizarNome(str) {
+  return str.replace(/(?:^|\s)\S/g, function(c) { return c.toUpperCase(); });
+}
+
+// Aplica capitalização automática em inputs de nome
+function aplicarCapitalizacaoNome(inputId) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('input', function() {
+    var pos = this.selectionStart;
+    var val = this.value;
+    // Capitaliza a primeira letra de cada palavra
+    var novo = val.replace(/(?:^|(?<=[^a-zA-ZÀ-ÿ]))\S/gu, function(c) { return c.toUpperCase(); });
+    // Fallback sem lookbehind (compatibilidade mais ampla)
+    if (novo === val) {
+      // Abordagem alternativa: capitaliza após espaço e no início
+      novo = val.replace(/(^|\s)(\S)/g, function(m, antes, letra) {
+        return antes + letra.toUpperCase();
+      });
+    }
+    if (novo !== val) {
+      this.value = novo;
+      try { this.setSelectionRange(pos, pos); } catch(e) {}
+    }
+  });
+}
+
+// ═══ FORMATAÇÃO AUTOMÁTICA DE TURMA ═══
+// Converte "11" → "1°1", "21" → "2°1", "32" → "3°2" etc.
+// Aceita também digitação livre, mas normaliza o ° entre ano e turma
+function aplicarFormatoTurma(inputId) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('input', function() {
+    var val = this.value;
+    var pos = this.selectionStart;
+
+    // Remove múltiplos °
+    val = val.replace(/°+/g, '°');
+
+    // Se o usuário digitou apenas dígitos (ex: "11", "32"), auto-formata
+    // Insere ° entre o primeiro dígito e o resto se não houver
+    var soDigitos = val.replace(/[°\s]/g, '');
+    if (/^\d{2,}$/.test(soDigitos) && !val.includes('°')) {
+      // Coloca o ° após o primeiro dígito
+      val = soDigitos[0] + '°' + soDigitos.slice(1);
+      pos = val.length;
+    }
+
+    // Garante maiúsculas para letras (ex: 1°A)
+    val = val.toUpperCase().replace(/°+/g, '°');
+
+    if (val !== this.value) {
+      this.value = val;
+      try { this.setSelectionRange(pos, pos); } catch(e) {}
+    }
+  });
+}
+
+// Inicializa após DOM pronto
+setTimeout(function() {
+  aplicarCapitalizacaoNome('f-aluno');
+  aplicarCapitalizacaoNome('f-professor');
+  aplicarCapitalizacaoNome('e-aluno');
+  aplicarCapitalizacaoNome('e-professor');
+  aplicarCapitalizacaoNome('cfg-nome-prof');
+  aplicarFormatoTurma('f-turma');
+  aplicarFormatoTurma('e-turma');
+}, 100);
 
 onAuthStateChanged(auth, function(user) {
   if (user) { window._adminAtivo = true; window._adminUsuario = user.email; }
@@ -1289,7 +1393,7 @@ window.renderLista = function renderLista() {
 
   var c = document.getElementById('lista-container');
   if (!fil.length) { c.innerHTML = '<div class="empty">Nenhuma ocorrência encontrada</div>'; c.className = 'lista'; return; }
-  var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Gazetando":"🏃","Sem nenhuma atividade":"😴","Outros":"📋"};
   c.innerHTML = fil.map(function(o) {
     var cls = o.status === 'Pendente' ? 'pendente' : o.status === 'Resolvido' ? 'resolvido' : 'acomp';
     var offlineTag = o._offline ? '<span class="offline-tag">Offline</span>' : '';
@@ -1311,7 +1415,7 @@ window.verDetalhe = function(key) {
   var o = (window._ocs||[]).find(function(x) { return x.firebaseKey === key; });
   if (!o) { var fl = lerFila().find(function(x) { return x._localId === key; }); if (fl) { o = Object.assign({}, fl, { firebaseKey: fl._localId, _offline: true }); } }
   if (!o) return;
-  var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Gazetando":"🏃","Sem nenhuma atividade":"😴","Outros":"📋"};
   var cls = o.status === 'Pendente' ? 'pendente' : o.status === 'Resolvido' ? 'resolvido' : 'acomp';
   var offlineAviso = o._offline ? '<div style="background:var(--badge-pendente-bg);color:var(--badge-pendente-txt);padding:8px 12px;border-radius:7px;font-size:11px;font-weight:600;margin:8px 0;">📦 Aguardando sincronização</div>' : '';
   mostrarView('view-detalhe');
@@ -1443,7 +1547,6 @@ function parseDateBR(dateStr) {
   return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
 }
 
-// Converte Date para string YYYY-MM-DD para input[type=date]
 function dateToInputVal(d) {
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
@@ -1481,7 +1584,6 @@ window.selecionarDia = function(dataStr) {
   window._diaSel = dataStr;
   renderCalendario();
   renderOcsDia(dataStr);
-  // ALTERAÇÃO 3: exibe botão de evento ao selecionar dia (btn-dl-rel sempre visível agora)
   document.getElementById('btn-add-evento').style.display = '';
 };
 
@@ -1492,12 +1594,11 @@ function renderOcsDia(dataStr) {
   var label = parts[0] + ' de ' + MESES_BR[parseInt(parts[1])-1];
   var total = ocs.length + eventos.length;
   document.getElementById('cal-dia-titulo').textContent = label + ' (' + total + ')';
-  // ALTERAÇÃO 3: btn-dl-rel não é mais controlado aqui — sempre visível
 
   var lista = document.getElementById('cal-ocs-lista');
   if (!total) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhum item neste dia</div>'; return; }
 
-  var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
+  var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Gazetando":"🏃","Sem nenhuma atividade":"😴","Outros":"📋"};
 
   var htmlEventos = eventos.map(function(ev) {
     return '<div class="cal-evento-item">' +
@@ -1539,24 +1640,25 @@ window.navCal = function(dir) {
   window._diaSel = null;
   document.getElementById('cal-dia-titulo').textContent = 'Selecione um dia';
   document.getElementById('cal-ocs-lista').innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>';
-  // ALTERAÇÃO 3: não esconde mais o btn-dl-rel ao navegar
   document.getElementById('btn-add-evento').style.display = 'none';
   renderCalendario();
 };
 
 // ═══════════════════════════════════════════════════════════════
-//  RELATÓRIO — ALTERAÇÃO 1+2: modal de seleção livre de datas
-//  + semana fechada Dom→Sáb + sem coluna status + hora no lugar
+//  RELATÓRIO
 // ═══════════════════════════════════════════════════════════════
 
-var _relAtalhoAtivo = null; // 'semana' | 'mes' | null
+var _relAtalhoAtivo = null; // 'dia' | 'semana' | 'mes' | null
 
 window.abrirModalRelatorio = function() {
   var hoje = new Date();
 
-  // Atualiza labels dos atalhos rápidos
-  // Semana atual: domingo anterior (ou hoje se domingo) → sábado da mesma semana
-  var diaSemana = hoje.getDay(); // 0=dom, 6=sab
+  // Label do botão "Hoje"
+  var labelHoje = String(hoje.getDate()).padStart(2,'0') + '/' + String(hoje.getMonth()+1).padStart(2,'0') + '/' + hoje.getFullYear();
+  document.getElementById('rel-label-dia').textContent = labelHoje;
+
+  // Semana atual: domingo → sábado
+  var diaSemana = hoje.getDay();
   var domAtual = new Date(hoje); domAtual.setDate(hoje.getDate() - diaSemana); domAtual.setHours(0,0,0,0);
   var sabAtual = new Date(domAtual); sabAtual.setDate(domAtual.getDate() + 6);
   var labelDom = String(domAtual.getDate()).padStart(2,'0') + '/' + String(domAtual.getMonth()+1).padStart(2,'0');
@@ -1566,12 +1668,26 @@ window.abrirModalRelatorio = function() {
   // Mês atual
   document.getElementById('rel-label-mes').textContent = MESES_BR[hoje.getMonth()] + ' ' + hoje.getFullYear();
 
-  // Pré-preenche os inputs com a semana atual como padrão
-  _relAtalhoAtivo = 'semana';
-  document.getElementById('rel-data-ini').value = dateToInputVal(domAtual);
-  document.getElementById('rel-data-fim').value = dateToInputVal(sabAtual);
-  document.getElementById('rel-btn-semana').classList.add('ativo');
-  document.getElementById('rel-btn-mes').classList.remove('ativo');
+  // Pré-seleciona "Hoje" se há um dia selecionado no calendário, senão semana
+  if (window._diaSel) {
+    _relAtalhoAtivo = 'dia';
+    // Converte data BR para input date
+    var partes = window._diaSel.split('/');
+    var diaInputVal = partes[2] + '-' + partes[1] + '-' + partes[0];
+    document.getElementById('rel-data-ini').value = diaInputVal;
+    document.getElementById('rel-data-fim').value = diaInputVal;
+    document.getElementById('rel-btn-dia').classList.add('ativo');
+    document.getElementById('rel-btn-semana').classList.remove('ativo');
+    document.getElementById('rel-btn-mes').classList.remove('ativo');
+  } else {
+    // Padrão: semana atual
+    _relAtalhoAtivo = 'semana';
+    document.getElementById('rel-data-ini').value = dateToInputVal(domAtual);
+    document.getElementById('rel-data-fim').value = dateToInputVal(sabAtual);
+    document.getElementById('rel-btn-dia').classList.remove('ativo');
+    document.getElementById('rel-btn-semana').classList.add('ativo');
+    document.getElementById('rel-btn-mes').classList.remove('ativo');
+  }
 
   document.getElementById('modal-relatorio').classList.add('show');
 };
@@ -1580,22 +1696,24 @@ window.fecharModalRelatorio = function() {
   document.getElementById('modal-relatorio').classList.remove('show');
 };
 
-// Atalhos rápidos: semana fechada Dom→Sáb ou mês completo
 window.aplicarAtalhoRel = function(tipo) {
   var hoje = new Date();
   _relAtalhoAtivo = tipo;
+  document.getElementById('rel-btn-dia').classList.toggle('ativo', tipo === 'dia');
   document.getElementById('rel-btn-semana').classList.toggle('ativo', tipo === 'semana');
   document.getElementById('rel-btn-mes').classList.toggle('ativo', tipo === 'mes');
 
-  if (tipo === 'semana') {
-    // Semana fechada: domingo desta semana → sábado desta semana
+  if (tipo === 'dia') {
+    // Dia de hoje
+    document.getElementById('rel-data-ini').value = dateToInputVal(hoje);
+    document.getElementById('rel-data-fim').value = dateToInputVal(hoje);
+  } else if (tipo === 'semana') {
     var diaSemana = hoje.getDay();
     var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana); dom.setHours(0,0,0,0);
     var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
     document.getElementById('rel-data-ini').value = dateToInputVal(dom);
     document.getElementById('rel-data-fim').value = dateToInputVal(sab);
   } else {
-    // Mês atual: dia 1 → último dia
     var iniMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
     var fimMes = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0);
     document.getElementById('rel-data-ini').value = dateToInputVal(iniMes);
@@ -1603,9 +1721,9 @@ window.aplicarAtalhoRel = function(tipo) {
   }
 };
 
-// Quando o usuário edita manualmente as datas, desmarca atalhos
 window.limparAtalhosRel = function() {
   _relAtalhoAtivo = null;
+  document.getElementById('rel-btn-dia').classList.remove('ativo');
   document.getElementById('rel-btn-semana').classList.remove('ativo');
   document.getElementById('rel-btn-mes').classList.remove('ativo');
 };
@@ -1629,12 +1747,14 @@ window.gerarRelatorio = function() {
 
   if (!ocsFiltradas.length) { mostrarToast('⚠️ Nenhuma ocorrência neste período'); return; }
 
-  // Monta o título do relatório
   var fmtDate = function(d) {
     return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
   };
+
   var tituloRelatorio;
-  if (_relAtalhoAtivo === 'semana') {
+  if (_relAtalhoAtivo === 'dia') {
+    tituloRelatorio = 'Relatório do Dia — ' + fmtDate(iniDate);
+  } else if (_relAtalhoAtivo === 'semana') {
     tituloRelatorio = 'Relatório Semanal — ' + fmtDate(iniDate) + ' a ' + fmtDate(fimDate);
   } else if (_relAtalhoAtivo === 'mes') {
     tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[iniDate.getMonth()] + ' ' + iniDate.getFullYear();
@@ -1645,9 +1765,9 @@ window.gerarRelatorio = function() {
   fecharModalRelatorio();
 
   var nomeInst = document.getElementById('header-nome-inst').textContent;
-
-  // Agrupa por data para exibir separadores quando período > 1 dia
   var umDia = iniVal === fimVal;
+
+  // Agrupa por data
   var porData = {};
   ocsFiltradas.forEach(function(o) {
     var k = o.data || '—';
@@ -1659,18 +1779,23 @@ window.gerarRelatorio = function() {
     return (da || 0) - (db || 0);
   });
 
-  // ALTERAÇÃO 2: sem coluna Status; coluna Professor exibe a hora registrada
+  // Numeração global dos alunos (independente do dia)
+  var contadorGlobal = 0;
+
   var registrosHtml = datasOrdenadas.map(function(data) {
     var header = !umDia
       ? '<tr><td colspan="4" style="padding:10px 0 4px;font-size:12px;font-weight:700;color:#1B3F8B;border-bottom:2px solid #1B3F8B;letter-spacing:.3px;">📅 ' + data + '</td></tr>'
       : '';
-    var linhas = porData[data].map(function(o, idx) {
-      var bg = idx % 2 === 0 ? '#FFFFFF' : '#F8F9FF';
+    var linhas = porData[data].map(function(o) {
+      contadorGlobal++;
+      var num = contadorGlobal;
+      var bg = (contadorGlobal % 2 === 0) ? '#F8F9FF' : '#FFFFFF';
       return '<tr style="background:' + bg + ';page-break-inside:avoid;">' +
+        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;font-weight:700;color:#64748B;border-bottom:1px solid #E8EEFF;text-align:center;width:40px;">' + num + '</td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:14px;font-weight:700;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + o.aluno + '</td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + (o.turma || '—') + '</td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">Prof(a). ' + o.professor + '<br><span style="font-size:11px;color:#64748B;">' + (o.data||'') + ' · ' + (o.hora||'') + '</span></td>' +
-        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;max-width:280px;line-height:1.6;">' +
+        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;max-width:240px;line-height:1.6;">' +
           '<div style="font-size:11px;font-weight:600;color:#2A5BD7;margin-bottom:4px;">' + o.tipo + '</div>' +
           o.descricao +
         '</td>' +
@@ -1679,33 +1804,28 @@ window.gerarRelatorio = function() {
     return header + linhas;
   }).join('');
 
-  // Estatísticas (mantidas para resumo no topo, mas sem status no corpo)
-  var total     = ocsFiltradas.length;
-  var pendentes = ocsFiltradas.filter(function(o){return o.status==='Pendente';}).length;
-  var acomp     = ocsFiltradas.filter(function(o){return o.status==='Em acompanhamento';}).length;
-  var resolvidos= ocsFiltradas.filter(function(o){return o.status==='Resolvido';}).length;
+  // SOMENTE total no resumo (sem status breakdown)
+  var total = ocsFiltradas.length;
 
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
     '<title>' + tituloRelatorio + ' — ' + nomeInst + '</title>' +
     '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">' +
     '<style>' +
       'body{font-family:"DM Sans",sans-serif;margin:0;padding:0;background:#fff;color:#0F1729;}' +
-      '.page{max-width:900px;margin:0 auto;padding:32px 32px 48px;}' +
+      '.page{max-width:960px;margin:0 auto;padding:32px 32px 48px;}' +
       '.header-rel{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:3px solid #1B3F8B;padding-bottom:16px;margin-bottom:24px;}' +
       '.inst-nome{font-size:22px;font-weight:700;color:#1B3F8B;margin-bottom:3px;}' +
       '.rel-titulo{font-size:14px;font-weight:500;color:#64748B;}' +
       '.rel-gerado{font-size:11px;color:#94A3B8;margin-top:4px;}' +
-      '.stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}' +
-      '.stat-box{flex:1;min-width:80px;border-radius:10px;padding:12px 16px;text-align:center;}' +
-      '.stat-box .n{font-size:26px;font-weight:700;}' +
-      '.stat-box .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}' +
-      '.s-total    {background:#EFF6FF;color:#1D4ED8;}' +
-      '.s-pendente {background:#FEF3C7;color:#92400E;}' +
-      '.s-acomp    {background:#DBEAFE;color:#1D4ED8;}' +
-      '.s-resolvido{background:#DCFCE7;color:#166534;}' +
+      '.stats-row{display:flex;gap:12px;margin-bottom:24px;}' +
+      '.stat-box{border-radius:10px;padding:14px 24px;text-align:center;}' +
+      '.stat-box .n{font-size:32px;font-weight:700;}' +
+      '.stat-box .l{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}' +
+      '.s-total{background:#EFF6FF;color:#1D4ED8;}' +
       'table{width:100%;border-collapse:collapse;font-family:"DM Sans",sans-serif;}' +
       'thead tr{background:#1B3F8B;}' +
       'thead th{color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;text-align:left;}' +
+      'thead th:first-child{text-align:center;width:40px;}' +
       '.btn-print{display:inline-flex;align-items:center;gap:6px;background:#1B3F8B;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;margin-bottom:20px;}' +
       '.btn-print:hover{background:#2A5BD7;}' +
       '.no-print{margin-bottom:16px;}' +
@@ -1729,17 +1849,15 @@ window.gerarRelatorio = function() {
         '<div style="font-size:36px;">📋</div>' +
       '</div>' +
       '<div class="stats-row">' +
-        '<div class="stat-box s-total"><div class="n">' + total + '</div><div class="l">Total</div></div>' +
-        '<div class="stat-box s-pendente"><div class="n">' + pendentes + '</div><div class="l">Pendentes</div></div>' +
-        '<div class="stat-box s-acomp"><div class="n">' + acomp + '</div><div class="l">Em Acomp.</div></div>' +
-        '<div class="stat-box s-resolvido"><div class="n">' + resolvidos + '</div><div class="l">Resolvidos</div></div>' +
+        '<div class="stat-box s-total"><div class="n">' + total + '</div><div class="l">Total de Ocorrências</div></div>' +
       '</div>' +
       '<table>' +
         '<thead><tr>' +
-          '<th style="width:20%">Aluno</th>' +
-          '<th style="width:9%">Turma</th>' +
-          '<th style="width:19%">Professor(a) · Horário</th>' +
-          '<th style="width:52%">Descrição</th>' +
+          '<th>#</th>' +
+          '<th style="width:22%">Aluno</th>' +
+          '<th style="width:10%">Turma</th>' +
+          '<th style="width:20%">Professor(a) · Horário</th>' +
+          '<th>Descrição</th>' +
         '</tr></thead>' +
         '<tbody>' + registrosHtml + '</tbody>' +
       '</table>' +
@@ -1876,30 +1994,4 @@ function renderChart() {
     {label:'Pendente',   data:data.dataPend,      backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',  borderColor:'#F59E0B', borderWidth:isBar?0:2, pointBackgroundColor:'#F59E0B', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
     {label:'Acomp.',     data:data.dataAcomp,     backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',  borderColor:'#3B82F6', borderWidth:isBar?0:2, pointBackgroundColor:'#3B82F6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
     {label:'Resolvido',  data:data.dataResolvido, backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',   borderColor:'#22C55E', borderWidth:isBar?0:2, pointBackgroundColor:'#22C55E', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
-    {label:'Total',      data:data.dataTotal,     backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)', borderColor:'#8B5CF6', borderWidth:isBar?0:2, pointBackgroundColor:'#8B5CF6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0}
-  ];
-  window._chartInst = new Chart(canvas, {
-    type: isBar ? 'bar' : 'line',
-    data: { labels: data.labels, datasets: datasets },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      animation:{ duration:600, easing:'easeOutQuart' },
-      interaction:{ intersect:false, mode:'index' },
-      plugins:{
-        legend:{ display:false },
-        tooltip:{ backgroundColor:'rgba(15,23,41,0.9)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.75)', padding:10, cornerRadius:8, titleFont:{family:'DM Sans',size:11,weight:'600'}, bodyFont:{family:'DM Sans',size:11} }
-      },
-      scales:{
-        x:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0}, border:{display:false} },
-        y:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0}, border:{display:false}, beginAtZero:true }
-      },
-      ...(isBar && { datasets:{ bar:{ barThickness:'flex', maxBarThickness:18 } } })
-    }
-  });
-}
-
-atualizarBannerFila();
-renderCalendario();
-</script>
-</body>
-</html>
+    {label:'Total',      data:data.dataTotal,     backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)', borderColor:'#8B5CF6', borderWidth:isBar?0:2, pointBackgroundColor:'#8B5CF6', pointRa
