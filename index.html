@@ -2027,4 +2027,8 @@ window.toggleChartTipo = function() {
 };
 
 function getTextColor() {
-  var
+  var tema = document.documentElement.getAttribute('data-tema') || 'claro';
+  if (tema === 'black') return '#555';
+  if (tema === 'escuro') return '#6B7A99';
+  return '#94A3B8';
+}
