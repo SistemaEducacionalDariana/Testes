@@ -351,7 +351,6 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 .cal-ocs-titulo-txt { font-size:12px; font-weight:600; color:var(--sub); }
 .cal-ocs-acoes { display:flex; gap:6px; }
 
-/* BOTÃO RELATÓRIO — sempre visível */
 .btn-dl-rel {
   background:var(--azul2); border:none; color:#fff;
   border-radius:7px; padding:5px 12px; font-size:10px; font-weight:700;
@@ -419,14 +418,20 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .login-loading { display:none; text-align:center; margin-top:8px; font-size:12px; color:var(--sub); }
 .login-loading.show { display:block; }
 
-/* ══ MODAL RELATÓRIO — novo layout com seleção de datas ══ */
+/* ══ MODAL RELATÓRIO — com calendário visual customizado ══ */
+.modal-relatorio-inner {
+  max-height:90vh;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
 .rel-atalhos {
-  display:flex; gap:8px; margin:10px 0 14px; flex-wrap:wrap;
+  display:flex; gap:6px; margin:10px 0 14px; flex-wrap:nowrap;
 }
 .rel-atalho-btn {
   flex:1; min-width:0;
   background:var(--cinza); border:1.5px solid var(--borda); color:var(--sub);
-  border-radius:9px; padding:9px 6px; font-size:11px; font-weight:700;
+  border-radius:9px; padding:8px 4px; font-size:11px; font-weight:700;
   cursor:pointer; font-family:'DM Sans',sans-serif; text-align:center;
   transition:all .15s; white-space:nowrap;
 }
@@ -434,10 +439,64 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .rel-atalho-btn.ativo {
   border-color:var(--azul2); background:var(--azulc); color:var(--azul2);
 }
-.rel-datas-row {
-  display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px;
+.rel-atalho-sub {
+  display:block; font-weight:400; font-size:9px; opacity:.7; margin-top:2px;
 }
-.rel-datas-row .form-group { margin-bottom:0; }
+
+/* Seletor de datas visual */
+.rel-datas-display {
+  display:grid; grid-template-columns:1fr auto 1fr; gap:6px;
+  align-items:center; margin-bottom:12px;
+}
+.rel-data-box {
+  background:var(--cinza); border:1.5px solid var(--borda); border-radius:10px;
+  padding:10px 10px; cursor:pointer; transition:border-color .15s; text-align:center;
+}
+.rel-data-box.ativo { border-color:var(--azul2); background:var(--azulc); }
+.rel-data-box:active { opacity:.8; }
+.rel-data-label { font-size:9px; font-weight:600; color:var(--sub); text-transform:uppercase; letter-spacing:.4px; }
+.rel-data-valor { font-size:13px; font-weight:700; color:var(--texto); margin-top:3px; }
+.rel-data-box.ativo .rel-data-label { color:var(--azul2); }
+.rel-data-box.ativo .rel-data-valor { color:var(--azul2); }
+.rel-seta { font-size:16px; color:var(--sub); text-align:center; }
+
+/* Mini calendário do relatório */
+.rel-cal-wrap {
+  background:var(--cinza); border:1px solid var(--borda); border-radius:12px;
+  padding:12px; margin-bottom:12px; display:none;
+}
+.rel-cal-wrap.show { display:block; }
+.rel-cal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.rel-cal-mes { font-size:12px; font-weight:700; color:var(--texto); }
+.rel-cal-navs { display:flex; gap:4px; }
+.rel-cal-nav { background:var(--bg-card); border:1px solid var(--borda); color:var(--sub); border-radius:6px; width:24px; height:24px; font-size:12px; cursor:pointer; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.rel-cal-ds { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; margin-bottom:4px; }
+.rel-cal-d { font-size:9px; font-weight:600; color:var(--sub); padding:2px 0; }
+.rel-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+.rel-cal-dia {
+  aspect-ratio:1; border-radius:6px; display:flex; align-items:center;
+  justify-content:center; font-size:11px; font-weight:500; cursor:pointer;
+  transition:background .12s; position:relative;
+}
+.rel-cal-dia:hover { background:var(--borda); }
+.rel-cal-dia.vazio { cursor:default; }
+.rel-cal-dia.hoje-rel { color:var(--azul2); font-weight:700; }
+.rel-cal-dia.ini-sel { background:var(--azul2) !important; color:#fff !important; border-radius:6px 0 0 6px; }
+.rel-cal-dia.fim-sel { background:var(--azul2) !important; color:#fff !important; border-radius:0 6px 6px 0; }
+.rel-cal-dia.ini-sel.fim-sel { border-radius:6px; }
+.rel-cal-dia.entre-sel { background:var(--azulc) !important; color:var(--azul2) !important; border-radius:0; }
+.rel-cal-dia.desabilitado { opacity:.3; cursor:not-allowed; }
+.rel-cal-dia.tem-oc-rel::after {
+  content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%);
+  width:3px; height:3px; border-radius:50%; background:var(--amarelo);
+}
+.rel-cal-dia.ini-sel.tem-oc-rel::after,
+.rel-cal-dia.fim-sel.tem-oc-rel::after { background:rgba(255,255,255,0.6); }
+
+.rel-sel-hint {
+  font-size:10px; color:var(--sub); font-weight:500; text-align:center;
+  padding:4px 0; margin-bottom:6px;
+}
 
 /* TOAST */
 .toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:#0F1729; color:#fff; padding:10px 20px; border-radius:20px; font-size:12px; font-weight:600; transition:transform .25s ease, opacity .25s ease; z-index:9999; white-space:nowrap; pointer-events:none; }
@@ -537,7 +596,6 @@ html[data-tema="black"] .toast { background:#222; }
             <span class="cal-ocs-titulo-txt" id="cal-dia-titulo">Selecione um dia</span>
             <div class="cal-ocs-acoes">
               <button class="btn-add-evento" id="btn-add-evento" onclick="abrirModalEvento()">+ Evento</button>
-              <!-- ALTERAÇÃO 3: botão sempre visível, sem display:none -->
               <button class="btn-dl-rel" id="btn-dl-rel" onclick="abrirModalRelatorio()">📄 Relatório</button>
             </div>
           </div>
@@ -882,36 +940,65 @@ html[data-tema="black"] .toast { background:#222; }
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
-     MODAL RELATÓRIO — ALTERAÇÃO 1: seleção livre de datas
-     + atalhos rápidos (semana Dom→Sáb, mês)
+     MODAL RELATÓRIO — com calendário visual customizado
      ══════════════════════════════════════════════════════════ -->
 <div class="modal-bg" id="modal-relatorio">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h3>📄 Gerar Relatório</h3>
-    <p>Selecione o período desejado</p>
+  <div class="modal" style="padding-bottom:24px;">
+    <div class="modal-relatorio-inner">
+      <div class="modal-handle"></div>
+      <h3>📄 Gerar Relatório</h3>
+      <p>Selecione o período desejado</p>
 
-    <!-- Atalhos rápidos -->
-    <div class="rel-atalhos">
-      <button class="rel-atalho-btn" id="rel-btn-semana" onclick="aplicarAtalhoRel('semana')">📆 Semana atual<br><span id="rel-label-semana" style="font-weight:400;font-size:10px;opacity:.7">Dom → Sáb</span></button>
-      <button class="rel-atalho-btn" id="rel-btn-mes" onclick="aplicarAtalhoRel('mes')">🗓️ Mês atual<br><span id="rel-label-mes" style="font-weight:400;font-size:10px;opacity:.7">—</span></button>
-    </div>
-
-    <!-- Seleção manual de datas -->
-    <div class="rel-datas-row">
-      <div class="form-group">
-        <label>Data início</label>
-        <input type="date" id="rel-data-ini" onchange="limparAtalhosRel()">
+      <!-- Atalhos rápidos: Hoje + Semana + Mês -->
+      <div class="rel-atalhos">
+        <button class="rel-atalho-btn" id="rel-btn-hoje" onclick="aplicarAtalhoRel('hoje')">
+          📅 Hoje
+          <span class="rel-atalho-sub" id="rel-label-hoje">—</span>
+        </button>
+        <button class="rel-atalho-btn" id="rel-btn-semana" onclick="aplicarAtalhoRel('semana')">
+          🗓 Semana
+          <span class="rel-atalho-sub" id="rel-label-semana">Dom → Sáb</span>
+        </button>
+        <button class="rel-atalho-btn" id="rel-btn-mes" onclick="aplicarAtalhoRel('mes')">
+          📆 Mês
+          <span class="rel-atalho-sub" id="rel-label-mes">—</span>
+        </button>
       </div>
-      <div class="form-group">
-        <label>Data fim</label>
-        <input type="date" id="rel-data-fim" onchange="limparAtalhosRel()">
-      </div>
-    </div>
 
-    <div class="modal-btns">
-      <button class="btn-cancelar" onclick="fecharModalRelatorio()">Cancelar</button>
-      <button class="btn-confirmar-azul" onclick="gerarRelatorio()">🖨️ Abrir para imprimir</button>
+      <!-- Display das datas selecionadas — clicável para abrir calendário -->
+      <div class="rel-datas-display">
+        <div class="rel-data-box" id="rel-box-ini" onclick="abrirCalRel('ini')">
+          <div class="rel-data-label">Início</div>
+          <div class="rel-data-valor" id="rel-display-ini">—</div>
+        </div>
+        <div class="rel-seta">→</div>
+        <div class="rel-data-box" id="rel-box-fim" onclick="abrirCalRel('fim')">
+          <div class="rel-data-label">Fim</div>
+          <div class="rel-data-valor" id="rel-display-fim">—</div>
+        </div>
+      </div>
+
+      <!-- Mini calendário visual do relatório -->
+      <div class="rel-cal-wrap" id="rel-cal-wrap">
+        <div class="rel-sel-hint" id="rel-sel-hint">Selecione a data de início</div>
+        <div class="rel-cal-header">
+          <div class="rel-cal-mes" id="rel-cal-mes-ano">—</div>
+          <div class="rel-cal-navs">
+            <button class="rel-cal-nav" onclick="navRelCal(-1)">‹</button>
+            <button class="rel-cal-nav" onclick="navRelCal(1)">›</button>
+          </div>
+        </div>
+        <div class="rel-cal-ds">
+          <div class="rel-cal-d">D</div><div class="rel-cal-d">S</div><div class="rel-cal-d">T</div>
+          <div class="rel-cal-d">Q</div><div class="rel-cal-d">Q</div><div class="rel-cal-d">S</div><div class="rel-cal-d">S</div>
+        </div>
+        <div class="rel-cal-grid" id="rel-cal-grid"></div>
+      </div>
+
+      <div class="modal-btns">
+        <button class="btn-cancelar" onclick="fecharModalRelatorio()">Cancelar</button>
+        <button class="btn-confirmar-azul" onclick="gerarRelatorio()">🖨️ Imprimir</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1431,7 +1518,7 @@ function mostrarToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 2500);
 }
 
-// ═══ CALENDÁRIO ═══
+// ═══ CALENDÁRIO PRINCIPAL ═══
 var _calAno  = new Date().getFullYear();
 var _calMes  = new Date().getMonth();
 window._diaSel  = null;
@@ -1443,7 +1530,11 @@ function parseDateBR(dateStr) {
   return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
 }
 
-// Converte Date para string YYYY-MM-DD para input[type=date]
+function dateToStr(d) {
+  // Retorna DD/MM/YYYY
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
+}
+
 function dateToInputVal(d) {
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
@@ -1481,7 +1572,6 @@ window.selecionarDia = function(dataStr) {
   window._diaSel = dataStr;
   renderCalendario();
   renderOcsDia(dataStr);
-  // ALTERAÇÃO 3: exibe botão de evento ao selecionar dia (btn-dl-rel sempre visível agora)
   document.getElementById('btn-add-evento').style.display = '';
 };
 
@@ -1492,7 +1582,6 @@ function renderOcsDia(dataStr) {
   var label = parts[0] + ' de ' + MESES_BR[parseInt(parts[1])-1];
   var total = ocs.length + eventos.length;
   document.getElementById('cal-dia-titulo').textContent = label + ' (' + total + ')';
-  // ALTERAÇÃO 3: btn-dl-rel não é mais controlado aqui — sempre visível
 
   var lista = document.getElementById('cal-ocs-lista');
   if (!total) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhum item neste dia</div>'; return; }
@@ -1539,85 +1628,211 @@ window.navCal = function(dir) {
   window._diaSel = null;
   document.getElementById('cal-dia-titulo').textContent = 'Selecione um dia';
   document.getElementById('cal-ocs-lista').innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Toque em um dia</div>';
-  // ALTERAÇÃO 3: não esconde mais o btn-dl-rel ao navegar
   document.getElementById('btn-add-evento').style.display = 'none';
   renderCalendario();
 };
 
-// ═══════════════════════════════════════════════════════════════
-//  RELATÓRIO — ALTERAÇÃO 1+2: modal de seleção livre de datas
-//  + semana fechada Dom→Sáb + sem coluna status + hora no lugar
-// ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
+//  RELATÓRIO — modal com calendário visual customizado
+//  + atalhos: Hoje / Semana / Mês
+// ═══════════════════════════════════════════════════════════
 
-var _relAtalhoAtivo = null; // 'semana' | 'mes' | null
+var _relAtalhoAtivo = null; // 'hoje' | 'semana' | 'mes' | null
+var _relIni = null;  // Date object
+var _relFim = null;  // Date object
+var _relCalAno = new Date().getFullYear();
+var _relCalMes = new Date().getMonth();
+var _relSelecionando = 'ini'; // 'ini' | 'fim'
+
+function fmtDateShort(d) {
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+}
+function fmtDateFull(d) {
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
+}
+
+function atualizarDisplayDatas() {
+  var ini = document.getElementById('rel-display-ini');
+  var fim = document.getElementById('rel-display-fim');
+  var boxIni = document.getElementById('rel-box-ini');
+  var boxFim = document.getElementById('rel-box-fim');
+
+  ini.textContent = _relIni ? fmtDateShort(_relIni) : '—';
+  fim.textContent = _relFim ? fmtDateShort(_relFim) : '—';
+
+  // Destaca o box que está sendo selecionado (quando calendário aberto)
+  var calAberto = document.getElementById('rel-cal-wrap').classList.contains('show');
+  boxIni.classList.toggle('ativo', calAberto && _relSelecionando === 'ini');
+  boxFim.classList.toggle('ativo', calAberto && _relSelecionando === 'fim');
+}
+
+function atualizarHintRel() {
+  var hint = document.getElementById('rel-sel-hint');
+  if (!_relIni) {
+    hint.textContent = 'Selecione a data de início';
+  } else if (!_relFim) {
+    hint.textContent = 'Agora selecione a data de fim';
+  } else {
+    hint.textContent = fmtDateFull(_relIni) + ' → ' + fmtDateFull(_relFim);
+  }
+}
+
+function renderRelCal() {
+  var hoje = new Date();
+  document.getElementById('rel-cal-mes-ano').textContent = MESES_BR[_relCalMes] + ' ' + _relCalAno;
+
+  var primeiroDia = new Date(_relCalAno, _relCalMes, 1).getDay();
+  var diasNoMes   = new Date(_relCalAno, _relCalMes+1, 0).getDate();
+
+  // Mapa de datas com ocorrências para mostrar bolinhas
+  var ocs = window._ocs || [];
+  var ocDatas = {};
+  ocs.forEach(function(o) {
+    if (o.data) ocDatas[o.data] = true;
+  });
+
+  var cells = '';
+  for (var i = 0; i < primeiroDia; i++) cells += '<div class="rel-cal-dia vazio"></div>';
+
+  for (var d = 1; d <= diasNoMes; d++) {
+    var thisDate = new Date(_relCalAno, _relCalMes, d);
+    var dataStr = dateToStr(thisDate);
+    var eHoje = hoje.getDate()===d && hoje.getMonth()===_relCalMes && hoje.getFullYear()===_relCalAno;
+    var temOc = ocDatas[dataStr] || false;
+
+    var isIni = _relIni && thisDate.getTime() === _relIni.getTime();
+    var isFim = _relFim && thisDate.getTime() === _relFim.getTime();
+    var isEntre = _relIni && _relFim && thisDate > _relIni && thisDate < _relFim;
+
+    var cls = 'rel-cal-dia';
+    if (eHoje) cls += ' hoje-rel';
+    if (isIni) cls += ' ini-sel';
+    if (isFim) cls += ' fim-sel';
+    if (isEntre) cls += ' entre-sel';
+    if (temOc) cls += ' tem-oc-rel';
+
+    cells += '<div class="' + cls + '" onclick="selecionarDiaRel(' + d + ')">' + d + '</div>';
+  }
+
+  document.getElementById('rel-cal-grid').innerHTML = cells;
+}
+
+window.abrirCalRel = function(qual) {
+  _relSelecionando = qual;
+  // Navega o calendário para o mês da data já selecionada, se houver
+  if (qual === 'ini' && _relIni) { _relCalAno = _relIni.getFullYear(); _relCalMes = _relIni.getMonth(); }
+  else if (qual === 'fim' && _relFim) { _relCalAno = _relFim.getFullYear(); _relCalMes = _relFim.getMonth(); }
+  else { _relCalAno = new Date().getFullYear(); _relCalMes = new Date().getMonth(); }
+
+  document.getElementById('rel-cal-wrap').classList.add('show');
+  atualizarHintRel();
+  atualizarDisplayDatas();
+  renderRelCal();
+};
+
+window.selecionarDiaRel = function(d) {
+  var data = new Date(_relCalAno, _relCalMes, d);
+
+  if (_relSelecionando === 'ini') {
+    _relIni = data;
+    // Se a data fim já existe e é antes do início, limpa o fim
+    if (_relFim && _relFim < _relIni) _relFim = null;
+    // Automaticamente passa para selecionar o fim
+    _relSelecionando = 'fim';
+    _relAtalhoAtivo = null;
+    atualizarAtalhosRel();
+  } else {
+    if (data < _relIni) {
+      // Clicou antes do início: inverte
+      _relFim = _relIni;
+      _relIni = data;
+    } else {
+      _relFim = data;
+    }
+    _relAtalhoAtivo = null;
+    atualizarAtalhosRel();
+    // Fecha o calendário ao selecionar o fim
+    document.getElementById('rel-cal-wrap').classList.remove('show');
+  }
+
+  atualizarDisplayDatas();
+  atualizarHintRel();
+  renderRelCal();
+};
+
+window.navRelCal = function(dir) {
+  _relCalMes += dir;
+  if (_relCalMes < 0)  { _relCalMes = 11; _relCalAno--; }
+  if (_relCalMes > 11) { _relCalMes = 0;  _relCalAno++; }
+  renderRelCal();
+};
+
+function atualizarAtalhosRel() {
+  document.getElementById('rel-btn-hoje').classList.toggle('ativo', _relAtalhoAtivo === 'hoje');
+  document.getElementById('rel-btn-semana').classList.toggle('ativo', _relAtalhoAtivo === 'semana');
+  document.getElementById('rel-btn-mes').classList.toggle('ativo', _relAtalhoAtivo === 'mes');
+}
+
+window.aplicarAtalhoRel = function(tipo) {
+  var hoje = new Date(); hoje.setHours(0,0,0,0);
+  _relAtalhoAtivo = tipo;
+
+  if (tipo === 'hoje') {
+    _relIni = new Date(hoje);
+    _relFim = new Date(hoje);
+  } else if (tipo === 'semana') {
+    var diaSemana = hoje.getDay();
+    var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana);
+    var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
+    _relIni = dom; _relFim = sab;
+  } else if (tipo === 'mes') {
+    _relIni = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+    _relFim = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0);
+  }
+
+  atualizarAtalhosRel();
+  atualizarDisplayDatas();
+  atualizarHintRel();
+  // Fecha o calendário ao usar atalho
+  document.getElementById('rel-cal-wrap').classList.remove('show');
+};
 
 window.abrirModalRelatorio = function() {
-  var hoje = new Date();
+  var hoje = new Date(); hoje.setHours(0,0,0,0);
 
-  // Atualiza labels dos atalhos rápidos
-  // Semana atual: domingo anterior (ou hoje se domingo) → sábado da mesma semana
-  var diaSemana = hoje.getDay(); // 0=dom, 6=sab
-  var domAtual = new Date(hoje); domAtual.setDate(hoje.getDate() - diaSemana); domAtual.setHours(0,0,0,0);
-  var sabAtual = new Date(domAtual); sabAtual.setDate(domAtual.getDate() + 6);
-  var labelDom = String(domAtual.getDate()).padStart(2,'0') + '/' + String(domAtual.getMonth()+1).padStart(2,'0');
-  var labelSab = String(sabAtual.getDate()).padStart(2,'0') + '/' + String(sabAtual.getMonth()+1).padStart(2,'0');
-  document.getElementById('rel-label-semana').textContent = labelDom + ' → ' + labelSab;
+  // Atualiza labels dos atalhos
+  document.getElementById('rel-label-hoje').textContent = fmtDateShort(hoje);
 
-  // Mês atual
-  document.getElementById('rel-label-mes').textContent = MESES_BR[hoje.getMonth()] + ' ' + hoje.getFullYear();
+  var diaSemana = hoje.getDay();
+  var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana);
+  var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
+  document.getElementById('rel-label-semana').textContent = fmtDateShort(dom) + ' → ' + fmtDateShort(sab);
+  document.getElementById('rel-label-mes').textContent = MESES_BR[hoje.getMonth()];
 
-  // Pré-preenche os inputs com a semana atual como padrão
+  // Pré-seleciona semana atual
   _relAtalhoAtivo = 'semana';
-  document.getElementById('rel-data-ini').value = dateToInputVal(domAtual);
-  document.getElementById('rel-data-fim').value = dateToInputVal(sabAtual);
-  document.getElementById('rel-btn-semana').classList.add('ativo');
-  document.getElementById('rel-btn-mes').classList.remove('ativo');
+  _relIni = dom;
+  _relFim = sab;
+  _relSelecionando = 'ini';
+
+  atualizarAtalhosRel();
+  atualizarDisplayDatas();
+  atualizarHintRel();
+  document.getElementById('rel-cal-wrap').classList.remove('show');
 
   document.getElementById('modal-relatorio').classList.add('show');
 };
 
 window.fecharModalRelatorio = function() {
   document.getElementById('modal-relatorio').classList.remove('show');
-};
-
-// Atalhos rápidos: semana fechada Dom→Sáb ou mês completo
-window.aplicarAtalhoRel = function(tipo) {
-  var hoje = new Date();
-  _relAtalhoAtivo = tipo;
-  document.getElementById('rel-btn-semana').classList.toggle('ativo', tipo === 'semana');
-  document.getElementById('rel-btn-mes').classList.toggle('ativo', tipo === 'mes');
-
-  if (tipo === 'semana') {
-    // Semana fechada: domingo desta semana → sábado desta semana
-    var diaSemana = hoje.getDay();
-    var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana); dom.setHours(0,0,0,0);
-    var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
-    document.getElementById('rel-data-ini').value = dateToInputVal(dom);
-    document.getElementById('rel-data-fim').value = dateToInputVal(sab);
-  } else {
-    // Mês atual: dia 1 → último dia
-    var iniMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
-    var fimMes = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0);
-    document.getElementById('rel-data-ini').value = dateToInputVal(iniMes);
-    document.getElementById('rel-data-fim').value = dateToInputVal(fimMes);
-  }
-};
-
-// Quando o usuário edita manualmente as datas, desmarca atalhos
-window.limparAtalhosRel = function() {
-  _relAtalhoAtivo = null;
-  document.getElementById('rel-btn-semana').classList.remove('ativo');
-  document.getElementById('rel-btn-mes').classList.remove('ativo');
+  document.getElementById('rel-cal-wrap').classList.remove('show');
 };
 
 window.gerarRelatorio = function() {
-  var iniVal = document.getElementById('rel-data-ini').value;
-  var fimVal = document.getElementById('rel-data-fim').value;
+  if (!_relIni || !_relFim) { mostrarToast('⚠️ Selecione as datas de início e fim'); return; }
 
-  if (!iniVal || !fimVal) { mostrarToast('⚠️ Selecione as datas de início e fim'); return; }
-
-  var iniDate = new Date(iniVal + 'T00:00:00');
-  var fimDate = new Date(fimVal + 'T23:59:59');
+  var iniDate = new Date(_relIni); iniDate.setHours(0,0,0,0);
+  var fimDate = new Date(_relFim); fimDate.setHours(23,59,59,999);
 
   if (iniDate > fimDate) { mostrarToast('⚠️ Data início maior que data fim'); return; }
 
@@ -1629,25 +1844,22 @@ window.gerarRelatorio = function() {
 
   if (!ocsFiltradas.length) { mostrarToast('⚠️ Nenhuma ocorrência neste período'); return; }
 
-  // Monta o título do relatório
-  var fmtDate = function(d) {
-    return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
-  };
   var tituloRelatorio;
-  if (_relAtalhoAtivo === 'semana') {
-    tituloRelatorio = 'Relatório Semanal — ' + fmtDate(iniDate) + ' a ' + fmtDate(fimDate);
+  if (_relAtalhoAtivo === 'hoje') {
+    tituloRelatorio = 'Relatório do Dia — ' + fmtDateFull(_relIni);
+  } else if (_relAtalhoAtivo === 'semana') {
+    tituloRelatorio = 'Relatório Semanal — ' + fmtDateFull(_relIni) + ' a ' + fmtDateFull(_relFim);
   } else if (_relAtalhoAtivo === 'mes') {
-    tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[iniDate.getMonth()] + ' ' + iniDate.getFullYear();
+    tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[_relIni.getMonth()] + ' ' + _relIni.getFullYear();
   } else {
-    tituloRelatorio = 'Relatório — ' + fmtDate(iniDate) + ' a ' + fmtDate(fimDate);
+    tituloRelatorio = 'Relatório — ' + fmtDateFull(_relIni) + ' a ' + fmtDateFull(_relFim);
   }
 
   fecharModalRelatorio();
 
   var nomeInst = document.getElementById('header-nome-inst').textContent;
+  var umDia = _relIni.getTime() === _relFim.getTime();
 
-  // Agrupa por data para exibir separadores quando período > 1 dia
-  var umDia = iniVal === fimVal;
   var porData = {};
   ocsFiltradas.forEach(function(o) {
     var k = o.data || '—';
@@ -1659,7 +1871,6 @@ window.gerarRelatorio = function() {
     return (da || 0) - (db || 0);
   });
 
-  // ALTERAÇÃO 2: sem coluna Status; coluna Professor exibe a hora registrada
   var registrosHtml = datasOrdenadas.map(function(data) {
     var header = !umDia
       ? '<tr><td colspan="4" style="padding:10px 0 4px;font-size:12px;font-weight:700;color:#1B3F8B;border-bottom:2px solid #1B3F8B;letter-spacing:.3px;">📅 ' + data + '</td></tr>'
@@ -1679,7 +1890,6 @@ window.gerarRelatorio = function() {
     return header + linhas;
   }).join('');
 
-  // Estatísticas (mantidas para resumo no topo, mas sem status no corpo)
   var total     = ocsFiltradas.length;
   var pendentes = ocsFiltradas.filter(function(o){return o.status==='Pendente';}).length;
   var acomp     = ocsFiltradas.filter(function(o){return o.status==='Em acompanhamento';}).length;
@@ -1817,89 +2027,4 @@ window.toggleChartTipo = function() {
 };
 
 function getTextColor() {
-  var tema = document.documentElement.getAttribute('data-tema') || 'claro';
-  if (tema === 'black') return '#555'; if (tema === 'escuro') return '#6B7A99'; return '#94A3B8';
-}
-function getGridColor() {
-  var tema = document.documentElement.getAttribute('data-tema') || 'claro';
-  if (tema === 'black') return 'rgba(255,255,255,0.04)'; if (tema === 'escuro') return 'rgba(255,255,255,0.06)'; return 'rgba(0,0,0,0.05)';
-}
-
-function buildChartData() {
-  var ocs = window._ocs || []; var agora = new Date();
-  var labels=[], dataPend=[], dataAcomp=[], dataResolvido=[], dataTotal=[];
-  if (_chartPeriodo === 'semana') {
-    var DS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-    for (var i = 6; i >= 0; i--) {
-      var d = new Date(agora); d.setDate(agora.getDate()-i); d.setHours(0,0,0,0);
-      var dateStr = String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
-      var filtered = ocs.filter(function(o) { return o.data === dateStr; });
-      labels.push(DS[d.getDay()]);
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
-    }
-  } else if (_chartPeriodo === 'mes') {
-    for (var w = 3; w >= 0; w--) {
-      var inicio = new Date(agora); inicio.setDate(agora.getDate()-(w+1)*7+1); inicio.setHours(0,0,0,0);
-      var fim = new Date(agora); fim.setDate(agora.getDate()-w*7); fim.setHours(23,59,59,999);
-      var filtered = ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d>=inicio&&d<=fim;});
-      var label = String(inicio.getDate()).padStart(2,'0')+'/'+String(inicio.getMonth()+1).padStart(2,'0');
-      labels.push(label);
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
-    }
-  } else {
-    var ML = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    for (var m = 0; m < 12; m++) {
-      var filtered = ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d.getMonth()===m&&d.getFullYear()===agora.getFullYear();});
-      labels.push(ML[m]);
-      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
-      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
-      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
-      dataTotal.push(filtered.length);
-    }
-  }
-  return { labels, dataPend, dataAcomp, dataResolvido, dataTotal };
-}
-
-function renderChart() {
-  var canvas = document.getElementById('chart-canvas'); if (!canvas) return;
-  var data = buildChartData();
-  var textColor = getTextColor(); var gridColor = getGridColor();
-  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
-  var isBar = _chartTipo === 'bar';
-  var datasets = [
-    {label:'Pendente',   data:data.dataPend,      backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',  borderColor:'#F59E0B', borderWidth:isBar?0:2, pointBackgroundColor:'#F59E0B', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
-    {label:'Acomp.',     data:data.dataAcomp,     backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',  borderColor:'#3B82F6', borderWidth:isBar?0:2, pointBackgroundColor:'#3B82F6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
-    {label:'Resolvido',  data:data.dataResolvido, backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',   borderColor:'#22C55E', borderWidth:isBar?0:2, pointBackgroundColor:'#22C55E', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
-    {label:'Total',      data:data.dataTotal,     backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)', borderColor:'#8B5CF6', borderWidth:isBar?0:2, pointBackgroundColor:'#8B5CF6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0}
-  ];
-  window._chartInst = new Chart(canvas, {
-    type: isBar ? 'bar' : 'line',
-    data: { labels: data.labels, datasets: datasets },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      animation:{ duration:600, easing:'easeOutQuart' },
-      interaction:{ intersect:false, mode:'index' },
-      plugins:{
-        legend:{ display:false },
-        tooltip:{ backgroundColor:'rgba(15,23,41,0.9)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.75)', padding:10, cornerRadius:8, titleFont:{family:'DM Sans',size:11,weight:'600'}, bodyFont:{family:'DM Sans',size:11} }
-      },
-      scales:{
-        x:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0}, border:{display:false} },
-        y:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0}, border:{display:false}, beginAtZero:true }
-      },
-      ...(isBar && { datasets:{ bar:{ barThickness:'flex', maxBarThickness:18 } } })
-    }
-  });
-}
-
-atualizarBannerFila();
-renderCalendario();
-</script>
-</body>
-</html>
+  var
