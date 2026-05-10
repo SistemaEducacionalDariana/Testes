@@ -239,55 +239,19 @@ html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { b
 
 /* ACCORDION CONFIG */
 .config-wrap { padding:16px; }
-
-.accordion-item {
-  background:var(--bg-card);
-  border:1px solid var(--borda);
-  border-radius:var(--radius);
-  margin-bottom:10px;
-  overflow:hidden;
-  transition:box-shadow .2s;
-}
-.accordion-item.open {
-  box-shadow:0 4px 20px rgba(42,91,215,0.08);
-  border-color:var(--azul2);
-}
-
-.accordion-header {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:15px 16px; cursor:pointer; user-select:none;
-  transition:background .15s;
-}
+.accordion-item { background:var(--bg-card); border:1px solid var(--borda); border-radius:var(--radius); margin-bottom:10px; overflow:hidden; transition:box-shadow .2s; }
+.accordion-item.open { box-shadow:0 4px 20px rgba(42,91,215,0.08); border-color:var(--azul2); }
+.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:15px 16px; cursor:pointer; user-select:none; transition:background .15s; }
 .accordion-header:active { background:var(--cinza); }
-
 .accordion-header-left { display:flex; align-items:center; gap:12px; }
-.accordion-icon {
-  width:36px; height:36px; border-radius:9px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:17px; flex-shrink:0;
-  background:var(--cinza); border:1px solid var(--borda);
-}
+.accordion-icon { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; background:var(--cinza); border:1px solid var(--borda); }
 .accordion-item.open .accordion-icon { background:var(--azulc); border-color:var(--azul2); }
 .accordion-title { font-size:13px; font-weight:700; color:var(--texto); }
 .accordion-desc  { font-size:11px; color:var(--sub); margin-top:2px; }
-
-.accordion-chevron {
-  font-size:12px; color:var(--sub); transition:transform .25s ease;
-  flex-shrink:0; width:20px; height:20px;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--cinza); border:1px solid var(--borda); border-radius:6px;
-}
+.accordion-chevron { font-size:12px; color:var(--sub); transition:transform .25s ease; flex-shrink:0; width:20px; height:20px; display:flex; align-items:center; justify-content:center; background:var(--cinza); border:1px solid var(--borda); border-radius:6px; }
 .accordion-item.open .accordion-chevron { transform:rotate(180deg); background:var(--azulc); border-color:var(--azul2); color:var(--azul2); }
-
-.accordion-body {
-  max-height:0; overflow:hidden;
-  transition:max-height .3s ease, padding .3s ease;
-  padding:0 16px;
-}
-.accordion-item.open .accordion-body {
-  max-height:800px;
-  padding:0 16px 16px;
-}
+.accordion-body { max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s ease; padding:0 16px; }
+.accordion-item.open .accordion-body { max-height:800px; padding:0 16px 16px; }
 .accordion-divider { height:1px; background:var(--borda); margin:0 16px 0; }
 .accordion-item.open .accordion-divider { display:block; }
 .accordion-item:not(.open) .accordion-divider { display:none; }
@@ -322,7 +286,7 @@ html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { b
 .analytics-wrap { padding:12px 16px 16px; display:flex; flex-direction:column; gap:12px; }
 .section-card { background:var(--bg-card); border-radius:var(--radius); border:1px solid var(--borda); overflow:hidden; }
 
-/* CALENDÁRIO */
+/* CALENDÁRIO PRINCIPAL */
 .cal-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 10px; }
 .cal-titulo { font-size:13px; font-weight:700; }
 .cal-nav { display:flex; gap:5px; }
@@ -330,11 +294,7 @@ html[data-tema="escuro"] .btn-vermelho,html[data-tema="black"] .btn-vermelho { b
 .cal-dias-semana { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; padding:0 10px; }
 .cal-ds { font-size:9px; font-weight:600; color:var(--sub); text-transform:uppercase; padding:4px 0; letter-spacing:.4px; }
 .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; padding:4px 10px 12px; }
-.cal-dia {
-  aspect-ratio:1; border-radius:7px; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; font-size:12px; font-weight:500; cursor:pointer; position:relative;
-  transition:background .15s; gap:2px;
-}
+.cal-dia { aspect-ratio:1; border-radius:7px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:12px; font-weight:500; cursor:pointer; position:relative; transition:background .15s; gap:2px; }
 .cal-dia:hover { background:var(--cinza); }
 .cal-dia.vazio { cursor:default; }
 .cal-dia.hoje { color:var(--azul2); font-weight:700; }
@@ -345,20 +305,12 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 .cal-dia.selecionado .cal-bolinha { background:rgba(255,255,255,0.7); }
 .cal-dia.tem-oc.resolvido-dia .cal-bolinha { background:var(--verde); }
 .cal-dia.tem-evento .cal-bolinha-evento { width:4px; height:4px; border-radius:50%; background:var(--azul2); flex-shrink:0; }
-
 .cal-ocs-dia { border-top:1px solid var(--borda); }
 .cal-ocs-titulo { padding:12px 16px 8px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; }
 .cal-ocs-titulo-txt { font-size:12px; font-weight:600; color:var(--sub); }
 .cal-ocs-acoes { display:flex; gap:6px; }
-
-.btn-dl-rel {
-  background:var(--azul2); border:none; color:#fff;
-  border-radius:7px; padding:5px 12px; font-size:10px; font-weight:700;
-  cursor:pointer; font-family:'DM Sans',sans-serif;
-  display:flex; align-items:center; gap:4px;
-}
+.btn-dl-rel { background:var(--azul2); border:none; color:#fff; border-radius:7px; padding:5px 12px; font-size:10px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center; gap:4px; }
 .btn-dl-rel:active { opacity:.8; }
-
 .btn-add-evento { background:var(--cinza); border:1px solid var(--borda); color:var(--sub); border-radius:7px; padding:5px 10px; font-size:10px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; display:none; }
 .cal-ocs-lista { padding:0 16px 14px; display:flex; flex-direction:column; gap:6px; }
 .cal-oc-item { background:var(--cinza); border-radius:8px; padding:9px 12px; border-left:3px solid var(--azul2); cursor:pointer; border:1px solid var(--borda); border-left:3px solid var(--azul2); }
@@ -367,12 +319,7 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 .cal-oc-item.s-pendente  { border-left-color:var(--badge-pendente-dot); }
 .cal-oc-item.s-acomp     { border-left-color:var(--badge-acomp-dot); }
 .cal-oc-item.s-resolvido { border-left-color:var(--badge-resolvido-dot); }
-
-.cal-evento-item {
-  background:var(--cinza); border-radius:8px; padding:9px 12px;
-  border:1px solid var(--borda); border-left:3px solid var(--azul2);
-  display:flex; align-items:center; justify-content:space-between;
-}
+.cal-evento-item { background:var(--cinza); border-radius:8px; padding:9px 12px; border:1px solid var(--borda); border-left:3px solid var(--azul2); display:flex; align-items:center; justify-content:space-between; }
 .cal-evento-item-left { display:flex; align-items:center; gap:8px; }
 .cal-evento-dot { width:8px; height:8px; border-radius:50%; background:var(--azul2); flex-shrink:0; }
 .cal-evento-nome { font-size:12px; font-weight:600; color:var(--texto); }
@@ -396,11 +343,7 @@ html[data-tema="escuro"] .cal-dia.selecionado,html[data-tema="black"] .cal-dia.s
 /* MODAIS */
 .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:500; align-items:flex-end; justify-content:center; padding:0; }
 .modal-bg.show { display:flex; }
-.modal {
-  background:var(--bg-card); border-radius:20px 20px 0 0; padding:24px 22px 32px;
-  width:100%; max-width:430px; box-shadow:0 -8px 40px rgba(0,0,0,0.2);
-  animation:slideUp .25s ease; border-top:1px solid var(--borda);
-}
+.modal { background:var(--bg-card); border-radius:20px 20px 0 0; padding:24px 22px 32px; width:100%; max-width:430px; box-shadow:0 -8px 40px rgba(0,0,0,0.2); animation:slideUp .25s ease; border-top:1px solid var(--borda); }
 @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 .modal-handle { width:36px; height:4px; background:var(--borda); border-radius:2px; margin:0 auto 20px; }
 .modal h3 { font-size:16px; font-weight:700; color:var(--texto); margin-bottom:4px; }
@@ -418,16 +361,10 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .login-loading { display:none; text-align:center; margin-top:8px; font-size:12px; color:var(--sub); }
 .login-loading.show { display:block; }
 
-/* ══ MODAL RELATÓRIO — com calendário visual customizado ══ */
-.modal-relatorio-inner {
-  max-height:90vh;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-}
+/* ══ MODAL RELATÓRIO — calendário visual + botão Hoje ══ */
+.modal-relatorio-inner { max-height:90vh; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 
-.rel-atalhos {
-  display:flex; gap:6px; margin:10px 0 14px; flex-wrap:nowrap;
-}
+.rel-atalhos { display:flex; gap:6px; margin:10px 0 14px; }
 .rel-atalho-btn {
   flex:1; min-width:0;
   background:var(--cinza); border:1.5px solid var(--borda); color:var(--sub);
@@ -436,22 +373,12 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
   transition:all .15s; white-space:nowrap;
 }
 .rel-atalho-btn:active { opacity:.7; }
-.rel-atalho-btn.ativo {
-  border-color:var(--azul2); background:var(--azulc); color:var(--azul2);
-}
-.rel-atalho-sub {
-  display:block; font-weight:400; font-size:9px; opacity:.7; margin-top:2px;
-}
+.rel-atalho-btn.ativo { border-color:var(--azul2); background:var(--azulc); color:var(--azul2); }
+.rel-atalho-sub { display:block; font-weight:400; font-size:9px; opacity:.7; margin-top:2px; }
 
-/* Seletor de datas visual */
-.rel-datas-display {
-  display:grid; grid-template-columns:1fr auto 1fr; gap:6px;
-  align-items:center; margin-bottom:12px;
-}
-.rel-data-box {
-  background:var(--cinza); border:1.5px solid var(--borda); border-radius:10px;
-  padding:10px 10px; cursor:pointer; transition:border-color .15s; text-align:center;
-}
+/* Boxes de datas clicáveis */
+.rel-datas-display { display:grid; grid-template-columns:1fr auto 1fr; gap:6px; align-items:center; margin-bottom:12px; }
+.rel-data-box { background:var(--cinza); border:1.5px solid var(--borda); border-radius:10px; padding:10px; cursor:pointer; transition:border-color .15s; text-align:center; }
 .rel-data-box.ativo { border-color:var(--azul2); background:var(--azulc); }
 .rel-data-box:active { opacity:.8; }
 .rel-data-label { font-size:9px; font-weight:600; color:var(--sub); text-transform:uppercase; letter-spacing:.4px; }
@@ -461,10 +388,7 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .rel-seta { font-size:16px; color:var(--sub); text-align:center; }
 
 /* Mini calendário do relatório */
-.rel-cal-wrap {
-  background:var(--cinza); border:1px solid var(--borda); border-radius:12px;
-  padding:12px; margin-bottom:12px; display:none;
-}
+.rel-cal-wrap { background:var(--cinza); border:1px solid var(--borda); border-radius:12px; padding:12px; margin-bottom:12px; display:none; }
 .rel-cal-wrap.show { display:block; }
 .rel-cal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
 .rel-cal-mes { font-size:12px; font-weight:700; color:var(--texto); }
@@ -473,11 +397,7 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .rel-cal-ds { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; margin-bottom:4px; }
 .rel-cal-d { font-size:9px; font-weight:600; color:var(--sub); padding:2px 0; }
 .rel-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
-.rel-cal-dia {
-  aspect-ratio:1; border-radius:6px; display:flex; align-items:center;
-  justify-content:center; font-size:11px; font-weight:500; cursor:pointer;
-  transition:background .12s; position:relative;
-}
+.rel-cal-dia { aspect-ratio:1; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:500; cursor:pointer; transition:background .12s; position:relative; }
 .rel-cal-dia:hover { background:var(--borda); }
 .rel-cal-dia.vazio { cursor:default; }
 .rel-cal-dia.hoje-rel { color:var(--azul2); font-weight:700; }
@@ -485,18 +405,9 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .rel-cal-dia.fim-sel { background:var(--azul2) !important; color:#fff !important; border-radius:0 6px 6px 0; }
 .rel-cal-dia.ini-sel.fim-sel { border-radius:6px; }
 .rel-cal-dia.entre-sel { background:var(--azulc) !important; color:var(--azul2) !important; border-radius:0; }
-.rel-cal-dia.desabilitado { opacity:.3; cursor:not-allowed; }
-.rel-cal-dia.tem-oc-rel::after {
-  content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%);
-  width:3px; height:3px; border-radius:50%; background:var(--amarelo);
-}
-.rel-cal-dia.ini-sel.tem-oc-rel::after,
-.rel-cal-dia.fim-sel.tem-oc-rel::after { background:rgba(255,255,255,0.6); }
-
-.rel-sel-hint {
-  font-size:10px; color:var(--sub); font-weight:500; text-align:center;
-  padding:4px 0; margin-bottom:6px;
-}
+.rel-cal-dia.tem-oc-rel::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:3px; height:3px; border-radius:50%; background:var(--amarelo); }
+.rel-cal-dia.ini-sel.tem-oc-rel::after,.rel-cal-dia.fim-sel.tem-oc-rel::after { background:rgba(255,255,255,0.6); }
+.rel-sel-hint { font-size:10px; color:var(--sub); font-weight:500; text-align:center; padding:4px 0; margin-bottom:6px; }
 
 /* TOAST */
 .toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:#0F1729; color:#fff; padding:10px 20px; border-radius:20px; font-size:12px; font-weight:600; transition:transform .25s ease, opacity .25s ease; z-index:9999; white-space:nowrap; pointer-events:none; }
@@ -510,16 +421,8 @@ html[data-tema="black"] .toast { background:#222; }
 .emoji-op:active { opacity:.6; }
 
 /* TAB BAR */
-.tab-bar {
-  display:flex; background:var(--tab-bg); border-top:1px solid var(--tab-borda);
-  flex-shrink:0; padding-bottom:env(safe-area-inset-bottom);
-}
-.tab-btn {
-  flex:1; padding:10px 0 8px; border:none; background:transparent; font-family:'DM Sans',sans-serif;
-  font-size:10px; font-weight:600; color:var(--sub); cursor:pointer;
-  display:flex; flex-direction:column; align-items:center; gap:3px; transition:color .2s;
-  letter-spacing:.3px; text-transform:uppercase;
-}
+.tab-bar { display:flex; background:var(--tab-bg); border-top:1px solid var(--tab-borda); flex-shrink:0; padding-bottom:env(safe-area-inset-bottom); }
+.tab-btn { flex:1; padding:10px 0 8px; border:none; background:transparent; font-family:'DM Sans',sans-serif; font-size:10px; font-weight:600; color:var(--sub); cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; transition:color .2s; letter-spacing:.3px; text-transform:uppercase; }
 .tab-btn-icon { font-size:18px; line-height:1; transition:transform .2s; }
 .tab-btn.ativo { color:var(--azul2); }
 .tab-btn.ativo .tab-btn-icon { transform:translateY(-1px); }
@@ -700,10 +603,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-header" onclick="toggleAccordion('acc-aparencia')">
           <div class="accordion-header-left">
             <div class="accordion-icon">🎨</div>
-            <div>
-              <div class="accordion-title">Aparência</div>
-              <div class="accordion-desc">Tema do app neste dispositivo</div>
-            </div>
+            <div><div class="accordion-title">Aparência</div><div class="accordion-desc">Tema do app neste dispositivo</div></div>
           </div>
           <div class="accordion-chevron">▼</div>
         </div>
@@ -733,10 +633,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-header" onclick="toggleAccordion('acc-nome')">
           <div class="accordion-header-left">
             <div class="accordion-icon">👤</div>
-            <div>
-              <div class="accordion-title">Meu Nome</div>
-              <div class="accordion-desc">Preenchido automaticamente ao registrar</div>
-            </div>
+            <div><div class="accordion-title">Meu Nome</div><div class="accordion-desc">Preenchido automaticamente ao registrar</div></div>
           </div>
           <div class="accordion-chevron">▼</div>
         </div>
@@ -755,10 +652,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-header" onclick="toggleAccordion('acc-admin')">
           <div class="accordion-header-left">
             <div class="accordion-icon">🔐</div>
-            <div>
-              <div class="accordion-title">Acesso Admin</div>
-              <div class="accordion-desc" id="acc-admin-desc">Entre com e-mail e senha de administrador</div>
-            </div>
+            <div><div class="accordion-title">Acesso Admin</div><div class="accordion-desc" id="acc-admin-desc">Entre com e-mail e senha de administrador</div></div>
           </div>
           <div class="accordion-chevron">▼</div>
         </div>
@@ -795,10 +689,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-header" onclick="toggleAccordion('acc-inst')">
           <div class="accordion-header-left">
             <div class="accordion-icon">🏫</div>
-            <div>
-              <div class="accordion-title">Instituição</div>
-              <div class="accordion-desc">Nome exibido no cabeçalho do app</div>
-            </div>
+            <div><div class="accordion-title">Instituição</div><div class="accordion-desc">Nome exibido no cabeçalho do app</div></div>
           </div>
           <div class="accordion-chevron">▼</div>
         </div>
@@ -814,10 +705,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-header" onclick="toggleAccordion('acc-icone')">
           <div class="accordion-header-left">
             <div class="accordion-icon">😀</div>
-            <div>
-              <div class="accordion-title">Ícone do App</div>
-              <div class="accordion-desc">Emoji exibido no cabeçalho</div>
-            </div>
+            <div><div class="accordion-title">Ícone do App</div><div class="accordion-desc">Emoji exibido no cabeçalho</div></div>
           </div>
           <div class="accordion-chevron">▼</div>
         </div>
@@ -832,10 +720,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-header" onclick="toggleAccordion('acc-senha')">
           <div class="accordion-header-left">
             <div class="accordion-icon">🔑</div>
-            <div>
-              <div class="accordion-title">Alterar Senha</div>
-              <div class="accordion-desc">Redefina a senha de administrador</div>
-            </div>
+            <div><div class="accordion-title">Alterar Senha</div><div class="accordion-desc">Redefina a senha de administrador</div></div>
           </div>
           <div class="accordion-chevron">▼</div>
         </div>
@@ -918,14 +803,8 @@ html[data-tema="black"] .toast { background:#222; }
       <input type="text" id="ev-titulo" placeholder="Ex: Reunião de pais, Conselho...">
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Horário início</label>
-        <input type="time" id="ev-hora-inicio" value="08:00">
-      </div>
-      <div class="form-group">
-        <label>Horário fim</label>
-        <input type="time" id="ev-hora-fim" value="09:00">
-      </div>
+      <div class="form-group"><label>Horário início</label><input type="time" id="ev-hora-inicio" value="08:00"></div>
+      <div class="form-group"><label>Horário fim</label><input type="time" id="ev-hora-fim" value="09:00"></div>
     </div>
     <div class="form-group">
       <label>Observação</label>
@@ -939,9 +818,7 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     MODAL RELATÓRIO — com calendário visual customizado
-     ══════════════════════════════════════════════════════════ -->
+<!-- MODAL RELATÓRIO — com calendário visual e botão Hoje -->
 <div class="modal-bg" id="modal-relatorio">
   <div class="modal" style="padding-bottom:24px;">
     <div class="modal-relatorio-inner">
@@ -949,7 +826,7 @@ html[data-tema="black"] .toast { background:#222; }
       <h3>📄 Gerar Relatório</h3>
       <p>Selecione o período desejado</p>
 
-      <!-- Atalhos rápidos: Hoje + Semana + Mês -->
+      <!-- Atalhos: Hoje + Semana + Mês -->
       <div class="rel-atalhos">
         <button class="rel-atalho-btn" id="rel-btn-hoje" onclick="aplicarAtalhoRel('hoje')">
           📅 Hoje
@@ -957,7 +834,7 @@ html[data-tema="black"] .toast { background:#222; }
         </button>
         <button class="rel-atalho-btn" id="rel-btn-semana" onclick="aplicarAtalhoRel('semana')">
           🗓 Semana
-          <span class="rel-atalho-sub" id="rel-label-semana">Dom → Sáb</span>
+          <span class="rel-atalho-sub" id="rel-label-semana">Dom→Sáb</span>
         </button>
         <button class="rel-atalho-btn" id="rel-btn-mes" onclick="aplicarAtalhoRel('mes')">
           📆 Mês
@@ -965,7 +842,7 @@ html[data-tema="black"] .toast { background:#222; }
         </button>
       </div>
 
-      <!-- Display das datas selecionadas — clicável para abrir calendário -->
+      <!-- Boxes de datas clicáveis -->
       <div class="rel-datas-display">
         <div class="rel-data-box" id="rel-box-ini" onclick="abrirCalRel('ini')">
           <div class="rel-data-label">Início</div>
@@ -978,7 +855,7 @@ html[data-tema="black"] .toast { background:#222; }
         </div>
       </div>
 
-      <!-- Mini calendário visual do relatório -->
+      <!-- Mini calendário visual -->
       <div class="rel-cal-wrap" id="rel-cal-wrap">
         <div class="rel-sel-hint" id="rel-sel-hint">Selecione a data de início</div>
         <div class="rel-cal-header">
@@ -1008,11 +885,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/fireba
 import { getDatabase, ref, push, update, remove, onValue, get, set }
   from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  updatePassword
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -1026,11 +899,11 @@ const firebaseConfig = {
   measurementId: "G-SC442ZNRBK"
 };
 
-const app    = initializeApp(firebaseConfig);
-const db     = getDatabase(app);
-const auth   = getAuth(app);
-const ocRef  = ref(db, 'ocorrencias');
-const evRef  = ref(db, 'eventos_calendario');
+const app   = initializeApp(firebaseConfig);
+const db    = getDatabase(app);
+const auth  = getAuth(app);
+const ocRef = ref(db, 'ocorrencias');
+const evRef = ref(db, 'eventos_calendario');
 
 window._adminAtivo   = false;
 window._adminUsuario = '';
@@ -1084,7 +957,6 @@ window.toggleAccordion = function(id) {
 
 // ═══ TEMA ═══
 var TEMAS = { claro:{icon:'☀️'}, escuro:{icon:'🌙'}, black:{icon:'⚫'} };
-
 function aplicarTema(t) {
   document.documentElement.setAttribute('data-tema', t);
   localStorage.setItem('ceti_tema', t);
@@ -1096,12 +968,10 @@ function aplicarTema(t) {
   renderChart();
 }
 (function() { var t = localStorage.getItem('ceti_tema') || 'claro'; aplicarTema(t); })();
-
 window.selecionarTema = function(t) { aplicarTema(t); mostrarToast(TEMAS[t].icon + ' Tema ativado'); };
 
 // ═══ ÍCONE ═══
 var EMOJIS = ['🏫','🎓','📚','✏️','🔬','🧪','🎨','🖥️','📐','📏','🏛️','🌟','🎯','💡','📖','🔭','🧬','⚗️','🎭','🏆','🌍','🤝','👩‍🏫','👨‍🏫','📝','🔐','🏠','🌱','🎪','🔷'];
-
 function popularEmojiGrid(containerId) {
   var iconeAtual = window._iconeAtual || '🏫';
   var html = EMOJIS.map(function(e) {
@@ -1110,11 +980,9 @@ function popularEmojiGrid(containerId) {
   var el = document.getElementById(containerId);
   if (el) el.innerHTML = html;
 }
-
 window._iconeAtual = '🏫';
 window.abrirModalIcone  = function() { popularEmojiGrid('emoji-grid-modal'); document.getElementById('modal-icone').classList.add('show'); };
 window.fecharModalIcone = function() { document.getElementById('modal-icone').classList.remove('show'); };
-
 window.selecionarIcone = async function(emoji) {
   try {
     await update(ref(db, 'admin_config'), { icone_logo: emoji });
@@ -1124,7 +992,6 @@ window.selecionarIcone = async function(emoji) {
     setTimeout(fecharModalIcone, 400);
   } catch(e) { mostrarToast('Erro: ' + e.message); }
 };
-
 window.alterarInstituicao = async function() {
   var novoNome = document.getElementById('p-nome-inst').value.trim();
   var erroEl = document.getElementById('erro-inst'), sucEl = document.getElementById('sucesso-inst');
@@ -1158,7 +1025,6 @@ function atualizarBannerFila() {
   if (fila.length > 0) { txt.textContent = '📦 ' + fila.length + ' aguardando envio'; banner.classList.add('show'); }
   else { banner.classList.remove('show'); }
 }
-
 window.tentarSyncFila = async function() {
   var fila = lerFila(); if (!fila.length) return;
   var enviados = 0;
@@ -1179,7 +1045,6 @@ onValue(ref(db, '.info/connected'), function(snap) {
 
 // ═══ ABAS ═══
 var _abaAtiva = 'lista';
-
 window.mudarAba = function(aba) {
   _abaAtiva = aba;
   document.getElementById('tab-lista').classList.toggle('ativo', aba === 'lista');
@@ -1195,7 +1060,6 @@ window.mudarAba = function(aba) {
     var tema = localStorage.getItem('ceti_tema') || 'claro'; aplicarTema(tema);
   }
 };
-
 function mostrarViewSemTabs(id) {
   ['view-lista','view-analytics','view-novo','view-editar','view-detalhe','view-config'].forEach(function(v) {
     document.getElementById(v).classList.remove('active');
@@ -1224,15 +1088,13 @@ function atualizarUiAdminConfig() {
   document.getElementById('admin-banner').classList.toggle('show', logado);
   if (logado) document.getElementById('admin-user-badge').textContent = window._adminUsuario || '—';
 }
-
 window.fazerLoginConfig = async function() {
   var email  = document.getElementById('cfg-email').value.trim();
   var senha  = document.getElementById('cfg-senha').value;
   var erroEl = document.getElementById('cfg-login-erro');
   var loadEl = document.getElementById('cfg-login-loading');
   if (!email || !senha) { erroEl.textContent = '❌ Preencha e-mail e senha.'; erroEl.classList.add('show'); return; }
-  erroEl.classList.remove('show');
-  loadEl.classList.add('show');
+  erroEl.classList.remove('show'); loadEl.classList.add('show');
   try {
     const cred = await signInWithEmailAndPassword(auth, email, senha);
     document.getElementById('cfg-email').value = '';
@@ -1241,17 +1103,16 @@ window.fazerLoginConfig = async function() {
     mostrarToast('✓ Bem-vindo, ' + cred.user.email + '!');
   } catch(e) {
     var msg = '❌ E-mail ou senha incorretos.';
-    if (e.code === 'auth/user-not-found')    msg = '❌ Usuário não encontrado.';
-    if (e.code === 'auth/wrong-password')    msg = '❌ Senha incorreta.';
-    if (e.code === 'auth/invalid-email')     msg = '❌ E-mail inválido.';
-    if (e.code === 'auth/too-many-requests') msg = '❌ Muitas tentativas.';
-    if (e.code === 'auth/network-request-failed') msg = '❌ Sem conexão.';
+    if (e.code === 'auth/user-not-found')         msg = '❌ Usuário não encontrado.';
+    if (e.code === 'auth/wrong-password')          msg = '❌ Senha incorreta.';
+    if (e.code === 'auth/invalid-email')           msg = '❌ E-mail inválido.';
+    if (e.code === 'auth/too-many-requests')       msg = '❌ Muitas tentativas.';
+    if (e.code === 'auth/network-request-failed')  msg = '❌ Sem conexão.';
     erroEl.textContent = msg; erroEl.classList.add('show');
     document.getElementById('cfg-senha').value = '';
   }
   loadEl.classList.remove('show');
 };
-
 window.sairAdminConfig = async function() {
   try {
     await signOut(auth);
@@ -1260,12 +1121,10 @@ window.sairAdminConfig = async function() {
     document.getElementById('acc-admin').classList.remove('open');
   } catch(e) { mostrarToast('Erro ao sair: ' + e.message); }
 };
-
 window.alterarSenha = async function() {
   var nova  = document.getElementById('p-senha-nova').value;
   var conf  = document.getElementById('p-senha-conf').value;
-  var erroEl = document.getElementById('painel-erro');
-  var sucEl  = document.getElementById('painel-sucesso');
+  var erroEl = document.getElementById('painel-erro'), sucEl = document.getElementById('painel-sucesso');
   erroEl.classList.remove('show'); sucEl.classList.remove('show');
   if (!nova || !conf)  { erroEl.textContent = '❌ Preencha os dois campos.'; erroEl.classList.add('show'); return; }
   if (nova.length < 6) { erroEl.textContent = '❌ Mínimo 6 caracteres.';    erroEl.classList.add('show'); return; }
@@ -1285,7 +1144,7 @@ window.alterarSenha = async function() {
   }
 };
 
-// ═══ SALVAR ═══
+// ═══ SALVAR OCORRÊNCIA ═══
 window.salvarOcorrencia = async function() {
   var btn = document.getElementById('btn-salvar');
   var aluno     = document.getElementById('f-aluno').value.trim();
@@ -1360,7 +1219,7 @@ window.atualizarStatus = async function(novoStatus) {
 };
 
 // ═══ RENDER LISTA ═══
-window.renderLista = function renderLista() {
+window.renderLista = function() {
   var filaLocal = lerFila(); var ocs = window._ocs || [];
   var keysFirebase = ocs.map(function(o) { return o.firebaseKey; });
   filaLocal = filaLocal.filter(function(x) { return !keysFirebase.includes(x._localId); });
@@ -1465,7 +1324,6 @@ function mostrarView(id) {
   document.getElementById('tab-config').classList.toggle('ativo', isConfig);
   document.getElementById('btn-novo-global').style.display = (isAnalytics || isConfig) ? 'none' : '';
 }
-
 window.modoAdminAtivo = function() { return window._adminAtivo || false; };
 window.irParaLista = function() {
   if (_abaAtiva === 'analytics') { mostrarView('view-analytics'); }
@@ -1479,7 +1337,6 @@ window.irParaNovo = function() {
   var campo = document.getElementById('f-professor');
   if (campo && nomeSalvo) campo.value = nomeSalvo;
 };
-
 window.salvarNomeProf = function() {
   var nome = (document.getElementById('cfg-nome-prof').value || '').trim();
   var sucEl = document.getElementById('sucesso-nome-prof');
@@ -1489,7 +1346,6 @@ window.salvarNomeProf = function() {
   setTimeout(function() { sucEl.classList.remove('show'); }, 2500);
   mostrarToast('✓ Nome salvo neste dispositivo!');
 };
-
 function carregarNomeProfConfig() {
   var nome = localStorage.getItem('ceti_nome_prof') || '';
   var campo = document.getElementById('cfg-nome-prof');
@@ -1503,7 +1359,6 @@ window.irParaPainel = function() {
   document.getElementById('tab-analytics').classList.remove('ativo');
   atualizarUiAdminConfig();
 };
-
 window.pedirExclusao      = function(key) { window._idAtual = key; document.getElementById('modal-excluir').classList.add('show'); };
 window.fecharModalExcluir = function() { document.getElementById('modal-excluir').classList.remove('show'); };
 window.toggleOlho = function(inputId, btnId) {
@@ -1519,9 +1374,9 @@ function mostrarToast(msg) {
 }
 
 // ═══ CALENDÁRIO PRINCIPAL ═══
-var _calAno  = new Date().getFullYear();
-var _calMes  = new Date().getMonth();
-window._diaSel  = null;
+var _calAno = new Date().getFullYear();
+var _calMes = new Date().getMonth();
+window._diaSel = null;
 var MESES_BR = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
 function parseDateBR(dateStr) {
@@ -1529,14 +1384,8 @@ function parseDateBR(dateStr) {
   var p = dateStr.split('/'); if (p.length < 3) return null;
   return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
 }
-
 function dateToStr(d) {
-  // Retorna DD/MM/YYYY
   return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
-}
-
-function dateToInputVal(d) {
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 
 function renderCalendario() {
@@ -1587,20 +1436,15 @@ function renderOcsDia(dataStr) {
   if (!total) { lista.innerHTML = '<div class="empty" style="padding:10px 0;font-size:12px;">Nenhum item neste dia</div>'; return; }
 
   var ICON = {"Agressão verbal":"💬","Agressão física":"👊","Uso de celular":"📱","Desrespeito ao professor":"🚫","Bagunça em sala":"🔊","Bullying":"😤","Vandalismo":"🔨","Outros":"📋"};
-
   var htmlEventos = eventos.map(function(ev) {
     return '<div class="cal-evento-item">' +
-      '<div class="cal-evento-item-left">' +
-        '<div class="cal-evento-dot"></div>' +
-        '<div>' +
-          '<div class="cal-evento-nome"><span class="evento-tag">EVENTO</span>' + ev.titulo + '</div>' +
-          '<div class="cal-evento-hora">' + (ev.horaInicio || '') + (ev.horaFim ? ' → ' + ev.horaFim : '') + (ev.obs ? ' · ' + ev.obs : '') + '</div>' +
-        '</div>' +
-      '</div>' +
-      '<button class="btn-del-evento" onclick="excluirEvento(\'' + ev.firebaseKey + '\')" title="Excluir evento">✕</button>' +
+      '<div class="cal-evento-item-left"><div class="cal-evento-dot"></div><div>' +
+        '<div class="cal-evento-nome"><span class="evento-tag">EVENTO</span>' + ev.titulo + '</div>' +
+        '<div class="cal-evento-hora">' + (ev.horaInicio||'') + (ev.horaFim?' → '+ev.horaFim:'') + (ev.obs?' · '+ev.obs:'') + '</div>' +
+      '</div></div>' +
+      '<button class="btn-del-evento" onclick="excluirEvento(\'' + ev.firebaseKey + '\')">✕</button>' +
     '</div>';
   }).join('');
-
   var htmlOcs = ocs.map(function(o) {
     var cls = o.status==='Pendente'?'s-pendente':o.status==='Resolvido'?'s-resolvido':'s-acomp';
     return '<div class="cal-oc-item ' + cls + '" onclick="irDetalheAnalytics(\'' + o.firebaseKey + '\')">' +
@@ -1608,7 +1452,6 @@ function renderOcsDia(dataStr) {
       '<div class="cal-oc-item-info">' + (ICON[o.tipo]||'📋') + ' ' + o.tipo + ' · ' + o.hora + '</div>' +
     '</div>';
   }).join('');
-
   lista.innerHTML = htmlEventos + htmlOcs;
 }
 
@@ -1633,15 +1476,14 @@ window.navCal = function(dir) {
 };
 
 // ═══════════════════════════════════════════════════════════
-//  RELATÓRIO — modal com calendário visual customizado
-//  + atalhos: Hoje / Semana / Mês
+//  RELATÓRIO — calendário visual + botão Hoje + Semana + Mês
 // ═══════════════════════════════════════════════════════════
 
-var _relAtalhoAtivo = null; // 'hoje' | 'semana' | 'mes' | null
-var _relIni = null;  // Date object
-var _relFim = null;  // Date object
-var _relCalAno = new Date().getFullYear();
-var _relCalMes = new Date().getMonth();
+var _relAtalhoAtivo  = null; // 'hoje' | 'semana' | 'mes' | null
+var _relIni          = null; // Date
+var _relFim          = null; // Date
+var _relCalAno       = new Date().getFullYear();
+var _relCalMes       = new Date().getMonth();
 var _relSelecionando = 'ini'; // 'ini' | 'fim'
 
 function fmtDateShort(d) {
@@ -1652,78 +1494,63 @@ function fmtDateFull(d) {
 }
 
 function atualizarDisplayDatas() {
-  var ini = document.getElementById('rel-display-ini');
-  var fim = document.getElementById('rel-display-fim');
-  var boxIni = document.getElementById('rel-box-ini');
-  var boxFim = document.getElementById('rel-box-fim');
-
-  ini.textContent = _relIni ? fmtDateShort(_relIni) : '—';
-  fim.textContent = _relFim ? fmtDateShort(_relFim) : '—';
-
-  // Destaca o box que está sendo selecionado (quando calendário aberto)
+  document.getElementById('rel-display-ini').textContent = _relIni ? fmtDateShort(_relIni) : '—';
+  document.getElementById('rel-display-fim').textContent = _relFim ? fmtDateShort(_relFim) : '—';
   var calAberto = document.getElementById('rel-cal-wrap').classList.contains('show');
-  boxIni.classList.toggle('ativo', calAberto && _relSelecionando === 'ini');
-  boxFim.classList.toggle('ativo', calAberto && _relSelecionando === 'fim');
+  document.getElementById('rel-box-ini').classList.toggle('ativo', calAberto && _relSelecionando === 'ini');
+  document.getElementById('rel-box-fim').classList.toggle('ativo', calAberto && _relSelecionando === 'fim');
 }
 
 function atualizarHintRel() {
   var hint = document.getElementById('rel-sel-hint');
-  if (!_relIni) {
-    hint.textContent = 'Selecione a data de início';
-  } else if (!_relFim) {
-    hint.textContent = 'Agora selecione a data de fim';
-  } else {
-    hint.textContent = fmtDateFull(_relIni) + ' → ' + fmtDateFull(_relFim);
-  }
+  if (!_relIni)       hint.textContent = 'Selecione a data de início';
+  else if (!_relFim)  hint.textContent = 'Agora selecione a data de fim';
+  else                hint.textContent = fmtDateFull(_relIni) + ' → ' + fmtDateFull(_relFim);
+}
+
+function atualizarAtalhosRel() {
+  document.getElementById('rel-btn-hoje').classList.toggle('ativo',   _relAtalhoAtivo === 'hoje');
+  document.getElementById('rel-btn-semana').classList.toggle('ativo', _relAtalhoAtivo === 'semana');
+  document.getElementById('rel-btn-mes').classList.toggle('ativo',    _relAtalhoAtivo === 'mes');
 }
 
 function renderRelCal() {
   var hoje = new Date();
   document.getElementById('rel-cal-mes-ano').textContent = MESES_BR[_relCalMes] + ' ' + _relCalAno;
-
   var primeiroDia = new Date(_relCalAno, _relCalMes, 1).getDay();
   var diasNoMes   = new Date(_relCalAno, _relCalMes+1, 0).getDate();
-
-  // Mapa de datas com ocorrências para mostrar bolinhas
   var ocs = window._ocs || [];
   var ocDatas = {};
-  ocs.forEach(function(o) {
-    if (o.data) ocDatas[o.data] = true;
-  });
+  ocs.forEach(function(o) { if (o.data) ocDatas[o.data] = true; });
 
   var cells = '';
   for (var i = 0; i < primeiroDia; i++) cells += '<div class="rel-cal-dia vazio"></div>';
-
   for (var d = 1; d <= diasNoMes; d++) {
     var thisDate = new Date(_relCalAno, _relCalMes, d);
-    var dataStr = dateToStr(thisDate);
-    var eHoje = hoje.getDate()===d && hoje.getMonth()===_relCalMes && hoje.getFullYear()===_relCalAno;
-    var temOc = ocDatas[dataStr] || false;
-
-    var isIni = _relIni && thisDate.getTime() === _relIni.getTime();
-    var isFim = _relFim && thisDate.getTime() === _relFim.getTime();
-    var isEntre = _relIni && _relFim && thisDate > _relIni && thisDate < _relFim;
+    var dataStr  = dateToStr(thisDate);
+    var eHoje    = hoje.getDate()===d && hoje.getMonth()===_relCalMes && hoje.getFullYear()===_relCalAno;
+    var temOc    = !!ocDatas[dataStr];
+    var isIni    = _relIni && thisDate.getTime() === _relIni.getTime();
+    var isFim    = _relFim && thisDate.getTime() === _relFim.getTime();
+    var isEntre  = _relIni && _relFim && thisDate > _relIni && thisDate < _relFim;
 
     var cls = 'rel-cal-dia';
-    if (eHoje) cls += ' hoje-rel';
-    if (isIni) cls += ' ini-sel';
-    if (isFim) cls += ' fim-sel';
+    if (eHoje)   cls += ' hoje-rel';
+    if (isIni)   cls += ' ini-sel';
+    if (isFim)   cls += ' fim-sel';
     if (isEntre) cls += ' entre-sel';
-    if (temOc) cls += ' tem-oc-rel';
+    if (temOc)   cls += ' tem-oc-rel';
 
     cells += '<div class="' + cls + '" onclick="selecionarDiaRel(' + d + ')">' + d + '</div>';
   }
-
   document.getElementById('rel-cal-grid').innerHTML = cells;
 }
 
 window.abrirCalRel = function(qual) {
   _relSelecionando = qual;
-  // Navega o calendário para o mês da data já selecionada, se houver
   if (qual === 'ini' && _relIni) { _relCalAno = _relIni.getFullYear(); _relCalMes = _relIni.getMonth(); }
   else if (qual === 'fim' && _relFim) { _relCalAno = _relFim.getFullYear(); _relCalMes = _relFim.getMonth(); }
   else { _relCalAno = new Date().getFullYear(); _relCalMes = new Date().getMonth(); }
-
   document.getElementById('rel-cal-wrap').classList.add('show');
   atualizarHintRel();
   atualizarDisplayDatas();
@@ -1732,29 +1559,19 @@ window.abrirCalRel = function(qual) {
 
 window.selecionarDiaRel = function(d) {
   var data = new Date(_relCalAno, _relCalMes, d);
-
   if (_relSelecionando === 'ini') {
     _relIni = data;
-    // Se a data fim já existe e é antes do início, limpa o fim
     if (_relFim && _relFim < _relIni) _relFim = null;
-    // Automaticamente passa para selecionar o fim
     _relSelecionando = 'fim';
-    _relAtalhoAtivo = null;
+    _relAtalhoAtivo  = null;
     atualizarAtalhosRel();
   } else {
-    if (data < _relIni) {
-      // Clicou antes do início: inverte
-      _relFim = _relIni;
-      _relIni = data;
-    } else {
-      _relFim = data;
-    }
+    if (data < _relIni) { _relFim = _relIni; _relIni = data; }
+    else                { _relFim = data; }
     _relAtalhoAtivo = null;
     atualizarAtalhosRel();
-    // Fecha o calendário ao selecionar o fim
     document.getElementById('rel-cal-wrap').classList.remove('show');
   }
-
   atualizarDisplayDatas();
   atualizarHintRel();
   renderRelCal();
@@ -1766,12 +1583,6 @@ window.navRelCal = function(dir) {
   if (_relCalMes > 11) { _relCalMes = 0;  _relCalAno++; }
   renderRelCal();
 };
-
-function atualizarAtalhosRel() {
-  document.getElementById('rel-btn-hoje').classList.toggle('ativo', _relAtalhoAtivo === 'hoje');
-  document.getElementById('rel-btn-semana').classList.toggle('ativo', _relAtalhoAtivo === 'semana');
-  document.getElementById('rel-btn-mes').classList.toggle('ativo', _relAtalhoAtivo === 'mes');
-}
 
 window.aplicarAtalhoRel = function(tipo) {
   var hoje = new Date(); hoje.setHours(0,0,0,0);
@@ -1793,33 +1604,30 @@ window.aplicarAtalhoRel = function(tipo) {
   atualizarAtalhosRel();
   atualizarDisplayDatas();
   atualizarHintRel();
-  // Fecha o calendário ao usar atalho
   document.getElementById('rel-cal-wrap').classList.remove('show');
 };
 
 window.abrirModalRelatorio = function() {
   var hoje = new Date(); hoje.setHours(0,0,0,0);
 
-  // Atualiza labels dos atalhos
+  // Labels dos atalhos
   document.getElementById('rel-label-hoje').textContent = fmtDateShort(hoje);
-
   var diaSemana = hoje.getDay();
   var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana);
   var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
-  document.getElementById('rel-label-semana').textContent = fmtDateShort(dom) + ' → ' + fmtDateShort(sab);
+  document.getElementById('rel-label-semana').textContent = fmtDateShort(dom) + '→' + fmtDateShort(sab);
   document.getElementById('rel-label-mes').textContent = MESES_BR[hoje.getMonth()];
 
   // Pré-seleciona semana atual
-  _relAtalhoAtivo = 'semana';
-  _relIni = dom;
-  _relFim = sab;
+  _relAtalhoAtivo  = 'semana';
+  _relIni          = dom;
+  _relFim          = sab;
   _relSelecionando = 'ini';
 
   atualizarAtalhosRel();
   atualizarDisplayDatas();
   atualizarHintRel();
   document.getElementById('rel-cal-wrap').classList.remove('show');
-
   document.getElementById('modal-relatorio').classList.add('show');
 };
 
@@ -1833,7 +1641,6 @@ window.gerarRelatorio = function() {
 
   var iniDate = new Date(_relIni); iniDate.setHours(0,0,0,0);
   var fimDate = new Date(_relFim); fimDate.setHours(23,59,59,999);
-
   if (iniDate > fimDate) { mostrarToast('⚠️ Data início maior que data fim'); return; }
 
   var ocs = window._ocs || [];
@@ -1841,19 +1648,13 @@ window.gerarRelatorio = function() {
     var d = parseDateBR(o.data);
     return d && d >= iniDate && d <= fimDate;
   });
-
   if (!ocsFiltradas.length) { mostrarToast('⚠️ Nenhuma ocorrência neste período'); return; }
 
   var tituloRelatorio;
-  if (_relAtalhoAtivo === 'hoje') {
-    tituloRelatorio = 'Relatório do Dia — ' + fmtDateFull(_relIni);
-  } else if (_relAtalhoAtivo === 'semana') {
-    tituloRelatorio = 'Relatório Semanal — ' + fmtDateFull(_relIni) + ' a ' + fmtDateFull(_relFim);
-  } else if (_relAtalhoAtivo === 'mes') {
-    tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[_relIni.getMonth()] + ' ' + _relIni.getFullYear();
-  } else {
-    tituloRelatorio = 'Relatório — ' + fmtDateFull(_relIni) + ' a ' + fmtDateFull(_relFim);
-  }
+  if (_relAtalhoAtivo === 'hoje')   tituloRelatorio = 'Relatório do Dia — ' + fmtDateFull(_relIni);
+  else if (_relAtalhoAtivo === 'semana') tituloRelatorio = 'Relatório Semanal — ' + fmtDateFull(_relIni) + ' a ' + fmtDateFull(_relFim);
+  else if (_relAtalhoAtivo === 'mes')    tituloRelatorio = 'Relatório Mensal — ' + MESES_BR[_relIni.getMonth()] + ' ' + _relIni.getFullYear();
+  else tituloRelatorio = 'Relatório — ' + fmtDateFull(_relIni) + ' a ' + fmtDateFull(_relFim);
 
   fecharModalRelatorio();
 
@@ -1879,11 +1680,10 @@ window.gerarRelatorio = function() {
       var bg = idx % 2 === 0 ? '#FFFFFF' : '#F8F9FF';
       return '<tr style="background:' + bg + ';page-break-inside:avoid;">' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:14px;font-weight:700;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + o.aluno + '</td>' +
-        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + (o.turma || '—') + '</td>' +
+        '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">' + (o.turma||'—') + '</td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;">Prof(a). ' + o.professor + '<br><span style="font-size:11px;color:#64748B;">' + (o.data||'') + ' · ' + (o.hora||'') + '</span></td>' +
         '<td style="padding:14px 10px;vertical-align:top;font-size:13px;color:#0F1729;border-bottom:1px solid #E8EEFF;max-width:280px;line-height:1.6;">' +
-          '<div style="font-size:11px;font-weight:600;color:#2A5BD7;margin-bottom:4px;">' + o.tipo + '</div>' +
-          o.descricao +
+          '<div style="font-size:11px;font-weight:600;color:#2A5BD7;margin-bottom:4px;">' + o.tipo + '</div>' + o.descricao +
         '</td>' +
       '</tr>';
     }).join('');
@@ -1898,70 +1698,43 @@ window.gerarRelatorio = function() {
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
     '<title>' + tituloRelatorio + ' — ' + nomeInst + '</title>' +
     '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">' +
-    '<style>' +
-      'body{font-family:"DM Sans",sans-serif;margin:0;padding:0;background:#fff;color:#0F1729;}' +
-      '.page{max-width:900px;margin:0 auto;padding:32px 32px 48px;}' +
-      '.header-rel{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:3px solid #1B3F8B;padding-bottom:16px;margin-bottom:24px;}' +
-      '.inst-nome{font-size:22px;font-weight:700;color:#1B3F8B;margin-bottom:3px;}' +
-      '.rel-titulo{font-size:14px;font-weight:500;color:#64748B;}' +
-      '.rel-gerado{font-size:11px;color:#94A3B8;margin-top:4px;}' +
-      '.stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}' +
-      '.stat-box{flex:1;min-width:80px;border-radius:10px;padding:12px 16px;text-align:center;}' +
-      '.stat-box .n{font-size:26px;font-weight:700;}' +
-      '.stat-box .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}' +
-      '.s-total    {background:#EFF6FF;color:#1D4ED8;}' +
-      '.s-pendente {background:#FEF3C7;color:#92400E;}' +
-      '.s-acomp    {background:#DBEAFE;color:#1D4ED8;}' +
-      '.s-resolvido{background:#DCFCE7;color:#166534;}' +
-      'table{width:100%;border-collapse:collapse;font-family:"DM Sans",sans-serif;}' +
-      'thead tr{background:#1B3F8B;}' +
-      'thead th{color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;text-align:left;}' +
-      '.btn-print{display:inline-flex;align-items:center;gap:6px;background:#1B3F8B;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;margin-bottom:20px;}' +
-      '.btn-print:hover{background:#2A5BD7;}' +
-      '.no-print{margin-bottom:16px;}' +
-      '@media print{' +
-        '.no-print{display:none!important;}' +
-        'body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}' +
-        '.page{padding:16px;}' +
-        'thead tr{background:#1B3F8B!important;}' +
-        'thead th{color:#fff!important;}' +
-        '.stat-box{border:1px solid #e2e8f0;}' +
-      '}' +
-    '</style></head><body>' +
-    '<div class="page">' +
-      '<div class="no-print"><button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button></div>' +
-      '<div class="header-rel">' +
-        '<div>' +
-          '<div class="inst-nome">' + nomeInst + '</div>' +
-          '<div class="rel-titulo">' + tituloRelatorio + '</div>' +
-          '<div class="rel-gerado">Gerado em: ' + new Date().toLocaleString('pt-BR') + '</div>' +
-        '</div>' +
-        '<div style="font-size:36px;">📋</div>' +
-      '</div>' +
-      '<div class="stats-row">' +
-        '<div class="stat-box s-total"><div class="n">' + total + '</div><div class="l">Total</div></div>' +
-        '<div class="stat-box s-pendente"><div class="n">' + pendentes + '</div><div class="l">Pendentes</div></div>' +
-        '<div class="stat-box s-acomp"><div class="n">' + acomp + '</div><div class="l">Em Acomp.</div></div>' +
-        '<div class="stat-box s-resolvido"><div class="n">' + resolvidos + '</div><div class="l">Resolvidos</div></div>' +
-      '</div>' +
-      '<table>' +
-        '<thead><tr>' +
-          '<th style="width:20%">Aluno</th>' +
-          '<th style="width:9%">Turma</th>' +
-          '<th style="width:19%">Professor(a) · Horário</th>' +
-          '<th style="width:52%">Descrição</th>' +
-        '</tr></thead>' +
-        '<tbody>' + registrosHtml + '</tbody>' +
-      '</table>' +
+    '<style>body{font-family:"DM Sans",sans-serif;margin:0;padding:0;background:#fff;color:#0F1729;}' +
+    '.page{max-width:900px;margin:0 auto;padding:32px 32px 48px;}' +
+    '.header-rel{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:3px solid #1B3F8B;padding-bottom:16px;margin-bottom:24px;}' +
+    '.inst-nome{font-size:22px;font-weight:700;color:#1B3F8B;margin-bottom:3px;}' +
+    '.rel-titulo{font-size:14px;font-weight:500;color:#64748B;}.rel-gerado{font-size:11px;color:#94A3B8;margin-top:4px;}' +
+    '.stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}' +
+    '.stat-box{flex:1;min-width:80px;border-radius:10px;padding:12px 16px;text-align:center;}' +
+    '.stat-box .n{font-size:26px;font-weight:700;}.stat-box .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}' +
+    '.s-total{background:#EFF6FF;color:#1D4ED8;}.s-pendente{background:#FEF3C7;color:#92400E;}' +
+    '.s-acomp{background:#DBEAFE;color:#1D4ED8;}.s-resolvido{background:#DCFCE7;color:#166534;}' +
+    'table{width:100%;border-collapse:collapse;font-family:"DM Sans",sans-serif;}' +
+    'thead tr{background:#1B3F8B;}thead th{color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;text-align:left;}' +
+    '.btn-print{display:inline-flex;align-items:center;gap:6px;background:#1B3F8B;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;margin-bottom:20px;}' +
+    '.btn-print:hover{background:#2A5BD7;}.no-print{margin-bottom:16px;}' +
+    '@media print{.no-print{display:none!important;}body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}' +
+    '.page{padding:16px;}thead tr{background:#1B3F8B!important;}thead th{color:#fff!important;}.stat-box{border:1px solid #e2e8f0;}}</style>' +
+    '</head><body><div class="page">' +
+    '<div class="no-print"><button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button></div>' +
+    '<div class="header-rel"><div><div class="inst-nome">' + nomeInst + '</div>' +
+    '<div class="rel-titulo">' + tituloRelatorio + '</div>' +
+    '<div class="rel-gerado">Gerado em: ' + new Date().toLocaleString('pt-BR') + '</div></div>' +
+    '<div style="font-size:36px;">📋</div></div>' +
+    '<div class="stats-row">' +
+    '<div class="stat-box s-total"><div class="n">' + total + '</div><div class="l">Total</div></div>' +
+    '<div class="stat-box s-pendente"><div class="n">' + pendentes + '</div><div class="l">Pendentes</div></div>' +
+    '<div class="stat-box s-acomp"><div class="n">' + acomp + '</div><div class="l">Em Acomp.</div></div>' +
+    '<div class="stat-box s-resolvido"><div class="n">' + resolvidos + '</div><div class="l">Resolvidos</div></div>' +
+    '</div>' +
+    '<table><thead><tr>' +
+    '<th style="width:20%">Aluno</th><th style="width:9%">Turma</th>' +
+    '<th style="width:19%">Professor(a) · Horário</th><th style="width:52%">Descrição</th>' +
+    '</tr></thead><tbody>' + registrosHtml + '</tbody></table>' +
     '</div></body></html>';
 
   var janela = window.open('', '_blank', 'width=960,height=700');
-  if (janela) {
-    janela.document.write(html);
-    janela.document.close();
-  } else {
-    mostrarToast('⚠️ Permita pop-ups para abrir o relatório');
-  }
+  if (janela) { janela.document.write(html); janela.document.close(); }
+  else { mostrarToast('⚠️ Permita pop-ups para abrir o relatório'); }
 };
 
 // ═══ EVENTOS DO CALENDÁRIO ═══
@@ -1977,13 +1750,9 @@ window.abrirModalEvento = function() {
   document.getElementById('ev-erro').classList.remove('show');
   document.getElementById('modal-evento').classList.add('show');
 };
-
-window.fecharModalEvento = function() {
-  document.getElementById('modal-evento').classList.remove('show');
-};
-
+window.fecharModalEvento = function() { document.getElementById('modal-evento').classList.remove('show'); };
 window.salvarEvento = async function() {
-  var titulo = document.getElementById('ev-titulo').value.trim();
+  var titulo     = document.getElementById('ev-titulo').value.trim();
   var horaInicio = document.getElementById('ev-hora-inicio').value;
   var horaFim    = document.getElementById('ev-hora-fim').value;
   var obs        = document.getElementById('ev-obs').value.trim();
@@ -2001,7 +1770,6 @@ window.salvarEvento = async function() {
     erroEl.classList.add('show');
   }
 };
-
 window.excluirEvento = async function(key) {
   try {
     await remove(ref(db, 'eventos_calendario/' + key));
@@ -2019,7 +1787,6 @@ window.setPeriodo = function(p) {
   document.querySelectorAll('#seg-periodo .seg-btn').forEach(function(b) { b.classList.toggle('ativo', b.dataset.p === p); });
   renderChart();
 };
-
 window.toggleChartTipo = function() {
   _chartTipo = _chartTipo === 'bar' ? 'line' : 'bar';
   document.getElementById('btn-chart-tipo').textContent = _chartTipo === 'bar' ? 'Barras' : 'Linha';
@@ -2032,3 +1799,88 @@ function getTextColor() {
   if (tema === 'escuro') return '#6B7A99';
   return '#94A3B8';
 }
+function getGridColor() {
+  var tema = document.documentElement.getAttribute('data-tema') || 'claro';
+  if (tema === 'black') return 'rgba(255,255,255,0.04)';
+  if (tema === 'escuro') return 'rgba(255,255,255,0.06)';
+  return 'rgba(0,0,0,0.05)';
+}
+
+function buildChartData() {
+  var ocs = window._ocs || []; var agora = new Date();
+  var labels=[], dataPend=[], dataAcomp=[], dataResolvido=[], dataTotal=[];
+  if (_chartPeriodo === 'semana') {
+    var DS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date(agora); d.setDate(agora.getDate()-i); d.setHours(0,0,0,0);
+      var dateStr = String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+      var filtered = ocs.filter(function(o) { return o.data === dateStr; });
+      labels.push(DS[d.getDay()]);
+      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
+      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
+      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
+      dataTotal.push(filtered.length);
+    }
+  } else if (_chartPeriodo === 'mes') {
+    for (var w = 3; w >= 0; w--) {
+      var inicio = new Date(agora); inicio.setDate(agora.getDate()-(w+1)*7+1); inicio.setHours(0,0,0,0);
+      var fim = new Date(agora); fim.setDate(agora.getDate()-w*7); fim.setHours(23,59,59,999);
+      var filtered = ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d>=inicio&&d<=fim;});
+      var label = String(inicio.getDate()).padStart(2,'0')+'/'+String(inicio.getMonth()+1).padStart(2,'0');
+      labels.push(label);
+      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
+      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
+      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
+      dataTotal.push(filtered.length);
+    }
+  } else {
+    var ML = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    for (var m = 0; m < 12; m++) {
+      var filtered = ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d.getMonth()===m&&d.getFullYear()===agora.getFullYear();});
+      labels.push(ML[m]);
+      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
+      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
+      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
+      dataTotal.push(filtered.length);
+    }
+  }
+  return { labels, dataPend, dataAcomp, dataResolvido, dataTotal };
+}
+
+function renderChart() {
+  var canvas = document.getElementById('chart-canvas'); if (!canvas) return;
+  var data = buildChartData();
+  var textColor = getTextColor(); var gridColor = getGridColor();
+  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
+  var isBar = _chartTipo === 'bar';
+  var datasets = [
+    {label:'Pendente',  data:data.dataPend,      backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',  borderColor:'#F59E0B', borderWidth:isBar?0:2, pointBackgroundColor:'#F59E0B', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
+    {label:'Acomp.',    data:data.dataAcomp,     backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',  borderColor:'#3B82F6', borderWidth:isBar?0:2, pointBackgroundColor:'#3B82F6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
+    {label:'Resolvido', data:data.dataResolvido, backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',   borderColor:'#22C55E', borderWidth:isBar?0:2, pointBackgroundColor:'#22C55E', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
+    {label:'Total',     data:data.dataTotal,     backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)', borderColor:'#8B5CF6', borderWidth:isBar?0:2, pointBackgroundColor:'#8B5CF6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0}
+  ];
+  window._chartInst = new Chart(canvas, {
+    type: isBar ? 'bar' : 'line',
+    data: { labels: data.labels, datasets: datasets },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      animation:{ duration:600, easing:'easeOutQuart' },
+      interaction:{ intersect:false, mode:'index' },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ backgroundColor:'rgba(15,23,41,0.9)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.75)', padding:10, cornerRadius:8, titleFont:{family:'DM Sans',size:11,weight:'600'}, bodyFont:{family:'DM Sans',size:11} }
+      },
+      scales:{
+        x:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0}, border:{display:false} },
+        y:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0}, border:{display:false}, beginAtZero:true }
+      },
+      ...(isBar && { datasets:{ bar:{ barThickness:'flex', maxBarThickness:18 } } })
+    }
+  });
+}
+
+atualizarBannerFila();
+renderCalendario();
+</script>
+</body>
+</html>
