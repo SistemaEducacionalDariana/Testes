@@ -361,9 +361,8 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .login-loading { display:none; text-align:center; margin-top:8px; font-size:12px; color:var(--sub); }
 .login-loading.show { display:block; }
 
-/* ══ MODAL RELATÓRIO — calendário visual + botão Hoje ══ */
+/* MODAL RELATÓRIO */
 .modal-relatorio-inner { max-height:90vh; overflow-y:auto; -webkit-overflow-scrolling:touch; }
-
 .rel-atalhos { display:flex; gap:6px; margin:10px 0 14px; }
 .rel-atalho-btn {
   flex:1; min-width:0;
@@ -375,8 +374,6 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .rel-atalho-btn:active { opacity:.7; }
 .rel-atalho-btn.ativo { border-color:var(--azul2); background:var(--azulc); color:var(--azul2); }
 .rel-atalho-sub { display:block; font-weight:400; font-size:9px; opacity:.7; margin-top:2px; }
-
-/* Boxes de datas clicáveis */
 .rel-datas-display { display:grid; grid-template-columns:1fr auto 1fr; gap:6px; align-items:center; margin-bottom:12px; }
 .rel-data-box { background:var(--cinza); border:1.5px solid var(--borda); border-radius:10px; padding:10px; cursor:pointer; transition:border-color .15s; text-align:center; }
 .rel-data-box.ativo { border-color:var(--azul2); background:var(--azulc); }
@@ -386,8 +383,6 @@ html[data-tema="escuro"] .sucesso-msg,html[data-tema="black"] .sucesso-msg { bac
 .rel-data-box.ativo .rel-data-label { color:var(--azul2); }
 .rel-data-box.ativo .rel-data-valor { color:var(--azul2); }
 .rel-seta { font-size:16px; color:var(--sub); text-align:center; }
-
-/* Mini calendário do relatório */
 .rel-cal-wrap { background:var(--cinza); border:1px solid var(--borda); border-radius:12px; padding:12px; margin-bottom:12px; display:none; }
 .rel-cal-wrap.show { display:block; }
 .rel-cal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
@@ -536,7 +531,7 @@ html[data-tema="black"] .toast { background:#222; }
           <button class="btn-back" onclick="irParaLista()">← Voltar</button>
           <div class="form-title">Nova Ocorrência</div>
         </div>
-        <div class="form-group"><label>Aluno *</label><input id="f-aluno" type="text" placeholder="Nome completo" class="capitalize-input"></div>
+        <div class="form-group"><label>Aluno *</label><input id="f-aluno" type="text" placeholder="Nome completo" autocomplete="off"></div>
         <div class="form-row">
           <div class="form-group"><label>Turma</label><input id="f-turma" type="text" placeholder="Ex: 3A"></div>
           <div class="form-group">
@@ -549,7 +544,7 @@ html[data-tema="black"] .toast { background:#222; }
             </select>
           </div>
         </div>
-        <div class="form-group"><label>Professor(a) *</label><input id="f-professor" type="text" placeholder="Nome do(a) professor(a)" class="capitalize-input"></div>
+        <div class="form-group"><label>Professor(a) *</label><input id="f-professor" type="text" placeholder="Nome do(a) professor(a)" autocomplete="off"></div>
         <div class="form-group"><label>Descrição *</label><textarea id="f-descricao" placeholder="Descreva o ocorrido..."></textarea></div>
         <button class="btn-salvar" id="btn-salvar" onclick="salvarOcorrencia()">Salvar Ocorrência</button>
       </div>
@@ -564,7 +559,7 @@ html[data-tema="black"] .toast { background:#222; }
           <button class="btn-back" onclick="voltarDetalhe()">← Voltar</button>
           <div class="form-title">Editar Ocorrência</div>
         </div>
-        <div class="form-group"><label>Aluno *</label><input id="e-aluno" type="text" class="capitalize-input"></div>
+        <div class="form-group"><label>Aluno *</label><input id="e-aluno" type="text" autocomplete="off"></div>
         <div class="form-row">
           <div class="form-group"><label>Turma</label><input id="e-turma" type="text"></div>
           <div class="form-group">
@@ -577,7 +572,7 @@ html[data-tema="black"] .toast { background:#222; }
             </select>
           </div>
         </div>
-        <div class="form-group"><label>Professor(a) *</label><input id="e-professor" type="text" class="capitalize-input"></div>
+        <div class="form-group"><label>Professor(a) *</label><input id="e-professor" type="text" autocomplete="off"></div>
         <div class="form-group"><label>Descrição *</label><textarea id="e-descricao"></textarea></div>
         <div id="admin-dt-wrap" style="display:none">
           <div class="form-group">
@@ -641,7 +636,7 @@ html[data-tema="black"] .toast { background:#222; }
         <div class="accordion-body">
           <div class="form-group" style="margin-bottom:10px;margin-top:4px;">
             <label>Prof(a). Nome</label>
-            <input type="text" id="cfg-nome-prof" placeholder="Seu nome completo" autocomplete="off" class="capitalize-input">
+            <input type="text" id="cfg-nome-prof" placeholder="Seu nome completo" autocomplete="off">
           </div>
           <div class="sucesso-msg" id="sucesso-nome-prof"></div>
           <button class="btn-salvar" style="font-size:12px;padding:10px;" onclick="salvarNomeProf()">Salvar Meu Nome</button>
@@ -818,15 +813,13 @@ html[data-tema="black"] .toast { background:#222; }
   </div>
 </div>
 
-<!-- MODAL RELATÓRIO — com calendário visual e botão Hoje -->
+<!-- MODAL RELATÓRIO -->
 <div class="modal-bg" id="modal-relatorio">
   <div class="modal" style="padding-bottom:24px;">
     <div class="modal-relatorio-inner">
       <div class="modal-handle"></div>
       <h3>📄 Gerar Relatório</h3>
       <p>Selecione o período desejado</p>
-
-      <!-- Atalhos: Hoje + Semana + Mês -->
       <div class="rel-atalhos">
         <button class="rel-atalho-btn" id="rel-btn-hoje" onclick="aplicarAtalhoRel('hoje')">
           📅 Hoje
@@ -841,8 +834,6 @@ html[data-tema="black"] .toast { background:#222; }
           <span class="rel-atalho-sub" id="rel-label-mes">—</span>
         </button>
       </div>
-
-      <!-- Boxes de datas clicáveis -->
       <div class="rel-datas-display">
         <div class="rel-data-box" id="rel-box-ini" onclick="abrirCalRel('ini')">
           <div class="rel-data-label">Início</div>
@@ -854,8 +845,6 @@ html[data-tema="black"] .toast { background:#222; }
           <div class="rel-data-valor" id="rel-display-fim">—</div>
         </div>
       </div>
-
-      <!-- Mini calendário visual -->
       <div class="rel-cal-wrap" id="rel-cal-wrap">
         <div class="rel-sel-hint" id="rel-sel-hint">Selecione a data de início</div>
         <div class="rel-cal-header">
@@ -871,7 +860,6 @@ html[data-tema="black"] .toast { background:#222; }
         </div>
         <div class="rel-cal-grid" id="rel-cal-grid"></div>
       </div>
-
       <div class="modal-btns">
         <button class="btn-cancelar" onclick="fecharModalRelatorio()">Cancelar</button>
         <button class="btn-confirmar-azul" onclick="gerarRelatorio()">🖨️ Imprimir</button>
@@ -909,28 +897,27 @@ window._adminAtivo   = false;
 window._adminUsuario = '';
 window._eventos      = [];
 
-// ═══ AUTO-CAPITALIZAR NOMES ═══
-// Capitaliza a primeira letra de cada palavra enquanto o usuário digita
+// ═══ MELHORIA 1: AUTO-CAPITALIZAÇÃO DE NOMES ═══
 function capitalizarNome(str) {
-  return str.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+  return str.replace(/(?:^|\s)\S/g, function(c) { return c.toUpperCase(); });
 }
 
-function aplicarCapitalize(input) {
+function aplicarCapitalize(inputId) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
   input.addEventListener('input', function() {
     var pos = this.selectionStart;
-    var valorAtual = this.value;
-    var valorCapitalizado = capitalizarNome(valorAtual);
-    if (valorAtual !== valorCapitalizado) {
-      this.value = valorCapitalizado;
+    var val = this.value;
+    var cap = capitalizarNome(val);
+    if (val !== cap) {
+      this.value = cap;
       this.setSelectionRange(pos, pos);
     }
   });
 }
 
-// Aplica em todos os campos de nome após carregamento
-document.querySelectorAll('.capitalize-input').forEach(function(input) {
-  aplicarCapitalize(input);
-});
+// Aplica nos campos de nome ao carregar
+['f-aluno', 'f-professor', 'e-aluno', 'e-professor', 'cfg-nome-prof'].forEach(aplicarCapitalize);
 
 onAuthStateChanged(auth, function(user) {
   if (user) { window._adminAtivo = true; window._adminUsuario = user.email; }
@@ -1498,10 +1485,7 @@ window.navCal = function(dir) {
   renderCalendario();
 };
 
-// ═══════════════════════════════════════════════════════════
-//  RELATÓRIO — calendário visual + botão Hoje + Semana + Mês
-// ═══════════════════════════════════════════════════════════
-
+// ═══ RELATÓRIO ═══
 var _relAtalhoAtivo  = null;
 var _relIni          = null;
 var _relFim          = null;
@@ -1610,10 +1594,8 @@ window.navRelCal = function(dir) {
 window.aplicarAtalhoRel = function(tipo) {
   var hoje = new Date(); hoje.setHours(0,0,0,0);
   _relAtalhoAtivo = tipo;
-
   if (tipo === 'hoje') {
-    _relIni = new Date(hoje);
-    _relFim = new Date(hoje);
+    _relIni = new Date(hoje); _relFim = new Date(hoje);
   } else if (tipo === 'semana') {
     var diaSemana = hoje.getDay();
     var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana);
@@ -1623,7 +1605,6 @@ window.aplicarAtalhoRel = function(tipo) {
     _relIni = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
     _relFim = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0);
   }
-
   atualizarAtalhosRel();
   atualizarDisplayDatas();
   atualizarHintRel();
@@ -1632,19 +1613,16 @@ window.aplicarAtalhoRel = function(tipo) {
 
 window.abrirModalRelatorio = function() {
   var hoje = new Date(); hoje.setHours(0,0,0,0);
-
   document.getElementById('rel-label-hoje').textContent = fmtDateShort(hoje);
   var diaSemana = hoje.getDay();
   var dom = new Date(hoje); dom.setDate(hoje.getDate() - diaSemana);
   var sab = new Date(dom); sab.setDate(dom.getDate() + 6);
   document.getElementById('rel-label-semana').textContent = fmtDateShort(dom) + '→' + fmtDateShort(sab);
   document.getElementById('rel-label-mes').textContent = MESES_BR[hoje.getMonth()];
-
   _relAtalhoAtivo  = 'semana';
   _relIni          = dom;
   _relFim          = sab;
   _relSelecionando = 'ini';
-
   atualizarAtalhosRel();
   atualizarDisplayDatas();
   atualizarHintRel();
@@ -1657,6 +1635,7 @@ window.fecharModalRelatorio = function() {
   document.getElementById('rel-cal-wrap').classList.remove('show');
 };
 
+// ═══ MELHORIA 2 + 3: RELATÓRIO COM TOTAL APENAS E NUMERAÇÃO SEQUENCIAL ═══
 window.gerarRelatorio = function() {
   if (!_relIni || !_relFim) { mostrarToast('⚠️ Selecione as datas de início e fim'); return; }
 
@@ -1693,7 +1672,7 @@ window.gerarRelatorio = function() {
     return (da || 0) - (db || 0);
   });
 
-  // Numeração global sequencial das ocorrências
+  // Numeração sequencial global (Melhoria 3)
   var contadorGlobal = 0;
 
   var registrosHtml = datasOrdenadas.map(function(data) {
@@ -1719,39 +1698,60 @@ window.gerarRelatorio = function() {
 
   var total = ocsFiltradas.length;
 
+  // Melhoria 2: apenas card de Total no relatório
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
     '<title>' + tituloRelatorio + ' — ' + nomeInst + '</title>' +
     '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">' +
-    '<style>body{font-family:"DM Sans",sans-serif;margin:0;padding:0;background:#fff;color:#0F1729;}' +
+    '<style>' +
+    'body{font-family:"DM Sans",sans-serif;margin:0;padding:0;background:#fff;color:#0F1729;}' +
     '.page{max-width:960px;margin:0 auto;padding:32px 32px 48px;}' +
     '.header-rel{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:3px solid #1B3F8B;padding-bottom:16px;margin-bottom:24px;}' +
     '.inst-nome{font-size:22px;font-weight:700;color:#1B3F8B;margin-bottom:3px;}' +
-    '.rel-titulo{font-size:14px;font-weight:500;color:#64748B;}.rel-gerado{font-size:11px;color:#94A3B8;margin-top:4px;}' +
-    '.stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}' +
-    '.stat-box{flex:1;min-width:80px;border-radius:10px;padding:14px 20px;text-align:center;}' +
-    '.stat-box .n{font-size:32px;font-weight:700;}.stat-box .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}' +
+    '.rel-titulo{font-size:14px;font-weight:500;color:#64748B;}' +
+    '.rel-gerado{font-size:11px;color:#94A3B8;margin-top:4px;}' +
+    '.stats-row{display:flex;gap:12px;margin-bottom:24px;}' +
+    '.stat-box{border-radius:10px;padding:16px 28px;text-align:center;}' +
+    '.stat-box .n{font-size:36px;font-weight:700;}' +
+    '.stat-box .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:3px;}' +
     '.s-total{background:#EFF6FF;color:#1D4ED8;}' +
     'table{width:100%;border-collapse:collapse;font-family:"DM Sans",sans-serif;}' +
-    'thead tr{background:#1B3F8B;}thead th{color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;text-align:left;}' +
+    'thead tr{background:#1B3F8B;}' +
+    'thead th{color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;text-align:left;}' +
     'thead th:first-child{text-align:center;width:42px;}' +
-    '.btn-print{display:inline-flex;align-items:center;gap:6px;background:#1B3F8B;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;margin-bottom:20px;}' +
-    '.btn-print:hover{background:#2A5BD7;}.no-print{margin-bottom:16px;}' +
-    '@media print{.no-print{display:none!important;}body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}' +
-    '.page{padding:16px;}thead tr{background:#1B3F8B!important;}thead th{color:#fff!important;}.stat-box{border:1px solid #e2e8f0;}}</style>' +
+    '.btn-print{display:inline-flex;align-items:center;gap:6px;background:#1B3F8B;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;}' +
+    '.btn-print:hover{background:#2A5BD7;}' +
+    '.no-print{margin-bottom:20px;}' +
+    '@media print{' +
+      '.no-print{display:none!important;}' +
+      'body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}' +
+      '.page{padding:16px;}' +
+      'thead tr{background:#1B3F8B!important;}' +
+      'thead th{color:#fff!important;}' +
+      '.stat-box{border:1px solid #e2e8f0;}' +
+    '}' +
+    '</style>' +
     '</head><body><div class="page">' +
     '<div class="no-print"><button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button></div>' +
-    '<div class="header-rel"><div><div class="inst-nome">' + nomeInst + '</div>' +
-    '<div class="rel-titulo">' + tituloRelatorio + '</div>' +
-    '<div class="rel-gerado">Gerado em: ' + new Date().toLocaleString('pt-BR') + '</div></div>' +
-    '<div style="font-size:36px;">📋</div></div>' +
+    '<div class="header-rel">' +
+      '<div>' +
+        '<div class="inst-nome">' + nomeInst + '</div>' +
+        '<div class="rel-titulo">' + tituloRelatorio + '</div>' +
+        '<div class="rel-gerado">Gerado em: ' + new Date().toLocaleString('pt-BR') + '</div>' +
+      '</div>' +
+      '<div style="font-size:40px;">📋</div>' +
+    '</div>' +
     '<div class="stats-row">' +
-    '<div class="stat-box s-total"><div class="n">' + total + '</div><div class="l">Total de Ocorrências</div></div>' +
+      '<div class="stat-box s-total"><div class="n">' + total + '</div><div class="l">Total de Ocorrências</div></div>' +
     '</div>' +
     '<table><thead><tr>' +
-    '<th style="width:42px;text-align:center;">#</th>' +
-    '<th style="width:20%">Aluno</th><th style="width:9%">Turma</th>' +
-    '<th style="width:19%">Professor(a) · Horário</th><th style="width:49%">Descrição</th>' +
-    '</tr></thead><tbody>' + registrosHtml + '</tbody></table>' +
+      '<th style="width:42px;text-align:center;">#</th>' +
+      '<th style="width:20%">Aluno</th>' +
+      '<th style="width:9%">Turma</th>' +
+      '<th style="width:19%">Professor(a) · Horário</th>' +
+      '<th style="width:49%">Descrição</th>' +
+    '</tr></thead><tbody>' +
+    registrosHtml +
+    '</tbody></table>' +
     '</div></body></html>';
 
   var janela = window.open('', '_blank', 'width=1000,height=700');
@@ -1846,4 +1846,63 @@ function buildChartData() {
   } else if (_chartPeriodo === 'mes') {
     for (var w = 3; w >= 0; w--) {
       var inicio = new Date(agora); inicio.setDate(agora.getDate()-(w+1)*7+1); inicio.setHours(0,0,0,0);
-      var fim =
+      var fim = new Date(agora); fim.setDate(agora.getDate()-w*7); fim.setHours(23,59,59,999);
+      var filtered = ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d>=inicio&&d<=fim;});
+      var label = String(inicio.getDate()).padStart(2,'0')+'/'+String(inicio.getMonth()+1).padStart(2,'0');
+      labels.push(label);
+      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
+      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
+      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
+      dataTotal.push(filtered.length);
+    }
+  } else {
+    var ML = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    for (var m = 0; m < 12; m++) {
+      var filtered = ocs.filter(function(o){var d=parseDateBR(o.data);if(!d)return false;return d.getMonth()===m&&d.getFullYear()===agora.getFullYear();});
+      labels.push(ML[m]);
+      dataPend.push(filtered.filter(function(o){return o.status==='Pendente';}).length);
+      dataAcomp.push(filtered.filter(function(o){return o.status==='Em acompanhamento';}).length);
+      dataResolvido.push(filtered.filter(function(o){return o.status==='Resolvido';}).length);
+      dataTotal.push(filtered.length);
+    }
+  }
+  return { labels, dataPend, dataAcomp, dataResolvido, dataTotal };
+}
+
+function renderChart() {
+  var canvas = document.getElementById('chart-canvas'); if (!canvas) return;
+  var data = buildChartData();
+  var textColor = getTextColor(); var gridColor = getGridColor();
+  if (window._chartInst) { window._chartInst.destroy(); window._chartInst = null; }
+  var isBar = _chartTipo === 'bar';
+  var datasets = [
+    {label:'Pendente',  data:data.dataPend,      backgroundColor:isBar?'rgba(245,158,11,0.85)':'rgba(245,158,11,0.15)',  borderColor:'#F59E0B', borderWidth:isBar?0:2, pointBackgroundColor:'#F59E0B', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
+    {label:'Acomp.',    data:data.dataAcomp,     backgroundColor:isBar?'rgba(59,130,246,0.85)':'rgba(59,130,246,0.10)',  borderColor:'#3B82F6', borderWidth:isBar?0:2, pointBackgroundColor:'#3B82F6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
+    {label:'Resolvido', data:data.dataResolvido, backgroundColor:isBar?'rgba(34,197,94,0.85)':'rgba(34,197,94,0.10)',   borderColor:'#22C55E', borderWidth:isBar?0:2, pointBackgroundColor:'#22C55E', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0},
+    {label:'Total',     data:data.dataTotal,     backgroundColor:isBar?'rgba(139,92,246,0.85)':'rgba(139,92,246,0.10)', borderColor:'#8B5CF6', borderWidth:isBar?0:2, pointBackgroundColor:'#8B5CF6', pointRadius:isBar?0:4, pointHoverRadius:5, fill:!isBar, tension:0.4, borderRadius:isBar?6:0}
+  ];
+  window._chartInst = new Chart(canvas, {
+    type: isBar ? 'bar' : 'line',
+    data: { labels: data.labels, datasets: datasets },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      animation:{ duration:600, easing:'easeOutQuart' },
+      interaction:{ intersect:false, mode:'index' },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{ backgroundColor:'rgba(15,23,41,0.9)', titleColor:'#fff', bodyColor:'rgba(255,255,255,0.75)', padding:10, cornerRadius:8, titleFont:{family:'DM Sans',size:11,weight:'600'}, bodyFont:{family:'DM Sans',size:11} }
+      },
+      scales:{
+        x:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},maxRotation:0}, border:{display:false} },
+        y:{ grid:{color:gridColor,drawBorder:false}, ticks:{color:textColor,font:{family:'DM Sans',size:10},stepSize:1,precision:0}, border:{display:false}, beginAtZero:true }
+      },
+      ...(isBar && { datasets:{ bar:{ barThickness:'flex', maxBarThickness:18 } } })
+    }
+  });
+}
+
+atualizarBannerFila();
+renderCalendario();
+</script>
+</body>
+</html>
